@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description" content="Tales of a Fractal Spectrum, ">
+
+        <link rel="alternate" href="http://www.mseri.me/feed/atom.xml" type="application/atom+xml" title="Tales of a Fractal Spectrum Atom Feed"/>
+        <link rel="alternate" href="http://www.mseri.me/feed/rss.xml" type="application/rss+xml" title="Tales of a Fractal Spectrum RSS Feed"/>
+
+        <title>Left pipe in Haskell - Tales of a Fractal Spectrum</title>
+
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Left pipe in Haskell" />
+    <meta property="og:description" content="If you read this blog, you know that I am very biased by having worked with unix shells for almost two decades and that I am addicted to the use of pipes (see e.g. Piping with Swift). I really find much more natural to see data moving from left ..." />
+
+        <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400" />
+    <link rel="stylesheet" href="http://www.mseri.me/theme/css/style-min.css">
+    <!--<link rel="stylesheet" href="http://www.mseri.me/theme/css/pygments.css">-->
+
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <header class="header">
+                <hgroup>
+                        <a id="blog-logo" href="http://www.mseri.me"><img src="http://www.mseri.me/images/gauss_logo.png" alt="Blog Logo" /></a>
+                    <h1 itemprop="name" class="blog-title"><a href="http://www.mseri.me">Tales of a Fractal Spectrum</a></h1>
+                        <h2 itemprop="description" class="blog-description">Free thoughts of a geeky mathematician</h2>
+                </hgroup>
+<nav class="nav">
+  <ul class="social-list">
+<li class="social-item"><a class="subscribe icon-twitter" href="http://www.twitter.com/marcelloseri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-facebook" href="http://www.facebook.com/marcello.seri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-google-plus" href="http://plus.google.com/+MarcelloSeri" target="_blank" rel="publisher"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-github" href="http://www.github.com/mseri" target="_blank"></a></li>&nbsp;    <li class="social-item">&nbsp;</li>
+    <li class="social-item"><a class="subscribe icon-feed" href="http://www.mseri.me/feed/rss.xml" target="_blank"></a></li>
+</ul>
+</nav>
+            </header>
+            <footer class="footer">
+                <section class="copyright">&copy; 2013--2015 <a itemscope="copyrightHolder" href="http://www.mseri.me">Tales of a Fractal Spectrum</a></section>
+                <section class="poweredby">Proudly published with Pelican on GitHub Pages.</section> 
+                <section class="theme"><a href="https://github.com/mseri/purity" target="_blank">Purity</a> is built with <a href="http://purecss.io" target="_blank">PureCSS</a>.</section>
+            </footer>
+            
+        </div>
+        <div class="pure-u-1 container">
+            
+<main class="content" role="main" id="top-post">
+        <div class="back">
+            <a href="http://www.mseri.me">&larr;  back to the home page</a>
+        </div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post purity_post">
+
+        <header class="post-header">
+            <h2 itemprop="name" class="post-title big">Left pipe in Haskell</h2>
+            <p class="post-meta">Written by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Marcello Seri</span></span> the <time itemprop="datePublished" datetime="21 Nov 2014">21 Nov 2014</time> - <span class="post-tagline"> under                                 <a class="post-category" href="http://www.mseri.me/tag/haskell.html">haskell</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/pipe.html">pipe</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/random-toughts.html">random toughts</a>. </span></p>
+        </header>
+
+        <section class="post-content">
+
+        <div class="post-share-box">
+            <section class="share">
+                <h3>Share this post</h3>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.mseri.me/left-pipe-in-haskell/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-twitter" href="http://twitter.com/share?text=Left pipe in Haskell&url=http://www.mseri.me/left-pipe-in-haskell/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://www.mseri.me/left-pipe-in-haskell/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+        </div>
+
+        <div itemprop="articleBody">
+            <p>If you read this blog, you know that I am very biased by having worked with unix shells for almost two decades and that I am addicted to the use of pipes (see e.g. <a href="http://www.mseri.me/piping-with-swift/">Piping with Swift</a>). I really find much more natural to see data moving from left to right.</p>
+<p>Yesterday I was thinking that in Haskell everything is an expression and that you can easily define infix operators. Thus it must be possible to implement a shell-like pipe.</p>
+<p>First of all, composition <code>(.)</code> is too strong, the pipe I have in mind is like <code>($)</code> but reversed. In fact, my second attempt (I feel embarassed by the first, I am not going to post it ;-P) was</p>
+<div class="highlight"><pre>($&gt;) = flip ($)
+</pre></div>
+
+
+<p>One can immediately check that it is typed correctly as </p>
+<div class="highlight"><pre>($&gt;) :: a -&gt; (a -&gt; b) -&gt; b
+</pre></div>
+
+
+<p>Now I can do e.g.</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">Data.List</span>
+
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span> <span class="err">$</span><span class="o">&gt;</span> <span class="n">sort</span> <span class="err">$</span><span class="o">&gt;</span> <span class="nb">filter</span> <span class="p">(</span>\<span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="err">$</span><span class="o">&gt;</span> <span class="nb">map</span> <span class="n">even</span> <span class="err">$</span><span class="o">&gt;</span> <span class="ow">and</span>
+</pre></div>
+
+
+<p>and get the result without complaints.</p>
+<p>This is just a stupid example but I find it more expressive (again probably because I use too much the shell) than</p>
+<div class="highlight"><pre>and . map even . filter (\x -&gt; x &lt; 4) . sort $ [3,1,4,2,2,6]
+</pre></div>
+
+
+<p>at least for certain kind of progressive filtering of data.</p>
+<p>I am now following <strong>fp101x</strong> on <strong>edX</strong>. It is quite good! I will soon(?) post a brief cheatsheet that I made to recall how to use Functors, Monads and other interesting constructs.</p>
+        </div>
+        
+        </section>
+
+<section class="post-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE UNCOMMENTING THE THEME * * */
+    var disqus_shortname = 'talesofafractalspectrum'; // required: replace example with your forum shortname
+    // make sure to use the post.id as an identifier, 
+    //otherwise disqus will use the pages url per default, 
+    //which might be problematic...
+    var disqus_identifier = '41,';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+    </article>
+    
+    <script type="text/javascript">
+        document.getElementById( 'top-post' ).scrollIntoView();
+    </script>
+
+</main>
+            
+        </div>
+    </div>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']]
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44365202-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

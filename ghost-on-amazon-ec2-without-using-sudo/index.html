@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description" content="Tales of a Fractal Spectrum, ">
+
+        <link rel="alternate" href="http://www.mseri.me/feed/atom.xml" type="application/atom+xml" title="Tales of a Fractal Spectrum Atom Feed"/>
+        <link rel="alternate" href="http://www.mseri.me/feed/rss.xml" type="application/rss+xml" title="Tales of a Fractal Spectrum RSS Feed"/>
+
+        <title>Ghost on Amazon EC2 without using sudo - Tales of a Fractal Spectrum</title>
+
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Ghost on Amazon EC2 without using sudo" />
+    <meta property="og:description" content="I've been thinking since yesterday's post how to run the ghost blog at the user level, wihout the need of using sudo. Use Nginx In a production environment I would probably run ghos as a nginx subdomain (i.e. ghost.mseri.me), eventually forwarding the domain to the ..." />
+
+        <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400" />
+    <link rel="stylesheet" href="http://www.mseri.me/theme/css/style-min.css">
+    <!--<link rel="stylesheet" href="http://www.mseri.me/theme/css/pygments.css">-->
+
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <header class="header">
+                <hgroup>
+                        <a id="blog-logo" href="http://www.mseri.me"><img src="http://www.mseri.me/images/gauss_logo.png" alt="Blog Logo" /></a>
+                    <h1 itemprop="name" class="blog-title"><a href="http://www.mseri.me">Tales of a Fractal Spectrum</a></h1>
+                        <h2 itemprop="description" class="blog-description">Free thoughts of a geeky mathematician</h2>
+                </hgroup>
+<nav class="nav">
+  <ul class="social-list">
+<li class="social-item"><a class="subscribe icon-twitter" href="http://www.twitter.com/marcelloseri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-facebook" href="http://www.facebook.com/marcello.seri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-google-plus" href="http://plus.google.com/+MarcelloSeri" target="_blank" rel="publisher"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-github" href="http://www.github.com/mseri" target="_blank"></a></li>&nbsp;    <li class="social-item">&nbsp;</li>
+    <li class="social-item"><a class="subscribe icon-feed" href="http://www.mseri.me/feed/rss.xml" target="_blank"></a></li>
+</ul>
+</nav>
+            </header>
+            <footer class="footer">
+                <section class="copyright">&copy; 2013--2015 <a itemscope="copyrightHolder" href="http://www.mseri.me">Tales of a Fractal Spectrum</a></section>
+                <section class="poweredby">Proudly published with Pelican on GitHub Pages.</section> 
+                <section class="theme"><a href="https://github.com/mseri/purity" target="_blank">Purity</a> is built with <a href="http://purecss.io" target="_blank">PureCSS</a>.</section>
+            </footer>
+            
+        </div>
+        <div class="pure-u-1 container">
+            
+<main class="content" role="main" id="top-post">
+        <div class="back">
+            <a href="http://www.mseri.me">&larr;  back to the home page</a>
+        </div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post purity_post">
+
+        <header class="post-header">
+            <h2 itemprop="name" class="post-title big">Ghost on Amazon EC2 without using sudo</h2>
+            <p class="post-meta">Written by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Marcello Seri</span></span> the <time itemprop="datePublished" datetime="24 Sep 2013">24 Sep 2013</time> - <span class="post-tagline"> under                                 <a class="post-category" href="http://www.mseri.me/tag/amazon-ec2.html">Amazon EC2</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/nginx.html">nginx</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/forever.html">forever</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/security.html">security</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/iptables.html">iptables</a>. </span></p>
+        </header>
+
+        <section class="post-content">
+
+        <div class="post-share-box">
+            <section class="share">
+                <h3>Share this post</h3>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.mseri.me/ghost-on-amazon-ec2-without-using-sudo/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-twitter" href="http://twitter.com/share?text=Ghost on Amazon EC2 without using sudo&url=http://www.mseri.me/ghost-on-amazon-ec2-without-using-sudo/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://www.mseri.me/ghost-on-amazon-ec2-without-using-sudo/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+        </div>
+
+        <div itemprop="articleBody">
+            <p>I've been thinking since <a href="http://www.mseri.me/ghost-up-and-running-on-amazon-ec2/">yesterday's post</a> how to run the ghost blog at the user level, wihout the need of using sudo.</p>
+<h2>Use Nginx</h2>
+<p>In a production environment I would probably run ghos as a nginx subdomain (i.e. <em>ghost.mseri.me</em>), eventually forwarding the domain to the same address (e.g. typing <em>mseri.me</em> you would end up automatically in <em>ghost.mseri.me</em>). For this purpose you either know by hearth how to do it, or you can follow one of the many tutorial available online. I think this is a very neat and effective way of proceeding.</p>
+<p>For the sake of completeness I link some of them here: </p>
+<ul>
+<li><a href="https://blog.igbuend.com/dude-looks-like-a-ghost/">Dude looks like a ghost</a></li>
+<li><a href="http://nls.io/setup-ghost-with-nginx-on-debian/">Setup Ghost with nginx on Debian</a> </li>
+<li><a href="https://github.com/d5/docs/wiki/Installing-Node.js-on-Amazon-EC2">Installing Node.js on Amazon EC2</a> </li>
+<li><a href="http://www.howtoinstallghost.com/how-to-host-ghost-on-a-nginx-subdomain/">How to Host Ghost on a Nginx Subdomain</a> </li>
+</ul>
+<p>Even if some of these links are for other Unix systems or just for node instead of ghost, it is pretty straightforward to adapt them to your needs.</p>
+<p>Remember, when you are in a production environment, end even when you are just on a test space, to try and secture your system as possible. A decent starting point could be <a href="http://www.cyberciti.biz/tips/linux-unix-bsd-nginx-webserver-security.html">Top 20 Nginx WebServer Best Security Practices</a> or <a href="https://blog.igbuend.com/dude-looks-like-a-ghost/">Dude looks like a ghost</a>. Moreover, if you are following this last tutorial you should have a look to <a href="http://snippets.aktagon.com/snippets/554-how-to-secure-an-nginx-server-with-fail2ban">How to Secure an nginx Server with Fail2Ban</a>.</p>
+<h2>Use iptables to forward port 80</h2>
+<p>Another option, given that in Amazon EC2 users are allowed to use only port greater 1024, is to forward your 80 port to your 8080 (or whatever you need) using iptables.</p>
+<p>If you set up ghost to listen on the port 8080, it's likely that you have nothing to do and port 80 and 8080 are already assigned to http. You can easily check it from the AWS Console (look for security groups) or simply <strong>giving it a try</strong>. Just modify your <code>config.js</code> and replace whatever is in <code>host: 2368</code> with <code>host: 8080</code>. Run ghost with <code>npm start</code> and try to access your blog, if it works there is nothing else to do than install <code>forever</code> and use it.</p>
+<p><img alt="The AWS console" src="/images/03-screenshot.png" /></p>
+<p>If it doesn't work try to execute the following command (only for linux) in a terminal and it should start working</p>
+<div class="highlight"><pre>sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+</pre></div>
+
+
+<p>If you are still using port 2360 replace 8080 with the appropriate value. You may need to enable the access to the proper ports, to do it is enough to execute the following. </p>
+<div class="highlight"><pre>sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
+</pre></div>
+
+
+<p>I reccomend to <strong>not play with iptables rules in a production environment if you don't know what you are doing</strong>.</p>
+<p>To check if the rules have been accepted you can list the configuration with </p>
+<div class="highlight"><pre>sudo iptables -L
+</pre></div>
+
+
+<p>and to delete the previous rules in case they didn't work just type them again in the terminal with <code>-A</code> replaced by <code>-D</code>.</p>
+<p>This same procedure can be adapted to other unix systems just using the appropriate firewall rules (like packet filter on BSD).</p>
+<h2>Install and use forever</h2>
+<p>Now that we can start ghost without any need of using sudo, we only have to install forever. Open a terminal and execute</p>
+<div class="highlight"><pre>sudo /usr/local/bin/npm install -g forever
+</pre></div>
+
+
+<p>then enter in the ghost folder with <code>cd path_to_your/ghost_folder</code> and run</p>
+<div class="highlight"><pre>NODE_ENV=production forever start index.js
+</pre></div>
+
+
+<p>Open your browser and enjoy your Ghost Blog!</p>
+<p><em>If you are using the development configuration instead of the production one, just drop <code>NODE_ENV=production</code> from the previous command.</em></p>
+<p>To kill the server, just use</p>
+<div class="highlight"><pre>forever list
+forever stop 0
+</pre></div>
+
+
+<p>where 0 is the ghost process. Or eventually</p>
+<div class="highlight"><pre>forever stopall
+</pre></div>
+
+
+<h3>Check permissions</h3>
+<p>If you were running your ghost blog using sudo, you may not be able to access the database or some folders. In such case is enough to fix its permissions. Open a terminal, enter in the ghost folder with <code>cd path_to_your/ghost_folder</code> and execute</p>
+<div class="highlight"><pre>sudo chown yourusername -R *
+sudo chgrp yourusergroup -R *
+</pre></div>
+
+
+<p>where you have to replace <code>yourusername</code> and <code>yourusergroup</code> with the appropriate values. For Amazon EC2 the are in general both equal to <code>ec2-user</code>. </p>
+        </div>
+        
+        </section>
+
+<section class="post-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE UNCOMMENTING THE THEME * * */
+    var disqus_shortname = 'talesofafractalspectrum'; // required: replace example with your forum shortname
+    // make sure to use the post.id as an identifier, 
+    //otherwise disqus will use the pages url per default, 
+    //which might be problematic...
+    var disqus_identifier = '3,';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+    </article>
+    
+    <script type="text/javascript">
+        document.getElementById( 'top-post' ).scrollIntoView();
+    </script>
+
+</main>
+            
+        </div>
+    </div>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']]
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44365202-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

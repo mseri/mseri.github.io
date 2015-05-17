@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description" content="Tales of a Fractal Spectrum, ">
+
+        <link rel="alternate" href="http://www.mseri.me/feed/atom.xml" type="application/atom+xml" title="Tales of a Fractal Spectrum Atom Feed"/>
+        <link rel="alternate" href="http://www.mseri.me/feed/rss.xml" type="application/rss+xml" title="Tales of a Fractal Spectrum RSS Feed"/>
+
+        <title>Piping with Swift - Tales of a Fractal Spectrum</title>
+
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Piping with Swift" />
+    <meta property="og:description" content="Lately I've been playing with Apple's newborn Swift quite a lot. I have to say that I am really impressed, and except for few things that I hope will be smoothed in the next months (years?), I find Swift really enjoyable and readable. However, there is one feature ..." />
+
+        <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400" />
+    <link rel="stylesheet" href="http://www.mseri.me/theme/css/style-min.css">
+    <!--<link rel="stylesheet" href="http://www.mseri.me/theme/css/pygments.css">-->
+
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <header class="header">
+                <hgroup>
+                        <a id="blog-logo" href="http://www.mseri.me"><img src="http://www.mseri.me/images/gauss_logo.png" alt="Blog Logo" /></a>
+                    <h1 itemprop="name" class="blog-title"><a href="http://www.mseri.me">Tales of a Fractal Spectrum</a></h1>
+                        <h2 itemprop="description" class="blog-description">Free thoughts of a geeky mathematician</h2>
+                </hgroup>
+<nav class="nav">
+  <ul class="social-list">
+<li class="social-item"><a class="subscribe icon-twitter" href="http://www.twitter.com/marcelloseri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-facebook" href="http://www.facebook.com/marcello.seri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-google-plus" href="http://plus.google.com/+MarcelloSeri" target="_blank" rel="publisher"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-github" href="http://www.github.com/mseri" target="_blank"></a></li>&nbsp;    <li class="social-item">&nbsp;</li>
+    <li class="social-item"><a class="subscribe icon-feed" href="http://www.mseri.me/feed/rss.xml" target="_blank"></a></li>
+</ul>
+</nav>
+            </header>
+            <footer class="footer">
+                <section class="copyright">&copy; 2013--2015 <a itemscope="copyrightHolder" href="http://www.mseri.me">Tales of a Fractal Spectrum</a></section>
+                <section class="poweredby">Proudly published with Pelican on GitHub Pages.</section> 
+                <section class="theme"><a href="https://github.com/mseri/purity" target="_blank">Purity</a> is built with <a href="http://purecss.io" target="_blank">PureCSS</a>.</section>
+            </footer>
+            
+        </div>
+        <div class="pure-u-1 container">
+            
+<main class="content" role="main" id="top-post">
+        <div class="back">
+            <a href="http://www.mseri.me">&larr;  back to the home page</a>
+        </div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post purity_post">
+
+        <header class="post-header">
+            <h2 itemprop="name" class="post-title big">Piping with Swift</h2>
+            <p class="post-meta">Written by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Marcello Seri</span></span> the <time itemprop="datePublished" datetime="16 Jun 2014">16 Jun 2014</time> - <span class="post-tagline"> under                                 <a class="post-category" href="http://www.mseri.me/tag/swift.html">swift</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/pipe.html">pipe</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/operators.html">operators</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/functional.html">functional</a>. </span></p>
+        </header>
+
+        <section class="post-content">
+
+        <div class="post-share-box">
+            <section class="share">
+                <h3>Share this post</h3>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.mseri.me/piping-with-swift/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-twitter" href="http://twitter.com/share?text=Piping with Swift&url=http://www.mseri.me/piping-with-swift/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://www.mseri.me/piping-with-swift/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+        </div>
+
+        <div itemprop="articleBody">
+            <p>Lately I've been playing with Apple's newborn Swift quite a lot. I have to say that I am really impressed, and except for few things that I hope will be smoothed in the next months (years?), I find Swift really enjoyable and readable.</p>
+<p>However, there is one feature that I really miss. Something that I daily use with slightly different syntaxes in Sh, Haskell, Julia and Elixir: the <strong>pipe</strong>!</p>
+<h3>Can we implement a <em>kind of</em> pipe in Swift?</h3>
+<p>Given that in Swift <code>|</code>, <code>.</code> and <code>||</code> have already quite precise and distinct meanings, I am going to mimic Julia and Elixir's notation and use <code>|&gt;</code>. 
+Swift is unbelievably flexible from this point of view: one can easily define new generic <code>infix</code>, <code>prefix</code> or <code>suffix</code> operator, and state their associativity and precedence properties. You'll soon see that the syntax speaks by itself!</p>
+<p>Let's try to define a left associative generic pipe.</p>
+<div class="highlight"><pre>operator infix |&gt; { 
+    associativity left 
+}
+func |&gt; &lt;L,R&gt;(left: L, right: L -&gt; R) -&gt; R {
+    return right(left);
+}
+</pre></div>
+
+
+<p>Then we could use it to chain some function together in an elegant way. For example</p>
+<div class="highlight"><pre>func unique&lt;T:Hashable&gt;(array: Array&lt;T&gt;) -&gt; Array&lt;T&gt;{
+    var filter = Dictionary&lt;T,Bool&gt;()
+    var result = Array&lt;T&gt;()
+    for i in 0..array.count {
+        if let elem = filter[array[i]] {
+            continue
+        } else {
+            filter[array[i]] = true
+            result.append(array[i])
+        }
+    }
+    return result
+}
+
+[1, 2, 3, 3, 3, 4, 5, 5, 6, 7] |&gt; sort |&gt; unique |&gt; toString |&gt; println
+
+// prints &#39;[1,2,3,4,5,6,7]&#39;
+</pre></div>
+
+
+<p>I strongly believe that some (better) implementation of the pipe should become part of Swift standard library. For example it would be nice to be able to chain subscripts (e.g. <code>filter[array[i]]</code> replaced by <code>i |&gt; array[$0] |&gt; filter[$0]</code>) or more flexible maps (e.g. <code>[1, 2, 3, 3, 3, 4, 5, 5, 6, 7] |&gt; sort |&gt; unique |&gt; map($0, {x in x * x})</code>) . But maybe I am asking for too much...</p>
+<p>While writing this example, I was wondering what is the best way to remove duplicates in a Swift array? The shortest code I could come up with is</p>
+<div class="highlight"><pre>func unique&lt;T:Hashable&gt;(array: T[]) -&gt; T[] {
+    var filter = Dictionary&lt;T,Bool&gt;()
+    for i in 0..array.count {
+            filter[array[i]] = true
+    }
+    return Array(filter.keys)
+}
+</pre></div>
+
+
+<p>but it is probably not the fastest one. Nevertheless, I would probably use an underlying dictionary to implement a <code>Set</code> type and use the <code>Set</code> to remove duplicates. Note here that <code>T[]</code> is just syntactic sugar for <code>Array&lt;T&gt;</code>.</p>
+<p>Another version, using the builtin <code>contains</code> function could be</p>
+<div class="highlight"><pre>func unique&lt;T : Equatable&gt;(array: T[]) -&gt; T[] {
+    var result = T[]()
+    for x in array {
+        if !contains(result, x) {
+            result += x
+        }
+    }
+    return result
+}
+</pre></div>
+
+
+<p>Again <code>+=</code> stands for <code>append</code> when used with arrays.</p>
+<p>I guess the fastest code would be to use a quicksort and remove the duplicates while sorting, but it (as my second implementation of <code>unique</code>) would not preserve the order of appearence.</p>
+<p>While wrtiting this post, on HN was linked a <a href="http://nomothetis.svbtle.com/smashing-swift">very initersting post</a> with implementation of some interesting construct, like the <a href="http://www.mseri.me/implementing-either-type-in-swift">either of the previous post</a> and more, and pointing out problems of the young swift compiler. I think it's a nice reading.</p>
+<p>Additionally I recently stumbled upon the <a href="http://stackoverflow.com/questions/24027116">following stackoverflow thread</a>. I find it quite interesting, especially because it shows a nice extension of Arrays introducing an <code>each</code> construct very similar to ruby's one.</p>
+<p>Another simple example I was working on is the <em>null coaleshing operator</em> that would come handy with Swift's optionals. An interesting discussion in regard can be found (again) in <a href="http://stackoverflow.com/questions/24082959">stackoverflow</a>.</p>
+<p>After some time we can start to understand the limitations of Swift, but the language is definitely still under construction and I would not be surprised if it will be different at the time of the final release. </p>
+<p>In the meanwhile, if you can, experiment with it and have fun!!</p>
+<p>UPDATE: despite the many limitations of Swift compiler in this direction, there is a quite active and promising library for functional programming in swift already under development: see <a href="https://github.com/maxpow4h/swiftz">swiftz on GitHub</a>.</p>
+        </div>
+        
+        </section>
+
+<section class="post-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE UNCOMMENTING THE THEME * * */
+    var disqus_shortname = 'talesofafractalspectrum'; // required: replace example with your forum shortname
+    // make sure to use the post.id as an identifier, 
+    //otherwise disqus will use the pages url per default, 
+    //which might be problematic...
+    var disqus_identifier = '34,';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+    </article>
+    
+    <script type="text/javascript">
+        document.getElementById( 'top-post' ).scrollIntoView();
+    </script>
+
+</main>
+            
+        </div>
+    </div>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']]
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44365202-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

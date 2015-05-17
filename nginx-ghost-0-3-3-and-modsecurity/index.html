@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description" content="Tales of a Fractal Spectrum, ">
+
+        <link rel="alternate" href="http://www.mseri.me/feed/atom.xml" type="application/atom+xml" title="Tales of a Fractal Spectrum Atom Feed"/>
+        <link rel="alternate" href="http://www.mseri.me/feed/rss.xml" type="application/rss+xml" title="Tales of a Fractal Spectrum RSS Feed"/>
+
+        <title>nginx, ghost 0.3.3 and modsecurity - Tales of a Fractal Spectrum</title>
+
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="nginx, ghost 0.3.3 and modsecurity" />
+    <meta property="og:description" content="In my previous post, Ghost on Amazon EC2 without using sudo, I was proposing some way of running ghost without having to use sudo and with at least a minimal eye on security. If you have followed one of the guides that I suggested, namely Dude Looks Like a Ghost ..." />
+
+        <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400" />
+    <link rel="stylesheet" href="http://www.mseri.me/theme/css/style-min.css">
+    <!--<link rel="stylesheet" href="http://www.mseri.me/theme/css/pygments.css">-->
+
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <header class="header">
+                <hgroup>
+                        <a id="blog-logo" href="http://www.mseri.me"><img src="http://www.mseri.me/images/gauss_logo.png" alt="Blog Logo" /></a>
+                    <h1 itemprop="name" class="blog-title"><a href="http://www.mseri.me">Tales of a Fractal Spectrum</a></h1>
+                        <h2 itemprop="description" class="blog-description">Free thoughts of a geeky mathematician</h2>
+                </hgroup>
+<nav class="nav">
+  <ul class="social-list">
+<li class="social-item"><a class="subscribe icon-twitter" href="http://www.twitter.com/marcelloseri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-facebook" href="http://www.facebook.com/marcello.seri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-google-plus" href="http://plus.google.com/+MarcelloSeri" target="_blank" rel="publisher"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-github" href="http://www.github.com/mseri" target="_blank"></a></li>&nbsp;    <li class="social-item">&nbsp;</li>
+    <li class="social-item"><a class="subscribe icon-feed" href="http://www.mseri.me/feed/rss.xml" target="_blank"></a></li>
+</ul>
+</nav>
+            </header>
+            <footer class="footer">
+                <section class="copyright">&copy; 2013--2015 <a itemscope="copyrightHolder" href="http://www.mseri.me">Tales of a Fractal Spectrum</a></section>
+                <section class="poweredby">Proudly published with Pelican on GitHub Pages.</section> 
+                <section class="theme"><a href="https://github.com/mseri/purity" target="_blank">Purity</a> is built with <a href="http://purecss.io" target="_blank">PureCSS</a>.</section>
+            </footer>
+            
+        </div>
+        <div class="pure-u-1 container">
+            
+<main class="content" role="main" id="top-post">
+        <div class="back">
+            <a href="http://www.mseri.me">&larr;  back to the home page</a>
+        </div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post purity_post">
+
+        <header class="post-header">
+            <h2 itemprop="name" class="post-title big">nginx, ghost 0.3.3 and modsecurity</h2>
+            <p class="post-meta">Written by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Marcello Seri</span></span> the <time itemprop="datePublished" datetime="18 Oct 2013">18 Oct 2013</time> - <span class="post-tagline"> under                                 <a class="post-category" href="http://www.mseri.me/tag/nginx.html">nginx</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/modsecurity.html">modsecurity</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/fix.html">fix</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/ghost.html">ghost</a>. </span></p>
+        </header>
+
+        <section class="post-content">
+
+        <div class="post-share-box">
+            <section class="share">
+                <h3>Share this post</h3>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.mseri.me/nginx-ghost-0-3-3-and-modsecurity/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-twitter" href="http://twitter.com/share?text=nginx, ghost 0.3.3 and modsecurity&url=http://www.mseri.me/nginx-ghost-0-3-3-and-modsecurity/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://www.mseri.me/nginx-ghost-0-3-3-and-modsecurity/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+        </div>
+
+        <div itemprop="articleBody">
+            <p>In my previous post, <a href="http://www.mseri.me/ghost-on-amazon-ec2-without-using-sudo/">Ghost on Amazon EC2 without using sudo</a>, I was proposing some way of running ghost without having to use sudo and with at least a minimal eye on security.</p>
+<p>If you have followed one of the guides that I suggested, namely <a href="https://blog.igbuend.com/dude-looks-like-a-ghost/">Dude Looks Like a Ghost</a>, or you have installed your own <a href="http://www.modsecurity.org">modsecurity</a> configuration you should have received a big page announcing an <strong>Error 403</strong> right after the update of your ghost to version <em>0.3.3</em>.</p>
+<p><strong>Don't worry!</strong></p>
+<p>Due to some security fixes in the last ghost version, modsecurity interpret the content of your ghost's <a href="http://en.wikipedia.org/wiki/HTTP_cookie">cookie</a> as an <a href="http://en.wikipedia.org/wiki/SQL_injection">sql injection</a> potential attack and simply drops the communication between the browser and the website to prevent it.</p>
+<p>If I understood what expressjs/connect are doing under the hood, there should be no problem in dropping the rule that creates this false positive from the modsecrutiry configuration. The faster way (assuming that you don't need this rule somewhere else) is to comment it in the configuration file</p>
+<div class="highlight"><pre>sed -i &#39;/981246/s/^/# /&#39; modsecurity_crs_41_sql_injection_attacks.conf
+</pre></div>
+
+
+<p>and then reload <a href="http://nginx.org">nginx</a></p>
+<div class="highlight"><pre>/opt/nginx/sbin/nginx -s reload
+</pre></div>
+
+
+<p>Otherwise you should <a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual#secruleremovebyid">selectively remove</a> the rule for the subdomain that is pointing to your ghost instance. But I suppose that if you need this last configuration you already know how to do it...</p>
+        </div>
+        
+        </section>
+
+<section class="post-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE UNCOMMENTING THE THEME * * */
+    var disqus_shortname = 'talesofafractalspectrum'; // required: replace example with your forum shortname
+    // make sure to use the post.id as an identifier, 
+    //otherwise disqus will use the pages url per default, 
+    //which might be problematic...
+    var disqus_identifier = '8,';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+    </article>
+    
+    <script type="text/javascript">
+        document.getElementById( 'top-post' ).scrollIntoView();
+    </script>
+
+</main>
+            
+        </div>
+    </div>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']]
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44365202-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

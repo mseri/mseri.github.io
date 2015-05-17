@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description" content="Tales of a Fractal Spectrum, ">
+
+        <link rel="alternate" href="http://www.mseri.me/feed/atom.xml" type="application/atom+xml" title="Tales of a Fractal Spectrum Atom Feed"/>
+        <link rel="alternate" href="http://www.mseri.me/feed/rss.xml" type="application/rss+xml" title="Tales of a Fractal Spectrum RSS Feed"/>
+
+        <title>Implementing Either type in Swift - Tales of a Fractal Spectrum</title>
+
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Implementing Either type in Swift" />
+    <meta property="og:description" content="It has been only a couple of days since Apple announced and released Swift. It has possibly been the most important and interesting announcement of Apple in the last few years and started an amount of discussions around the web. With the hours passing, we've found out that there ..." />
+
+        <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400" />
+    <link rel="stylesheet" href="http://www.mseri.me/theme/css/style-min.css">
+    <!--<link rel="stylesheet" href="http://www.mseri.me/theme/css/pygments.css">-->
+
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <header class="header">
+                <hgroup>
+                        <a id="blog-logo" href="http://www.mseri.me"><img src="http://www.mseri.me/images/gauss_logo.png" alt="Blog Logo" /></a>
+                    <h1 itemprop="name" class="blog-title"><a href="http://www.mseri.me">Tales of a Fractal Spectrum</a></h1>
+                        <h2 itemprop="description" class="blog-description">Free thoughts of a geeky mathematician</h2>
+                </hgroup>
+<nav class="nav">
+  <ul class="social-list">
+<li class="social-item"><a class="subscribe icon-twitter" href="http://www.twitter.com/marcelloseri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-facebook" href="http://www.facebook.com/marcello.seri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-google-plus" href="http://plus.google.com/+MarcelloSeri" target="_blank" rel="publisher"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-github" href="http://www.github.com/mseri" target="_blank"></a></li>&nbsp;    <li class="social-item">&nbsp;</li>
+    <li class="social-item"><a class="subscribe icon-feed" href="http://www.mseri.me/feed/rss.xml" target="_blank"></a></li>
+</ul>
+</nav>
+            </header>
+            <footer class="footer">
+                <section class="copyright">&copy; 2013--2015 <a itemscope="copyrightHolder" href="http://www.mseri.me">Tales of a Fractal Spectrum</a></section>
+                <section class="poweredby">Proudly published with Pelican on GitHub Pages.</section> 
+                <section class="theme"><a href="https://github.com/mseri/purity" target="_blank">Purity</a> is built with <a href="http://purecss.io" target="_blank">PureCSS</a>.</section>
+            </footer>
+            
+        </div>
+        <div class="pure-u-1 container">
+            
+<main class="content" role="main" id="top-post">
+        <div class="back">
+            <a href="http://www.mseri.me">&larr;  back to the home page</a>
+        </div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post purity_post">
+
+        <header class="post-header">
+            <h2 itemprop="name" class="post-title big">Implementing Either type in Swift</h2>
+            <p class="post-meta">Written by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Marcello Seri</span></span> the <time itemprop="datePublished" datetime="04 Jun 2014">04 Jun 2014</time> - <span class="post-tagline"> under                                 <a class="post-category" href="http://www.mseri.me/tag/haskell.html">haskell</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/either.html">either</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/types.html">types</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/swift.html">swift</a>. </span></p>
+        </header>
+
+        <section class="post-content">
+
+        <div class="post-share-box">
+            <section class="share">
+                <h3>Share this post</h3>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.mseri.me/implementing-either-type-in-swift/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-twitter" href="http://twitter.com/share?text=Implementing Either type in Swift&url=http://www.mseri.me/implementing-either-type-in-swift/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://www.mseri.me/implementing-either-type-in-swift/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+        </div>
+
+        <div itemprop="articleBody">
+            <p>It has been only a couple of days since Apple <a href="https://developer.apple.com/swift/">announced and released Swift</a>. It has possibly been the most important and interesting announcement of Apple in the last few years and <a href="https://news.ycombinator.com/item?id=7835099">started an amount of discussions around the web</a>.</p>
+<p>With the hours passing, we've found out that there was <a href="http://swift-lang.org">at least another Swift</a> in the history of programming languages (with a similar icon) and that <a href="http://nondot.org/sabre/">Swift is under development since 2010 and its father is Chris Lattner</a>, creator of <code>clang</code> and <code>LLVM</code>.</p>
+<p>As we can read from his page, it's no surprise that people have found similarities with Rust, Haskell, Ruby, Python, Julia, and many other language. And the more I play with Swift, the happier I am of what they did. I really hope that the language will be released with an open source license as LLVM, clang and in some sense Objective-C.</p>
+<p>But let's come to the hearth of this post. I find abstract types and monadic construct very powerful and fun to code. And the type system in Swift, desite not being as flexible and powerful as Haskell's, gives a lot of freedom in this directon. Optionals fall exactly in this context and correspond very closely to <a href="http://www.haskell.org/haskellwiki/Maybe">Haskell's Maybe class</a>.</p>
+<p>As you can read in <a href="https://itun.es/gb/jEUH0.l">Apple Inc. “The Swift Programming Language.” ebook</a>, the <em>optional</em> type in Swift is nothing but synctactic sugar for the following enum</p>
+<div class="highlight"><pre><span class="cm">/* Reimplement the Swift standard library&#39;s optional type */</span><span class="w"></span>
+enum<span class="w"> </span>OptionalValue<span class="o">&lt;</span>T<span class="o">&gt;</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span>case<span class="w"> </span>None<span class="w"></span>
+<span class="w">    </span>case<span class="w"> </span>Some<span class="o">(</span>T<span class="o">)</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+
+var<span class="w"> </span><span class="nl">possibleInteger</span><span class="o">:</span><span class="w"> </span>OptionalValue<span class="o">&lt;</span>Int<span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">.</span>None<span class="w"></span>
+possibleInteger<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">.</span>Some<span class="o">(</span><span class="m">100</span><span class="o">)</span><span class="w"></span>
+</pre></div>
+
+
+<p>Where<code>T</code> represents a generic type, <code>nil</code> is indeed syntactic sugar for <code>OptionalValue&lt;T&gt;.None</code> and <code>?</code> the same for <code>OptionalValue&lt;T&gt;.Some(T)</code>.</p>
+<p>You can then use a <code>switch</code> and swift pattern matching capabilities to manage the error</p>
+<div class="highlight"><pre>switch possibleInteger {
+case .Some(let value) :
+    /* just type &#39;value&#39; here to see &#39;100&#39; appearing in playground REPL */
+    println(&quot;Value is: \(value)&quot;)
+case .None :
+    println(&quot;Error: no value.&quot;)
+}
+</pre></div>
+
+
+<p>I am not going in the realm of Monads (yet) and <a href="http://www.haskell.org/haskellwiki/Monad_tutorials_timeline">try to explain them</a>, but I think that the <a href="http://www.haskell.org/ghc/docs/latest/html/libraries/base/Data-Either.html"><em>either</em></a> type could be very useful in Swift. As for the <em>optional</em>, we can easily define it as</p>
+<div class="highlight"><pre><span class="k">enum</span> <span class="n">Either</span><span class="s">&lt;T1, T2&gt;</span> {
+    <span class="n">case</span> <span class="n">Left</span>(<span class="n">T1</span>)
+    <span class="n">case</span> <span class="n">Right</span>(<span class="n">T2</span>)
+}
+</pre></div>
+
+
+<p>As in Haskell, Either is parameterized by two types, not one. A value of the Either type <em>either</em> contains a value of type <code>T1</code> or of type <code>T2</code>. With it, we can discriminate between two possibilities and using Swift pattern matching we can write a nice, clean code. </p>
+<p>Either can be used as a <a href="https://www.fpcomplete.com/school/starting-with-haskell/basics-of-haskell/10_Error_Handling">generalization of optional types</a> in which Left not only encodes failure but is accompanied by an error message (so often <code>T1</code> will be just <code>String</code>). Then Right encodes success and the accompanying value.</p>
+<p>For example</p>
+<div class="highlight"><pre>var possibleInteger: Either&lt;String,Int&gt; = .Left(&quot;Not a number&quot;)
+var possibleInteger2: Either&lt;String,Int&gt; = .Right(3)
+
+switch possibleInteger1 {
+case .Left(let errorText) :
+    println(&quot;Error: \(errorText)&quot;)
+case .Right(let value) :
+    println(&quot;The value is: \(value)&quot;)
+}
+
+func safeDiv(x:Float, y:Float) -&gt; Either&lt;String,Float&gt; {
+  if y == 0 {
+    return Either&lt;String, Float&gt;.Left(&quot;Error: division by zero&quot;)
+  } else {
+    return Either&lt;String, Float&gt;.Right(x/y)
+  }
+}
+
+var badDivision = safeDiv(2,0)
+</pre></div>
+
+
+<p>In some sense you still have a kind of <code>assert</code> without having to stop the execution and raise and exception. This let's you control certain kind of errors or expected behaviors with much ease.</p>
+<p>Additionally, it would be pretty easy to use <code>generics</code> and <code>typealias</code>es to shorten sensibly the notation and clean the code above.</p>
+        </div>
+        
+        </section>
+
+<section class="post-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE UNCOMMENTING THE THEME * * */
+    var disqus_shortname = 'talesofafractalspectrum'; // required: replace example with your forum shortname
+    // make sure to use the post.id as an identifier, 
+    //otherwise disqus will use the pages url per default, 
+    //which might be problematic...
+    var disqus_identifier = '33,';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+    </article>
+    
+    <script type="text/javascript">
+        document.getElementById( 'top-post' ).scrollIntoView();
+    </script>
+
+</main>
+            
+        </div>
+    </div>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']]
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44365202-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

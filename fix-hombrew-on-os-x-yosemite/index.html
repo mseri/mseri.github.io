@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description" content="Tales of a Fractal Spectrum, ">
+
+        <link rel="alternate" href="http://www.mseri.me/feed/atom.xml" type="application/atom+xml" title="Tales of a Fractal Spectrum Atom Feed"/>
+        <link rel="alternate" href="http://www.mseri.me/feed/rss.xml" type="application/rss+xml" title="Tales of a Fractal Spectrum RSS Feed"/>
+
+        <title>Fix Hombrew on OS X Yosemite - Tales of a Fractal Spectrum</title>
+
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Fix Hombrew on OS X Yosemite" />
+    <meta property="og:description" content="If for some reasons you've been crazy enough to install the first developer beta of Mac OSX 10.01 Yosemite, you've probably noticed that Homebrew stopped working. One possible fix is to delete homebrew and reinstall everything following this gist. But I am too lazy and too attached ..." />
+
+        <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400" />
+    <link rel="stylesheet" href="http://www.mseri.me/theme/css/style-min.css">
+    <!--<link rel="stylesheet" href="http://www.mseri.me/theme/css/pygments.css">-->
+
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <header class="header">
+                <hgroup>
+                        <a id="blog-logo" href="http://www.mseri.me"><img src="http://www.mseri.me/images/gauss_logo.png" alt="Blog Logo" /></a>
+                    <h1 itemprop="name" class="blog-title"><a href="http://www.mseri.me">Tales of a Fractal Spectrum</a></h1>
+                        <h2 itemprop="description" class="blog-description">Free thoughts of a geeky mathematician</h2>
+                </hgroup>
+<nav class="nav">
+  <ul class="social-list">
+<li class="social-item"><a class="subscribe icon-twitter" href="http://www.twitter.com/marcelloseri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-facebook" href="http://www.facebook.com/marcello.seri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-google-plus" href="http://plus.google.com/+MarcelloSeri" target="_blank" rel="publisher"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-github" href="http://www.github.com/mseri" target="_blank"></a></li>&nbsp;    <li class="social-item">&nbsp;</li>
+    <li class="social-item"><a class="subscribe icon-feed" href="http://www.mseri.me/feed/rss.xml" target="_blank"></a></li>
+</ul>
+</nav>
+            </header>
+            <footer class="footer">
+                <section class="copyright">&copy; 2013--2015 <a itemscope="copyrightHolder" href="http://www.mseri.me">Tales of a Fractal Spectrum</a></section>
+                <section class="poweredby">Proudly published with Pelican on GitHub Pages.</section> 
+                <section class="theme"><a href="https://github.com/mseri/purity" target="_blank">Purity</a> is built with <a href="http://purecss.io" target="_blank">PureCSS</a>.</section>
+            </footer>
+            
+        </div>
+        <div class="pure-u-1 container">
+            
+<main class="content" role="main" id="top-post">
+        <div class="back">
+            <a href="http://www.mseri.me">&larr;  back to the home page</a>
+        </div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post purity_post">
+
+        <header class="post-header">
+            <h2 itemprop="name" class="post-title big">Fix Hombrew on OS X Yosemite</h2>
+            <p class="post-meta">Written by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Marcello Seri</span></span> the <time itemprop="datePublished" datetime="03 Jun 2014">03 Jun 2014</time> - <span class="post-tagline"> under                                 <a class="post-category" href="http://www.mseri.me/tag/fix.html">fix</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/homebrew.html">homebrew</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/yosemite.html">yosemite</a>. </span></p>
+        </header>
+
+        <section class="post-content">
+
+        <div class="post-share-box">
+            <section class="share">
+                <h3>Share this post</h3>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.mseri.me/fix-hombrew-on-os-x-yosemite/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-twitter" href="http://twitter.com/share?text=Fix Hombrew on OS X Yosemite&url=http://www.mseri.me/fix-hombrew-on-os-x-yosemite/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://www.mseri.me/fix-hombrew-on-os-x-yosemite/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+        </div>
+
+        <div itemprop="articleBody">
+            <p>If for some reasons you've been crazy enough to install the first developer beta of Mac OSX 10.01 Yosemite, you've probably noticed that <a href="http://brew.sh/">Homebrew</a> stopped working.</p>
+<p>One possible fix is to delete homebrew and reinstall everything following this <a href="https://gist.github.com/jpincheira/bd3698fee46735fac252">gist</a>. But I am too lazy and too attached to my list of installed packages to accept it.</p>
+<p>The first error I've got while running <code>brew update</code> was related to <em>missing system ruby 1.8</em>. This appears because OSX finally updated to <code>ruby 2.0</code> and this conflicts with the static link saved in one of Hombrew executables.</p>
+<hr />
+<p><strong>Update</strong>: as of this morning Homebrew has been fixed, you will not need to modify Hombrew's files if you update to Yosemite after having run <code>brew update</code>.</p>
+<p>If you did update the files as above and get a <em>failed merge</em> error, you will need to edit them again and fix the merge. On top of each file you will see something like</p>
+<div class="highlight"><pre>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:mergetest
+Your changes
+=======
+Something new
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 4e2b407f501b68f8588aa645acafffa0224b9b78:mergetest
+</pre></div>
+
+
+<p>Delete everything except for the 'Something new' line. Then save and in the end run <code>cd $(brew --repository) &amp;&amp; git commit -a -m 'fix brew update'</code></p>
+<hr />
+<p>The fix is quite simple. I opened <code>vim /usr/local/Library/brew.rb</code> and replaced the <code>1.8</code> in the shebang at the beginning of the file with <code>2.0</code>.
+And the same must be required for <code>/usr/local/Library/ENV/4.3/xcrun</code>, <code>/usr/local/Library/ENV/4.3/clang</code> and <code>/usr/local/Library/ENV/4.3/cc</code>.</p>
+<p>But that's not enough. We still have to add and commit the changes: <code>cd $(brew --repository) &amp;&amp; git commit -a -m 'fix ruby 2'</code></p>
+<p>Running <code>brew update</code> still complains. I needed two additional fixes. First <code>mkdir /Library/Caches/Homebrew</code> and second you will need to install <code>XCode 6 beta</code> (if you have access to Yosemite I assume that you have access to XCode too) and then install the command line tools (you can download them from Apple's developer center).</p>
+<p>You may encounter additional errors. The <a href="https://github.com/Homebrew/homebrew/issues/29795">relative Issue page on Homebrew's git repo</a> seems quite crowded at the moment.</p>
+        </div>
+        
+        </section>
+
+<section class="post-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE UNCOMMENTING THE THEME * * */
+    var disqus_shortname = 'talesofafractalspectrum'; // required: replace example with your forum shortname
+    // make sure to use the post.id as an identifier, 
+    //otherwise disqus will use the pages url per default, 
+    //which might be problematic...
+    var disqus_identifier = '32,';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+    </article>
+    
+    <script type="text/javascript">
+        document.getElementById( 'top-post' ).scrollIntoView();
+    </script>
+
+</main>
+            
+        </div>
+    </div>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']]
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44365202-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

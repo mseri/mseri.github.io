@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tales of a Fractal Spectrum</title><link href="http://www.mseri.me/" rel="alternate"></link><link href="http://www.mseri.me/feed/atom.xml" rel="self"></link><id>http://www.mseri.me/</id><updated>2015-02-06T01:11:55+00:00</updated><entry><title>On teaching mathematics - By V. I. Arnold</title><link href="http://www.mseri.me/on-teaching-mathematics/" rel="alternate"></link><updated>2015-02-06T01:11:55+00:00</updated><author><name>Marcello Seri</name></author><id>tag:www.mseri.me,2015-02-06:on-teaching-mathematics/</id><summary type="html">&lt;p&gt;&lt;em&gt;This is an extended text of the address at the discussion on teaching of mathematics in Palais de Découverte in Paris on 7 March 1997.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Mathematics is a part of physics. Physics is an experimental science, a part of natural science. Mathematics is the part of physics where experiments are cheap.&lt;/p&gt;
+&lt;p&gt;The Jacobi identity (which forces the heights of a triangle to cross at one point) is an experimental fact in the same way as that the Earth is round (that is, homeomorphic to a ball). But it can be discovered with less expense.&lt;/p&gt;
+&lt;p&gt;In the middle of the twentieth century it was attempted to divide physics and mathematics. The consequences turned out to be catastrophic. Whole generations of mathematicians grew up without knowing half of their science and, of course, in total ignorance of any other sciences. They first began teaching their ugly scholastic pseudo-mathematics to their students, then to schoolchildren (forgetting Hardy's warning that ugly mathematics has no permanent place under the Sun).&lt;/p&gt;
+&lt;p&gt;Since scholastic mathematics that is cut off from physics is fit neither for teaching nor for application in any other science, the result was the universal hate towards mathematicians - both on the part of the poor schoolchildren (some of whom in the meantime became ministers) and of the users.&lt;/p&gt;
+&lt;p&gt;The ugly building, built by undereducated mathematicians who were exhausted by their inferiority complex and who were unable to make themselves familiar with physics, reminds one of the rigorous axiomatic theory of odd numbers. Obviously, it is possible to create such a theory and make pupils admire the perfection and internal consistency of the resulting structure (in which, for example, the sum of an odd number of terms and the product of any number of factors are defined). From this sectarian point of view, even numbers could either be declared a heresy or, with passage of time, be introduced into the theory supplemented with a few "ideal" objects (in order to comply with the needs of physics and the real world).&lt;/p&gt;
+&lt;p&gt;Unfortunately, it was an ugly twisted construction of mathematics like the one above which predominated in the teaching of mathematics for decades. Having originated in France, this pervertedness quickly spread to teaching of foundations of mathematics, first to university students, then to school pupils of all lines (first in France, then in other countries, including Russia).&lt;/p&gt;
+&lt;p&gt;To the question "what is $2 + 3$" a French primary school pupil replied: "$3 + 2$, since addition is commutative". He did not know what the sum was equal to and could not even understand what he was asked about!&lt;/p&gt;
+&lt;p&gt;Another French pupil (quite rational, in my opinion) defined mathematics as follows: "there is a square, but that still has to be proved".&lt;/p&gt;
+&lt;p&gt;Judging by my teaching experience in France, the university students' idea of mathematics (even of those taught mathematics at the École Normale Supérieure - I feel sorry most of all for these obviously intelligent but deformed kids) is as poor as that of this pupil.&lt;/p&gt;
+&lt;p&gt;For example, these students have never seen a paraboloid and a question on the form of the surface given by the equation $xy = z^2$ puts the mathematicians studying at ENS into a stupor. Drawing a curve given by parametric equations (like $x = t^3 - 3^t$, $y = t^4 - 2t^2$) on a plane is a totally impossible problem for students (and, probably, even for most French professors of mathematics).&lt;/p&gt;
+&lt;p&gt;Beginning with l'Hospital's first textbook on calculus ("calculus for understanding of curved lines") and roughly until Goursat's textbook, the ability to solve such problems was considered to be (along with the knowledge of the times table) a necessary part of the craft of every mathematician.&lt;/p&gt;
+&lt;p&gt;Mentally challenged zealots of "abstract mathematics" threw all the geometry (through which connection with physics and reality most often takes place in mathematics) out of teaching. Calculus textbooks by Goursat, Hermite, Picard were recently dumped by the student library of the Universities Paris 6 and 7 (Jussieu) as obsolete and, therefore, harmful (they were only rescued by my intervention).&lt;/p&gt;
+&lt;p&gt;ENS students who have sat through courses on differential and algebraic geometry (read by respected mathematicians) turned out be acquainted neither with the Riemann surface of an elliptic curve $y^2 = x^3 + ax + b$ nor, in fact, with the topological classification of surfaces (not even mentioning elliptic integrals of first kind and the group property of an elliptic curve, that is, the Euler-Abel addition theorem). They were only taught Hodge structures and Jacobi varieties!&lt;/p&gt;
+&lt;p&gt;How could this happen in France, which gave the world Lagrange and Laplace, Cauchy and Poincaré, Leray and Thom? It seems to me that a reasonable explanation was given by I.G. Petrovskii, who taught me in 1966: genuine mathematicians do not gang up, but the weak need gangs in order to survive. They can unite on various grounds (it could be super-abstractness, anti-Semitism or "applied and industrial" problems), but the essence is always a solution of the social problem - survival in conditions of more literate surroundings.&lt;/p&gt;
+&lt;p&gt;By the way, I shall remind you of a warning of L. Pasteur: there never have been and never will be any "applied sciences", there are only applications of sciences (quite useful ones!).&lt;/p&gt;
+&lt;p&gt;In those times I was treating Petrovskii's words with some doubt, but now I am being more and more convinced of how right he was. A considerable part of the super-abstract activity comes down simply to industrialising shameless grabbing of discoveries from discoverers and then systematically assigning them to epigons-generalizers. Similarly to the fact that America does not carry Columbus's name, mathematical results are almost never called by the names of their discoverers.&lt;/p&gt;
+&lt;p&gt;In order to avoid being misquoted, I have to note that my own achievements were for some unknown reason never expropriated in this way, although it always happened to both my teachers (Kolmogorov, Petrovskii, Pontryagin, Rokhlin) and my pupils. Prof. M. Berry once formulated the following two principles:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The Arnold Principle. If a notion bears a personal name, then this name is not the name of the discoverer.&lt;/p&gt;
+&lt;p&gt;The Berry Principle. The Arnold Principle is applicable to itself.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Let's return, however, to teaching of mathematics in France.&lt;/p&gt;
+&lt;p&gt;When I was a first-year student at the Faculty of Mechanics and Mathematics of the Moscow State University, the lectures on calculus were read by the set-theoretic topologist L.A. Tumarkin, who conscientiously retold the old classical calculus course of French type in the Goursat version. He told us that integrals of rational functions along an algebraic curve can be taken if the corresponding Riemann surface is a sphere and, generally speaking, cannot be taken if its genus is higher, and that for the sphericity it is enough to have a sufficiently large number of double points on the curve of a given degree (which forces the curve to be unicursal: it is possible to draw its real points on the projective plane with one stroke of a pen).&lt;/p&gt;
+&lt;p&gt;These facts capture the imagination so much that (even given without any proofs) they give a better and more correct idea of modern mathematics than whole volumes of the Bourbaki treatise. Indeed, here we find out about the existence of a wonderful connection between things which seem to be completely different: on the one hand, the existence of an explicit expression for the integrals and the topology of the corresponding Riemann surface and, on the other hand, between the number of double points and genus of the corresponding Riemann surface, which also exhibits itself in the real domain as the unicursality.&lt;/p&gt;
+&lt;p&gt;Jacobi noted, as mathematics' most fascinating property, that in it one and the same function controls both the presentations of a whole number as a sum of four squares and the real movement of a pendulum.&lt;/p&gt;
+&lt;p&gt;These discoveries of connections between heterogeneous mathematical objects can be compared with the discovery of the connection between electricity and magnetism in physics or with the discovery of the similarity between the east coast of America and the west coast of Africa in geology.&lt;/p&gt;
+&lt;p&gt;The emotional significance of such discoveries for teaching is difficult to overestimate. It is they who teach us to search and find such wonderful phenomena of harmony of the Universe.&lt;/p&gt;
+&lt;p&gt;The de-geometrisation of mathematical education and the divorce from physics sever these ties. For example, not only students but also modern algebro-geometers on the whole do not know about the Jacobi fact mentioned here: an elliptic integral of first kind expresses the time of motion along an elliptic phase curve in the corresponding Hamiltonian system.&lt;/p&gt;
+&lt;p&gt;Rephrasing the famous words on the electron and atom, it can be said that a hypocycloid is as inexhaustible as an ideal in a polynomial ring. But teaching ideals to students who have never seen a hypocycloid is as ridiculous as teaching addition of fractions to children who have never cut (at least mentally) a cake or an apple into equal parts. No wonder that the children will prefer to add a numerator to a numerator and a denominator to a denominator.&lt;/p&gt;
+&lt;p&gt;From my French friends I heard that the tendency towards super-abstract generalizations is their traditional national trait. I do not entirely disagree that this might be a question of a hereditary disease, but I would like to underline the fact that I borrowed the cake-and-apple example from Poincaré.&lt;/p&gt;
+&lt;p&gt;The scheme of construction of a mathematical theory is exactly the same as that in any other natural science. First we consider some objects and make some observations in special cases. Then we try and find the limits of application of our observations, look for counter-examples which would prevent unjustified extension of our observations onto a too wide range of events (example: the number of partitions of consecutive odd numbers 1, 3, 5, 7, 9 into an odd number of natural summands gives the sequence 1, 2, 4, 8, 16, but then comes 29).&lt;/p&gt;
+&lt;p&gt;As a result we formulate the empirical discovery that we made (for example, the Fermat conjecture or Poincaré conjecture) as clearly as possible. After this there comes the difficult period of checking as to how reliable are the conclusions .&lt;/p&gt;
+&lt;p&gt;At this point a special technique has been developed in mathematics. This technique, when applied to the real world, is sometimes useful, but can sometimes also lead to self-deception. This technique is called modelling. When constructing a model, the following idealisation is made: certain facts which are only known with a certain degree of probability or with a certain degree of accuracy, are considered to be "absolutely" correct and are accepted as "axioms". The sense of this "absoluteness" lies precisely in the fact that we allow ourselves to use these "facts" according to the rules of formal logic, in the process declaring as "theorems" all that we can derive from them.&lt;/p&gt;
+&lt;p&gt;It is obvious that in any real-life activity it is impossible to wholly rely on such deductions. The reason is at least that the parameters of the studied phenomena are never known absolutely exactly and a small change in parameters (for example, the initial conditions of a process) can totally change the result. Say, for this reason a reliable long-term weather forecast is impossible and will remain impossible, no matter how much we develop computers and devices which record initial conditions.&lt;/p&gt;
+&lt;p&gt;In exactly the same way a small change in axioms (of which we cannot be completely sure) is capable, generally speaking, of leading to completely different conclusions than those that are obtained from theorems which have been deduced from the accepted axioms. The longer and fancier is the chain of deductions ("proofs"), the less reliable is the final result.&lt;/p&gt;
+&lt;p&gt;Complex models are rarely useful (unless for those writing their dissertations).&lt;/p&gt;
+&lt;p&gt;The mathematical technique of modelling consists of ignoring this trouble and speaking about your deductive model in such a way as if it coincided with reality. The fact that this path, which is obviously incorrect from the point of view of natural science, often leads to useful results in physics is called "the inconceivable effectiveness of mathematics in natural sciences" (or "the Wigner principle").&lt;/p&gt;
+&lt;p&gt;Here we can add a remark by I.M. Gel'fand: there exists yet another phenomenon which is comparable in its inconceivability with the inconceivable effectiveness of mathematics in physics noted by Wigner - this is the equally inconceivable ineffectiveness of mathematics in biology.&lt;/p&gt;
+&lt;p&gt;"The subtle poison of mathematical education" (in F. Klein's words) for a physicist consists precisely in that the absolutised model separates from the reality and is no longer compared with it. Here is a simple example: mathematics teaches us that the solution of the Malthus equation $dx/dt = x$ is uniquely defined by the initial conditions (that is that the corresponding integral curves in the $(t,x)$-plane do not intersect each other). This conclusion of the mathematical model bears little relevance to the reality. A computer experiment shows that all these integral curves have common points on the negative $t$-semi-axis. Indeed, say, curves with the initial conditions $x(0) = 0$ and $x(0) = 1$ practically intersect at $t = -10$ and at $t = -100$ you cannot fit in an atom between them. Properties of the space at such small distances are not described at all by Euclidean geometry. Application of the uniqueness theorem in this situation obviously exceeds the accuracy of the model. This has to be respected in practical application of the model, otherwise one might find oneself faced with serious troubles.&lt;/p&gt;
+&lt;p&gt;I would like to note, however, that the same uniqueness theorem explains why the closing stage of mooring of a ship to the quay is carried out manually: on steering, if the velocity of approach would have been defined as a smooth (linear) function of the distance, the process of mooring would have required an infinitely long period of time. An alternative is an impact with the quay (which is damped by suitable non-ideally elastic bodies). By the way, this problem had to be seriously confronted on landing the first descending apparata on the Moon and Mars and also on docking with space stations - here the uniqueness theorem is working against us.&lt;/p&gt;
+&lt;p&gt;Unfortunately, neither such examples, nor discussing the danger of fetishising theorems are to be met in modern mathematical textbooks, even in the better ones. I even got the impression that scholastic mathematicians (who have little knowledge of physics) believe in the principal difference of the axiomatic mathematics from modelling which is common in natural science and which always requires the subsequent control of deductions by an experiment.&lt;/p&gt;
+&lt;p&gt;Not even mentioning the relative character of initial axioms, one cannot forget about the inevitability of logical mistakes in long arguments (say, in the form of a computer breakdown caused by cosmic rays or quantum oscillations). Every working mathematician knows that if one does not control oneself (best of all by examples), then after some ten pages half of all the signs in formulae will be wrong and twos will find their way from denominators into numerators.&lt;/p&gt;
+&lt;p&gt;The technology of combatting such errors is the same external control by experiments or observations as in any experimental science and it should be taught from the very beginning to all juniors in schools.&lt;/p&gt;
+&lt;p&gt;Attempts to create "pure" deductive-axiomatic mathematics have led to the rejection of the scheme used in physics (observation - model - investigation of the model - conclusions - testing by observations) and its substitution by the scheme: definition - theorem - proof. It is impossible to understand an unmotivated definition but this does not stop the criminal algebraists-axiomatisators. For example, they would readily define the product of natural numbers by means of the long multiplication rule. With this the commutativity of multiplication becomes difficult to prove but it is still possible to deduce it as a theorem from the axioms. It is then possible to force poor students to learn this theorem and its proof (with the aim of raising the standing of both the science and the persons teaching it). It is obvious that such definitions and such proofs can only harm the teaching and practical work.&lt;/p&gt;
+&lt;p&gt;It is only possible to understand the commutativity of multiplication by counting and re-counting soldiers by ranks and files or by calculating the area of a rectangle in the two ways. Any attempt to do without this interference by physics and reality into mathematics is sectarianism and isolationism which destroy the image of mathematics as a useful human activity in the eyes of all sensible people.&lt;/p&gt;
+&lt;p&gt;I shall open a few more such secrets (in the interest of poor students).&lt;/p&gt;
+&lt;p&gt;The determinant of a matrix is an (oriented) volume of the parallelepiped whose edges are its columns. If the students are told this secret (which is carefully hidden in the purified algebraic education), then the whole theory of determinants becomes a clear chapter of the theory of poly-linear forms. If determinants are defined otherwise, then any sensible person will forever hate all the determinants, Jacobians and the implicit function theorem.&lt;/p&gt;
+&lt;p&gt;What is a group? Algebraists teach that this is supposedly a set with two operations that satisfy a load of easily-forgettable axioms. This definition provokes a natural protest: why would any sensible person need such pairs of operations? "Oh, curse this maths" - concludes the student (who, possibly, becomes the Minister for Science in the future).&lt;/p&gt;
+&lt;p&gt;We get a totally different situation if we start off not with the group but with the concept of a transformation (a one-to-one mapping of a set onto itself) as it was historically. A collection of transformations of a set is called a group if along with any two transformations it contains the result of their consecutive application and an inverse transformation along with every transformation.&lt;/p&gt;
+&lt;p&gt;This is all the definition there is. The so-called "axioms" are in fact just (obvious) properties of groups of transformations. What axiomatisators call "abstract groups" are just groups of transformations of various sets considered up to isomorphisms (which are one-to-one mappings preserving the operations). As Cayley proved, there are no "more abstract" groups in the world. So why do the algebraists keep on tormenting students with the abstract definition?&lt;/p&gt;
+&lt;p&gt;By the way, in the 1960s I taught group theory to Moscow schoolchildren. Avoiding all the axiomatics and staying as close as possible to physics, in half a year I got to the Abel theorem on the unsolvability of a general equation of degree five in radicals (having on the way taught the pupils complex numbers, Riemann surfaces, fundamental groups and monodromy groups of algebraic functions). This course was later published by one of the audience, V. Alekseev, as the book The Abel theorem in problems.&lt;/p&gt;
+&lt;p&gt;What is a smooth manifold? In a recent American book I read that Poincaré was not acquainted with this (introduced by himself) notion and that the "modern" definition was only given by Veblen in the late 1920s: a manifold is a topological space which satisfies a long series of axioms.&lt;/p&gt;
+&lt;p&gt;For what sins must students try and find their way through all these twists and turns? Actually, in Poincaré's Analysis Situs there is an absolutely clear definition of a smooth manifold which is much more useful than the "abstract" one.&lt;/p&gt;
+&lt;p&gt;A smooth $k$-dimensional submanifold of the Euclidean space $\mathbb{R}^N$ is its subset which in a neighbourhood of its every point is a graph of a smooth mapping of $\mathbb{R}^k$ into $\mathbb{R}^{(N - k)}$ (where $\mathbb{R}^k$ and $\mathbb{R}^{(N - k)}$ are coordinate subspaces). This is a straightforward generalization of most common smooth curves on the plane (say, of the circle $x^2 + y^2 = 1$) or curves and surfaces in the three-dimensional space.&lt;/p&gt;
+&lt;p&gt;Between smooth manifolds smooth mappings are naturally defined. Diffeomorphisms are mappings which are smooth, together with their inverses.&lt;/p&gt;
+&lt;p&gt;An "abstract" smooth manifold is a smooth submanifold of a Euclidean space considered up to a diffeomorphism. There are no "more abstract" finite-dimensional smooth manifolds in the world (Whitney's theorem). Why do we keep on tormenting students with the abstract definition? Would it not be better to prove them the theorem about the explicit classification of closed two-dimensional manifolds (surfaces)?&lt;/p&gt;
+&lt;p&gt;It is this wonderful theorem (which states, for example, that any compact connected oriented surface is a sphere with a number of handles) that gives a correct impression of what modern mathematics is and not the super-abstract generalizations of naive submanifolds of a Euclidean space which in fact do not give anything new and are presented as achievements by the axiomatisators.&lt;/p&gt;
+&lt;p&gt;The theorem of classification of surfaces is a top-class mathematical achievement, comparable with the discovery of America or X-rays. This is a genuine discovery of mathematical natural science and it is even difficult to say whether the fact itself is more attributable to physics or to mathematics. In its significance for both the applications and the development of correct Weltanschauung it by far surpasses such "achievements" of mathematics as the proof of Fermat's last theorem or the proof of the fact that any sufficiently large whole number can be represented as a sum of three prime numbers.&lt;/p&gt;
+&lt;p&gt;For the sake of publicity modern mathematicians sometimes present such sporting achievements as the last word in their science. Understandably this not only does not contribute to the society's appreciation of mathematics but, on the contrary, causes a healthy distrust of the necessity of wasting energy on (rock-climbing-type) exercises with these exotic questions needed and wanted by no one.&lt;/p&gt;
+&lt;p&gt;The theorem of classification of surfaces should have been included in high school mathematics courses (probably, without the proof) but for some reason is not included even in university mathematics courses (from which in France, by the way, all the geometry has been banished over the last few decades).&lt;/p&gt;
+&lt;p&gt;The return of mathematical teaching at all levels from the scholastic chatter to presenting the important domain of natural science is an espessially hot problem for France. I was astonished that all the best and most important in methodical approach mathematical books are almost unknown to students here (and, seems to me, have not been translated into French). Among these are Numbers and figures by Rademacher and Töplitz, Geometry and the imagination by Hilbert and Cohn-Vossen, What is mathematics? by Courant and Robbins, How to solve it and Mathematics and plausible reasoning by Polya, Development of mathematics in the 19th century by F. Klein.&lt;/p&gt;
+&lt;p&gt;I remember well what a strong impression the calculus course by Hermite (which does exist in a Russian translation!) made on me in my school years.&lt;/p&gt;
+&lt;p&gt;Riemann surfaces appeared in it, I think, in one of the first lectures (all the analysis was, of course, complex, as it should be). Asymptotics of integrals were investigated by means of path deformations on Riemann surfaces under the motion of branching points (nowadays, we would have called this the Picard-Lefschetz theory; Picard, by the way, was Hermite's son-in-law - mathematical abilities are often transferred by sons-in-law: the dynasty Hadamard - P. Levy - L. Schwarz - U. Frisch is yet another famous example in the Paris Academy of Sciences).&lt;/p&gt;
+&lt;p&gt;The "obsolete" course by Hermite of one hundred years ago (probably, now thrown away from student libraries of French universities) was much more modern than those most boring calculus textbooks with which students are nowadays tormented.&lt;/p&gt;
+&lt;p&gt;If mathematicians do not come to their senses, then the consumers who preserved a need in a modern, in the best meaning of the word, mathematical theory as well as the immunity (characteristic of any sensible person) to the useless axiomatic chatter will in the end turn down the services of the undereducated scholastics in both the schools and the universities.&lt;/p&gt;
+&lt;p&gt;A teacher of mathematics, who has not got to grips with at least some of the volumes of the course by Landau and Lifshitz, will then become a relict like the one nowadays who does not know the difference between an open and a closed set.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;V.I. Arnold&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Translated by A.V. GORYUNOV
+Published in: Uspekhi Mat. Nauk 53 (1998), no. 1, 229—234;
+English translation: Russian Math. Surveys 53 (1998), no. 1, 229—236.
+Source of this text:
+http://www.ceremade.dauphine.fr/~msfr/articles/arnold/PRE_anglais.ps &lt;/p&gt;</summary><category term="mathematics"></category><category term="arnold"></category><category term="letter"></category><category term="teaching"></category></entry><entry><title>Left pipe in Haskell</title><link href="http://www.mseri.me/left-pipe-in-haskell/" rel="alternate"></link><updated>2014-11-21T15:24:54+00:00</updated><author><name>Marcello Seri</name></author><id>tag:www.mseri.me,2014-11-21:left-pipe-in-haskell/</id><summary type="html">&lt;p&gt;If you read this blog, you know that I am very biased by having worked with unix shells for almost two decades and that I am addicted to the use of pipes (see e.g. &lt;a href="http://www.mseri.me/piping-with-swift/"&gt;Piping with Swift&lt;/a&gt;). I really find much more natural to see data moving from left to right.&lt;/p&gt;
+&lt;p&gt;Yesterday I was thinking that in Haskell everything is an expression and that you can easily define infix operators. Thus it must be possible to implement a shell-like pipe.&lt;/p&gt;
+&lt;p&gt;First of all, composition &lt;code&gt;(.)&lt;/code&gt; is too strong, the pipe I have in mind is like &lt;code&gt;($)&lt;/code&gt; but reversed. In fact, my second attempt (I feel embarassed by the first, I am not going to post it ;-P) was&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;($&amp;gt;) = flip ($)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;One can immediately check that it is typed correctly as &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;($&amp;gt;) :: a -&amp;gt; (a -&amp;gt; b) -&amp;gt; b
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now I can do e.g.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;Data.List&lt;/span&gt;
+
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;sort&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;filter&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;\&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;map&lt;/span&gt; &lt;span class="n"&gt;even&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;and get the result without complaints.&lt;/p&gt;
+&lt;p&gt;This is just a stupid example but I find it more expressive (again probably because I use too much the shell) than&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;and . map even . filter (\x -&amp;gt; x &amp;lt; 4) . sort $ [3,1,4,2,2,6]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;at least for certain kind of progressive filtering of data.&lt;/p&gt;
+&lt;p&gt;I am now following &lt;strong&gt;fp101x&lt;/strong&gt; on &lt;strong&gt;edX&lt;/strong&gt;. It is quite good! I will soon(?) post a brief cheatsheet that I made to recall how to use Functors, Monads and other interesting constructs.&lt;/p&gt;</summary><category term="haskell"></category><category term="pipe"></category><category term="random toughts"></category></entry><entry><title>What Problems to Solve - By Richard Feynman</title><link href="http://www.mseri.me/what-problems-to-solve-by-richard-feynman/" rel="alternate"></link><updated>2014-11-21T15:16:10+00:00</updated><author><name>Marcello Seri</name></author><id>tag:www.mseri.me,2014-11-21:what-problems-to-solve-by-richard-feynman/</id><summary type="html">&lt;p&gt;&lt;em&gt;A former student, who was also once a student of Tomonaga’s, wrote to extend his congratulations. Feynman responded, asking Mr. Mano what he was now doing. The response: "studying the Coherence theory with some applications to the propagation of electromagnetic waves through turbulent atmosphere... a humble and down-to-earth type of problem."&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Dear Koichi,&lt;/p&gt;
+&lt;p&gt;I was very happy to hear from you, and that you have such a position in the
+Research Laboratories. Unfortunately your letter made me unhappy for you seem
+to be truly sad. It seems that the influence of your teacher has been to give
+you a false idea of what are worthwhile problems. The worthwhile problems are
+the ones you can really solve or help solve, the ones you can really contribute
+something to. A problem is grand in science if it lies before us unsolved and
+we see some way for us to make some headway into it. I would advise you to take
+even simpler, or as you say, humbler, problems until you find some you can
+really solve easily, no matter how trivial. You will get the pleasure of
+success, and of helping your fellow man, even if it is only to answer a
+question in the mind of a colleague less able than you. You must not take away
+from yourself these pleasures because you have some erroneous idea of what is
+worthwhile.&lt;/p&gt;
+&lt;p&gt;You met me at the peak of my career when I seemed to you to be concerned with
+problems close to the gods. But at the same time I had another Ph.D. Student
+(Albert Hibbs) was on how it is that the winds build up waves blowing over
+water in the sea. 
+I accepted him as a student because he came to me with the
+problem he wanted to solve. With you I made a mistake, I gave you the problem
+instead of letting you find your own; and left you with a wrong idea of what is
+interesting or pleasant or important to work on (namely those problems you see
+you may do something about). I am sorry, excuse me. I hope by this letter to
+correct it a little.&lt;/p&gt;
+&lt;p&gt;I have worked on innumerable problems that you would call humble, but which I
+enjoyed and felt very good about because I sometimes could partially succeed.
+For example, experiments on the coefficient of friction on highly polished
+surfaces, to try to learn something about how friction worked (failure). Or,
+how elastic properties of crystals depends on the forces between the atoms in
+them, or how to make electroplated metal stick to plastic objects (like radio
+knobs). Or, how neutrons diffuse out of Uranium. Or, the reflection of
+electromagnetic waves from films coating glass. The development of shock waves
+in explosions. The design of a neutron counter. Why some elements capture
+electrons from the L-orbits, but not the K-orbits. General theory of how to
+fold paper to make a certain type of child’s toy (called flexagons). The energy
+levels in the light nuclei. The theory of turbulence (I have spent several
+years on it without success). Plus all the “grander” problems of quantum
+theory.&lt;/p&gt;
+&lt;p&gt;No problem is too small or too trivial if we can really do something about it.&lt;/p&gt;
+&lt;p&gt;You say you are a nameless man. You are not to your wife and to your child. You
+will not long remain so to your immediate colleagues if you can answer their
+simple questions when they come into your office. You are not nameless to me.
+Do not remain nameless to yourself – it is too sad a way to be. now your place
+in the world and evaluate yourself fairly, not in terms of your naïve ideals of
+your own youth, nor in terms of what you erroneously imagine your teacher’s
+ideals are.&lt;/p&gt;
+&lt;p&gt;Best of luck and happiness.  Sincerely, Richard P. Feynman.&lt;/p&gt;
+&lt;p&gt;From &lt;a href="http://genius.cat-v.org/richard-feynman/writtings/letters/problems"&gt;Hotel Genius&lt;/a&gt;.&lt;/p&gt;</summary><category term="feynman"></category></entry><entry><title>Socks proxy with ssh</title><link href="http://www.mseri.me/socks-proxy-with-ssh/" rel="alternate"></link><updated>2014-10-31T18:26:17+00:00</updated><author><name>Marcello Seri</name></author><id>tag:www.mseri.me,2014-10-31:socks-proxy-with-ssh/</id><summary type="html">&lt;p&gt;When you work in the University, it is very likely that during a trip or the weekend you urge to connect via the University to have access to Journals and other academic resources. &lt;/p&gt;
+&lt;p&gt;Often enough this requires long and complicated procedures involving the setup of rarely updated proprietary VPN softwares that sometimes like to install their obscure helpers to monitor the traffic and prevent you to open malicious websites. Helpers that would keep working in background sending to unspecified servers all your business even when the VPN is off...&lt;/p&gt;
+&lt;p&gt;Luckily is even more common to have some level of ssh access provided directly by each institution. Indeed, there is a not too well known &lt;code&gt;ssh&lt;/code&gt; option that let you use your encrypted connection to start a local socks proxy that could be used in the place of the VPN. &lt;/p&gt;
+&lt;p&gt;I copy and paste from the &lt;a href="http://linuxcommand.org/man_pages/ssh1.html"&gt;man page&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;-D port&lt;/strong&gt;: Specifies a local “dynamic” application-level port forwarding. This works by allocating a socket to listen to port on the local side, and whenever a connection is made to this port, the connec  tion is forwarded over the secure channel, and the application protocol is then used to determine where to connect to from the remote machine.  Currently the SOCKS4 and SOCKS5 protocols are supported, and ssh will act as a SOCKS server.  [...]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Run in your terminal&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ssh -D 9090  your_username@your_academic_ssh_server
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;and setup your browser to use a socks proxy with address &lt;code&gt;localhost&lt;/code&gt; (or &lt;code&gt;127.0.0.1&lt;/code&gt;) and port &lt;code&gt;9090&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;There is even a more complete solution for linux and mac (note, it does not work on OS X 10.10 Yosemite, and has some problems with OS X 10.9 Mavericks) called &lt;a href="https://github.com/apenwarr/sshuttle"&gt;&lt;code&gt;sshuttle&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;</summary><category term="Tips"></category><category term="vpn"></category><category term="socks proxy"></category><category term="ssh"></category></entry><entry><title>Why privacy matters by Glenn Greenwald</title><link href="http://www.mseri.me/why-privacy-matters-by-glenn-greenwald/" rel="alternate"></link><updated>2014-10-19T15:01:42+00:00</updated><author><name>Marcello Seri</name></author><id>tag:www.mseri.me,2014-10-19:why-privacy-matters-by-glenn-greenwald/</id><summary type="html">&lt;p&gt;I am so sorry that I needed so much time before watching this wonderfully inspiring TED video.&lt;/p&gt;
+&lt;iframe src="https://embed-ssl.ted.com/talks/glenn_greenwald_why_privacy_matters.html" width="560" height="315" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;I really admire Snowden, Greenwald and all the people that are fighting to denounce the dangerous path that we are following. &lt;/p&gt;
+&lt;p&gt;It's time to take action, even the smallest one coubl make a difference. Maybe we don't see the threat now, but we cannot now what will happen in the future.&lt;/p&gt;</summary><category term="Snowden"></category><category term="Mass surveillance"></category><category term="video"></category></entry><entry><title>Fix WiFi on OS X by tweaking the MTU</title><link href="http://www.mseri.me/fixing-wifi-on-os-x-by-tweaking-the-mtu/" rel="alternate"></link><updated>2014-10-19T14:54:46+00:00</updated><author><name>Marcello Seri</name></author><id>tag:www.mseri.me,2014-10-15:fixing-wifi-on-os-x-by-tweaking-the-mtu/</id><summary type="html">&lt;p&gt;After I had installed the first developer beta of Yosemite I started experiencing serious WiFi issues &lt;strong&gt;at home&lt;/strong&gt;, with the connection dropping after few seconds of activity. Only apparent solution was to disable and reenable periodically the wifi until it started working.&lt;/p&gt;
+&lt;p&gt;The issue was not present whene I was in my office or using public wifi's around. And removing the network setup to have them reset to default didn't help.&lt;/p&gt;
+&lt;p&gt;Few days ago I was looking for an old script in one of my backups when I've found an old note called &lt;code&gt;Find MTU to fix Lion WiFi&lt;/code&gt;. I had completely forgotten about it, as I had forgotten about the problems with Lion's wifi...&lt;/p&gt;
+&lt;p&gt;It turned out that the problem was, in fact, related to the &lt;a href="https://en.wikipedia.org/wiki/Maximum_transmission_unit"&gt;MTU&lt;/a&gt;(Basically the size of the transmitted packets). It was set to be automatic, and it automatically selected the value 1500 (that seemed to be quite standard, or at least correcto for almost all the networks I've used). Checking it brutally I found out that my home router has a quite lower MTU, and changing it did solve all my problems.&lt;/p&gt;
+&lt;p&gt;Finding the correct MTU is quite easy. One needs just to open a terminal and &lt;code&gt;ping&lt;/code&gt; and external website with appropriately constructed packets. Namely&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ping -D -s 1500 example.com
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here &lt;code&gt;-D&lt;/code&gt; tells ping that the package cannot be fragmented, in other words if it is too large it will not be sent at all, and &lt;code&gt;-s 1500&lt;/code&gt; tells it what must be the size of the packet in bytes. Be careful, 1500 is not really the full size of the packet, &lt;strong&gt;there is an overhead of 28 bytes that you need to add to that number&lt;/strong&gt;. E.g &lt;code&gt;-s 1500&lt;/code&gt; means that the packet size is 1528 bytes. If the largest packet that you can successfully send has size  1472, then your MTU value is 1500.&lt;/p&gt;
+&lt;p&gt;You can add the option &lt;code&gt;-c n&lt;/code&gt; to tell ping to send only n packages (2 or 3 will be enough), otherwise you can kill the process after a couple of packages is sent.&lt;/p&gt;
+&lt;p&gt;Running&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ping -D -s 1500 example.com
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;on my network I get the following output&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;PING example.com (93.184.216.119): 1500 data bytes
+ping: sendto: Message too long
+[...]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If you read a similar message (and you should if you use 1500) you need to start reducing the value after the &lt;code&gt;-s&lt;/code&gt; until you find the first value for which ping starts working, i.e. you start receiving output of the form&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;1412 bytes from 93.184.216.119: icmp_seq=0 ttl=53 time=136.639 ms
+[...]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In my case the value was 1404, that corresponds to MTU 1432.&lt;/p&gt;
+&lt;p&gt;To change the MTU than is enough to open WiFi's advanced preferences and, on the hardware tab, select &lt;em&gt;MTU: Manual&lt;/em&gt;, insert the value that you have found and apply the changes.&lt;/p&gt;</summary><category term="tips"></category><category term="Tips"></category><category term="wifi"></category><category term="osx"></category><category term="trick"></category><category term="MTU"></category></entry><entry><title>On Advanced Functional Programming</title><link href="http://www.mseri.me/on-advanced-functional-programming/" rel="alternate"></link><updated>2014-10-19T14:56:32+00:00</updated><author><name>Marcello Seri</name></author><id>tag:www.mseri.me,2014-10-15:on-advanced-functional-programming/</id><summary type="html">&lt;p&gt;In few days, tomorrow if I'm not mistaken, you will be able to attend the new &lt;a href="https://www.edx.org/course/delftx/delftx-fp101x-introduction-functional-2126"&gt;Erik Meijer's introduction to Functional Programming on edX&lt;/a&gt;. If you have any interest in mathematics or programming, I am sure that this is something that you have to watch.&lt;/p&gt;
+&lt;p&gt;I am saying new because a similar course was held in 2010 by the same person, you can still watch it here:
+&lt;a href="http://lambda-the-ultimate.org/node/3642"&gt;Erik Meijer's MSDN Channel 9 lecture series on functional programming&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The main reason I'm writing this post (more than just advertising the course above) is that there is a second part, by &lt;a href="http://softlang.wikidot.com/rlaemmel:teaching"&gt;Dr. Ralf Lämmel&lt;/a&gt;, that I was not aware of.&lt;/p&gt;
+&lt;p&gt;I cite from the course page:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The idea here is to take the next step from Erik Meijer's fantastic introductory series on functional programming. Accordingly, Ralf's series will dive into more advanced areas of functional programming, again focusing on the Haskell language (the functional concepts here span beyond any one functional language, however).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I've struggled a bit to find all the lectures, so I've decided to link them here for reference:
+1. &lt;a href="http://channel9.msdn.com/Shows/Going+Deep/C9-Lectures-Dr-Ralf-Laemmel-Advanced-Functional-Programming-The-Expression-Problem"&gt;The Expression Problem&lt;/a&gt;
+2.  &lt;a href="http://channel9.msdn.com/Shows/Going+Deep/C9-Lectures-Dr-Ralf-Lmmel-Advanced-Functional-Programming-Type-Classes"&gt;Type Classes&lt;/a&gt;
+3. &lt;a href="http://channel9.msdn.com/Shows/Going+Deep/C9-Lectures-Dr-Ralf-Lmmel-Advanced-Functional-Programming-Evolution-of-an-Interpreter"&gt;Evolution of an Interpreter&lt;/a&gt;
+4. &lt;a href="http://channel9.msdn.com/Shows/Going+Deep/C9-Lectures-Dr-Ralf-Lmmel-AFP-The-Quick-Essence-of-Functional-Programming"&gt;The Quick Essence of Functional Programming&lt;/a&gt;
+5. &lt;a href="http://channel9.msdn.com/Shows/Going+Deep/C9-Lectures-Dr-Ralf-Lmmel-Going-Bananas"&gt;Going Bananas&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Given that we are here. Channel 9 provides other nice set of lectures, in particular &lt;a href="http://channel9.msdn.com/Series/C9-Lectures-Yuri-Gurevich-Introduction-to-Algorithms-and-Computational-Complexity"&gt;Yuri Gurevich - Introduction to Algorithms and Computational Complexity&lt;/a&gt;, &lt;a href="http://channel9.msdn.com/Series/C9-Lectures-Greg-Meredith-Monadic-Design-Patterns-for-the-Web"&gt;Greg Meredith - Monadic Design Patterns for the Web&lt;/a&gt; and the very recent &lt;a href="http://channel9.msdn.com/Events/Build/2014/3-642"&gt;Thinking for Programmers by Leslie Lamport&lt;/a&gt; (~~he is one of LaTeX developer~~ he is really a &lt;a href="http://research.microsoft.com/en-us/news/features/lamport-031814.aspx"&gt;big guy&lt;/a&gt; in computer sicence, and among the other things he is one of LaTeX developers).&lt;/p&gt;</summary><category term="functional programming"></category><category term="courses"></category><category term="edX"></category><category term="references"></category></entry><entry><title>Piping with Swift</title><link href="http://www.mseri.me/piping-with-swift/" rel="alternate"></link><updated>2014-06-16T10:31:56+00:00</updated><author><name>Marcello Seri</name></author><id>tag:www.mseri.me,2014-06-16:piping-with-swift/</id><summary type="html">&lt;p&gt;Lately I've been playing with Apple's newborn Swift quite a lot. I have to say that I am really impressed, and except for few things that I hope will be smoothed in the next months (years?), I find Swift really enjoyable and readable.&lt;/p&gt;
+&lt;p&gt;However, there is one feature that I really miss. Something that I daily use with slightly different syntaxes in Sh, Haskell, Julia and Elixir: the &lt;strong&gt;pipe&lt;/strong&gt;!&lt;/p&gt;
+&lt;h3&gt;Can we implement a &lt;em&gt;kind of&lt;/em&gt; pipe in Swift?&lt;/h3&gt;
+&lt;p&gt;Given that in Swift &lt;code&gt;|&lt;/code&gt;, &lt;code&gt;.&lt;/code&gt; and &lt;code&gt;||&lt;/code&gt; have already quite precise and distinct meanings, I am going to mimic Julia and Elixir's notation and use &lt;code&gt;|&amp;gt;&lt;/code&gt;. 
+Swift is unbelievably flexible from this point of view: one can easily define new generic &lt;code&gt;infix&lt;/code&gt;, &lt;code&gt;prefix&lt;/code&gt; or &lt;code&gt;suffix&lt;/code&gt; operator, and state their associativity and precedence properties. You'll soon see that the syntax speaks by itself!&lt;/p&gt;
+&lt;p&gt;Let's try to define a left associative generic pipe.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;operator infix |&amp;gt; { 
+    associativity left 
+}
+func |&amp;gt; &amp;lt;L,R&amp;gt;(left: L, right: L -&amp;gt; R) -&amp;gt; R {
+    return right(left);
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then we could use it to chain some function together in an elegant way. For example&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;func unique&amp;lt;T:Hashable&amp;gt;(array: Array&amp;lt;T&amp;gt;) -&amp;gt; Array&amp;lt;T&amp;gt;{
+    var filter = Dictionary&amp;lt;T,Bool&amp;gt;()
+    var result = Array&amp;lt;T&amp;gt;()
+    for i in 0..array.count {
+        if let elem = filter[array[i]] {
+            continue
+        } else {
+            filter[array[i]] = true
+            result.append(array[i])
+        }
+    }
+    return result
+}
+
+[1, 2, 3, 3, 3, 4, 5, 5, 6, 7] |&amp;gt; sort |&amp;gt; unique |&amp;gt; toString |&amp;gt; println
+
+// prints &amp;#39;[1,2,3,4,5,6,7]&amp;#39;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I strongly believe that some (better) implementation of the pipe should become part of Swift standard library. For example it would be nice to be able to chain subscripts (e.g. &lt;code&gt;filter[array[i]]&lt;/code&gt; replaced by &lt;code&gt;i |&amp;gt; array[$0] |&amp;gt; filter[$0]&lt;/code&gt;) or more flexible maps (e.g. &lt;code&gt;[1, 2, 3, 3, 3, 4, 5, 5, 6, 7] |&amp;gt; sort |&amp;gt; unique |&amp;gt; map($0, {x in x * x})&lt;/code&gt;) . But maybe I am asking for too much...&lt;/p&gt;
+&lt;p&gt;While writing this example, I was wondering what is the best way to remove duplicates in a Swift array? The shortest code I could come up with is&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;func unique&amp;lt;T:Hashable&amp;gt;(array: T[]) -&amp;gt; T[] {
+    var filter = Dictionary&amp;lt;T,Bool&amp;gt;()
+    for i in 0..array.count {
+            filter[array[i]] = true
+    }
+    return Array(filter.keys)
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;but it is probably not the fastest one. Nevertheless, I would probably use an underlying dictionary to implement a &lt;code&gt;Set&lt;/code&gt; type and use the &lt;code&gt;Set&lt;/code&gt; to remove duplicates. Note here that &lt;code&gt;T[]&lt;/code&gt; is just syntactic sugar for &lt;code&gt;Array&amp;lt;T&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Another version, using the builtin &lt;code&gt;contains&lt;/code&gt; function could be&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;func unique&amp;lt;T : Equatable&amp;gt;(array: T[]) -&amp;gt; T[] {
+    var result = T[]()
+    for x in array {
+        if !contains(result, x) {
+            result += x
+        }
+    }
+    return result
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Again &lt;code&gt;+=&lt;/code&gt; stands for &lt;code&gt;append&lt;/code&gt; when used with arrays.&lt;/p&gt;
+&lt;p&gt;I guess the fastest code would be to use a quicksort and remove the duplicates while sorting, but it (as my second implementation of &lt;code&gt;unique&lt;/code&gt;) would not preserve the order of appearence.&lt;/p&gt;
+&lt;p&gt;While wrtiting this post, on HN was linked a &lt;a href="http://nomothetis.svbtle.com/smashing-swift"&gt;very initersting post&lt;/a&gt; with implementation of some interesting construct, like the &lt;a href="http://www.mseri.me/implementing-either-type-in-swift"&gt;either of the previous post&lt;/a&gt; and more, and pointing out problems of the young swift compiler. I think it's a nice reading.&lt;/p&gt;
+&lt;p&gt;Additionally I recently stumbled upon the &lt;a href="http://stackoverflow.com/questions/24027116"&gt;following stackoverflow thread&lt;/a&gt;. I find it quite interesting, especially because it shows a nice extension of Arrays introducing an &lt;code&gt;each&lt;/code&gt; construct very similar to ruby's one.&lt;/p&gt;
+&lt;p&gt;Another simple example I was working on is the &lt;em&gt;null coaleshing operator&lt;/em&gt; that would come handy with Swift's optionals. An interesting discussion in regard can be found (again) in &lt;a href="http://stackoverflow.com/questions/24082959"&gt;stackoverflow&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;After some time we can start to understand the limitations of Swift, but the language is definitely still under construction and I would not be surprised if it will be different at the time of the final release. &lt;/p&gt;
+&lt;p&gt;In the meanwhile, if you can, experiment with it and have fun!!&lt;/p&gt;
+&lt;p&gt;UPDATE: despite the many limitations of Swift compiler in this direction, there is a quite active and promising library for functional programming in swift already under development: see &lt;a href="https://github.com/maxpow4h/swiftz"&gt;swiftz on GitHub&lt;/a&gt;.&lt;/p&gt;</summary><category term="swift"></category><category term="pipe"></category><category term="operators"></category><category term="functional"></category></entry></feed>

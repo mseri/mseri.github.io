@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description" content="Tales of a Fractal Spectrum, ">
+
+        <link rel="alternate" href="http://www.mseri.me/feed/atom.xml" type="application/atom+xml" title="Tales of a Fractal Spectrum Atom Feed"/>
+        <link rel="alternate" href="http://www.mseri.me/feed/rss.xml" type="application/rss+xml" title="Tales of a Fractal Spectrum RSS Feed"/>
+
+        <title>Move to ghc 7.8.2 on MacOSX - Tales of a Fractal Spectrum</title>
+
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Move to ghc 7.8.2 on MacOSX" />
+    <meta property="og:description" content="Lately I've been playing with some functional languages: haskell, lisp (in particular the scheme dialect, see e.g. chicken or racket) and elixir (I very much like it and I really appreciate that it runs on the erlang VM). Each of those has something pretty unique and I believe ..." />
+
+        <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400" />
+    <link rel="stylesheet" href="http://www.mseri.me/theme/css/style-min.css">
+    <!--<link rel="stylesheet" href="http://www.mseri.me/theme/css/pygments.css">-->
+
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <header class="header">
+                <hgroup>
+                        <a id="blog-logo" href="http://www.mseri.me"><img src="http://www.mseri.me/images/gauss_logo.png" alt="Blog Logo" /></a>
+                    <h1 itemprop="name" class="blog-title"><a href="http://www.mseri.me">Tales of a Fractal Spectrum</a></h1>
+                        <h2 itemprop="description" class="blog-description">Free thoughts of a geeky mathematician</h2>
+                </hgroup>
+<nav class="nav">
+  <ul class="social-list">
+<li class="social-item"><a class="subscribe icon-twitter" href="http://www.twitter.com/marcelloseri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-facebook" href="http://www.facebook.com/marcello.seri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-google-plus" href="http://plus.google.com/+MarcelloSeri" target="_blank" rel="publisher"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-github" href="http://www.github.com/mseri" target="_blank"></a></li>&nbsp;    <li class="social-item">&nbsp;</li>
+    <li class="social-item"><a class="subscribe icon-feed" href="http://www.mseri.me/feed/rss.xml" target="_blank"></a></li>
+</ul>
+</nav>
+            </header>
+            <footer class="footer">
+                <section class="copyright">&copy; 2013--2015 <a itemscope="copyrightHolder" href="http://www.mseri.me">Tales of a Fractal Spectrum</a></section>
+                <section class="poweredby">Proudly published with Pelican on GitHub Pages.</section> 
+                <section class="theme"><a href="https://github.com/mseri/purity" target="_blank">Purity</a> is built with <a href="http://purecss.io" target="_blank">PureCSS</a>.</section>
+            </footer>
+            
+        </div>
+        <div class="pure-u-1 container">
+            
+<main class="content" role="main" id="top-post">
+        <div class="back">
+            <a href="http://www.mseri.me">&larr;  back to the home page</a>
+        </div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post purity_post">
+
+        <header class="post-header">
+            <h2 itemprop="name" class="post-title big">Move to ghc 7.8.2 on MacOSX</h2>
+            <p class="post-meta">Written by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Marcello Seri</span></span> the <time itemprop="datePublished" datetime="01 Jun 2014">01 Jun 2014</time> - <span class="post-tagline"> under                                 <a class="post-category" href="http://www.mseri.me/tag/tutorial.html">tutorial</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/cabal.html">cabal</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/ghc-78.html">ghc 7.8</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/setup.html">setup</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/haskell.html">haskell</a>. </span></p>
+        </header>
+
+        <section class="post-content">
+
+        <div class="post-share-box">
+            <section class="share">
+                <h3>Share this post</h3>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.mseri.me/move-to-ghc-7-8-2-on-macosx/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-twitter" href="http://twitter.com/share?text=Move to ghc 7.8.2 on MacOSX&url=http://www.mseri.me/move-to-ghc-7-8-2-on-macosx/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://www.mseri.me/move-to-ghc-7-8-2-on-macosx/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+        </div>
+
+        <div itemprop="articleBody">
+            <p>Lately I've been playing with some functional languages: <a href="http://www.haskell.org/">haskell</a>, lisp (in particular the scheme dialect, see e.g. <a href="http://www.call-cc.org">chicken</a> or <a href="http://racket-lang.org">racket</a>) and <a href="http://elixir-lang.org">elixir</a> (I very much like it and I really appreciate that it runs on the erlang VM).</p>
+<p>Each of those has something pretty unique and I believe is very worth learning. I cannot stress how much material you can find both online and in libraries to learn them (except for elixir but its website does a really good job and there will be plenty of books very soon out) and how strong thay can change your way of programming. </p>
+<p>This post is about installing a recent version of <code>gch</code> to play with haskell. </p>
+<p>I started using haskell by installing <code>ghc</code>, the Glasgow Haskell Compiler (pretty much the de fact standard of haskell compilers), via Homebrew. And then installing <code>haskell-platform</code> (again using Homebrew) to find out, not much later, that I only needed the <code>cabal-install</code> package (at that time installed via Homebrew too after removing the platform).</p>
+<p>Recently, <code>ghc</code> reached version <code>7.8</code>, and that shipped a huge amount of improvements. With my huge disappointemnt, all the packages installed via Homebrew were supporting only ghc 7.6 and I had hard times with dependencies, multiple packages and so on...</p>
+<p>The solution was pretty simple and straightforward in the end, and I believe this could be handy for other people too strognly enough to write this post.</p>
+<p>First of all I uninstalled ghc 7.6, cabal-install or haskell platform (if you have it). Then I reinstalled the 7.8 branch of ghc, thanks to Homebrew that was pretty straightforward:</p>
+<div class="highlight"><pre>brew install ghc --devel
+</pre></div>
+
+
+<p>Additionally I had to remove the <code>.cabal</code> and <code>.ghc</code> folder in my home. There were pieces of configurations that were creating some conflicts, move them if you feel unsure and want to avoid the deletion. </p>
+<p>Then I needed <code>cabal-install</code>. This requires slightly more work, especially it didn't quite work for me when I followed <a href="http://www.haskell.org/haskellwiki/Cabal-Install">the instructions</a>.</p>
+<p>First download the sources for <code>cabal-install</code> from <a href="http://www.haskell.org/cabal/download.html">here</a>. Just the <code>cabal-install tool</code> sources, it is going to update the <code>Cabal</code> library during its setup.</p>
+<p>Untar the file, e.g.</p>
+<div class="highlight"><pre>tar zxvf cabal-install-1.20.0.2.tar.gz
+</pre></div>
+
+
+<p>and enter the newly created folder, e.g</p>
+<div class="highlight"><pre>cd cabal-install-1.20.0.2
+</pre></div>
+
+
+<p>Now it all reduces to run</p>
+<div class="highlight"><pre>./bootstrap.sh --no-doc
+</pre></div>
+
+
+<p>(append <code>--global</code> if you prefer to install it in <code>/usr/local</code> instead of <code>$HOME/cabal</code>).</p>
+<p>The <code>--no-docs</code> flag seemed necessary to avoid a number of errors appearing in the compilation process and forcing me to install a number of packages by hand. Sadly I could not figure out the problem in the script yet, but that flag seems a reasonable workaround and I will install the docs later anyhow.</p>
+<p>You may still get some error related to broken package, in such cas just <code>ghc-pkg unregister &lt;brokenpackagename&gt;</code> and rerun the script (in my case they were <code>text</code> and <code>mtl</code>).</p>
+<p>When cabal is installed it is a good idea to run</p>
+<div class="highlight"><pre>cabal update
+</pre></div>
+
+
+<p>and follow the instructions.</p>
+<p>Remember that <code>.cabal/bin</code> must be in your <code>$PATH</code>.</p>
+<p>To learn coding in haskell there are few great sources. I think <a href="http://learnyouahaskell.com">Learn yourself a Haskell for Great Good!</a> is a good place to start, maybe not perfect and not complete but I really really enjoied it (and learnt a lot).</p>
+<h2>Essential Packages for Using Haskell</h2>
+<p>Now, this section is mainly for my personal records. There is a number of packages I like to have installed for customizations, help and other stuff. Maybe some of those could interest some reader. Some of the installations will require sensible compilation times and overheating of your machine, it very much feels like installing <code>gentoo</code> ~10 years ago... some of you know what I mean :)</p>
+<p>I rely very much on <a href="http://www.haskell.org/hoogle/">hoogle</a> when I code in haskell. Best part of it is that you can have it offline. First install the appropriate package with <code>cabal install hoogle</code>. </p>
+<p>You may be get a warning and be asked to run the install with the flag <code>--force-reinstall</code>. Just do it: <code>cabal install hoogle --force-reinstall</code>.</p>
+<p>I've additionally got a strange error related to <code>happy</code> and <code>haskell-src-exts</code>, it can be solved just by <code>cabal install happy</code>. I am still wondering why it happened.</p>
+<p>When the setup is complete, you can run <code>hoogle data</code> to create a local database of entries, or <code>hoogle data all</code> if you want the complete hoogle dataset (this takes a loooong time).</p>
+<p>If you don't plan to use <code>goa</code> or <code>lambdabot</code> you can integrate <code>hoogle</code> in <code>ghci</code> by adding </p>
+<div class="highlight"><pre>:def hoogle \str -&gt; return $ &quot;:! hoogle --count=15 \&quot;&quot; ++ str ++ &quot;\&quot;&quot;
+</pre></div>
+
+
+<p>to your <code>.ghci</code> file.</p>
+<p>I believe that <code>ghci</code> is nothing without <a href="http://www.haskell.org/haskellwiki/Lambdabot">lambdabot</a>. Therefore <code>cabal install goa lambdabot</code> is the inevitable second step. Note that <code>goa</code> is not a mistake but a <a href="http://hackage.haskell.org/package/goa">useful addition</a>.</p>
+<p><code>lambdabot &lt;= 4.3.0.1</code> have some problems with <code>ghc-7.8.2</code> and you will get a compilation error. To fix it you first <code>cabal install goa</code> by itself, then <code>cabal get lambdabot; cd lambdabot-4.3.0.1</code> and then you need to replace the content of <code>src/Lambdabot/Monad.hs-boot</code> with</p>
+<div class="highlight"><pre><span class="p">{</span><span class="o">-</span><span class="c"># LANGUAGE RankNTypes #-}</span>
+<span class="n">module</span> <span class="n">Lambdabot</span><span class="o">.</span><span class="n">Monad</span> <span class="n">where</span>
+
+<span class="kn">import</span> <span class="nn">Control.Monad.Reader</span>
+<span class="kn">import</span> <span class="nn">Data.IORef</span>
+
+<span class="n">data</span> <span class="n">IRCRWState</span>
+<span class="n">data</span> <span class="n">IRCRState</span>
+<span class="n">newtype</span> <span class="n">LB</span> <span class="n">a</span> <span class="o">=</span> <span class="n">LB</span> <span class="p">{</span><span class="n">runLB</span> <span class="p">::</span> <span class="n">ReaderT</span> <span class="p">(</span><span class="n">IRCRState</span><span class="p">,</span> <span class="n">IORef</span> <span class="n">IRCRWState</span><span class="p">)</span> <span class="n">IO</span> <span class="n">a</span><span class="p">}</span> 
+
+<span class="n">instance</span> <span class="n">Monad</span> <span class="n">LB</span>
+</pre></div>
+
+
+<p>(the above code is due to <a href="https://github.com/mokus0/lambdabot/pull/79">artella-coding</a> and should be merged in the next release of lambdabot). 
+Then save and run <code>cabal configure &amp;&amp; cabal install</code>.</p>
+<p>Then in my <code>.ghci</code> I have</p>
+<div class="highlight"><pre>:m - Prelude
+:m + GOA
+setLambdabotHome &quot;/Users/marcelloseri/.cabal/bin&quot;
+:def bs        lambdabot &quot;botsnack&quot;
+:def pl        lambdabot &quot;pl&quot;
+:def unpl      lambdabot &quot;unpl&quot;
+:def redo      lambdabot &quot;redo&quot;
+:def undo      lambdabot &quot;undo&quot;
+:def index     lambdabot &quot;index&quot;
+:def docs      lambdabot &quot;docs&quot;
+:def instances lambdabot &quot;instances&quot;
+:def hoogle    lambdabot &quot;hoogle&quot;
+:def source    lambdabot &quot;fptools&quot;
+:def where     lambdabot &quot;where&quot;
+:def version   lambdabot &quot;version&quot;
+:def src       lambdabot &quot;src&quot;
+</pre></div>
+
+
+<p>I like to see what my code should look like. Often <a href="http://community.haskell.org/~ndm/hlint/">hlint</a> is of great help for this (especially when you run it directly in your favourite editor, e.g. <code>vim</code> and <code>Sublime Text</code>): thus <code>cabal install hlint</code>.</p>
+<p>Ans speaking of editors we cannot forget <a href="http://www.mew.org/~kazu/proj/ghc-mod/en/ghc-mod.html">ghc-mod</a> to provide the integration: <code>cabal install ghc-mod</code>.</p>
+<p>Finally I massively use <code>pandoc</code>, look at <a href="http://johnmacfarlane.net/pandoc/">its webpage</a> if you don't know it. You can installe prebuild binaries but recently I restarted enjying compiling things by myself. The installation via <code>cabal</code> is trivial. Just type <code>cabal install pandoc</code> and wait. Maybe go to get some coffee... it's not going to be just a couple of minutes. It may fail complaining about <code>alex</code>, in such case just run <code>cabal install alex</code> and run <code>cabal install pandoc</code> again.</p>
+<p>Now that my <code>.cabal</code> folder is quite huge, I have everything I want to have fun with haskell.</p>
+<p>I happen to use many more haskell packages in fact (e.g. <code>aeson</code> for the <code>json</code> integration) but I usually install them in <a href="http://www.haskell.org/cabal/users-guide/installing-packages.html#developing-with-sandboxes">local sandboxed environment</a> and try to keep the global user folder more or less stable.</p>
+        </div>
+        
+        </section>
+
+<section class="post-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE UNCOMMENTING THE THEME * * */
+    var disqus_shortname = 'talesofafractalspectrum'; // required: replace example with your forum shortname
+    // make sure to use the post.id as an identifier, 
+    //otherwise disqus will use the pages url per default, 
+    //which might be problematic...
+    var disqus_identifier = '31,';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+    </article>
+    
+    <script type="text/javascript">
+        document.getElementById( 'top-post' ).scrollIntoView();
+    </script>
+
+</main>
+            
+        </div>
+    </div>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']]
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44365202-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>
