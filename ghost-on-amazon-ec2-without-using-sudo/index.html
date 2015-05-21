@@ -102,13 +102,13 @@
 <p>If you set up ghost to listen on the port 8080, it's likely that you have nothing to do and port 80 and 8080 are already assigned to http. You can easily check it from the AWS Console (look for security groups) or simply <strong>giving it a try</strong>. Just modify your <code>config.js</code> and replace whatever is in <code>host: 2368</code> with <code>host: 8080</code>. Run ghost with <code>npm start</code> and try to access your blog, if it works there is nothing else to do than install <code>forever</code> and use it.</p>
 <p><img alt="The AWS console" src="/images/03-screenshot.png" /></p>
 <p>If it doesn't work try to execute the following command (only for linux) in a terminal and it should start working</p>
-<div class="highlight"><pre>sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+<div class="highlight"><pre>sudo iptables -t nat -A PREROUTING -p tcp --dport <span class="m">80</span> -j REDIRECT --to-port 8080
 </pre></div>
 
 
 <p>If you are still using port 2360 replace 8080 with the appropriate value. You may need to enable the access to the proper ports, to do it is enough to execute the following. </p>
-<div class="highlight"><pre>sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-sudo iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
+<div class="highlight"><pre>sudo iptables -A INPUT -p tcp --dport <span class="m">80</span> -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport <span class="m">8080</span> -j ACCEPT
 </pre></div>
 
 
@@ -127,7 +127,7 @@ sudo iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
 
 
 <p>then enter in the ghost folder with <code>cd path_to_your/ghost_folder</code> and run</p>
-<div class="highlight"><pre>NODE_ENV=production forever start index.js
+<div class="highlight"><pre><span class="nv">NODE_ENV</span><span class="o">=</span>production forever start index.js
 </pre></div>
 
 

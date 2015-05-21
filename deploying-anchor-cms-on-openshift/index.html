@@ -144,7 +144,7 @@ https://anchor-mseritutorial.rhcloud.com/ZendServer
 
 <p>You have to accept a licence, save a password and just click <code>Next</code> at the License Information page.</p>
 <p>Having secured our zend app, is time to add mysql to the application. Do it with</p>
-<div class="highlight"><pre>rhc add-cartridge mysql-5.1 --app anchor
+<div class="highlight"><pre><span class="nv">$ </span>rhc add-cartridge mysql-5.1 --app anchor
 </pre></div>
 
 
@@ -158,7 +158,7 @@ https://anchor-mseritutorial.rhcloud.com/ZendServer
 
 <p><em>A good idea to increase security now would be to install phpmyadmin or login to the remote mysql to create a new database and a new user with restricted permissions to use for the website. It is a good idea and should be done, I am skipping this step for the tutorial and go on using the username and password obtained at this step.</em></p>
 <p>For the setup of Anchor we need to annotate something more. Use the address for <code>SSH To:</code> that you obtained previously and save the output of the following command</p>
-<div class="highlight"><pre> $ ssh uuid@anchor-mseritutorial.rhcloud.com &#39;env | grep MYSQL&#39;
+<div class="highlight"><pre><span class="nv">$ </span>ssh uuid@anchor-mseritutorial.rhcloud.com <span class="s1">&#39;env | grep MYSQL&#39;</span>
 </pre></div>
 
 
@@ -190,23 +190,7 @@ https://anchor-mseritutorial.rhcloud.com/ZendServer
 
 
 <p>Then we need to move the content folder in a space that the remote keeps safe and separated from the repository deployment. This can be done creating the file <code>.openshift/action_hooks/build</code> (as before you just need <code>$ nano ../.openshift/action_hooks/build</code>) with the following content</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<div class="highlight"><pre><span class="c">#!/bin/bash</span>
 
 <span class="k">if</span> <span class="o">[</span> ! -d <span class="nv">$OPENSHIFT_DATA_DIR</span>/content <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
    <span class="nb">echo</span> <span class="s2">&quot;Creating and populating the safe content folder&quot;</span>
@@ -224,18 +208,18 @@ https://anchor-mseritutorial.rhcloud.com/ZendServer
 <span class="nb">echo</span> <span class="s2">&quot;Symlinking the safe content folder&quot;</span>
 ln -sf <span class="nv">$OPENSHIFT_DATA_DIR</span>/content <span class="nv">$OPENSHIFT_REPO_DIR</span>/php/content
 </pre></div>
-</td></tr></table>
+
 
 <p>We are almost ready. Before pushing the changes we need to modify the file <code>.gitignore</code> contained in the <code>php</code> folder. Open it with <code>$ nano .gitignore</code> and delete the lines</p>
-<div class="highlight"><pre># generated config
+<div class="highlight"><pre><span class="c"># generated config</span>
 /anchor/config/app.php
 /anchor/config/db.php
 /anchor/config/session.php
 
-# user mod_rewrite
+<span class="c"># user mod_rewrite</span>
 /.htaccess
 
-# debug and custom themes
+<span class="c"># debug and custom themes</span>
 /themes/*
 !/themes/default
 </pre></div>

@@ -90,7 +90,7 @@
 <p><strong>Don't worry!</strong></p>
 <p>Due to some security fixes in the last ghost version, modsecurity interpret the content of your ghost's <a href="http://en.wikipedia.org/wiki/HTTP_cookie">cookie</a> as an <a href="http://en.wikipedia.org/wiki/SQL_injection">sql injection</a> potential attack and simply drops the communication between the browser and the website to prevent it.</p>
 <p>If I understood what expressjs/connect are doing under the hood, there should be no problem in dropping the rule that creates this false positive from the modsecrutiry configuration. The faster way (assuming that you don't need this rule somewhere else) is to comment it in the configuration file</p>
-<div class="highlight"><pre>sed -i &#39;/981246/s/^/# /&#39; modsecurity_crs_41_sql_injection_attacks.conf
+<div class="highlight"><pre>sed -i <span class="s1">&#39;/981246/s/^/# /&#39;</span> modsecurity_crs_41_sql_injection_attacks.conf
 </pre></div>
 
 

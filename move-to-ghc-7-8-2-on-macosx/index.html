@@ -105,7 +105,7 @@
 
 
 <p>and enter the newly created folder, e.g</p>
-<div class="highlight"><pre>cd cabal-install-1.20.0.2
+<div class="highlight"><pre><span class="nb">cd </span>cabal-install-1.20.0.2
 </pre></div>
 
 
@@ -132,46 +132,46 @@
 <p>I've additionally got a strange error related to <code>happy</code> and <code>haskell-src-exts</code>, it can be solved just by <code>cabal install happy</code>. I am still wondering why it happened.</p>
 <p>When the setup is complete, you can run <code>hoogle data</code> to create a local database of entries, or <code>hoogle data all</code> if you want the complete hoogle dataset (this takes a loooong time).</p>
 <p>If you don't plan to use <code>goa</code> or <code>lambdabot</code> you can integrate <code>hoogle</code> in <code>ghci</code> by adding </p>
-<div class="highlight"><pre>:def hoogle \str -&gt; return $ &quot;:! hoogle --count=15 \&quot;&quot; ++ str ++ &quot;\&quot;&quot;
+<div class="highlight"><pre><span class="kt">:</span><span class="n">def</span> <span class="n">hoogle</span> <span class="nf">\</span><span class="n">str</span> <span class="ow">-&gt;</span> <span class="n">return</span> <span class="o">$</span> <span class="s">&quot;:! hoogle --count=15 </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">++</span> <span class="n">str</span> <span class="o">++</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">&quot;</span>
 </pre></div>
 
 
 <p>to your <code>.ghci</code> file.</p>
 <p>I believe that <code>ghci</code> is nothing without <a href="http://www.haskell.org/haskellwiki/Lambdabot">lambdabot</a>. Therefore <code>cabal install goa lambdabot</code> is the inevitable second step. Note that <code>goa</code> is not a mistake but a <a href="http://hackage.haskell.org/package/goa">useful addition</a>.</p>
 <p><code>lambdabot &lt;= 4.3.0.1</code> have some problems with <code>ghc-7.8.2</code> and you will get a compilation error. To fix it you first <code>cabal install goa</code> by itself, then <code>cabal get lambdabot; cd lambdabot-4.3.0.1</code> and then you need to replace the content of <code>src/Lambdabot/Monad.hs-boot</code> with</p>
-<div class="highlight"><pre><span class="p">{</span><span class="o">-</span><span class="c"># LANGUAGE RankNTypes #-}</span>
-<span class="n">module</span> <span class="n">Lambdabot</span><span class="o">.</span><span class="n">Monad</span> <span class="n">where</span>
+<div class="highlight"><pre><span class="cm">{-# LANGUAGE RankNTypes #-}</span>
+<span class="kr">module</span> <span class="nn">Lambdabot.Monad</span> <span class="kr">where</span>
 
-<span class="kn">import</span> <span class="nn">Control.Monad.Reader</span>
-<span class="kn">import</span> <span class="nn">Data.IORef</span>
+<span class="kr">import</span> <span class="nn">Control.Monad.Reader</span>
+<span class="kr">import</span> <span class="nn">Data.IORef</span>
 
-<span class="n">data</span> <span class="n">IRCRWState</span>
-<span class="n">data</span> <span class="n">IRCRState</span>
-<span class="n">newtype</span> <span class="n">LB</span> <span class="n">a</span> <span class="o">=</span> <span class="n">LB</span> <span class="p">{</span><span class="n">runLB</span> <span class="p">::</span> <span class="n">ReaderT</span> <span class="p">(</span><span class="n">IRCRState</span><span class="p">,</span> <span class="n">IORef</span> <span class="n">IRCRWState</span><span class="p">)</span> <span class="n">IO</span> <span class="n">a</span><span class="p">}</span> 
+<span class="kr">data</span> <span class="kt">IRCRWState</span>
+<span class="kr">data</span> <span class="kt">IRCRState</span>
+<span class="kr">newtype</span> <span class="kt">LB</span> <span class="n">a</span> <span class="ow">=</span> <span class="kt">LB</span> <span class="p">{</span><span class="n">runLB</span> <span class="ow">::</span> <span class="kt">ReaderT</span> <span class="p">(</span><span class="kt">IRCRState</span><span class="p">,</span> <span class="kt">IORef</span> <span class="kt">IRCRWState</span><span class="p">)</span> <span class="kt">IO</span> <span class="n">a</span><span class="p">}</span>
 
-<span class="n">instance</span> <span class="n">Monad</span> <span class="n">LB</span>
+<span class="kr">instance</span> <span class="kt">Monad</span> <span class="kt">LB</span>
 </pre></div>
 
 
 <p>(the above code is due to <a href="https://github.com/mokus0/lambdabot/pull/79">artella-coding</a> and should be merged in the next release of lambdabot). 
 Then save and run <code>cabal configure &amp;&amp; cabal install</code>.</p>
 <p>Then in my <code>.ghci</code> I have</p>
-<div class="highlight"><pre>:m - Prelude
-:m + GOA
-setLambdabotHome &quot;/Users/marcelloseri/.cabal/bin&quot;
-:def bs        lambdabot &quot;botsnack&quot;
-:def pl        lambdabot &quot;pl&quot;
-:def unpl      lambdabot &quot;unpl&quot;
-:def redo      lambdabot &quot;redo&quot;
-:def undo      lambdabot &quot;undo&quot;
-:def index     lambdabot &quot;index&quot;
-:def docs      lambdabot &quot;docs&quot;
-:def instances lambdabot &quot;instances&quot;
-:def hoogle    lambdabot &quot;hoogle&quot;
-:def source    lambdabot &quot;fptools&quot;
-:def where     lambdabot &quot;where&quot;
-:def version   lambdabot &quot;version&quot;
-:def src       lambdabot &quot;src&quot;
+<div class="highlight"><pre><span class="kt">:</span><span class="n">m</span> <span class="o">-</span> <span class="kt">Prelude</span>
+<span class="kt">:</span><span class="n">m</span> <span class="o">+</span> <span class="kt">GOA</span>
+<span class="nf">setLambdabotHome</span> <span class="s">&quot;/Users/marcelloseri/.cabal/bin&quot;</span>
+<span class="kt">:</span><span class="n">def</span> <span class="n">bs</span>        <span class="n">lambdabot</span> <span class="s">&quot;botsnack&quot;</span>
+<span class="kt">:</span><span class="n">def</span> <span class="n">pl</span>        <span class="n">lambdabot</span> <span class="s">&quot;pl&quot;</span>
+<span class="kt">:</span><span class="n">def</span> <span class="n">unpl</span>      <span class="n">lambdabot</span> <span class="s">&quot;unpl&quot;</span>
+<span class="kt">:</span><span class="n">def</span> <span class="n">redo</span>      <span class="n">lambdabot</span> <span class="s">&quot;redo&quot;</span>
+<span class="kt">:</span><span class="n">def</span> <span class="n">undo</span>      <span class="n">lambdabot</span> <span class="s">&quot;undo&quot;</span>
+<span class="kt">:</span><span class="n">def</span> <span class="n">index</span>     <span class="n">lambdabot</span> <span class="s">&quot;index&quot;</span>
+<span class="kt">:</span><span class="n">def</span> <span class="n">docs</span>      <span class="n">lambdabot</span> <span class="s">&quot;docs&quot;</span>
+<span class="kt">:</span><span class="n">def</span> <span class="n">instances</span> <span class="n">lambdabot</span> <span class="s">&quot;instances&quot;</span>
+<span class="kt">:</span><span class="n">def</span> <span class="n">hoogle</span>    <span class="n">lambdabot</span> <span class="s">&quot;hoogle&quot;</span>
+<span class="kt">:</span><span class="n">def</span> <span class="n">source</span>    <span class="n">lambdabot</span> <span class="s">&quot;fptools&quot;</span>
+<span class="kt">:</span><span class="n">def</span> <span class="kr">where</span>     <span class="n">lambdabot</span> <span class="s">&quot;where&quot;</span>
+<span class="kt">:</span><span class="n">def</span> <span class="n">version</span>   <span class="n">lambdabot</span> <span class="s">&quot;version&quot;</span>
+<span class="kt">:</span><span class="n">def</span> <span class="n">src</span>       <span class="n">lambdabot</span> <span class="s">&quot;src&quot;</span>
 </pre></div>
 
 

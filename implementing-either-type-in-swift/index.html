@@ -90,59 +90,59 @@
 <p>As we can read from his page, it's no surprise that people have found similarities with Rust, Haskell, Ruby, Python, Julia, and many other language. And the more I play with Swift, the happier I am of what they did. I really hope that the language will be released with an open source license as LLVM, clang and in some sense Objective-C.</p>
 <p>But let's come to the hearth of this post. I find abstract types and monadic construct very powerful and fun to code. And the type system in Swift, desite not being as flexible and powerful as Haskell's, gives a lot of freedom in this directon. Optionals fall exactly in this context and correspond very closely to <a href="http://www.haskell.org/haskellwiki/Maybe">Haskell's Maybe class</a>.</p>
 <p>As you can read in <a href="https://itun.es/gb/jEUH0.l">Apple Inc. “The Swift Programming Language.” ebook</a>, the <em>optional</em> type in Swift is nothing but synctactic sugar for the following enum</p>
-<div class="highlight"><pre><span class="cm">/* Reimplement the Swift standard library&#39;s optional type */</span><span class="w"></span>
-enum<span class="w"> </span>OptionalValue<span class="o">&lt;</span>T<span class="o">&gt;</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">    </span>case<span class="w"> </span>None<span class="w"></span>
-<span class="w">    </span>case<span class="w"> </span>Some<span class="o">(</span>T<span class="o">)</span><span class="w"></span>
-<span class="err">}</span><span class="w"></span>
+<div class="highlight"><pre><span class="cm">/* Reimplement the Swift standard library&#39;s optional type */</span>
+<span class="kd">enum</span> <span class="nc">OptionalValue</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">None</span>
+    <span class="k">case</span> <span class="n">Some</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="p">}</span>
 
-var<span class="w"> </span><span class="nl">possibleInteger</span><span class="o">:</span><span class="w"> </span>OptionalValue<span class="o">&lt;</span>Int<span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">.</span>None<span class="w"></span>
-possibleInteger<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">.</span>Some<span class="o">(</span><span class="m">100</span><span class="o">)</span><span class="w"></span>
+<span class="kd">var</span> <span class="nv">possibleInteger</span><span class="p">:</span> <span class="n">OptionalValue</span><span class="p">&lt;</span><span class="nb">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="p">.</span><span class="n">None</span>
+<span class="n">possibleInteger</span> <span class="p">=</span> <span class="p">.</span><span class="n">Some</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 
 
 <p>Where<code>T</code> represents a generic type, <code>nil</code> is indeed syntactic sugar for <code>OptionalValue&lt;T&gt;.None</code> and <code>?</code> the same for <code>OptionalValue&lt;T&gt;.Some(T)</code>.</p>
 <p>You can then use a <code>switch</code> and swift pattern matching capabilities to manage the error</p>
-<div class="highlight"><pre>switch possibleInteger {
-case .Some(let value) :
-    /* just type &#39;value&#39; here to see &#39;100&#39; appearing in playground REPL */
-    println(&quot;Value is: \(value)&quot;)
-case .None :
-    println(&quot;Error: no value.&quot;)
-}
+<div class="highlight"><pre><span class="k">switch</span> <span class="n">possibleInteger</span> <span class="p">{</span>
+<span class="k">case</span> <span class="p">.</span><span class="n">Some</span><span class="p">(</span><span class="kd">let</span> <span class="nv">value</span><span class="p">)</span> <span class="p">:</span>
+    <span class="cm">/* just type &#39;value&#39; here to see &#39;100&#39; appearing in playground REPL */</span>
+    <span class="bp">println</span><span class="p">(</span><span class="s">&quot;Value is: </span><span class="si">\(</span><span class="n">value</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="k">case</span> <span class="p">.</span><span class="n">None</span> <span class="p">:</span>
+    <span class="bp">println</span><span class="p">(</span><span class="s">&quot;Error: no value.&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <p>I am not going in the realm of Monads (yet) and <a href="http://www.haskell.org/haskellwiki/Monad_tutorials_timeline">try to explain them</a>, but I think that the <a href="http://www.haskell.org/ghc/docs/latest/html/libraries/base/Data-Either.html"><em>either</em></a> type could be very useful in Swift. As for the <em>optional</em>, we can easily define it as</p>
-<div class="highlight"><pre><span class="k">enum</span> <span class="n">Either</span><span class="s">&lt;T1, T2&gt;</span> {
-    <span class="n">case</span> <span class="n">Left</span>(<span class="n">T1</span>)
-    <span class="n">case</span> <span class="n">Right</span>(<span class="n">T2</span>)
-}
+<div class="highlight"><pre><span class="kd">enum</span> <span class="nc">Either</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">Left</span><span class="p">(</span><span class="n">T1</span><span class="p">)</span>
+    <span class="k">case</span> <span class="n">Right</span><span class="p">(</span><span class="n">T2</span><span class="p">)</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <p>As in Haskell, Either is parameterized by two types, not one. A value of the Either type <em>either</em> contains a value of type <code>T1</code> or of type <code>T2</code>. With it, we can discriminate between two possibilities and using Swift pattern matching we can write a nice, clean code. </p>
 <p>Either can be used as a <a href="https://www.fpcomplete.com/school/starting-with-haskell/basics-of-haskell/10_Error_Handling">generalization of optional types</a> in which Left not only encodes failure but is accompanied by an error message (so often <code>T1</code> will be just <code>String</code>). Then Right encodes success and the accompanying value.</p>
 <p>For example</p>
-<div class="highlight"><pre>var possibleInteger: Either&lt;String,Int&gt; = .Left(&quot;Not a number&quot;)
-var possibleInteger2: Either&lt;String,Int&gt; = .Right(3)
+<div class="highlight"><pre><span class="kd">var</span> <span class="nv">possibleInteger</span><span class="p">:</span> <span class="n">Either</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">,</span><span class="nb">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="p">.</span><span class="n">Left</span><span class="p">(</span><span class="s">&quot;Not a number&quot;</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nv">possibleInteger2</span><span class="p">:</span> <span class="n">Either</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">,</span><span class="nb">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="p">.</span><span class="n">Right</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 
-switch possibleInteger1 {
-case .Left(let errorText) :
-    println(&quot;Error: \(errorText)&quot;)
-case .Right(let value) :
-    println(&quot;The value is: \(value)&quot;)
-}
+<span class="k">switch</span> <span class="n">possibleInteger1</span> <span class="p">{</span>
+<span class="k">case</span> <span class="p">.</span><span class="n">Left</span><span class="p">(</span><span class="kd">let</span> <span class="nv">errorText</span><span class="p">)</span> <span class="p">:</span>
+    <span class="bp">println</span><span class="p">(</span><span class="s">&quot;Error: </span><span class="si">\(</span><span class="n">errorText</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="k">case</span> <span class="p">.</span><span class="n">Right</span><span class="p">(</span><span class="kd">let</span> <span class="nv">value</span><span class="p">)</span> <span class="p">:</span>
+    <span class="bp">println</span><span class="p">(</span><span class="s">&quot;The value is: </span><span class="si">\(</span><span class="n">value</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func safeDiv(x:Float, y:Float) -&gt; Either&lt;String,Float&gt; {
-  if y == 0 {
-    return Either&lt;String, Float&gt;.Left(&quot;Error: division by zero&quot;)
-  } else {
-    return Either&lt;String, Float&gt;.Right(x/y)
-  }
-}
+<span class="kd">func</span> <span class="nf">safeDiv</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="nb">Float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="nb">Float</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Either</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">,</span><span class="nb">Float</span><span class="p">&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="n">y</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Either</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">Float</span><span class="p">&gt;.</span><span class="n">Left</span><span class="p">(</span><span class="s">&quot;Error: division by zero&quot;</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Either</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">Float</span><span class="p">&gt;.</span><span class="n">Right</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 
-var badDivision = safeDiv(2,0)
+<span class="kd">var</span> <span class="nv">badDivision</span> <span class="p">=</span> <span class="n">safeDiv</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
 

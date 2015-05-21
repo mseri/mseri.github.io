@@ -74,25 +74,25 @@ Source of this text:
 http://www.ceremade.dauphine.fr/~msfr/articles/arnold/PRE_anglais.ps &lt;/p&gt;</summary><category term="mathematics"></category><category term="arnold"></category><category term="letter"></category><category term="teaching"></category></entry><entry><title>Left pipe in Haskell</title><link href="http://www.mseri.me/left-pipe-in-haskell/" rel="alternate"></link><updated>2014-11-21T15:24:54+00:00</updated><author><name>Marcello Seri</name></author><id>tag:www.mseri.me,2014-11-21:left-pipe-in-haskell/</id><summary type="html">&lt;p&gt;If you read this blog, you know that I am very biased by having worked with unix shells for almost two decades and that I am addicted to the use of pipes (see e.g. &lt;a href="http://www.mseri.me/piping-with-swift/"&gt;Piping with Swift&lt;/a&gt;). I really find much more natural to see data moving from left to right.&lt;/p&gt;
 &lt;p&gt;Yesterday I was thinking that in Haskell everything is an expression and that you can easily define infix operators. Thus it must be possible to implement a shell-like pipe.&lt;/p&gt;
 &lt;p&gt;First of all, composition &lt;code&gt;(.)&lt;/code&gt; is too strong, the pipe I have in mind is like &lt;code&gt;($)&lt;/code&gt; but reversed. In fact, my second attempt (I feel embarassed by the first, I am not going to post it ;-P) was&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;($&amp;gt;) = flip ($)
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;$&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;=&lt;/span&gt; &lt;span class="n"&gt;flip&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;One can immediately check that it is typed correctly as &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;($&amp;gt;) :: a -&amp;gt; (a -&amp;gt; b) -&amp;gt; b
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;$&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;::&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="ow"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="ow"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Now I can do e.g.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;Data.List&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;Data.List&lt;/span&gt;
 
-&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;sort&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;filter&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;\&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;map&lt;/span&gt; &lt;span class="n"&gt;even&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;$&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;sort&lt;/span&gt; &lt;span class="o"&gt;$&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;\&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;$&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt; &lt;span class="n"&gt;even&lt;/span&gt; &lt;span class="o"&gt;$&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;and get the result without complaints.&lt;/p&gt;
 &lt;p&gt;This is just a stupid example but I find it more expressive (again probably because I use too much the shell) than&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;and . map even . filter (\x -&amp;gt; x &amp;lt; 4) . sort $ [3,1,4,2,2,6]
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nf"&gt;and&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt; &lt;span class="n"&gt;even&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;filter&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;\&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;sort&lt;/span&gt; &lt;span class="o"&gt;$&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -153,7 +153,7 @@ ideals are.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;-D port&lt;/strong&gt;: Specifies a local “dynamic” application-level port forwarding. This works by allocating a socket to listen to port on the local side, and whenever a connection is made to this port, the connec  tion is forwarded over the secure channel, and the application protocol is then used to determine where to connect to from the remote machine.  Currently the SOCKS4 and SOCKS5 protocols are supported, and ssh will act as a SOCKS server.  [...]&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Run in your terminal&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ssh -D 9090  your_username@your_academic_ssh_server
+&lt;div class="highlight"&gt;&lt;pre&gt;ssh -D &lt;span class="m"&gt;9090&lt;/span&gt;  your_username@your_academic_ssh_server
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -167,21 +167,21 @@ ideals are.&lt;/p&gt;
 &lt;p&gt;Few days ago I was looking for an old script in one of my backups when I've found an old note called &lt;code&gt;Find MTU to fix Lion WiFi&lt;/code&gt;. I had completely forgotten about it, as I had forgotten about the problems with Lion's wifi...&lt;/p&gt;
 &lt;p&gt;It turned out that the problem was, in fact, related to the &lt;a href="https://en.wikipedia.org/wiki/Maximum_transmission_unit"&gt;MTU&lt;/a&gt;(Basically the size of the transmitted packets). It was set to be automatic, and it automatically selected the value 1500 (that seemed to be quite standard, or at least correcto for almost all the networks I've used). Checking it brutally I found out that my home router has a quite lower MTU, and changing it did solve all my problems.&lt;/p&gt;
 &lt;p&gt;Finding the correct MTU is quite easy. One needs just to open a terminal and &lt;code&gt;ping&lt;/code&gt; and external website with appropriately constructed packets. Namely&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ping -D -s 1500 example.com
+&lt;div class="highlight"&gt;&lt;pre&gt;ping -D -s &lt;span class="m"&gt;1500&lt;/span&gt; example.com
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Here &lt;code&gt;-D&lt;/code&gt; tells ping that the package cannot be fragmented, in other words if it is too large it will not be sent at all, and &lt;code&gt;-s 1500&lt;/code&gt; tells it what must be the size of the packet in bytes. Be careful, 1500 is not really the full size of the packet, &lt;strong&gt;there is an overhead of 28 bytes that you need to add to that number&lt;/strong&gt;. E.g &lt;code&gt;-s 1500&lt;/code&gt; means that the packet size is 1528 bytes. If the largest packet that you can successfully send has size  1472, then your MTU value is 1500.&lt;/p&gt;
 &lt;p&gt;You can add the option &lt;code&gt;-c n&lt;/code&gt; to tell ping to send only n packages (2 or 3 will be enough), otherwise you can kill the process after a couple of packages is sent.&lt;/p&gt;
 &lt;p&gt;Running&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ping -D -s 1500 example.com
+&lt;div class="highlight"&gt;&lt;pre&gt;ping -D -s &lt;span class="m"&gt;1500&lt;/span&gt; example.com
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;on my network I get the following output&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;PING example.com (93.184.216.119): 1500 data bytes
-ping: sendto: Message too long
-[...]
+  ping: sendto: Message too long
+  [...]
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -212,59 +212,59 @@ ping: sendto: Message too long
 &lt;p&gt;Given that in Swift &lt;code&gt;|&lt;/code&gt;, &lt;code&gt;.&lt;/code&gt; and &lt;code&gt;||&lt;/code&gt; have already quite precise and distinct meanings, I am going to mimic Julia and Elixir's notation and use &lt;code&gt;|&amp;gt;&lt;/code&gt;. 
 Swift is unbelievably flexible from this point of view: one can easily define new generic &lt;code&gt;infix&lt;/code&gt;, &lt;code&gt;prefix&lt;/code&gt; or &lt;code&gt;suffix&lt;/code&gt; operator, and state their associativity and precedence properties. You'll soon see that the syntax speaks by itself!&lt;/p&gt;
 &lt;p&gt;Let's try to define a left associative generic pipe.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;operator infix |&amp;gt; { 
-    associativity left 
-}
-func |&amp;gt; &amp;lt;L,R&amp;gt;(left: L, right: L -&amp;gt; R) -&amp;gt; R {
-    return right(left);
-}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;operator&lt;/span&gt; &lt;span class="kr"&gt;infix&lt;/span&gt; &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; 
+    &lt;span class="kr"&gt;associativity&lt;/span&gt; &lt;span class="kr"&gt;left&lt;/span&gt; 
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="kd"&gt;func&lt;/span&gt; &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;&lt;span class="kr"&gt;left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kr"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;L&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;R&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;R&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kr"&gt;right&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kr"&gt;left&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Then we could use it to chain some function together in an elegant way. For example&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;func unique&amp;lt;T:Hashable&amp;gt;(array: Array&amp;lt;T&amp;gt;) -&amp;gt; Array&amp;lt;T&amp;gt;{
-    var filter = Dictionary&amp;lt;T,Bool&amp;gt;()
-    var result = Array&amp;lt;T&amp;gt;()
-    for i in 0..array.count {
-        if let elem = filter[array[i]] {
-            continue
-        } else {
-            filter[array[i]] = true
-            result.append(array[i])
-        }
-    }
-    return result
-}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;func&lt;/span&gt; &lt;span class="nf"&gt;unique&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;Hashable&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;Array&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;)&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;Array&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nv"&gt;filter&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;Dictionary&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;Bool&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;()&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nv"&gt;result&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;Array&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="bp"&gt;count&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;elem&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;continue&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="bp"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-[1, 2, 3, 3, 3, 4, 5, 5, 6, 7] |&amp;gt; sort |&amp;gt; unique |&amp;gt; toString |&amp;gt; println
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="bp"&gt;sort&lt;/span&gt; &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;unique&lt;/span&gt; &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="bp"&gt;toString&lt;/span&gt; &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="bp"&gt;println&lt;/span&gt;
 
-// prints &amp;#39;[1,2,3,4,5,6,7]&amp;#39;
+&lt;span class="c1"&gt;// prints &amp;#39;[1,2,3,4,5,6,7]&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;I strongly believe that some (better) implementation of the pipe should become part of Swift standard library. For example it would be nice to be able to chain subscripts (e.g. &lt;code&gt;filter[array[i]]&lt;/code&gt; replaced by &lt;code&gt;i |&amp;gt; array[$0] |&amp;gt; filter[$0]&lt;/code&gt;) or more flexible maps (e.g. &lt;code&gt;[1, 2, 3, 3, 3, 4, 5, 5, 6, 7] |&amp;gt; sort |&amp;gt; unique |&amp;gt; map($0, {x in x * x})&lt;/code&gt;) . But maybe I am asking for too much...&lt;/p&gt;
 &lt;p&gt;While writing this example, I was wondering what is the best way to remove duplicates in a Swift array? The shortest code I could come up with is&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;func unique&amp;lt;T:Hashable&amp;gt;(array: T[]) -&amp;gt; T[] {
-    var filter = Dictionary&amp;lt;T,Bool&amp;gt;()
-    for i in 0..array.count {
-            filter[array[i]] = true
-    }
-    return Array(filter.keys)
-}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;func&lt;/span&gt; &lt;span class="nf"&gt;unique&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;Hashable&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;[])&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nv"&gt;filter&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;Dictionary&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;Bool&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="bp"&gt;count&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="bp"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;Array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;but it is probably not the fastest one. Nevertheless, I would probably use an underlying dictionary to implement a &lt;code&gt;Set&lt;/code&gt; type and use the &lt;code&gt;Set&lt;/code&gt; to remove duplicates. Note here that &lt;code&gt;T[]&lt;/code&gt; is just syntactic sugar for &lt;code&gt;Array&amp;lt;T&amp;gt;&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Another version, using the builtin &lt;code&gt;contains&lt;/code&gt; function could be&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;func unique&amp;lt;T : Equatable&amp;gt;(array: T[]) -&amp;gt; T[] {
-    var result = T[]()
-    for x in array {
-        if !contains(result, x) {
-            result += x
-        }
-    }
-    return result
-}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;func&lt;/span&gt; &lt;span class="nf"&gt;unique&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;Equatable&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;[])&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nv"&gt;result&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;[]()&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;array&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="bp"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 

@@ -92,12 +92,12 @@
 <h2>Convert yourself to Homebrew</h2>
 <p>Then let's install a serious package manager, and with this I really mean: install <a href="http://brew.sh">Homebrew</a>!</p>
 <p>If you don't have it yet, open a Terminal and install it copying and pasting the following code:</p>
-<div class="highlight"><pre>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+<div class="highlight"><pre>ruby -e <span class="s2">&quot;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">&quot;</span>
 </pre></div>
 
 
 <p>You shouldn't need  <code>sudo</code> for the installation, everything will be nicely located in <code>/usr/local</code>. When the execution ends add this to your <code>.profile</code> (or <code>/bash_profile</code> or <code>.zsh_profile</code> or the equivalent for your shell):</p>
-<div class="highlight"><pre><span class="x">export PATH=/usr/local/bin:</span><span class="p">$</span><span class="nv">PATH</span><span class="x"></span>
+<div class="highlight"><pre><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/bin:<span class="nv">$PATH</span>
 </pre></div>
 
 
@@ -124,17 +124,17 @@ pip install scipy
 
 <p>(I run them separately to have a more direct control of the possible errors)</p>
 <p>There are some possible problems here. On my laptop and my office computer I had <code>gfortran</code> complaining with the following error</p>
-<div class="highlight"><pre><span class="n">gfortran</span><span class="o">:</span> <span class="n">error</span><span class="o">:</span> <span class="n">libgfortran</span><span class="o">.</span><span class="na">spec</span><span class="o">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="n">or</span> <span class="n">directory</span> 
+<div class="highlight"><pre>gfortran: error: libgfortran.spec: No such file or directory
 </pre></div>
 
 
 <p>I could fix the problem with</p>
-<div class="highlight"><pre>brew link --overwrite gfortran 
+<div class="highlight"><pre>brew link --overwrite gfortran
 </pre></div>
 
 
 <p>Moreover, in an old installation, I had randomlike errors appearing here and then. I don't really know the cause, but I temporarily solved installing the development version of scipy</p>
-<div class="highlight"><pre>pip install -e git+https://github.com/scipy/scipy#egg=scipy-dev
+<div class="highlight"><pre>pip install -e git+https://github.com/scipy/scipy#egg<span class="o">=</span>scipy-dev
 </pre></div>
 
 

@@ -91,59 +91,59 @@
 <p>Given that in Swift <code>|</code>, <code>.</code> and <code>||</code> have already quite precise and distinct meanings, I am going to mimic Julia and Elixir's notation and use <code>|&gt;</code>. 
 Swift is unbelievably flexible from this point of view: one can easily define new generic <code>infix</code>, <code>prefix</code> or <code>suffix</code> operator, and state their associativity and precedence properties. You'll soon see that the syntax speaks by itself!</p>
 <p>Let's try to define a left associative generic pipe.</p>
-<div class="highlight"><pre>operator infix |&gt; { 
-    associativity left 
-}
-func |&gt; &lt;L,R&gt;(left: L, right: L -&gt; R) -&gt; R {
-    return right(left);
-}
+<div class="highlight"><pre><span class="kd">operator</span> <span class="kr">infix</span> <span class="o">|&gt;</span> <span class="p">{</span> 
+    <span class="kr">associativity</span> <span class="kr">left</span> 
+<span class="p">}</span>
+<span class="kd">func</span> <span class="o">|&gt;</span> <span class="p">&lt;</span><span class="n">L</span><span class="p">,</span><span class="n">R</span><span class="p">&gt;(</span><span class="kr">left</span><span class="p">:</span> <span class="n">L</span><span class="p">,</span> <span class="kr">right</span><span class="p">:</span> <span class="n">L</span> <span class="p">-&gt;</span> <span class="n">R</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">R</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kr">right</span><span class="p">(</span><span class="kr">left</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <p>Then we could use it to chain some function together in an elegant way. For example</p>
-<div class="highlight"><pre>func unique&lt;T:Hashable&gt;(array: Array&lt;T&gt;) -&gt; Array&lt;T&gt;{
-    var filter = Dictionary&lt;T,Bool&gt;()
-    var result = Array&lt;T&gt;()
-    for i in 0..array.count {
-        if let elem = filter[array[i]] {
-            continue
-        } else {
-            filter[array[i]] = true
-            result.append(array[i])
-        }
-    }
-    return result
-}
+<div class="highlight"><pre><span class="kd">func</span> <span class="nf">unique</span><span class="p">&lt;</span><span class="n">T</span><span class="p">:</span><span class="nb">Hashable</span><span class="p">&gt;(</span><span class="n">array</span><span class="p">:</span> <span class="nb">Array</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;)</span> <span class="p">-&gt;</span> <span class="nb">Array</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;{</span>
+    <span class="kd">var</span> <span class="nv">filter</span> <span class="p">=</span> <span class="nb">Dictionary</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span><span class="nb">Bool</span><span class="p">&gt;()</span>
+    <span class="kd">var</span> <span class="nv">result</span> <span class="p">=</span> <span class="nb">Array</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.</span><span class="n">array</span><span class="p">.</span><span class="bp">count</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="kd">let</span> <span class="nv">elem</span> <span class="p">=</span> <span class="bp">filter</span><span class="p">[</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="p">{</span>
+            <span class="k">continue</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="bp">filter</span><span class="p">[</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="p">=</span> <span class="kc">true</span>
+            <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span>
+<span class="p">}</span>
 
-[1, 2, 3, 3, 3, 4, 5, 5, 6, 7] |&gt; sort |&gt; unique |&gt; toString |&gt; println
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span> <span class="o">|&gt;</span> <span class="bp">sort</span> <span class="o">|&gt;</span> <span class="n">unique</span> <span class="o">|&gt;</span> <span class="bp">toString</span> <span class="o">|&gt;</span> <span class="bp">println</span>
 
-// prints &#39;[1,2,3,4,5,6,7]&#39;
+<span class="c1">// prints &#39;[1,2,3,4,5,6,7]&#39;</span>
 </pre></div>
 
 
 <p>I strongly believe that some (better) implementation of the pipe should become part of Swift standard library. For example it would be nice to be able to chain subscripts (e.g. <code>filter[array[i]]</code> replaced by <code>i |&gt; array[$0] |&gt; filter[$0]</code>) or more flexible maps (e.g. <code>[1, 2, 3, 3, 3, 4, 5, 5, 6, 7] |&gt; sort |&gt; unique |&gt; map($0, {x in x * x})</code>) . But maybe I am asking for too much...</p>
 <p>While writing this example, I was wondering what is the best way to remove duplicates in a Swift array? The shortest code I could come up with is</p>
-<div class="highlight"><pre>func unique&lt;T:Hashable&gt;(array: T[]) -&gt; T[] {
-    var filter = Dictionary&lt;T,Bool&gt;()
-    for i in 0..array.count {
-            filter[array[i]] = true
-    }
-    return Array(filter.keys)
-}
+<div class="highlight"><pre><span class="kd">func</span> <span class="nf">unique</span><span class="p">&lt;</span><span class="n">T</span><span class="p">:</span><span class="nb">Hashable</span><span class="p">&gt;(</span><span class="n">array</span><span class="p">:</span> <span class="n">T</span><span class="p">[])</span> <span class="p">-&gt;</span> <span class="n">T</span><span class="p">[]</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nv">filter</span> <span class="p">=</span> <span class="nb">Dictionary</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span><span class="nb">Bool</span><span class="p">&gt;()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.</span><span class="n">array</span><span class="p">.</span><span class="bp">count</span> <span class="p">{</span>
+            <span class="bp">filter</span><span class="p">[</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="p">=</span> <span class="kc">true</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">Array</span><span class="p">(</span><span class="bp">filter</span><span class="p">.</span><span class="n">keys</span><span class="p">)</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <p>but it is probably not the fastest one. Nevertheless, I would probably use an underlying dictionary to implement a <code>Set</code> type and use the <code>Set</code> to remove duplicates. Note here that <code>T[]</code> is just syntactic sugar for <code>Array&lt;T&gt;</code>.</p>
 <p>Another version, using the builtin <code>contains</code> function could be</p>
-<div class="highlight"><pre>func unique&lt;T : Equatable&gt;(array: T[]) -&gt; T[] {
-    var result = T[]()
-    for x in array {
-        if !contains(result, x) {
-            result += x
-        }
-    }
-    return result
-}
+<div class="highlight"><pre><span class="kd">func</span> <span class="nf">unique</span><span class="p">&lt;</span><span class="n">T</span> <span class="p">:</span> <span class="nb">Equatable</span><span class="p">&gt;(</span><span class="n">array</span><span class="p">:</span> <span class="n">T</span><span class="p">[])</span> <span class="p">-&gt;</span> <span class="n">T</span><span class="p">[]</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nv">result</span> <span class="p">=</span> <span class="n">T</span><span class="p">[]()</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="k">in</span> <span class="n">array</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="o">!</span><span class="bp">contains</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="n">x</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span>
+<span class="p">}</span>
 </pre></div>
 
 

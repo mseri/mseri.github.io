@@ -93,7 +93,7 @@
 <p><strong>-D port</strong>: Specifies a local “dynamic” application-level port forwarding. This works by allocating a socket to listen to port on the local side, and whenever a connection is made to this port, the connec  tion is forwarded over the secure channel, and the application protocol is then used to determine where to connect to from the remote machine.  Currently the SOCKS4 and SOCKS5 protocols are supported, and ssh will act as a SOCKS server.  [...]</p>
 </blockquote>
 <p>Run in your terminal</p>
-<div class="highlight"><pre>ssh -D 9090  your_username@your_academic_ssh_server
+<div class="highlight"><pre>ssh -D <span class="m">9090</span>  your_username@your_academic_ssh_server
 </pre></div>
 
 

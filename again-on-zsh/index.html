@@ -102,41 +102,31 @@
 <ol>
 <li>
 <p>Clean your previous Zsh configuration (<strong>create a Backup copy of the files before proceeding!!!</strong>)</p>
-<div class="highlight"><pre>rm -r .z* .oh-my-zsh
-</pre></div>
-
-
+<p>:::sh
+rm -r .z* .oh-my-zsh</p>
 </li>
 <li>
 <p>Launch Zsh:</p>
-<div class="highlight"><pre>zsh
-</pre></div>
-
-
+<p>:::sh
+zsh</p>
 </li>
 <li>
 <p>Clone the repository:</p>
-<div class="highlight"><pre><span class="s-Atom">git</span> <span class="s-Atom">clone</span> <span class="s-Atom">--recursive</span> <span class="nn">https</span><span class="p">:</span><span class="o">//</span><span class="s-Atom">github</span><span class="p">.</span><span class="s-Atom">com</span><span class="o">/</span><span class="s-Atom">sorin</span><span class="o">-</span><span class="s-Atom">ionescu</span><span class="o">/</span><span class="s-Atom">prezto</span><span class="p">.</span><span class="s-Atom">git</span> <span class="s2">&quot;${ZDOTDIR:-$HOME}/.zprezto&quot;</span>
-</pre></div>
-
-
+<p>:::sh
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"</p>
 </li>
 <li>
 <p>Create a new Zsh configuration by copying the Zsh configuration files provided:</p>
-<div class="highlight"><pre><span class="s-Atom">setopt</span> <span class="nv">EXTENDED_GLOB</span>
-<span class="s-Atom">for</span> <span class="s-Atom">rcfile</span> <span class="s-Atom">in</span> <span class="s2">&quot;${ZDOTDIR:-$HOME}&quot;</span><span class="s-Atom">/.zprezto</span><span class="o">/</span><span class="s-Atom">runcoms/^</span><span class="nv">README</span><span class="p">.</span><span class="nf">md</span><span class="p">(.</span><span class="nv">N</span><span class="p">);</span> <span class="s-Atom">do</span>
-  <span class="s-Atom">ln</span> <span class="o">-</span><span class="s-Atom">s</span> <span class="s2">&quot;$rcfile&quot;</span> <span class="s2">&quot;${ZDOTDIR:-$HOME}/.${rcfile:t}&quot;</span>
-<span class="s-Atom">done</span>
-</pre></div>
-
-
+<p>:::sh
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done</p>
 </li>
 <li>
 <p>Set Zsh as your default shell (if it is not):</p>
-<div class="highlight"><pre>chsh -s /bin/zsh
-</pre></div>
-
-
+<p>:::sh
+chsh -s /bin/zsh</p>
 </li>
 <li>
 <p>Open a new Zsh terminal window or tab.</p>
@@ -171,19 +161,18 @@ zstyle &#39;:prezto:load&#39; pmodule \
 <ol>
 <li>
 <p>First of all you need to create a new folder</p>
-<div class="highlight"><pre><span class="nv">$ </span>mkdir ~/.zsh.prompts
-</pre></div>
-
-
-<p>where you are going to save your theme.</p>
+<p>:::sh
+$ mkdir ~/.zsh.prompts</p>
 </li>
+</ol>
+<p>where you are going to save your theme.</p>
+<ol>
 <li>
 <p>Modify the <code>Prompt</code> section of <code>.zpreztorc</code> to look like </p>
-<div class="highlight"><pre><span class="err">#</span><span class="x"> Set the prompt theme to load.</span>
-<span class="err">#</span><span class="x"> Setting it to &#39;random&#39; loads a random theme.</span>
+<h1>Set the prompt theme to load.</h1>
+<div class="highlight"><pre><span class="err">#</span><span class="x"> Setting it to &#39;random&#39; loads a random theme.</span>
 <span class="err">#</span><span class="x"> Auto set to &#39;off&#39; on dumb terminals.</span>
 <span class="err">#</span><span class="x"> zstyle &#39;:prezto:module:prompt&#39; theme &#39;sorin&#39;</span>
-
 <span class="x">autoload promptinit</span>
 <span class="x">fpath=(</span><span class="p">$</span><span class="nv">HOME</span><span class="x">/.zsh.prompts </span><span class="p">$</span><span class="nv">fpath</span><span class="x">)</span>
 <span class="x">promptinit</span>
@@ -192,25 +181,25 @@ zstyle &#39;:prezto:load&#39; pmodule \
 </pre></div>
 
 
+</li>
+</ol>
 <p>where <code>YOURTHEMENAME</code> is the name that you have chosen for your theme.</p>
-</li>
-<li>
-<p>Create your theme file in <code>.zsh.prompts</code>. Note that its name must be <code>prompt_YOURTHEMENAME_setup</code>, otherwise it will not be recognised.</p>
-</li>
+<ol>
+<li>Create your theme file in <code>.zsh.prompts</code>. Note that its name must be <code>prompt_YOURTHEMENAME_setup</code>, otherwise it will not be recognised.</li>
 </ol>
 <p>I have no real advice on the creation of a theme. I posted <a href="https://gist.github.com/mseri/8026965">my theme on gist</a> if you want to try it or you want to use it as a starting point. It is a slightly modified version of YADR's steeef simplified theme.</p>
 <p>You may find the function provided in <a href="https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/spectrum.zsh">oh-my-zsh's spectrum file</a> helpful. For example it is enough to type the following in your Zsh terminal to see all the colours available</p>
-<div class="highlight"><pre><span class="x">for code in </span><span class="cp">{</span><span class="m">000.</span><span class="o">.</span><span class="m">255</span><span class="cp">}</span><span class="x">; do</span>
-<span class="x">    print -P -- &quot;$code: %F</span><span class="cp">{</span><span class="nv">$code</span><span class="cp">}</span><span class="x">Test%f&quot;</span>
-<span class="x">done</span>
+<div class="highlight"><pre><span class="k">for</span> code in <span class="o">{</span>000..255<span class="o">}</span><span class="p">;</span> <span class="k">do</span>
+    print -P -- <span class="s2">&quot;</span><span class="nv">$code</span><span class="s2">: %F{</span><span class="nv">$code</span><span class="s2">}Test%f&quot;</span>
+<span class="k">done</span>
 </pre></div>
 
 
 <p>Or, for something similar, have fun and try</p>
-<div class="highlight"><pre><span class="x">for code in </span><span class="cp">{</span><span class="m">000.</span><span class="o">.</span><span class="m">255</span><span class="cp">}</span><span class="x">; do</span>
-<span class="x">    ((cc = code + 1))</span>
-<span class="x">    print -P -- &quot;$BG[$code]$code: Test %</span><span class="cp">{</span><span class="nv">$reset_color</span><span class="o">%</span><span class="cp">}</span><span class="x">&quot;</span>
-<span class="x">  done</span>
+<div class="highlight"><pre><span class="k">for</span> code in <span class="o">{</span>000..255<span class="o">}</span><span class="p">;</span> <span class="k">do</span>
+    <span class="o">((</span><span class="nv">cc</span> <span class="o">=</span> code + 1<span class="o">))</span>
+    print -P -- <span class="s2">&quot;</span><span class="nv">$BG</span><span class="s2">[</span><span class="nv">$code</span><span class="s2">]</span><span class="nv">$code</span><span class="s2">: Test %{</span><span class="nv">$reset_color</span><span class="s2">%}&quot;</span>
+<span class="k">done</span>
 </pre></div>
 
 
