@@ -103,30 +103,30 @@
 <li>
 <p>Clean your previous Zsh configuration (<strong>create a Backup copy of the files before proceeding!!!</strong>)</p>
 <p>:::sh
-rm -r .z* .oh-my-zsh</p>
+  rm -r .z* .oh-my-zsh</p>
 </li>
 <li>
 <p>Launch Zsh:</p>
 <p>:::sh
-zsh</p>
+  zsh</p>
 </li>
 <li>
 <p>Clone the repository:</p>
 <p>:::sh
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"</p>
+  git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"</p>
 </li>
 <li>
 <p>Create a new Zsh configuration by copying the Zsh configuration files provided:</p>
 <p>:::sh
-setopt EXTENDED_GLOB
-for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-done</p>
+  setopt EXTENDED_GLOB
+  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+  done</p>
 </li>
 <li>
 <p>Set Zsh as your default shell (if it is not):</p>
 <p>:::sh
-chsh -s /bin/zsh</p>
+  chsh -s /bin/zsh</p>
 </li>
 <li>
 <p>Open a new Zsh terminal window or tab.</p>
@@ -162,22 +162,21 @@ zstyle &#39;:prezto:load&#39; pmodule \
 <li>
 <p>First of all you need to create a new folder</p>
 <p>:::sh
-$ mkdir ~/.zsh.prompts</p>
+  $ mkdir ~/.zsh.prompts</p>
 </li>
 </ol>
 <p>where you are going to save your theme.</p>
 <ol>
 <li>
 <p>Modify the <code>Prompt</code> section of <code>.zpreztorc</code> to look like </p>
-<h1>Set the prompt theme to load.</h1>
-<div class="highlight"><pre><span class="err">#</span><span class="x"> Setting it to &#39;random&#39; loads a random theme.</span>
-<span class="err">#</span><span class="x"> Auto set to &#39;off&#39; on dumb terminals.</span>
-<span class="err">#</span><span class="x"> zstyle &#39;:prezto:module:prompt&#39; theme &#39;sorin&#39;</span>
-<span class="x">autoload promptinit</span>
-<span class="x">fpath=(</span><span class="p">$</span><span class="nv">HOME</span><span class="x">/.zsh.prompts </span><span class="p">$</span><span class="nv">fpath</span><span class="x">)</span>
-<span class="x">promptinit</span>
-
-<span class="x">zstyle &#39;:prezto:module:prompt&#39; theme &#39;YOURTHEMENAME&#39;</span>
+<p># Set the prompt theme to load.
+    # Setting it to 'random' loads a random theme.
+    # Auto set to 'off' on dumb terminals.
+    # zstyle ':prezto:module:prompt' theme 'sorin'
+    autoload promptinit
+    fpath=($HOME/.zsh.prompts $fpath)
+    promptinit</p>
+<div class="highlight"><pre>zstyle &#39;:prezto:module:prompt&#39; theme &#39;YOURTHEMENAME&#39;
 </pre></div>
 
 
