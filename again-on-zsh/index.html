@@ -116,21 +116,27 @@
 </li>
 <li>
 <p>Clone the repository:</p>
-<p>:::sh
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"</p>
+<div class="highlight"><pre>git clone --recursive https://github.com/sorin-ionescu/prezto.git <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ZDOTDIR</span><span class="k">:-</span><span class="nv">$HOME</span><span class="si">}</span><span class="s2">/.zprezto&quot;</span>
+</pre></div>
+
+
 </li>
 <li>
 <p>Create a new Zsh configuration by copying the Zsh configuration files provided:</p>
-<p>:::sh
-setopt EXTENDED_GLOB
-for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-done</p>
+<div class="highlight"><pre>setopt EXTENDED_GLOB
+<span class="k">for</span> rcfile in <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ZDOTDIR</span><span class="k">:-</span><span class="nv">$HOME</span><span class="si">}</span><span class="s2">&quot;</span>/.zprezto/runcoms/^README.md<span class="o">(</span>.N<span class="o">)</span><span class="p">;</span> <span class="k">do</span>
+    ln -s <span class="s2">&quot;</span><span class="nv">$rcfile</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ZDOTDIR</span><span class="k">:-</span><span class="nv">$HOME</span><span class="si">}</span><span class="s2">/.</span><span class="si">${</span><span class="nv">rcfile</span><span class="p">:</span><span class="nv">t</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+</pre></div>
+
+
 </li>
 <li>
 <p>Set Zsh as your default shell (if it is not):</p>
-<p>:::sh
-chsh -s /bin/zsh</p>
+<div class="highlight"><pre>chsh -s /bin/zsh
+</pre></div>
+
+
 </li>
 <li>
 <p>Open a new Zsh terminal window or tab.</p>
@@ -165,31 +171,31 @@ zstyle &#39;:prezto:load&#39; pmodule \
 <ol>
 <li>
 <p>First of all you need to create a new folder</p>
-<p>:::sh
-$ mkdir ~/.zsh.prompts</p>
-</li>
-</ol>
-<p>where you are going to save your theme.</p>
-<ol>
-<li>
-<p>Modify the <code>Prompt</code> section of <code>.zpreztorc</code> to look like </p>
-<h1>Set the prompt theme to load.</h1>
-<div class="highlight"><pre><span class="err">#</span><span class="x"> Setting it to &#39;random&#39; loads a random theme.</span>
-<span class="err">#</span><span class="x"> Auto set to &#39;off&#39; on dumb terminals.</span>
-<span class="err">#</span><span class="x"> zstyle &#39;:prezto:module:prompt&#39; theme &#39;sorin&#39;</span>
-<span class="x">autoload promptinit</span>
-<span class="x">fpath=(</span><span class="p">$</span><span class="nv">HOME</span><span class="x">/.zsh.prompts </span><span class="p">$</span><span class="nv">fpath</span><span class="x">)</span>
-<span class="x">promptinit</span>
-
-<span class="x">zstyle &#39;:prezto:module:prompt&#39; theme &#39;YOURTHEMENAME&#39;</span>
+<div class="highlight"><pre><span class="nv">$ </span>mkdir ~/.zsh.prompts
 </pre></div>
 
 
+<p>where you are going to save your theme.</p>
 </li>
-</ol>
+<li>
+<p>Modify the <code>Prompt</code> section of <code>.zpreztorc</code> to look like </p>
+<div class="highlight"><pre><span class="c"># Set the prompt theme to load.</span>
+    <span class="c"># Setting it to &#39;random&#39; loads a random theme.</span>
+    <span class="c"># Auto set to &#39;off&#39; on dumb terminals.</span>
+    <span class="c"># zstyle &#39;:prezto:module:prompt&#39; theme &#39;sorin&#39;</span>
+    autoload promptinit
+    <span class="nv">fpath</span><span class="o">=(</span><span class="nv">$HOME</span>/.zsh.prompts <span class="nv">$fpath</span><span class="o">)</span>
+    promptinit
+
+    zstyle <span class="s1">&#39;:prezto:module:prompt&#39;</span> theme <span class="s1">&#39;YOURTHEMENAME&#39;</span>
+</pre></div>
+
+
 <p>where <code>YOURTHEMENAME</code> is the name that you have chosen for your theme.</p>
-<ol>
-<li>Create your theme file in <code>.zsh.prompts</code>. Note that its name must be <code>prompt_YOURTHEMENAME_setup</code>, otherwise it will not be recognised.</li>
+</li>
+<li>
+<p>Create your theme file in <code>.zsh.prompts</code>. Note that its name must be <code>prompt_YOURTHEMENAME_setup</code>, otherwise it will not be recognised.</p>
+</li>
 </ol>
 <p>I have no real advice on the creation of a theme. I posted <a href="https://gist.github.com/mseri/8026965">my theme on gist</a> if you want to try it or you want to use it as a starting point. It is a slightly modified version of YADR's steeef simplified theme.</p>
 <p>You may find the function provided in <a href="https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/spectrum.zsh">oh-my-zsh's spectrum file</a> helpful. For example it is enough to type the following in your Zsh terminal to see all the colours available</p>
