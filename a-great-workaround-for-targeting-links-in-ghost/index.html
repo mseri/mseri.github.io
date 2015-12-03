@@ -102,13 +102,13 @@
 <p>Well, we could write the whole anchor by hand, but this is not really what I was looking for. I didn't really spend much time trying to solve the issues, but I had the great luck of reading a post <a href="http://huynq.net/">here</a>...</p>
 <p>HuyNQ has a post showing a workaround that is as simple as it is brilliant!</p>
 <p>Apparently the markdown interpreter of Ghost makes no assumption regarding the characters contained in the link you add: this means that <code>"</code> is not converted to <code>&amp;dquot;</code>, but is transferred to the code as it is <em>(this is potentially bad, as it could be used for attacks, but imho if some attacker can change the text in the database you should have other more serious worries)</em>.</p>
-<p>This means that adding " to the URL will generate an anchor with the proper target. In other words</p>
-<div class="highlight"><pre>[the text you see](http://theli.nk)
+<p>This means that appending <code>" target="_blank</code> to the URL will generate an anchor with the proper target. In other words</p>
+<div class="highlight"><pre>[the text you see](http://theli.nk&quot; target=&quot;_blank)
 </pre></div>
 
 
 <p>will generate</p>
-<div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://theli.nk&quot;</span><span class="nt">&gt;</span>the text you see<span class="nt">&lt;/a&gt;</span>
+<div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://theli.nk&quot;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span><span class="nt">&gt;</span>the text you see<span class="nt">&lt;/a&gt;</span>
 </pre></div>
 
 
