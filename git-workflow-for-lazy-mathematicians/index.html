@@ -18,7 +18,7 @@
 
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Git workflow for lazy mathematicians" />
-    <meta property="og:description" content="First of all, what is git? Citing its website Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. [It] is easy to learn and has a tiny footprint with lightning fast performance. In other ..." />
+    <meta property="og:description" content="First of all, what is git? Citing its website Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. [It] is easy to learn and has a tiny footprint with lightning fast performance. In other …" />
 
         <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
 
@@ -109,12 +109,12 @@
 </ul>
 <h2>First of all install Git</h2>
 <p>But the zeroeth step is always to check if git is already installed on your computer (Mac OSX and many Linux distros have it pre-installed). Open a terminal and type</p>
-<div class="highlight"><pre>git version
+<div class="highlight"><pre><span></span>git version
 </pre></div>
 
 
 <p>If your output looks like</p>
-<div class="highlight"><pre>git version 1.8.3.4
+<div class="highlight"><pre><span></span>git version <span class="m">1</span>.8.3.4
 </pre></div>
 
 
@@ -122,12 +122,12 @@
 <p>How to install it is really a matter of what OS you are using. You could just go to the home page of <a href="http://git-scm.com">Git</a> and download an installer, use your favourite package manager or compile the sources.</p>
 <p>Alternatively you could use the github software for <a href="http://mac.github.com">mac</a> and <a href="http://windows.github.com">windows</a>. For windows I strongly suggest to use <a href="http://msysgit.github.io">msysGit</a>.</p>
 <p>On any Debian based linux (including Ubuntu) you can use the command line </p>
-<div class="highlight"><pre>sudo apt-get install git-core
+<div class="highlight"><pre><span></span>sudo apt-get install git-core
 </pre></div>
 
 
 <p>Similarly, on red hat based (like Fedora), you can use</p>
-<div class="highlight"><pre>yum install git-core
+<div class="highlight"><pre><span></span>yum install git-core
 </pre></div>
 
 
@@ -137,13 +137,13 @@
 <h3>Introduce yourself to git</h3>
 <p>Now that Git is installed you shall check if it is properly configured, i.e. does it know who you are?
 Open a terminal (keep it open... we will use it a lot) and type</p>
-<div class="highlight"><pre>git config -l --global
+<div class="highlight"><pre><span></span>git config -l --global
 </pre></div>
 
 
 <p>You should see <code>user.name=Your Name</code> and <code>user.email=your_email_address</code>. The email address will identify you to any services that use your Git repo, therefore it is important that these values are correct and are the one used to register your BitBucket/GitHub/OtherServiceUsingGit account.</p>
 <p>If the previous output was wrong, you can fix it easily with</p>
-<div class="highlight"><pre>git config --global user.name <span class="s1">&#39;Your Name&#39;</span>
+<div class="highlight"><pre><span></span>git config --global user.name <span class="s1">&#39;Your Name&#39;</span>
 git config --global user.email youremail@somedomain.com
 </pre></div>
 
@@ -151,7 +151,7 @@ git config --global user.email youremail@somedomain.com
 <h2>Git Init</h2>
 <p>If you want to start using Git with your project you have to initialise it. <strong>Be sure to be in your project's root directory.</strong></p>
 <p>Initialise Git and make your first commit:</p>
-<div class="highlight"><pre>git init
+<div class="highlight"><pre><span></span>git init
 git add .
 git commit -m <span class="s1">&#39;first commit&#39;</span>
 </pre></div>
@@ -162,7 +162,7 @@ git commit -m <span class="s1">&#39;first commit&#39;</span>
 <p>You should include a short descriptive comment with every commit.</p>
 </blockquote>
 <p>At any time with you can check your repository status with</p>
-<div class="highlight"><pre>git status
+<div class="highlight"><pre><span></span>git status
 </pre></div>
 
 
@@ -177,7 +177,7 @@ git commit -m <span class="s1">&#39;first commit&#39;</span>
 <ul>
 <li>
 <p>for Bitbucket</p>
-<div class="highlight"><pre>git remote add origin https://user@bitbucket.org/path_to/repo.git
+<div class="highlight"><pre><span></span>git remote add origin https://user@bitbucket.org/path_to/repo.git
 git push origin master
 </pre></div>
 
@@ -185,7 +185,7 @@ git push origin master
 </li>
 <li>
 <p>for GitHub</p>
-<div class="highlight"><pre>git remote add origin https://user@github.com/path_to/repo.git
+<div class="highlight"><pre><span></span>git remote add origin https://user@github.com/path_to/repo.git
 git push origin master
 </pre></div>
 
@@ -194,13 +194,13 @@ git push origin master
 </ul>
 <h3>Save changes</h3>
 <p>At each stage of completion you should <a href="http://gitref.org/basic/#commit">commit your code</a> into your local repository with:</p>
-<div class="highlight"><pre>git commit -am <span class="s2">&quot;some readable comment&quot;</span>
+<div class="highlight"><pre><span></span>git commit -am <span class="s2">&quot;some readable comment&quot;</span>
 </pre></div>
 
 
 <p>Here we use the <code>-am</code> argument: <code>-m</code> adds a commit message, while <code>-a</code> automatically makes a snapshot of all the changes done to <em>tracked files</em>, adds new files and removes any files you may have marked for deletion (otherwise you have to use <code>git rm</code>, adding an additional step).</p>
 <p>Finally you can push your changes to the remote repository:</p>
-<div class="highlight"><pre>git push origin master
+<div class="highlight"><pre><span></span>git push origin master
 </pre></div>
 
 
@@ -209,12 +209,12 @@ git push origin master
 <p>I would suggest you to use imperative tense ("update" not "updated") and keep the first line very short. I think <a href="http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">A note about git commit messages</a> is a good reding in regard.</p>
 <h3>View the history of changes</h3>
 <p>To view your history is enough to type</p>
-<div class="highlight"><pre>git log
+<div class="highlight"><pre><span></span>git log
 </pre></div>
 
 
 <p>The output will be something like</p>
-<div class="highlight"><pre>commit 7dbba9ab8bb2031ed52abf6a2dc11cc335ece5a1
+<div class="highlight"><pre><span></span>commit 7dbba9ab8bb2031ed52abf6a2dc11cc335ece5a1
 Author: Marcello Seri 
 Date:   Fri Oct 4 13:11:51 2013 +0100
 
@@ -251,13 +251,13 @@ Date:   Fri May 17 14:40:04 2013 +0100
 <h3>Ignore Files</h3>
 <p>When you compile LaTeX documents, and in general when you compile any code, you will produce many different useless files that you don't want to be saved at each commit. To take care of them you have to create a <code>.gitignore</code> file in your project root directory.</p>
 <p>If you like terminal you could do as follows.</p>
-<div class="highlight"><pre>touch .gitignore
+<div class="highlight"><pre><span></span>touch .gitignore
 <span class="nb">echo</span> <span class="s1">&#39;.DS_Store&#39;</span> &gt;&gt; .gitignore
 </pre></div>
 
 
 <p>Or open <code>.gitignore</code> with your favourite editor and add all the files and folder Git has to ignore. For LaTeX you <code>.gitignore</code> could look like</p>
-<div class="highlight"><pre># For Mac users
+<div class="highlight"><pre><span></span># For Mac users
 .DS_Store
 
 # For TexPad users
@@ -281,12 +281,12 @@ Date:   Fri May 17 14:40:04 2013 +0100
 <p>This section is borrowed from <a href="https://www.sharelatex.com/blog/2012/10/16/collaborating-with-latex-and-git.html#.UmU-DZGOays">Collaborating with LaTeX and Git</a>.</p>
 <p>Of course, you don't want to just be able to see changes, you want to be able to go back and use the history to undo changes. Perhaps you want to restore the document to a previous version because you don't like the changes you've made or you realise you made a mistake. Git doesn't just rewind the the history of your document because then you would lose the changes made between then and now. Instead, git lets you restore the files you are working with to an earlier version by creating a new version which comes after all of the intervening history. If you decide you didn't actually want to do this after all then nothing has been lost.</p>
 <p>To restore your files to an earlier version, simply run:</p>
-<div class="highlight"><pre>git checkout f69606d7e24ad45b31bb6eb4b38192bd07f274fc *
+<div class="highlight"><pre><span></span>git checkout f69606d7e24ad45b31bb6eb4b38192bd07f274fc *
 </pre></div>
 
 
 <p>This tells git to <code>checkout</code> the files from the older version specified by the third argument (remember we refer to versions by their long identifier of numbers and letters). The files in your project now have their contents restored to the older version, but you still need to create a new version to mark this change in Git:</p>
-<div class="highlight"><pre>git commit -a -m <span class="s2">&quot;Restore files to previous version&quot;</span>
+<div class="highlight"><pre><span></span>git commit -a -m <span class="s2">&quot;Restore files to previous version&quot;</span>
 </pre></div>
 
 
@@ -296,7 +296,7 @@ Date:   Fri May 17 14:40:04 2013 +0100
 2) Updating your acknowledgements, 
 3) Adding in a figure. 
 At each step you've created a new version in git, but now you decide that you didn't really want to update you acknowledgements. Unfortunately this is sandwiched between other changes so a simple rollback like before won't do. Fear not, because git is clever enough to do what you want, with the revert command:</p>
-<div class="highlight"><pre>git revert f69606d7e24ad45b31bb6eb4b38192bd07f274fc
+<div class="highlight"><pre><span></span>git revert f69606d7e24ad45b31bb6eb4b38192bd07f274fc
 </pre></div>
 
 
@@ -305,7 +305,7 @@ At each step you've created a new version in git, but now you decide that you di
 <h3>Pushes and Pulls</h3>
 <p>Suppose that some collaborator made an important change and pushed it on the remote repository. Now that you need it, how can you retrieve it?</p>
 <p>Supposing that there is no conflict, you just have to commit your code and instead of pushin it, pull it from the remote:</p>
-<div class="highlight"><pre>git pull origin master
+<div class="highlight"><pre><span></span>git pull origin master
 </pre></div>
 
 
@@ -313,25 +313,25 @@ At each step you've created a new version in git, but now you decide that you di
 <p>This is the workflow I use when I work in teams. I learned it from <a href="http://railsapps.github.io/rails-git.html">Rails with Git and GitHub</a>. I like how it is explained in that page, this section is borrowed from their article.</p>
 <p>When you are using Git for version control, you can commit every time you save a file, even for the tiniest typo fixes. If only you will ever see your Git commits, no one will care. But if you are working on a team, either commercially or as part of an open source project, you will drive your fellow programmers crazy if they try to follow your work and see such "granular” commits. Instead, get in the habit of creating a Git branch each time you begin work to implement a feature. When your new feature is complete, merge the branch and "squash” the commits so your comrades see just one commit for the entire feature.</p>
 <p>Here's how you could create a new Git branch for a section named "Second Proof":</p>
-<div class="highlight"><pre>git checkout -b second_proof
+<div class="highlight"><pre><span></span>git checkout -b second_proof
 </pre></div>
 
 
 <p>The command creates a new branch named "second_proof" and switches to it, analogous to copying all your files to a new directory and moving to work in the new directory (though that is not really what happens with Git).</p>
 <p>When the new feature is complete, merge the working branch to "master" and squash the commits so you have just one commit for the entire feature:</p>
-<div class="highlight"><pre>git checkout master
+<div class="highlight"><pre><span></span>git checkout master
 git merge --squash second_proof
 git commit -am <span class="s2">&quot;secion named &#39;Second Proof&#39; complete&quot;</span>
 </pre></div>
 
 
 <p>If everithing goes smoothly you can push your changes</p>
-<div class="highlight"><pre>git push origin master
+<div class="highlight"><pre><span></span>git push origin master
 </pre></div>
 
 
 <p>Finally you can delete the working branch when you're done:</p>
-<div class="highlight"><pre>git branch -D second_proof
+<div class="highlight"><pre><span></span>git branch -D second_proof
 </pre></div>
 
 

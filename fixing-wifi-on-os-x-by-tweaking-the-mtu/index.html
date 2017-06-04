@@ -18,7 +18,7 @@
 
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Fix WiFi on OS X by tweaking the MTU" />
-    <meta property="og:description" content="After I had installed the first developer beta of Yosemite I started experiencing serious WiFi issues at home, with the connection dropping after few seconds of activity. Only apparent solution was to disable and reenable periodically the wifi until it started working. The issue was not present whene I was ..." />
+    <meta property="og:description" content="After I had installed the first developer beta of Yosemite I started experiencing serious WiFi issues at home, with the connection dropping after few seconds of activity. Only apparent solution was to disable and reenable periodically the wifi until it started working. The issue was not present whene I was …" />
 
         <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
 
@@ -90,26 +90,26 @@
 <p>Few days ago I was looking for an old script in one of my backups when I've found an old note called <code>Find MTU to fix Lion WiFi</code>. I had completely forgotten about it, as I had forgotten about the problems with Lion's wifi...</p>
 <p>It turned out that the problem was, in fact, related to the <a href="https://en.wikipedia.org/wiki/Maximum_transmission_unit">MTU</a>(Basically the size of the transmitted packets). It was set to be automatic, and it automatically selected the value 1500 (that seemed to be quite standard, or at least correcto for almost all the networks I've used). Checking it brutally I found out that my home router has a quite lower MTU, and changing it did solve all my problems.</p>
 <p>Finding the correct MTU is quite easy. One needs just to open a terminal and <code>ping</code> and external website with appropriately constructed packets. Namely</p>
-<div class="highlight"><pre>ping -D -s <span class="m">1500</span> example.com
+<div class="highlight"><pre><span></span>ping -D -s <span class="m">1500</span> example.com
 </pre></div>
 
 
 <p>Here <code>-D</code> tells ping that the package cannot be fragmented, in other words if it is too large it will not be sent at all, and <code>-s 1500</code> tells it what must be the size of the packet in bytes. Be careful, 1500 is not really the full size of the packet, <strong>there is an overhead of 28 bytes that you need to add to that number</strong>. E.g <code>-s 1500</code> means that the packet size is 1528 bytes. If the largest packet that you can successfully send has size  1472, then your MTU value is 1500.</p>
 <p>You can add the option <code>-c n</code> to tell ping to send only n packages (2 or 3 will be enough), otherwise you can kill the process after a couple of packages is sent.</p>
 <p>Running</p>
-<div class="highlight"><pre>ping -D -s <span class="m">1500</span> example.com
+<div class="highlight"><pre><span></span>ping -D -s <span class="m">1500</span> example.com
 </pre></div>
 
 
 <p>on my network I get the following output</p>
-<div class="highlight"><pre>PING example.com (93.184.216.119): 1500 data bytes
+<div class="highlight"><pre><span></span>PING example.com (93.184.216.119): 1500 data bytes
   ping: sendto: Message too long
   [...]
 </pre></div>
 
 
 <p>If you read a similar message (and you should if you use 1500) you need to start reducing the value after the <code>-s</code> until you find the first value for which ping starts working, i.e. you start receiving output of the form</p>
-<div class="highlight"><pre>1412 bytes from 93.184.216.119: icmp_seq=0 ttl=53 time=136.639 ms
+<div class="highlight"><pre><span></span>1412 bytes from 93.184.216.119: icmp_seq=0 ttl=53 time=136.639 ms
 [...]
 </pre></div>
 

@@ -18,7 +18,7 @@
 
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Left pipe in Haskell" />
-    <meta property="og:description" content="If you read this blog, you know that I am very biased by having worked with unix shells for almost two decades and that I am addicted to the use of pipes (see e.g. Piping with Swift). I really find much more natural to see data moving from left ..." />
+    <meta property="og:description" content="If you read this blog, you know that I am very biased by having worked with unix shells for almost two decades and that I am addicted to the use of pipes (see e.g. Piping with Swift). I really find much more natural to see data moving from left …" />
 
         <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
 
@@ -88,17 +88,17 @@
             <p>If you read this blog, you know that I am very biased by having worked with unix shells for almost two decades and that I am addicted to the use of pipes (see e.g. <a href="http://www.mseri.me/piping-with-swift/">Piping with Swift</a>). I really find much more natural to see data moving from left to right.</p>
 <p>Yesterday I was thinking that in Haskell everything is an expression and that you can easily define infix operators. Thus it must be possible to implement a shell-like pipe.</p>
 <p>First of all, composition <code>(.)</code> is too strong, the pipe I have in mind is like <code>($)</code> but reversed. In fact, my second attempt (I feel embarassed by the first, I am not going to post it ;-P) was</p>
-<div class="highlight"><pre><span class="p">(</span><span class="o">$&gt;</span><span class="p">)</span> <span class="ow">=</span> <span class="n">flip</span> <span class="p">(</span><span class="o">$</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="o">$&gt;</span><span class="p">)</span> <span class="ow">=</span> <span class="n">flip</span> <span class="p">(</span><span class="o">$</span><span class="p">)</span>
 </pre></div>
 
 
 <p>One can immediately check that it is typed correctly as </p>
-<div class="highlight"><pre><span class="p">(</span><span class="o">$&gt;</span><span class="p">)</span> <span class="ow">::</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">b</span>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="o">$&gt;</span><span class="p">)</span> <span class="ow">::</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">b</span>
 </pre></div>
 
 
 <p>Now I can do e.g.</p>
-<div class="highlight"><pre><span class="kr">import</span> <span class="nn">Data.List</span>
+<div class="highlight"><pre><span></span><span class="kr">import</span> <span class="nn">Data.List</span>
 
 <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span> <span class="o">$&gt;</span> <span class="n">sort</span> <span class="o">$&gt;</span> <span class="n">filter</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">$&gt;</span> <span class="n">map</span> <span class="n">even</span> <span class="o">$&gt;</span> <span class="n">and</span>
 </pre></div>
@@ -106,7 +106,7 @@
 
 <p>and get the result without complaints.</p>
 <p>This is just a stupid example but I find it more expressive (again probably because I use too much the shell) than</p>
-<div class="highlight"><pre><span class="nf">and</span> <span class="o">.</span> <span class="n">map</span> <span class="n">even</span> <span class="o">.</span> <span class="n">filter</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">.</span> <span class="n">sort</span> <span class="o">$</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="nf">and</span> <span class="o">.</span> <span class="n">map</span> <span class="n">even</span> <span class="o">.</span> <span class="n">filter</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">.</span> <span class="n">sort</span> <span class="o">$</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
 </pre></div>
 
 

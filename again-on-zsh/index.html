@@ -18,7 +18,7 @@
 
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Again on zsh" />
-    <meta property="og:description" content="I already wrote about the great pleasure of moving to zsh in a previous post, but I feel that I should update you on the progresses. From the last time I moved from Oh-My-Zsh to Prezto, a different dotfiles framework. I've found it much lighter and faster than oh-my-zsh ..." />
+    <meta property="og:description" content="I already wrote about the great pleasure of moving to zsh in a previous post, but I feel that I should update you on the progresses. From the last time I moved from Oh-My-Zsh to Prezto, a different dotfiles framework. I've found it much lighter and faster than oh-my-zsh, despite …" />
 
         <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
 
@@ -91,8 +91,8 @@
 <p>I must say that it cover all the plugins that I need and it feels sensibly faster and nicer on OSX and on the Raspberry Pi.</p>
 <p>The setup requires three steps instead of just one but it's worth doing it.</p>
 <p>If you already use zsh I suggest you to make a backup copy of your configuration. It's enough to do the following from a terminal:</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> ~
-<span class="nv">$ </span>tar czf zshBackup.tar.gz .z* .oh-my-zsh
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~
+$ tar czf zshBackup.tar.gz .z* .oh-my-zsh
 </pre></div>
 
 
@@ -102,28 +102,28 @@
 <ol>
 <li>
 <p>Clean your previous Zsh configuration (<strong>create a Backup copy of the files before proceeding!!!</strong>)</p>
-<div class="highlight"><pre>rm -r .z* .oh-my-zsh
+<div class="highlight"><pre><span></span>rm -r .z* .oh-my-zsh
 </pre></div>
 
 
 </li>
 <li>
 <p>Launch Zsh:</p>
-<div class="highlight"><pre>zsh
+<div class="highlight"><pre><span></span>zsh
 </pre></div>
 
 
 </li>
 <li>
 <p>Clone the repository:</p>
-<div class="highlight"><pre>git clone --recursive https://github.com/sorin-ionescu/prezto.git <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ZDOTDIR</span><span class="k">:-</span><span class="nv">$HOME</span><span class="si">}</span><span class="s2">/.zprezto&quot;</span>
+<div class="highlight"><pre><span></span>git clone --recursive https://github.com/sorin-ionescu/prezto.git <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ZDOTDIR</span><span class="k">:-</span><span class="nv">$HOME</span><span class="si">}</span><span class="s2">/.zprezto&quot;</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>Create a new Zsh configuration by copying the Zsh configuration files provided:</p>
-<div class="highlight"><pre>setopt EXTENDED_GLOB
+<div class="highlight"><pre><span></span>setopt EXTENDED_GLOB
 <span class="k">for</span> rcfile in <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ZDOTDIR</span><span class="k">:-</span><span class="nv">$HOME</span><span class="si">}</span><span class="s2">&quot;</span>/.zprezto/runcoms/^README.md<span class="o">(</span>.N<span class="o">)</span>
 <span class="k">do</span>
     ln -s <span class="s2">&quot;</span><span class="nv">$rcfile</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ZDOTDIR</span><span class="k">:-</span><span class="nv">$HOME</span><span class="si">}</span><span class="s2">/.</span><span class="si">${</span><span class="nv">rcfile</span><span class="p">:</span><span class="nv">t</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -134,7 +134,7 @@
 </li>
 <li>
 <p>Set Zsh as your default shell (if it is not):</p>
-<div class="highlight"><pre>chsh -s /bin/zsh
+<div class="highlight"><pre><span></span>chsh -s /bin/zsh
 </pre></div>
 
 
@@ -146,7 +146,7 @@
 <p>At this point you can happily see your new zsh theme.
 Prezto comes with many available plugins, I suggest you to look at the <a href="https://github.com/sorin-ionescu/prezto/tree/master/modules#modules">Modules page on Prezto's GitHub</a> or at the <code>README</code> file in <code>.zprezto/modules</code>.</p>
 <p>To enable the modules is enough to open <code>.zpreztorc</code> with your favourite editor and look for a block that looks like:</p>
-<div class="highlight"><pre># Set the Prezto modules to load (browse modules).
+<div class="highlight"><pre><span></span># Set the Prezto modules to load (browse modules).
 # The order matters.
 zstyle &#39;:prezto:load&#39; pmodule \
   &#39;environment&#39; \
@@ -172,7 +172,7 @@ zstyle &#39;:prezto:load&#39; pmodule \
 <ol>
 <li>
 <p>First of all you need to create a new folder</p>
-<div class="highlight"><pre><span class="nv">$ </span>mkdir ~/.zsh.prompts
+<div class="highlight"><pre><span></span>$ mkdir ~/.zsh.prompts
 </pre></div>
 
 
@@ -180,10 +180,10 @@ zstyle &#39;:prezto:load&#39; pmodule \
 </li>
 <li>
 <p>Modify the <code>Prompt</code> section of <code>.zpreztorc</code> to look like </p>
-<div class="highlight"><pre><span class="c"># Set the prompt theme to load.</span>
-<span class="c"># Setting it to &#39;random&#39; loads a random theme.</span>
-<span class="c"># Auto set to &#39;off&#39; on dumb terminals.</span>
-<span class="c"># zstyle &#39;:prezto:module:prompt&#39; theme &#39;sorin&#39;</span>
+<div class="highlight"><pre><span></span><span class="c1"># Set the prompt theme to load.</span>
+<span class="c1"># Setting it to &#39;random&#39; loads a random theme.</span>
+<span class="c1"># Auto set to &#39;off&#39; on dumb terminals.</span>
+<span class="c1"># zstyle &#39;:prezto:module:prompt&#39; theme &#39;sorin&#39;</span>
 autoload promptinit
 <span class="nv">fpath</span><span class="o">=(</span><span class="nv">$HOME</span>/.zsh.prompts <span class="nv">$fpath</span><span class="o">)</span>
 promptinit
@@ -200,15 +200,15 @@ zstyle <span class="s1">&#39;:prezto:module:prompt&#39;</span> theme <span class
 </ol>
 <p>I have no real advice on the creation of a theme. I posted <a href="https://gist.github.com/mseri/8026965">my theme on gist</a> if you want to try it or you want to use it as a starting point. It is a slightly modified version of YADR's steeef simplified theme.</p>
 <p>You may find the function provided in <a href="https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/spectrum.zsh">oh-my-zsh's spectrum file</a> helpful. For example it is enough to type the following in your Zsh terminal to see all the colours available</p>
-<div class="highlight"><pre><span class="k">for</span> code in <span class="o">{</span>000..255<span class="o">}</span><span class="p">;</span> <span class="k">do</span>
+<div class="highlight"><pre><span></span><span class="k">for</span> code in <span class="o">{</span><span class="m">000</span>..255<span class="o">}</span><span class="p">;</span> <span class="k">do</span>
     print -P -- <span class="s2">&quot;</span><span class="nv">$code</span><span class="s2">: %F{</span><span class="nv">$code</span><span class="s2">}Test%f&quot;</span>
 <span class="k">done</span>
 </pre></div>
 
 
 <p>Or, for something similar, have fun and try</p>
-<div class="highlight"><pre><span class="k">for</span> code in <span class="o">{</span>000..255<span class="o">}</span><span class="p">;</span> <span class="k">do</span>
-    <span class="o">((</span><span class="nv">cc</span> <span class="o">=</span> code + 1<span class="o">))</span>
+<div class="highlight"><pre><span></span><span class="k">for</span> code in <span class="o">{</span><span class="m">000</span>..255<span class="o">}</span><span class="p">;</span> <span class="k">do</span>
+    <span class="o">((</span><span class="nv">cc</span> <span class="o">=</span> code + <span class="m">1</span><span class="o">))</span>
     print -P -- <span class="s2">&quot;</span><span class="nv">$BG</span><span class="s2">[</span><span class="nv">$code</span><span class="s2">]</span><span class="nv">$code</span><span class="s2">: Test %{</span><span class="nv">$reset_color</span><span class="s2">%}&quot;</span>
 <span class="k">done</span>
 </pre></div>

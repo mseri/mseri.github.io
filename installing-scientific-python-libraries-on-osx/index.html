@@ -18,7 +18,7 @@
 
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Installing scientific python libraries on OSX" />
-    <meta property="og:description" content="For a recent project, I had the necessity to install (or update) some of the scientific python libraries that I use for computation (and to avoit matlab). I was aware of a not too recent tutorial in regard that left me quit unhappy at the time, in particular I strongly ..." />
+    <meta property="og:description" content="For a recent project, I had the necessity to install (or update) some of the scientific python libraries that I use for computation (and to avoit matlab). I was aware of a not too recent tutorial in regard that left me quit unhappy at the time, in particular I strongly …" />
 
         <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
 
@@ -92,77 +92,77 @@
 <h2>Convert yourself to Homebrew</h2>
 <p>Then let's install a serious package manager, and with this I really mean: install <a href="http://brew.sh">Homebrew</a>!</p>
 <p>If you don't have it yet, open a Terminal and install it copying and pasting the following code:</p>
-<div class="highlight"><pre>ruby -e <span class="s2">&quot;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">&quot;</span>
+<div class="highlight"><pre><span></span>ruby -e <span class="s2">&quot;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">&quot;</span>
 </pre></div>
 
 
 <p>You shouldn't need  <code>sudo</code> for the installation, everything will be nicely located in <code>/usr/local</code>. When the execution ends add this to your <code>.profile</code> (or <code>/bash_profile</code> or <code>.zsh_profile</code> or the equivalent for your shell):</p>
-<div class="highlight"><pre><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/bin:<span class="nv">$PATH</span>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/usr/local/bin:<span class="nv">$PATH</span>
 </pre></div>
 
 
 <h2>Install gfortran</h2>
 <p>We will not use it directly but it will be required to install scipy and it is going to take some time, so let's deal with it now. <strong>Close and reopen the terminal to reload the new environment's variables</strong> and run:</p>
-<div class="highlight"><pre>brew install gfortran
+<div class="highlight"><pre><span></span>brew install gfortran
 </pre></div>
 
 
 <p>Easy, no?? Now just wait for the magic to happen.</p>
 <h2>Install an updated version of Python</h2>
 <p>I know that OSX is shipped with its own python install, but that's the outdated system one. Leave it to the system and do not mess with it! We are going to install a more recent version of python in parallel. With Homebrew is  very simple, just execute the following command.</p>
-<div class="highlight"><pre>brew install python
+<div class="highlight"><pre><span></span>brew install python
 </pre></div>
 
 
 <p>If you did everything correctly, running <code>which python</code> you should read <code>/usr/local/bin/python</code>. And now that we have python, let's install a nice package manager for it. Install pip with <code>easy_install pip</code>.</p>
 <h2>Install numpy and scipy</h2>
 <p>That's now very easy with pip:</p>
-<div class="highlight"><pre>pip install numpy
+<div class="highlight"><pre><span></span>pip install numpy
 pip install scipy
 </pre></div>
 
 
 <p>(I run them separately to have a more direct control of the possible errors)</p>
 <p>There are some possible problems here. On my laptop and my office computer I had <code>gfortran</code> complaining with the following error</p>
-<div class="highlight"><pre>gfortran: error: libgfortran.spec: No such file or directory
+<div class="highlight"><pre><span></span>gfortran: error: libgfortran.spec: No such file or directory
 </pre></div>
 
 
 <p>I could fix the problem with</p>
-<div class="highlight"><pre>brew link --overwrite gfortran
+<div class="highlight"><pre><span></span>brew link --overwrite gfortran
 </pre></div>
 
 
 <p>Moreover, in an old installation, I had randomlike errors appearing here and then. I don't really know the cause, but I temporarily solved installing the development version of scipy</p>
-<div class="highlight"><pre>pip install -e git+https://github.com/scipy/scipy#egg<span class="o">=</span>scipy-dev
+<div class="highlight"><pre><span></span>pip install -e git+https://github.com/scipy/scipy#egg<span class="o">=</span>scipy-dev
 </pre></div>
 
 
 <p>Give it a try if you keep having troubles.</p>
 <h2>Install matplotlib</h2>
 <p>For this you will first need to install pkg-config. But it's as easy as</p>
-<div class="highlight"><pre>brew install pkg-config
+<div class="highlight"><pre><span></span>brew install pkg-config
 </pre></div>
 
 
 <p>After it finishes its job, simply run</p>
-<div class="highlight"><pre>pip install matplotlib
+<div class="highlight"><pre><span></span>pip install matplotlib
 </pre></div>
 
 
 <p>Note that if you keep having an error related to <code>png.h</code> you may want to <code>brew install lipng</code> or, as I've read on stackoverflow I think, <code>brew install freetype</code>. Additionally, if you get an error related to freetype headers, you have to do the following:</p>
-<div class="highlight"><pre>sudo ln -s  /usr/local/include/freetype2/ /usr/include/freetype
+<div class="highlight"><pre><span></span>sudo ln -s  /usr/local/include/freetype2/ /usr/include/freetype
 </pre></div>
 
 
 <p>If you are still not able to install it, try the development version like I suggested for scipy:</p>
-<div class="highlight"><pre>pip install git+git://github.com/matplotlib/matplotlib.git
+<div class="highlight"><pre><span></span>pip install git+git://github.com/matplotlib/matplotlib.git
 </pre></div>
 
 
 <h2>Almost done</h2>
 <p>Hopefully everything is installed properly now. Run python and try the following imports</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">import</span> <span class="nn">scipy</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span>
 </pre></div>
@@ -171,33 +171,33 @@ pip install scipy
 <p>They should proceed with no errors.</p>
 <h2>Last but not least</h2>
 <p>To have a nicer interface to test our code I strongly encourage you to install ipython. Simply run </p>
-<div class="highlight"><pre>pip install ipython
+<div class="highlight"><pre><span></span>pip install ipython
 </pre></div>
 
 
 <p>and the next time you will need the python intepreter use</p>
-<div class="highlight"><pre>ipython
+<div class="highlight"><pre><span></span>ipython
 </pre></div>
 
 
 <p>Have fun!!!</p>
-<hr />
+<hr>
 <h2>A final remark for Max</h2>
 <p>We are probably going to use <a href="http://qutip.org">QuTiP</a> too. Its setup is quite straightforward, simply run</p>
-<div class="highlight"><pre>pip install cython
+<div class="highlight"><pre><span></span>pip install cython
 pip install qutip
 </pre></div>
 
 
 <p>and it's installed. You can test the installation pasting the following code in ipython (courtesy of <a href="http://nbviewer.ipython.org/github/jrjohansson/qutip-lectures/blob/master/Lecture-0-Introduction-to-QuTiP.ipynb">Introduction to QuTiP</a>)</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">q</span> <span class="o">=</span> <span class="n">Qobj</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">]])</span>
 <span class="n">q</span>
 </pre></div>
 
 
 <p>If you get as output </p>
-<div class="highlight"><pre>Quantum object: dims = [[2], [1]], shape = [2, 1], type = ket
+<div class="highlight"><pre><span></span>Quantum object: dims = [[2], [1]], shape = [2, 1], type = ket
 Qobj data =
 [[ 1.]
  [ 0.]]
@@ -206,7 +206,7 @@ Qobj data =
 
 <p>then the installation was fine.</p>
 <p>Have a look at the official <a href="http://qutip.org/tutorials.html">Tutorials page</a> it is quite fun!</p>
-<hr />
+<hr>
 <p>Edit: updated Homebrew install link</p>
         </div>
         

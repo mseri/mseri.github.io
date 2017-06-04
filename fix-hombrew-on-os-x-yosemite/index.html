@@ -18,7 +18,7 @@
 
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Fix Hombrew on OS X Yosemite" />
-    <meta property="og:description" content="If for some reasons you've been crazy enough to install the first developer beta of Mac OSX 10.01 Yosemite, you've probably noticed that Homebrew stopped working. One possible fix is to delete homebrew and reinstall everything following this gist. But I am too lazy and too attached ..." />
+    <meta property="og:description" content="If for some reasons you've been crazy enough to install the first developer beta of Mac OSX 10.01 Yosemite, you've probably noticed that Homebrew stopped working. One possible fix is to delete homebrew and reinstall everything following this gist. But I am too lazy and too attached to my …" />
 
         <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
 
@@ -88,10 +88,10 @@
             <p>If for some reasons you've been crazy enough to install the first developer beta of Mac OSX 10.01 Yosemite, you've probably noticed that <a href="http://brew.sh/">Homebrew</a> stopped working.</p>
 <p>One possible fix is to delete homebrew and reinstall everything following this <a href="https://gist.github.com/jpincheira/bd3698fee46735fac252">gist</a>. But I am too lazy and too attached to my list of installed packages to accept it.</p>
 <p>The first error I've got while running <code>brew update</code> was related to <em>missing system ruby 1.8</em>. This appears because OSX finally updated to <code>ruby 2.0</code> and this conflicts with the static link saved in one of Hombrew executables.</p>
-<hr />
+<hr>
 <p><strong>Update</strong>: as of this morning Homebrew has been fixed, you will not need to modify Hombrew's files if you update to Yosemite after having run <code>brew update</code>.</p>
 <p>If you did update the files as above and get a <em>failed merge</em> error, you will need to edit them again and fix the merge. On top of each file you will see something like</p>
-<div class="highlight"><pre>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:mergetest
+<div class="highlight"><pre><span></span>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:mergetest
 Your changes
 =======
 Something new
@@ -100,7 +100,7 @@ Something new
 
 
 <p>Delete everything except for the 'Something new' line. Then save and in the end run <code>cd $(brew --repository) &amp;&amp; git commit -a -m 'fix brew update'</code></p>
-<hr />
+<hr>
 <p>The fix is quite simple. I opened <code>vim /usr/local/Library/brew.rb</code> and replaced the <code>1.8</code> in the shebang at the beginning of the file with <code>2.0</code>.
 And the same must be required for <code>/usr/local/Library/ENV/4.3/xcrun</code>, <code>/usr/local/Library/ENV/4.3/clang</code> and <code>/usr/local/Library/ENV/4.3/cc</code>.</p>
 <p>But that's not enough. We still have to add and commit the changes: <code>cd $(brew --repository) &amp;&amp; git commit -a -m 'fix ruby 2'</code></p>

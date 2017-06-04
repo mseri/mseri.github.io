@@ -18,7 +18,7 @@
 
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Move to ghc 7.8.2 on MacOSX" />
-    <meta property="og:description" content="Lately I've been playing with some functional languages: haskell, lisp (in particular the scheme dialect, see e.g. chicken or racket) and elixir (I very much like it and I really appreciate that it runs on the erlang VM). Each of those has something pretty unique and I believe ..." />
+    <meta property="og:description" content="Lately I've been playing with some functional languages: haskell, lisp (in particular the scheme dialect, see e.g. chicken or racket) and elixir (I very much like it and I really appreciate that it runs on the erlang VM). Each of those has something pretty unique and I believe is …" />
 
         <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
 
@@ -92,7 +92,7 @@
 <p>Recently, <code>ghc</code> reached version <code>7.8</code>, and that shipped a huge amount of improvements. With my huge disappointemnt, all the packages installed via Homebrew were supporting only ghc 7.6 and I had hard times with dependencies, multiple packages and so on...</p>
 <p>The solution was pretty simple and straightforward in the end, and I believe this could be handy for other people too strognly enough to write this post.</p>
 <p>First of all I uninstalled ghc 7.6, cabal-install or haskell platform (if you have it). Then I reinstalled the 7.8 branch of ghc, thanks to Homebrew that was pretty straightforward:</p>
-<div class="highlight"><pre>brew install ghc --devel
+<div class="highlight"><pre><span></span>brew install ghc --devel
 </pre></div>
 
 
@@ -100,17 +100,17 @@
 <p>Then I needed <code>cabal-install</code>. This requires slightly more work, especially it didn't quite work for me when I followed <a href="http://www.haskell.org/haskellwiki/Cabal-Install">the instructions</a>.</p>
 <p>First download the sources for <code>cabal-install</code> from <a href="http://www.haskell.org/cabal/download.html">here</a>. Just the <code>cabal-install tool</code> sources, it is going to update the <code>Cabal</code> library during its setup.</p>
 <p>Untar the file, e.g.</p>
-<div class="highlight"><pre>tar zxvf cabal-install-1.20.0.2.tar.gz
+<div class="highlight"><pre><span></span>tar zxvf cabal-install-1.20.0.2.tar.gz
 </pre></div>
 
 
 <p>and enter the newly created folder, e.g</p>
-<div class="highlight"><pre><span class="nb">cd </span>cabal-install-1.20.0.2
+<div class="highlight"><pre><span></span><span class="nb">cd</span> cabal-install-1.20.0.2
 </pre></div>
 
 
 <p>Now it all reduces to run</p>
-<div class="highlight"><pre>./bootstrap.sh --no-doc
+<div class="highlight"><pre><span></span>./bootstrap.sh --no-doc
 </pre></div>
 
 
@@ -118,7 +118,7 @@
 <p>The <code>--no-docs</code> flag seemed necessary to avoid a number of errors appearing in the compilation process and forcing me to install a number of packages by hand. Sadly I could not figure out the problem in the script yet, but that flag seems a reasonable workaround and I will install the docs later anyhow.</p>
 <p>You may still get some error related to broken package, in such cas just <code>ghc-pkg unregister &lt;brokenpackagename&gt;</code> and rerun the script (in my case they were <code>text</code> and <code>mtl</code>).</p>
 <p>When cabal is installed it is a good idea to run</p>
-<div class="highlight"><pre>cabal update
+<div class="highlight"><pre><span></span>cabal update
 </pre></div>
 
 
@@ -132,14 +132,14 @@
 <p>I've additionally got a strange error related to <code>happy</code> and <code>haskell-src-exts</code>, it can be solved just by <code>cabal install happy</code>. I am still wondering why it happened.</p>
 <p>When the setup is complete, you can run <code>hoogle data</code> to create a local database of entries, or <code>hoogle data all</code> if you want the complete hoogle dataset (this takes a loooong time).</p>
 <p>If you don't plan to use <code>goa</code> or <code>lambdabot</code> you can integrate <code>hoogle</code> in <code>ghci</code> by adding </p>
-<div class="highlight"><pre><span class="kt">:</span><span class="n">def</span> <span class="n">hoogle</span> <span class="nf">\</span><span class="n">str</span> <span class="ow">-&gt;</span> <span class="n">return</span> <span class="o">$</span> <span class="s">&quot;:! hoogle --count=15 </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">++</span> <span class="n">str</span> <span class="o">++</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">&quot;</span>
+<div class="highlight"><pre><span></span><span class="kt">:</span><span class="n">def</span> <span class="n">hoogle</span> <span class="nf">\</span><span class="n">str</span> <span class="ow">-&gt;</span> <span class="n">return</span> <span class="o">$</span> <span class="s">&quot;:! hoogle --count=15 </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">++</span> <span class="n">str</span> <span class="o">++</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">&quot;</span>
 </pre></div>
 
 
 <p>to your <code>.ghci</code> file.</p>
 <p>I believe that <code>ghci</code> is nothing without <a href="http://www.haskell.org/haskellwiki/Lambdabot">lambdabot</a>. Therefore <code>cabal install goa lambdabot</code> is the inevitable second step. Note that <code>goa</code> is not a mistake but a <a href="http://hackage.haskell.org/package/goa">useful addition</a>.</p>
 <p><code>lambdabot &lt;= 4.3.0.1</code> have some problems with <code>ghc-7.8.2</code> and you will get a compilation error. To fix it you first <code>cabal install goa</code> by itself, then <code>cabal get lambdabot; cd lambdabot-4.3.0.1</code> and then you need to replace the content of <code>src/Lambdabot/Monad.hs-boot</code> with</p>
-<div class="highlight"><pre><span class="cm">{-# LANGUAGE RankNTypes #-}</span>
+<div class="highlight"><pre><span></span><span class="cm">{-# LANGUAGE RankNTypes #-}</span>
 <span class="kr">module</span> <span class="nn">Lambdabot.Monad</span> <span class="kr">where</span>
 
 <span class="kr">import</span> <span class="nn">Control.Monad.Reader</span>
@@ -156,7 +156,7 @@
 <p>(the above code is due to <a href="https://github.com/mokus0/lambdabot/pull/79">artella-coding</a> and should be merged in the next release of lambdabot). 
 Then save and run <code>cabal configure &amp;&amp; cabal install</code>.</p>
 <p>Then in my <code>.ghci</code> I have</p>
-<div class="highlight"><pre><span class="kt">:</span><span class="n">m</span> <span class="o">-</span> <span class="kt">Prelude</span>
+<div class="highlight"><pre><span></span><span class="kt">:</span><span class="n">m</span> <span class="o">-</span> <span class="kt">Prelude</span>
 <span class="kt">:</span><span class="n">m</span> <span class="o">+</span> <span class="kt">GOA</span>
 <span class="nf">setLambdabotHome</span> <span class="s">&quot;/Users/marcelloseri/.cabal/bin&quot;</span>
 <span class="kt">:</span><span class="n">def</span> <span class="n">bs</span>        <span class="n">lambdabot</span> <span class="s">&quot;botsnack&quot;</span>

@@ -18,7 +18,7 @@
 
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Update script explained" />
-    <meta property="og:description" content="I am going to proceed step by step through the code of the script that I have posted few days ago. I purposedly updated the script to be a bit more general and flexible (but not too much). At the end of the file I explain how to run it ..." />
+    <meta property="og:description" content="I am going to proceed step by step through the code of the script that I have posted few days ago. I purposedly updated the script to be a bit more general and flexible (but not too much). At the end of the file I explain how to run it …" />
 
         <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
 
@@ -88,25 +88,25 @@
             <p>I am going to proceed step by step through the code of the script that I have <a href="http://www.mseri.me/a-simple-script-to-update-ghost/">posted few days ago</a>. </p>
 <p>I purposedly updated the script to be a bit more general and flexible (but not too much). At the end of the file I explain how to run it. You should <a href="http://docs.ghost.org/installation/upgrading/">make a backup</a> before doing the update (the simplest way is probably running <code>tar czf backup.tar.gz YOUR_GHOST_FOLDER</code>). Be careful that there is no warranty with this script and I will not take any responsibility for claims or damages consequent to the use of it.</p>
 <p>The following line is called <em>sha bang</em> and simply tells your system that the file contains a set of instructions that has to be executed by the <a href="http://en.wikipedia.org/wiki/Bash_(Unix_shell)"><em>bash</em></a> interpreter.</p>
-<div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 </pre></div>
 
 
 <p>You should have bash installed in <code>/bin/bash</code> to be sure that the script will be of any use.</p>
 <p>The next bit of code is just checking if you have defined the three most important variables: <code>GHOSTUPDATEFILE</code>, <code>GHOSTUPDATELOCATION</code>, <code>GHOSTINSTALLDIR</code>; and define them if they are not. They respectively represent the name of the last ghost update, at the present day it is just <code>ghost-0.3.3.zip</code>, the temporary folder that will be used to unzip the new ghost, by default <code>update-ghost-tmp</code> and the folder where ghost is installed (in this last version in absolute path), the default is the subfolder <code>ghost</code> of the folder containing the script.</p>
-<div class="highlight"><pre><span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$GHOSTUPDATEFILE</span> <span class="o">]]</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$GHOSTUPDATEFILE</span> <span class="o">]]</span><span class="p">;</span>
 <span class="k">then</span>
-  <span class="nb">export </span><span class="nv">GHOSTUPDATEFILE</span><span class="o">=</span><span class="s1">&#39;ghost-0.3.3.zip&#39;</span>
+  <span class="nb">export</span> <span class="nv">GHOSTUPDATEFILE</span><span class="o">=</span><span class="s1">&#39;ghost-0.3.3.zip&#39;</span>
 <span class="k">fi</span>
 
 <span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$GHOSTUPDATELOCATION</span> <span class="o">]]</span><span class="p">;</span>
 <span class="k">then</span>
-  <span class="nb">export </span><span class="nv">GHOSTUPDATELOCATION</span><span class="o">=</span><span class="s1">&#39;update-ghost-tmp&#39;</span>
+  <span class="nb">export</span> <span class="nv">GHOSTUPDATELOCATION</span><span class="o">=</span><span class="s1">&#39;update-ghost-tmp&#39;</span>
 <span class="k">fi</span>
 
 <span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$GHOSTINSTALLDIR</span> <span class="o">]]</span><span class="p">;</span>
 <span class="k">then</span>
-  <span class="nb">export </span><span class="nv">GHOSTINSTALLDIR</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span><span class="s1">&#39;/ghost&#39;</span>
+  <span class="nb">export</span> <span class="nv">GHOSTINSTALLDIR</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span><span class="s1">&#39;/ghost&#39;</span>
 <span class="k">fi</span>
 </pre></div>
 
@@ -114,24 +114,24 @@
 <p>You can either change them in the file or simply type something like the following before running the script in your terminal: <code>export NAME_OF_THE_VARIABLE='YOUR_CUSTOM_VALUE'</code></p>
 <p>I suggest you to check that the variables are correct typing in your terminal <code>echo $NAME_OF_THE_VARIABLE</code> and checking that in output you get the correct <code>YOUR_CUSTOM_VALUE</code>.</p>
 <p>The code proceed saving the current location in a variable, we will need it later, with </p>
-<div class="highlight"><pre><span class="nb">export </span><span class="nv">STARTLOCATION</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">STARTLOCATION</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>
 </pre></div>
 
 
 <p>The following three lines simply take care to download <code>GHOSTUPDATEFILE</code> and unzip it in <code>GHOSTUPDATELOCATION</code>.</p>
-<div class="highlight"><pre>wget http://ghost.org/zip/<span class="k">$(</span><span class="nb">echo</span> <span class="nv">$GHOSTUPDATEFILE</span><span class="k">)</span>
+<div class="highlight"><pre><span></span>wget http://ghost.org/zip/<span class="k">$(</span><span class="nb">echo</span> <span class="nv">$GHOSTUPDATEFILE</span><span class="k">)</span>
 unzip <span class="nv">$GHOSTUPDATEFILE</span> -d <span class="nv">$GHOSTUPDATELOCATION</span>
 <span class="nb">echo</span> <span class="s2">&quot;Ghost downloaded and unzipped&quot;</span>
 </pre></div>
 
 
 <p>For this step to be effective you need to have installed <code>wget</code>. If this is not the case you should install it or replace the wget line with</p>
-<div class="highlight"><pre>curl -O http://ghost.org/zip/<span class="k">$(</span><span class="nb">echo</span> <span class="nv">$GHOSTUPDATEFILE</span><span class="k">)</span>
+<div class="highlight"><pre><span></span>curl -O http://ghost.org/zip/<span class="k">$(</span><span class="nb">echo</span> <span class="nv">$GHOSTUPDATEFILE</span><span class="k">)</span>
 </pre></div>
 
 
 <p>Note that you will anyhow read the message <em>Ghost downloaded and unzipped</em>, even if there have been errors during the execution. If I have time, I may change this behavior in a future version but I don't plan to do it for the moment.</p>
-<div class="highlight"><pre><span class="nb">cd</span> <span class="nv">$GHOSTUPDATELOCATION</span>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$GHOSTUPDATELOCATION</span>
 cp *.md *.js *.txt *.json <span class="nv">$GHOSTINSTALLDIR</span>
 cp -R core <span class="nv">$GHOSTINSTALLDIR</span>
 cp -R content/themes/casper <span class="nv">$GHOSTINSTALLDIR</span>/content/themes
@@ -145,15 +145,15 @@ npm install --production
 
 <p>These few lines of code simply do what is mechanically suggested to do in the <a href="http://docs.ghost.org/installation/upgrading/">ghost upgrade instruction page</a>: go into the new ghost folder and copy all the files in your active ghost environment, then move back to your ghost environment and run npm update.</p>
 <p>After this update process is finished, hopefully without errors, we go back to our first location and remove the temporary update file and update folder.</p>
-<div class="highlight"><pre><span class="nb">cd</span> <span class="nv">$STARTLOCATION</span>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$STARTLOCATION</span>
 rm -rf <span class="nv">$GHOSTUPDATELOCATION</span> <span class="nv">$GHOSTUPDATEFILE</span>
 <span class="nb">echo</span> <span class="s2">&quot;Folder cleaned&quot;</span>
 </pre></div>
 
 
 <p>The next, last, step is the one that you will probably have to modify to adapt to your needs. Its purpose is restarting the ghost environment. In my case it runs with <a href="https://npmjs.org/package/forever">forever</a> and is started by a code that I saved in a script called <code>starter.sh</code> in my ghost folder. The following code does the restart as I would do it by hand and then tells me "<em>Done!</em>".</p>
-<div class="highlight"><pre><span class="nb">echo</span> <span class="s2">&quot;Restarting ghost...&quot;</span>
-forever stop 0
+<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;Restarting ghost...&quot;</span>
+forever stop <span class="m">0</span>
 sh <span class="nv">$GHOSTINSTALLDIR</span>/starter.sh
 
 <span class="nb">echo</span> <span class="s2">&quot;Done!&quot;</span>
@@ -162,7 +162,7 @@ sh <span class="nv">$GHOSTINSTALLDIR</span>/starter.sh
 
 <p>You have to replace those lines with the appropriate code. It really depends on how you start/stop your server, you can even delete them and do it by hand after the update is complete.</p>
 <p>Suppose that your folder structure is something like</p>
-<div class="highlight"><pre>~\
+<div class="highlight"><pre><span></span>~\
   folder1\
           ...
   folder2\
@@ -178,8 +178,8 @@ sh <span class="nv">$GHOSTINSTALLDIR</span>/starter.sh
 
 
 <p>then to run the script you should log in to your server and do something like</p>
-<div class="highlight"><pre><span class="nb">cd </span>folder1/
-<span class="nb">export </span><span class="nv">GHOSTINSTALLDIR</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span><span class="s1">&#39;/myghost&#39;</span>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> folder1/
+<span class="nb">export</span> <span class="nv">GHOSTINSTALLDIR</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span><span class="s1">&#39;/myghost&#39;</span>
 sh update-ghost.sh
 </pre></div>
 

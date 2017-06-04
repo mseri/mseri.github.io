@@ -18,7 +18,7 @@
 
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Ghost on Amazon EC2 without using sudo" />
-    <meta property="og:description" content="I've been thinking since yesterday's post how to run the ghost blog at the user level, wihout the need of using sudo. Use Nginx In a production environment I would probably run ghos as a nginx subdomain (i.e. ghost.mseri.me), eventually forwarding the domain to the ..." />
+    <meta property="og:description" content="I've been thinking since yesterday's post how to run the ghost blog at the user level, wihout the need of using sudo. Use Nginx In a production environment I would probably run ghos as a nginx subdomain (i.e. ghost.mseri.me), eventually forwarding the domain to the same address …" />
 
         <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
 
@@ -100,21 +100,21 @@
 <h2>Use iptables to forward port 80</h2>
 <p>Another option, given that in Amazon EC2 users are allowed to use only port greater 1024, is to forward your 80 port to your 8080 (or whatever you need) using iptables.</p>
 <p>If you set up ghost to listen on the port 8080, it's likely that you have nothing to do and port 80 and 8080 are already assigned to http. You can easily check it from the AWS Console (look for security groups) or simply <strong>giving it a try</strong>. Just modify your <code>config.js</code> and replace whatever is in <code>host: 2368</code> with <code>host: 8080</code>. Run ghost with <code>npm start</code> and try to access your blog, if it works there is nothing else to do than install <code>forever</code> and use it.</p>
-<p><img alt="The AWS console" src="/images/03-screenshot.png" /></p>
+<p><img alt="The AWS console" src="/images/03-screenshot.png"></p>
 <p>If it doesn't work try to execute the following command (only for linux) in a terminal and it should start working</p>
-<div class="highlight"><pre>sudo iptables -t nat -A PREROUTING -p tcp --dport <span class="m">80</span> -j REDIRECT --to-port 8080
+<div class="highlight"><pre><span></span>sudo iptables -t nat -A PREROUTING -p tcp --dport <span class="m">80</span> -j REDIRECT --to-port <span class="m">8080</span>
 </pre></div>
 
 
 <p>If you are still using port 2360 replace 8080 with the appropriate value. You may need to enable the access to the proper ports, to do it is enough to execute the following. </p>
-<div class="highlight"><pre>sudo iptables -A INPUT -p tcp --dport <span class="m">80</span> -j ACCEPT
+<div class="highlight"><pre><span></span>sudo iptables -A INPUT -p tcp --dport <span class="m">80</span> -j ACCEPT
 sudo iptables -A INPUT -p tcp --dport <span class="m">8080</span> -j ACCEPT
 </pre></div>
 
 
 <p>I reccomend to <strong>not play with iptables rules in a production environment if you don't know what you are doing</strong>.</p>
 <p>To check if the rules have been accepted you can list the configuration with </p>
-<div class="highlight"><pre>sudo iptables -L
+<div class="highlight"><pre><span></span>sudo iptables -L
 </pre></div>
 
 
@@ -122,31 +122,31 @@ sudo iptables -A INPUT -p tcp --dport <span class="m">8080</span> -j ACCEPT
 <p>This same procedure can be adapted to other unix systems just using the appropriate firewall rules (like packet filter on BSD).</p>
 <h2>Install and use forever</h2>
 <p>Now that we can start ghost without any need of using sudo, we only have to install forever. Open a terminal and execute</p>
-<div class="highlight"><pre>sudo /usr/local/bin/npm install -g forever
+<div class="highlight"><pre><span></span>sudo /usr/local/bin/npm install -g forever
 </pre></div>
 
 
 <p>then enter in the ghost folder with <code>cd path_to_your/ghost_folder</code> and run</p>
-<div class="highlight"><pre><span class="nv">NODE_ENV</span><span class="o">=</span>production forever start index.js
+<div class="highlight"><pre><span></span><span class="nv">NODE_ENV</span><span class="o">=</span>production forever start index.js
 </pre></div>
 
 
 <p>Open your browser and enjoy your Ghost Blog!</p>
 <p><em>If you are using the development configuration instead of the production one, just drop <code>NODE_ENV=production</code> from the previous command.</em></p>
 <p>To kill the server, just use</p>
-<div class="highlight"><pre>forever list
-forever stop 0
+<div class="highlight"><pre><span></span>forever list
+forever stop <span class="m">0</span>
 </pre></div>
 
 
 <p>where 0 is the ghost process. Or eventually</p>
-<div class="highlight"><pre>forever stopall
+<div class="highlight"><pre><span></span>forever stopall
 </pre></div>
 
 
 <h3>Check permissions</h3>
 <p>If you were running your ghost blog using sudo, you may not be able to access the database or some folders. In such case is enough to fix its permissions. Open a terminal, enter in the ghost folder with <code>cd path_to_your/ghost_folder</code> and execute</p>
-<div class="highlight"><pre>sudo chown yourusername -R *
+<div class="highlight"><pre><span></span>sudo chown yourusername -R *
 sudo chgrp yourusergroup -R *
 </pre></div>
 

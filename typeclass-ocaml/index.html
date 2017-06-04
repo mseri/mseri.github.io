@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description" content="Tales of a Fractal Spectrum, ">
+
+        <link rel="alternate" href="http://www.mseri.me/feed/atom.xml" type="application/atom+xml" title="Tales of a Fractal Spectrum Atom Feed"/>
+        <link rel="alternate" href="http://www.mseri.me/feed/rss.xml" type="application/rss+xml" title="Tales of a Fractal Spectrum RSS Feed"/>
+
+        <title>First steps with Category Theory and OCaml - Tales of a Fractal Spectrum</title>
+
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="First steps with Category Theory and OCaml" />
+    <meta property="og:description" content="Introduction Category theory is an abstrac mathematical framework that had a huge influence on pure functional programming design patterns. The abstractions and laws that come bundled with the mathematical concepts allow us to write safer and composable interfaces, very prone to equational reasoning, at the price of a steeper learning …" />
+
+        <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400" />
+    <link rel="stylesheet" href="http://www.mseri.me/theme/css/style-min.css">
+    <!--<link rel="stylesheet" href="http://www.mseri.me/theme/css/pygments.css">-->
+
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+    <div class="pure-g-r" id="layout">
+        <div class="sidebar pure-u">
+            <header class="header">
+                <hgroup>
+                        <a id="blog-logo" href="http://www.mseri.me"><img src="http://www.mseri.me/images/gauss_logo.png" alt="Blog Logo" /></a>
+                    <h1 itemprop="name" class="blog-title"><a href="http://www.mseri.me">Tales of a Fractal Spectrum</a></h1>
+                        <h2 itemprop="description" class="blog-description">Free thoughts of a geeky mathematician</h2>
+                </hgroup>
+<nav class="nav">
+  <ul class="social-list">
+<li class="social-item"><a class="subscribe icon-twitter" href="http://www.twitter.com/marcelloseri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-facebook" href="http://www.facebook.com/marcello.seri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-google-plus" href="http://plus.google.com/+MarcelloSeri" target="_blank" rel="publisher"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-github" href="http://www.github.com/mseri" target="_blank"></a></li>&nbsp;    <li class="social-item">&nbsp;</li>
+    <li class="social-item"><a class="subscribe icon-feed" href="http://www.mseri.me/feed/rss.xml" target="_blank"></a></li>
+</ul>
+</nav>
+            </header>
+            <footer class="footer">
+                <section class="copyright">&copy; 2013--2015 <a itemscope="copyrightHolder" href="http://www.mseri.me">Tales of a Fractal Spectrum</a></section>
+                <section class="poweredby">Proudly published with Pelican on GitHub Pages.</section> 
+                <section class="theme"><a href="https://github.com/mseri/pelican-purity" target="_blank">Purity</a> is built with <a href="http://purecss.io" target="_blank">PureCSS</a>.</section>
+            </footer>
+            
+        </div>
+        <div class="pure-u-1 container">
+            
+<main class="content" role="main" id="top-post">
+        <div class="back">
+            <a href="http://www.mseri.me">&larr;  back to the home page</a>
+        </div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post purity_post">
+
+        <header class="post-header">
+            <h2 itemprop="name" class="post-title big">First steps with Category Theory and OCaml</h2>
+            <p class="post-meta">Written by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Marcello Seri</span></span> the <time itemprop="datePublished" datetime="04 Jun 2017">04 Jun 2017</time> - <span class="post-tagline"> under                                 <a class="post-category" href="http://www.mseri.me/tag/ocaml.html">ocaml</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/blog.html">blog</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/monad.html">monad</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/functor.html">functor</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/typeclass.html">typeclass</a>. </span></p>
+        </header>
+
+        <section class="post-content">
+
+        <div class="post-share-box">
+            <section class="share">
+                <h3>Share this post</h3>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.mseri.me/typeclass-ocaml/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-twitter" href="http://twitter.com/share?text=First steps with Category Theory and OCaml&url=http://www.mseri.me/typeclass-ocaml/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://www.mseri.me/typeclass-ocaml/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+        </div>
+
+        <div itemprop="articleBody">
+            <h1>Introduction</h1>
+<p>Category theory is an abstrac mathematical framework that had a huge influence
+on pure functional programming design patterns. The abstractions and laws that
+come bundled with the mathematical concepts allow us to write safer and
+composable interfaces, very prone to equational reasoning, at the price of a
+steeper learning curve. If you attempt to write some relatively modern Haskell
+code, you will inevitably have to deal with Monoids, Functions, Monads, Lenses
+and whatnot <a href="https://wiki.haskell.org/Typeclassopedia" title="Typeclassopedia">typeclassopedia</a>. Also, if you are using modern OCaml libraries,
+you will find fingerprints of these constructs all over the place, even though
+there they are less prominent.</p>
+<p>These are the notes of a talk, I've given for our team at Citrix. The aim was to
+try to introduce some of those abstract concepts with trivial and less trivial
+examples, trying to formalize them using the powerful but verbose syntax of the
+OCaml module system. I am relatively new to the OCaml world, and there are
+likely some things that can be done better, especially toward the end of the
+notes. If you have ideas on fixes and improvements, please let me know in the
+comments and I'll try to update and correct the text.</p>
+<p>In what follows, I will focus on Monoids, Functors (not to be confused with
+OCaml's module functors), Applicatives, Alternatives and, only briefly, Monads
+(these will be the core of another talk, that will be followed by a final one on
+the Free Monad -- I will link the notes here if they are made public).</p>
+<p>There is plenty more to discuss: Semigroups, Categories, Semigroupoids,
+F-Algebras (scary, but these are really powerful and useful: <a href="https://www.youtube.com/watch?v=PK4SOaAGVfg" title="F-algebras or: How I Learned to Stop Worrying and Love the Type System">f-algebras-video</a>,
+<a href="https://www.schoolofhaskell.com/user/bartosz/understanding-algebras" title="Understanding F-Algebras">f-algebras-understanding</a>), Foldables, Traversables
+<a href="https://discuss.ocaml.org/t/notes-from-compose-2017/240/6" title="An example of Traversable">example-traversable-ocaml</a>, ... You can find a good introduction on the whole
+Category Theory for Programmers topic at <a href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/" title="Category Theory for Programmers">bartosz</a>.</p>
+<p>It is always interesting to think about counterexamples. I will not have time to
+do it here, but you can find a nice account of some of them at
+<a href="http://blog.functorial.com/posts/2015-12-06-Counterexamples.html" title="Counterexamples of Type Classes">counterexamples</a>.</p>
+<p>At the very end of the talk I will try to show how we can easily implement a
+parser combinator using these concepts. This is heavily inspired by <a href="http://www.cs.nott.ac.uk/~pszgmh/monparsing.pdf" title="Monadic Parser Combinators">hutton</a>
+(that in turns inspired the famous <a href="https://hackage.haskell.org/package/parsec" title="Haskell's parsec">parsec</a> library from Haskell), however our
+parser will be an applicative one and not a monadic one. To understand the
+differences it is worth reading the paper linked above and compare the parser
+there with the one implemented here.</p>
+<p>I will try to follow the ocaml conventions writing capitalized modules (e.g.
+<code>Monoid</code>) and fully capital signatures (e.g. <code>MONOID</code>). I will also try to
+explicitly mention when I am talking about OCaml Module Functors or functors
+in the Haskell sense.</p>
+<p>I will use haskell's convention for the list: if <code>x</code> is a value, I will
+denote <code>xs</code> a list of <code>x</code>s. In the same way, a list of <code>x</code>s is pattern
+matched for me as <code>x :: xs</code>.</p>
+<p>We could have written the whole code using the 'desugared' version of Haskell's
+typeclasses, see <a href="http://okmij.org/ftp/Computation/typeclass.html" title="Demistifying Type Classes">demistifying-type-classes</a>, but I think it would be more
+idiomatic to try and use the module system. Also this provides a good way to
+explore some modern OCaml features (while waiting for modular implicits to
+land).</p>
+<p>For a proper implementation of these and more type classes, please have a look
+at <a href="https://github.com/IndiscriminateCoding/clarity" title="Clarity">clarity</a>.  For more advanced concepts, like the free monad, a good start is
+<a href="http://rgrinberg.com/posts/free-monads-in-the-wild-ocaml" title="Free monads in the wild - OCaml edition">free-monads-in-the-wild</a>.</p>
+<p>While writing this talk, a blog post with practically the same ideas has been
+posted, <a href="http://blog.shaynefletcher.org/2017/05/more-type-classes-in-ocaml.html" title="More type classes in OCaml">more-typeclasses</a>. Have a look at that, it does a much better job and
+provides more context that what I could do in this brief notes. It also
+discusses the Traversables that we are largely ignoring for this seminar. The
+main difference between the two is that we are not discussing traversables and
+instead spend some time on applicatives. Also some examples differ, although I
+have tryed to use a signature as close as possible for the final parser
+implementation.</p>
+<h1>Why</h1>
+<p>Abstract classes are</p>
+<ul>
+<li>Composable</li>
+<li>Reusable</li>
+<li>Testable</li>
+</ul>
+<p>and you can identify them by the signatures of your functions.</p>
+<p>Each class, moreover, will provide a series of general helpers and combinators
+that will help having consistent apis for different libraries. Finally, being
+baked by mathematical laws, these interfaces are more easily testable. You need
+only to test a minimal subset of the functions to ensure that the whole api is
+correct.</p>
+<p>As a brief example, you probably have already used <code>map</code> or <code>bind</code> over many
+different types, e.g. <code>option</code>, <code>resutl</code> or <code>list</code>.</p>
+<h1>Helpers</h1>
+<p>We will need some preliminary helpers (I will use the same syntax as <a href="https://github.com/IndiscriminateCoding/clarity" title="Clarity">clarity</a>
+for those):</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span>   <span class="c">(* look at [clarity], they use a neat compiler trick that we are not using here *)</span>
+<span class="k">let</span> <span class="n">const</span> <span class="n">x</span> <span class="o">_</span> <span class="o">=</span> <span class="n">x</span>
+<span class="k">let</span> <span class="n">flip</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">f</span> <span class="n">y</span> <span class="n">x</span>
+<span class="k">let</span> <span class="n">compose</span> <span class="n">f</span> <span class="n">g</span> <span class="n">x</span> <span class="o">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">let</span> <span class="o">(&lt;.&gt;)</span> <span class="n">f</span> <span class="n">g</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="n">x</span><span class="o">)</span>   <span class="c">(* &lt;- compose *)</span>
+<span class="k">let</span> <span class="o">(&gt;.&gt;)</span> <span class="n">g</span> <span class="n">f</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="n">x</span><span class="o">)</span>   <span class="c">(* first apply [g] then [f] but writing them the other way around *)</span>
+</pre></div>
+
+
+<h1>Monoids</h1>
+<p>Let's start with the the complicated (sounding) mathematical definition. A
+monoid is an algebraic structure closed under an associative operation (often
+denoted <code>mappend</code>) and with a neutral element (often denoted <code>mempty</code>).</p>
+<p>For example, integer numbers with the addition or with the multiplication
+operators form a <code>Monoid</code>. Integer numbers with the division operator do not
+(this is because you cannot divide by <code>0</code>).</p>
+<p>This can be specified in OCaml with the following module signature:</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">MONOID</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="c">(** Monoid *)</span>
+  <span class="k">type</span> <span class="n">t</span>
+
+  <span class="c">(** Neutral element *)</span>
+  <span class="c">(* without this we have a semigroup... *)</span>
+  <span class="k">val</span> <span class="n">mempty</span> <span class="o">:</span> <span class="n">t</span>
+
+  <span class="c">(** Associative operation *)</span>
+  <span class="k">val</span> <span class="n">mappend</span><span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>In order to create a <code>MONOID</code>, we need to provide an implementation of the
+<code>mempty</code> and <code>mappend</code> functions (as well as the <code>type</code>).  We can implement the
+monoid modules for integer numbers with sum and product as</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Sum</span><span class="o">:</span> <span class="o">(</span><span class="nc">MONOID</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
+  <span class="k">let</span> <span class="n">mempty</span>  <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">let</span> <span class="n">mappend</span> <span class="o">=</span> <span class="o">(+)</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">Prod</span><span class="o">:</span> <span class="o">(</span><span class="nc">MONOID</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
+  <span class="k">let</span> <span class="n">mempty</span>  <span class="o">=</span> <span class="mi">1</span>
+  <span class="k">let</span> <span class="n">mappend</span> <span class="o">=</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>NOTE: here we see a first difference with haskell, where polymorphism
+allows multiple coexisting definitions of <code>mempty</code> and <code>mappend</code> that
+do not need to be encapsulated in a module namespace.</p>
+<p>These are true monoids if we make sure that</p>
+<div class="highlight"><pre><span></span><span class="c">(* closed: however you choose x, y, z with type t below ... *)</span>
+<span class="c">(* neutral element *)</span>
+<span class="n">mappend</span> <span class="n">mempty</span> <span class="n">x</span>        <span class="o">=</span> <span class="n">x</span>
+<span class="n">mappend</span> <span class="n">x</span> <span class="n">mempty</span>        <span class="o">=</span> <span class="n">x</span>
+<span class="c">(* associative *)</span>
+<span class="n">mappend</span> <span class="n">x</span> <span class="o">(</span><span class="n">mappend</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="o">=</span> <span class="n">mappend</span> <span class="o">(</span><span class="n">mappend</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="n">z</span>
+</pre></div>
+
+
+<p>Note that we cannot enforce these laws with the type system. We need to make
+sure that they hold when we are writing the implementation. We can use OCaml
+functors (kind of parametrised modules) to add a simple test module for (almost)
+any <code>MONOID</code>!</p>
+<div class="highlight"><pre><span></span><span class="c">(* This is an OCaml functor -- look at its signature on the repl *)</span>
+<span class="k">module</span> <span class="nc">TestMonoid</span> <span class="o">(</span><span class="nc">M</span><span class="o">:</span> <span class="nc">MONOID</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">open</span> <span class="nc">M</span>
+
+  <span class="k">let</span> <span class="n">test_neutral_element</span> <span class="n">x</span> <span class="o">=</span>
+    <span class="k">assert</span> <span class="o">(</span><span class="n">mappend</span> <span class="n">mempty</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">);</span>
+    <span class="k">assert</span> <span class="o">(</span><span class="n">mappend</span> <span class="n">x</span> <span class="n">mempty</span> <span class="o">=</span> <span class="n">x</span><span class="o">)</span>
+
+  <span class="k">let</span> <span class="n">test_assoc</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">=</span>
+    <span class="k">assert</span> <span class="o">(</span>
+      <span class="n">mappend</span> <span class="n">x</span> <span class="o">(</span><span class="n">mappend</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="o">=</span> <span class="n">mappend</span> <span class="o">(</span><span class="n">mappend</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="n">z</span>
+    <span class="o">)</span>
+
+<span class="k">end</span>
+</pre></div>
+
+
+<p>It is crucial to make sure that these laws are satisfied by your modules,
+violating them leads often to code that is difficult to reason about and
+refactor.</p>
+<p><strong>Exercise</strong>:</p>
+<ul>
+<li>
+<p>run the tests for the monoids defined above</p>
+</li>
+<li>
+<p>check what happens if in the declarations above you replace
+<code>MONOID with type t = int</code> with <code>MONOID</code> or <code>MONOID with type t := int</code>.</p>
+</li>
+</ul>
+<p>I mentioned that these patterns allow us to define general common helpers.
+Indeed, in all cases we can easily see that the <code>mappend</code> function allows us to
+synthesize a list of values into one, e.g.</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">example1</span> <span class="bp">()</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">xs</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">;</span> <span class="mi">4</span><span class="o">;</span> <span class="mi">5</span><span class="o">;</span> <span class="mi">6</span><span class="o">]</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="n">sum</span> <span class="o">=</span>
+    <span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span> <span class="nn">Sum</span><span class="p">.</span><span class="n">mappend</span> <span class="nn">Sum</span><span class="p">.</span><span class="n">mempty</span>
+  <span class="k">in</span>
+  <span class="k">let</span> <span class="n">prod</span> <span class="o">=</span>
+    <span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span> <span class="nn">Prod</span><span class="p">.</span><span class="n">mappend</span> <span class="nn">Prod</span><span class="p">.</span><span class="n">mempty</span>
+  <span class="k">in</span>
+  <span class="nn">Printf</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;sum:%d prod:%d</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">(</span><span class="n">sum</span> <span class="n">xs</span><span class="o">)</span> <span class="o">(</span><span class="n">prod</span> <span class="n">xs</span><span class="o">)</span>
+</pre></div>
+
+
+<p>In the example above there is clearly a pattern that can be generalised. In
+fact, monoids usually come bundled with the following helpers.</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Monoid_Utils</span> <span class="o">(</span><span class="nc">M</span><span class="o">:</span> <span class="nc">MONOID</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** Generic Monoid helpers.</span>
+<span class="c">   * These should really be part of the Monoid module itself *)</span>
+  <span class="k">open</span> <span class="nc">M</span>
+
+  <span class="c">(** A convenient shorthand for mappend *)</span>
+  <span class="k">let</span> <span class="o">(&lt;+&gt;)</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">mappend</span> <span class="n">x</span> <span class="n">y</span>
+
+  <span class="c">(** Any monoid can be concatenated *)</span>
+  <span class="c">(* This is more general and works for any foldable ... *)</span>
+  <span class="k">let</span> <span class="n">concat</span> <span class="n">xs</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span> <span class="o">(&lt;+&gt;)</span> <span class="n">mempty</span> <span class="n">xs</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Another common simple example of monoid, that does not involve numbers, is the
+string:</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">StringM</span><span class="o">:</span> <span class="o">(</span><span class="nc">MONOID</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">string</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">string</span>
+  <span class="k">let</span> <span class="n">mempty</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="k">let</span> <span class="n">mappend</span> <span class="n">s1</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">s1</span><span class="o">^</span><span class="n">s2</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Let's try one more!</p>
+<div class="highlight"><pre><span></span><span class="c">(* Broken example... *)</span>
+<span class="n">module</span> <span class="n">ListM</span><span class="o">:</span> <span class="o">(</span><span class="n">MONOID</span> <span class="k">with</span> <span class="n">type</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="n">type</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">let</span> <span class="n">mempty</span>  <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">mappend</span> <span class="o">=</span> <span class="o">(@)</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Unfortunately this will not work, but we can workaround the problem using an
+intermediate dummy module (I will never thank enough <a href="http://rgrinberg.com/posts/free-monads-in-the-wild-ocaml" title="Free monads in the wild - OCaml edition">free-monads-in-the-wild</a>
+for this).</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">GENERIC_TYPE_WORKAROUND</span> <span class="o">=</span> <span class="k">sig</span> <span class="k">type</span> <span class="n">t</span> <span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">ListM</span> <span class="o">(</span><span class="nc">T</span><span class="o">:</span> <span class="nc">GENERIC_TYPE_WORKAROUND</span><span class="o">):</span> <span class="o">(</span><span class="nc">MONOID</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nn">T</span><span class="p">.</span><span class="n">t</span> <span class="kt">list</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nn">T</span><span class="p">.</span><span class="n">t</span> <span class="kt">list</span>
+  <span class="k">let</span> <span class="n">mempty</span>  <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">mappend</span> <span class="o">=</span> <span class="o">(@)</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Using this is, unfortunately, a bit verbose:</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">example2</span> <span class="bp">()</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">xs</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">;</span> <span class="mi">4</span><span class="o">;</span> <span class="mi">5</span><span class="o">;</span> <span class="mi">6</span><span class="o">]</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="k">module</span> <span class="nc">MSum</span> <span class="o">=</span> <span class="nc">Monoid_Utils</span><span class="o">(</span><span class="nc">Sum</span><span class="o">)</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="k">module</span> <span class="nc">MProd</span> <span class="o">=</span> <span class="nc">Monoid_Utils</span><span class="o">(</span><span class="nc">Prod</span><span class="o">)</span> <span class="k">in</span>
+  <span class="nn">Printf</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;sum:%d prod:%d</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">(</span><span class="nn">MSum</span><span class="p">.</span><span class="n">concat</span> <span class="n">xs</span><span class="o">)</span> <span class="o">(</span><span class="nn">MProd</span><span class="p">.</span><span class="n">concat</span> <span class="n">xs</span><span class="o">);</span>
+
+<span class="c">(* Note how we need to label the type to make it polymorphic *)</span>
+<span class="k">let</span> <span class="n">example3</span> <span class="bp">()</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">xs</span> <span class="o">=</span> <span class="o">[[</span><span class="mi">1</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">3</span><span class="o">];[</span><span class="mi">1</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">3</span><span class="o">];[</span><span class="mi">1</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">3</span><span class="o">]]</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="n">concat</span> <span class="o">(</span><span class="k">type</span> <span class="n">a</span><span class="o">)</span> <span class="n">xs</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="k">module</span> <span class="nc">ListM</span> <span class="o">=</span> <span class="nc">ListM</span><span class="o">(</span><span class="k">struct</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">a</span> <span class="k">end</span><span class="o">)</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="k">module</span> <span class="nc">ListU</span> <span class="o">=</span> <span class="nc">Monoid_Utils</span><span class="o">(</span><span class="nc">ListM</span><span class="o">)</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="k">open</span> <span class="nc">ListU</span> <span class="k">in</span>
+    <span class="nn">ListU</span><span class="p">.</span><span class="n">concat</span> <span class="n">xs</span>
+  <span class="k">in</span>
+  <span class="n">concat</span> <span class="n">xs</span>
+</pre></div>
+
+
+<p>Two other interesting monoids are <code>Any</code> and <code>All</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">All</span><span class="o">:</span> <span class="o">(</span><span class="nc">MONOID</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">bool</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">bool</span>
+  <span class="k">let</span> <span class="n">mempty</span>  <span class="o">=</span> <span class="bp">true</span>
+  <span class="k">let</span> <span class="n">mappend</span> <span class="o">=</span> <span class="o">(&amp;&amp;)</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">Any</span><span class="o">:</span> <span class="o">(</span><span class="nc">MONOID</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">bool</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">bool</span>
+  <span class="k">let</span> <span class="n">mempty</span>  <span class="o">=</span> <span class="bp">false</span>
+  <span class="k">let</span> <span class="n">mappend</span> <span class="o">=</span> <span class="o">(||)</span>
+<span class="k">end</span>
+
+<span class="k">let</span> <span class="n">example4</span> <span class="bp">()</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">xs</span>   <span class="o">=</span> <span class="o">[</span><span class="bp">true</span><span class="o">;</span> <span class="bp">false</span><span class="o">;</span> <span class="bp">false</span><span class="o">;</span> <span class="bp">true</span><span class="o">]</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="n">xs&#39;</span>  <span class="o">=</span> <span class="o">[</span><span class="bp">true</span><span class="o">;</span> <span class="bp">true</span><span class="o">]</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="n">xs&#39;&#39;</span> <span class="o">=</span> <span class="o">[</span><span class="bp">false</span><span class="o">;</span> <span class="bp">false</span><span class="o">]</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="k">module</span> <span class="nc">AllU</span> <span class="o">=</span> <span class="nc">Monoid_Utils</span><span class="o">(</span><span class="nc">All</span><span class="o">)</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="k">module</span> <span class="nc">AnyU</span> <span class="o">=</span> <span class="nc">Monoid_Utils</span><span class="o">(</span><span class="nc">Any</span><span class="o">)</span> <span class="k">in</span>
+  <span class="nn">Printf</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;all: %b %b %b</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">(</span><span class="nn">AllU</span><span class="p">.</span><span class="n">concat</span> <span class="n">xs</span><span class="o">)</span> <span class="o">(</span><span class="nn">AllU</span><span class="p">.</span><span class="n">concat</span> <span class="n">xs&#39;</span><span class="o">)</span> <span class="o">(</span><span class="nn">AllU</span><span class="p">.</span><span class="n">concat</span> <span class="n">xs&#39;&#39;</span><span class="o">);</span>
+  <span class="nn">Printf</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;any: %b %b %b&quot;</span> <span class="o">(</span><span class="nn">AnyU</span><span class="p">.</span><span class="n">concat</span> <span class="n">xs</span><span class="o">)</span> <span class="o">(</span><span class="nn">AnyU</span><span class="p">.</span><span class="n">concat</span> <span class="n">xs&#39;</span><span class="o">)</span> <span class="o">(</span><span class="nn">AnyU</span><span class="p">.</span><span class="n">concat</span> <span class="n">xs&#39;&#39;</span><span class="o">)</span>
+</pre></div>
+
+
+<h1>Functors</h1>
+<p>Mathematically functors are a bit more complicated than monoids: they are
+structure-preserving maps between categories. If monoids represent the things
+that can be <em>synthesised</em> (<code>mappend</code>ed), functors represent the things that can
+be mapped (literally <code>fmap</code>ped) over. Quoting <a href="https://wiki.haskell.org/Typeclassopedia" title="Typeclassopedia">typeclassopedia</a>:</p>
+<blockquote>
+<p>There are two fundamental ways to think about <code>fmap</code>. The first has already
+been mentioned: it takes two parameters, a function and a container, and applies
+the function "inside" the container, producing a new container. Alternately, we
+can think of <code>fmap</code> as applying a function to a value in a context (without
+altering the context).</p>
+</blockquote>
+<p>This can be specified in OCaml with the following module type:</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">FUNCTOR</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">fmap</span><span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>In this case we do not need workarounds to create a module implementing the
+<code>FUNCTOR</code> signature for lists:</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListF</span><span class="o">:</span> <span class="o">(</span><span class="nc">FUNCTOR</span> <span class="k">with</span> <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>  <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">let</span> <span class="n">fmap</span> <span class="n">f</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="n">f</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>As for monoids, functors need to satisfy some laws.  We can translate the
+structure-preserving property from the mathematical defitinion into the
+following (if you know what a <em>morphism</em> is, this should look familiar)</p>
+<div class="highlight"><pre><span></span>  (* we map the identity into itself *)
+  fmap id = id
+
+  (* mapping a composition of functions is
+   * equivalent to composing the mapped functions *)
+  fmap (f &lt;.&gt; g)  = fmap f &lt;.&gt; fmap g
+</pre></div>
+
+
+<p>This is a way to say that our <code>fmap</code> cannot change the "shape" of the mapped
+values. We can translate these into a test module, as we did for the monoids.</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">TestFunctor</span> <span class="o">(</span><span class="nc">F</span><span class="o">:</span> <span class="nc">FUNCTOR</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">open</span> <span class="nc">F</span>
+
+  <span class="k">let</span> <span class="n">test_id</span> <span class="n">x</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span><span class="n">fmap</span> <span class="n">id</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">)</span>
+
+  <span class="k">let</span> <span class="n">test_compose</span> <span class="n">f</span> <span class="n">g</span> <span class="n">x</span> <span class="o">=</span>
+    <span class="k">assert</span> <span class="o">(</span>
+      <span class="n">fmap</span> <span class="o">(</span><span class="n">f</span> <span class="o">&lt;.&gt;</span> <span class="n">g</span><span class="o">)</span> <span class="n">x</span> <span class="o">=</span> <span class="n">fmap</span> <span class="n">f</span> <span class="o">(</span><span class="n">fmap</span> <span class="n">g</span> <span class="n">x</span><span class="o">)</span>
+    <span class="o">)</span>
+
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Many commonly used types are in fact functor instancess. A few examples are the
+following.</p>
+<div class="highlight"><pre><span></span><span class="c">(* optional values *)</span>
+<span class="k">module</span> <span class="nc">OptionF</span><span class="o">:</span> <span class="o">(</span><span class="nc">FUNCTOR</span> <span class="k">with</span> <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">option</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">option</span>
+  <span class="k">let</span> <span class="n">fmap</span> <span class="n">f</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="nc">Some</span> <span class="n">x</span>  <span class="o">-&gt;</span> <span class="nc">Some</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+    <span class="o">|</span> <span class="nc">None</span>    <span class="o">-&gt;</span> <span class="nc">None</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="c">(* result values *)</span>
+<span class="k">module</span> <span class="nc">ResultF</span><span class="o">:</span> <span class="o">(</span><span class="nc">FUNCTOR</span> <span class="k">with</span> <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span><span class="o">,</span> <span class="kt">string</span><span class="o">)</span> <span class="n">result</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span><span class="o">,</span> <span class="kt">string</span><span class="o">)</span> <span class="n">result</span>
+  <span class="k">let</span> <span class="n">fmap</span> <span class="n">f</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="nc">Ok</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="nc">Ok</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+    <span class="o">|</span> <span class="nc">Error</span> <span class="o">_</span> <span class="k">as</span> <span class="n">err</span> <span class="o">-&gt;</span> <span class="n">err</span>
+<span class="k">end</span>
+
+<span class="c">(* This is only for recent (4.03+) compilers or otherwise it depends</span>
+<span class="c"> * on the result library. The rresult library already provides the</span>
+<span class="c"> * functor (and monad) implementation for it. *)</span>
+</pre></div>
+
+
+<p>As it happened with monoids, functors often come with their generic
+helpers as well <a href="https://hackage.haskell.org/package/base-4.9.0.0/docs/Data-Functor.html" title="Data.Functor on Hackage">hackage-data.functor</a>.</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Functor_Utils</span><span class="o">(</span><span class="nc">F</span><span class="o">:</span> <span class="nc">FUNCTOR</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** Generic Functor helpers.</span>
+<span class="c">   *  This should be part of the Functor module itself... *)</span>
+  <span class="k">open</span> <span class="nc">F</span>
+
+  <span class="c">(** A convenient shorthand for fmap *)</span>
+  <span class="k">let</span> <span class="o">(&lt;$&gt;)</span> <span class="n">f</span> <span class="n">x</span> <span class="o">=</span> <span class="n">fmap</span> <span class="n">f</span> <span class="n">x</span>
+
+  <span class="c">(** Replace all locations in the input with the same value *)</span>
+  <span class="k">let</span> <span class="o">(&lt;$)</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="n">fmap</span> <span class="o">(</span><span class="n">const</span> <span class="n">r</span><span class="o">)</span> <span class="n">x</span>
+  <span class="c">(** Flipped version of &lt;$ *)</span>
+  <span class="k">let</span> <span class="o">($&gt;)</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="n">flip</span> <span class="o">(&lt;$)</span> <span class="n">r</span> <span class="n">x</span>
+
+  <span class="c">(** [void] discards or ignores the result of evaluation *)</span>
+  <span class="k">let</span> <span class="n">void</span> <span class="n">f</span> <span class="n">x</span> <span class="o">=</span> <span class="n">fmap</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">ignore</span><span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">))</span> <span class="n">x</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<h2>Applicative Functors</h2>
+<p>Applicative functors are a special class of functors carrying some more
+structure. Again quoting <a href="https://wiki.haskell.org/Typeclassopedia" title="Typeclassopedia">typeclassopedia</a>:</p>
+<blockquote>
+<p>The title of their classic paper, <a href="http://www.soi.city.ac.uk/~ross/papers/Applicative.html" title="Applicative Programming with Effects">applicative-programming-with-effects</a>,
+gives a hint at the intended intuition behind the <code>Applicative</code> type class. It
+encapsulates certain sorts of “effectful” computations in a functionally pure
+way, and encourages an “applicative” programming style.</p>
+</blockquote>
+<p>A minimal implementation is simple, but requires some level of care. The
+following comes from <a href="https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Applicative.html" title="Control.Applicative on Hackage">hackage-control.applicative</a>.</p>
+<blockquote>
+<p>An <code>applicative functor</code> is a <code>functor</code> with application, providing operations
+to embed effect free expressions (<code>pure</code>), and to apply functions that are in a
+context to values already in the context (<code>ap</code>, or the equivalent infix <code>&lt;*&gt;</code>).</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">APPLICATIVE</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(* This includes the signature of FUNCTOR,</span>
+<span class="c">   * rewriting the types to make them match *)</span>
+  <span class="k">include</span> <span class="nc">FUNCTOR</span> <span class="k">with</span> <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">:=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** Lift a value *)</span>
+  <span class="k">val</span> <span class="n">pure</span><span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="c">(** Sequential application *)</span>
+  <span class="k">val</span> <span class="n">ap</span><span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+
+  <span class="c">(* Note that if you still have to define the functor,</span>
+<span class="c">   * you can define `fmap` from the above functions as</span>
+<span class="c">   * `let fmap f x = pure f &lt;*&gt; x` *)</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Now it should be expectable that there will be plenty of generic helper
+functions coming with applicatives as well. This is in fact the case, even more
+than for the previous structures.</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Applicative_Utils</span> <span class="o">(</span><span class="nc">A</span><span class="o">:</span> <span class="nc">APPLICATIVE</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** Generic Functor helpers.</span>
+<span class="c">   * This should really be part of the Applcative module itself *)</span>
+
+  <span class="k">open</span> <span class="nc">A</span>
+  <span class="k">module</span> <span class="nc">FunU</span> <span class="o">=</span> <span class="nc">Functor_Utils</span><span class="o">(</span><span class="nc">A</span><span class="o">)</span>
+  <span class="k">include</span> <span class="nc">FunU</span>
+
+  <span class="c">(** A convenient infix for ap -- called apply*)</span>
+  <span class="k">let</span> <span class="o">(&lt;*&gt;)</span> <span class="n">f</span> <span class="o">=</span> <span class="n">ap</span> <span class="n">f</span>
+
+  <span class="c">(* Below, we denote `actions` the elements of the applicative typeclass *)</span>
+
+  <span class="c">(** Lift a function to actions. This function may be used as a value</span>
+<span class="c">   *  for fmap in a Functor instance. *)</span>
+  <span class="k">let</span> <span class="n">liftA</span> <span class="n">f</span> <span class="n">x</span> <span class="o">=</span> <span class="n">f</span> <span class="o">&lt;$&gt;</span> <span class="n">x</span>
+  <span class="c">(** Lift a binary function to actions. *)</span>
+  <span class="k">let</span> <span class="n">liftA2</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span>  <span class="o">=</span> <span class="n">f</span> <span class="o">&lt;$&gt;</span> <span class="n">x</span> <span class="o">&lt;*&gt;</span> <span class="n">y</span>
+  <span class="c">(** Lift a ternary function to actions. *)</span>
+  <span class="k">let</span> <span class="n">liftA3</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">=</span> <span class="n">f</span> <span class="o">&lt;$&gt;</span> <span class="n">x</span> <span class="o">&lt;*&gt;</span> <span class="n">y</span> <span class="o">&lt;*&gt;</span> <span class="n">z</span>
+
+  <span class="c">(** Sequence actions, discarding the value of the second argument. *)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">&lt;*</span> <span class="o">)</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="n">const</span> <span class="o">&lt;$&gt;</span> <span class="n">r</span> <span class="o">&lt;*&gt;</span> <span class="n">x</span>
+  <span class="c">(** Sequence actions, discarding the value of the first argument. *)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">*&gt;</span> <span class="o">)</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">y</span><span class="o">)</span> <span class="o">&lt;$&gt;</span> <span class="n">r</span> <span class="o">&lt;*&gt;</span> <span class="n">x</span>     <span class="c">(* == flip ( &lt;* ) *)</span>
+
+  <span class="c">(* These should be part of foldable or traversable, and in turn</span>
+<span class="c">   * they end up with applicatives *)</span>
+
+  <span class="c">(** Evaluate each action in the structure from left to right, and</span>
+<span class="c">   * and collect the results. *)</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">sequenceA</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">pure</span> <span class="bp">[]</span>
+    <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span> <span class="o">-&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">cons</span> <span class="o">&lt;$&gt;</span> <span class="n">x</span> <span class="o">&lt;*&gt;</span> <span class="n">sequenceA</span> <span class="n">xs</span>
+
+  <span class="c">(** Evaluate each action in the structure from left to right, and</span>
+<span class="c">   *  ignore the results *)</span>
+  <span class="k">let</span> <span class="n">sequenceA_</span> <span class="n">xs</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="o">(</span> <span class="o">*&gt;</span> <span class="o">)</span> <span class="n">xs</span> <span class="o">(</span><span class="n">pure</span> <span class="bp">()</span><span class="o">)</span>
+
+  <span class="c">(** Map each element of a structure to an action, evaluate these actions</span>
+<span class="c">   *  from left to right, and collect the results. *)</span>
+  <span class="k">let</span> <span class="n">traverseA</span> <span class="n">f</span> <span class="o">=</span>  <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span> <span class="o">&gt;.&gt;</span> <span class="n">sequenceA</span>
+
+  <span class="c">(** Map each element of a structure to an action, evaluate these</span>
+<span class="c">   *  actions from left to right, and ignore the results. *)</span>
+  <span class="k">let</span> <span class="n">traverseA_</span> <span class="n">f</span> <span class="n">xs</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="o">((</span> <span class="o">*&gt;</span> <span class="o">)</span> <span class="o">&lt;.&gt;</span> <span class="n">f</span><span class="o">)</span> <span class="n">xs</span> <span class="o">(</span><span class="n">pure</span> <span class="bp">()</span><span class="o">)</span>
+
+  <span class="c">(** `forA` is &#39;traverse&#39; with its arguments flipped. *)</span>
+  <span class="k">let</span> <span class="n">forA</span> <span class="n">xs</span> <span class="o">=</span> <span class="o">(</span><span class="n">flip</span> <span class="n">traverseA</span><span class="o">)</span> <span class="n">xs</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>The <code>liftAN</code> functions are very convenient to <em>lift</em> a regular function of <code>N</code>
+arguments into a function operating on <code>N</code> applicative values.</p>
+<p>A complete definition must satisfy the following laws (haskell syntax):</p>
+<ul>
+<li>
+<p><em>identity law</em>: <code>pure id &lt;*&gt; v = v</code></p>
+</li>
+<li>
+<p><em>homomorphism</em>: <code>pure f &lt;*&gt; pure x = pure (f x)</code> (<a href="https://wiki.haskell.org/Typeclassopedia" title="Typeclassopedia">typeclassopedia</a> says:
+applying a non-effectful function to a non-effectful argument in an effectful
+context is the same as just applying the function to the argument and then
+injecting the result into the context with <code>pure</code>)</p>
+</li>
+<li>
+<p><em>interchange</em>:  <code>u &lt;*&gt; pure y = pure ($ y) &lt;*&gt; u</code> (<a href="https://wiki.haskell.org/Typeclassopedia" title="Typeclassopedia">typeclassopedia</a> says:
+when evaluating the application of an effectful function to a pure argument, the
+order in which we evaluate the function and its argument doesn't matter)</p>
+</li>
+<li>
+<p><em>composition</em>: <code>pure (&lt;.&gt;) &lt;*&gt; u &lt;*&gt; v &lt;*&gt; w = u &lt;*&gt; (v &lt;*&gt; w)</code></p>
+</li>
+</ul>
+<p>These may again be turned into a generic testing module:</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">TestApplicative</span> <span class="o">(</span><span class="nc">A</span><span class="o">:</span> <span class="nc">APPLICATIVE</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">open</span> <span class="nc">A</span>
+  <span class="k">module</span> <span class="nc">ApplU</span> <span class="o">=</span> <span class="nc">Applicative_Utils</span><span class="o">(</span><span class="nc">A</span><span class="o">)</span>
+  <span class="k">open</span> <span class="nc">ApplU</span>
+
+  <span class="k">let</span> <span class="n">test_id</span> <span class="n">x</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span>
+    <span class="o">(</span><span class="n">pure</span> <span class="n">id</span> <span class="o">&lt;*&gt;</span> <span class="n">x</span><span class="o">)</span> <span class="o">=</span> <span class="n">x</span>
+  <span class="o">)</span>
+
+  <span class="k">let</span> <span class="n">test_homomorphism</span> <span class="n">f</span> <span class="n">x</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span>
+    <span class="n">pure</span> <span class="n">f</span> <span class="o">&lt;*&gt;</span> <span class="n">pure</span> <span class="n">x</span> <span class="o">=</span> <span class="n">pure</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+  <span class="o">)</span>
+
+  <span class="k">let</span> <span class="n">test_interchange</span> <span class="n">u</span> <span class="n">y</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span>
+    <span class="o">(</span><span class="n">u</span> <span class="o">&lt;*&gt;</span> <span class="n">pure</span> <span class="n">y</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">pure</span> <span class="o">(</span><span class="k">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">y</span><span class="o">)</span> <span class="o">&lt;*&gt;</span> <span class="n">u</span><span class="o">)</span>
+  <span class="o">)</span>
+
+  <span class="k">let</span> <span class="n">test_composition</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span>
+    <span class="o">(</span><span class="n">pure</span> <span class="n">compose</span> <span class="o">&lt;*&gt;</span> <span class="n">u</span> <span class="o">&lt;*&gt;</span> <span class="n">v</span> <span class="o">&lt;*&gt;</span> <span class="n">w</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">u</span> <span class="o">&lt;*&gt;</span> <span class="o">(</span><span class="n">v</span> <span class="o">&lt;*&gt;</span> <span class="n">w</span><span class="o">))</span>
+  <span class="o">)</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>This can be used to validate some instances of this pattern. We will see some of
+its limitations soon...</p>
+<p>Note that as a consequence of these laws, the functor instance for <code>f</code> will
+satisfy</p>
+<div class="highlight"><pre><span></span>fmap f x = pure f &lt;*&gt; x
+</pre></div>
+
+
+<p>Let's see how this much stuff can be rewritten in OCaml.</p>
+<p>We can take the <code>ListF</code> module defined above and extend it into an applicative.
+In fact, it's kind of the other way around: <code>ListA</code> re-exports the
+implementation of <code>ListF</code> for the functorial part of the signature.</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListA</span><span class="o">:</span> <span class="o">(</span><span class="nc">APPLICATIVE</span> <span class="k">with</span> <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">ListF</span>
+
+  <span class="c">(** Put a value in a list *)</span>
+  <span class="k">let</span> <span class="n">pure</span> <span class="n">x</span> <span class="o">=</span> <span class="o">[</span><span class="n">x</span><span class="o">]</span>
+
+  <span class="c">(** Take a list of functions and a list of values,</span>
+<span class="c">    *  and applies each function to each element of the</span>
+<span class="c">    *  list -- in practice, is a cartesian product *)</span>
+  <span class="k">let</span> <span class="n">ap</span> <span class="n">fs</span> <span class="n">xs</span> <span class="o">=</span>
+    <span class="n">fmap</span> <span class="o">(</span><span class="k">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="n">fmap</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="n">xs</span><span class="o">)</span> <span class="n">fs</span>
+    <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">concat</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Another immediate example is <code>option</code>.</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">OptionA</span><span class="o">:</span> <span class="o">(</span><span class="nc">APPLICATIVE</span> <span class="k">with</span> <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">option</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">OptionF</span>
+
+  <span class="c">(** Put a value in a Optional *)</span>
+  <span class="k">let</span> <span class="n">pure</span> <span class="n">x</span> <span class="o">=</span> <span class="nc">Some</span> <span class="n">x</span>
+
+  <span class="c">(** Take a option function and a option value,</span>
+<span class="c">    * and applies the function to the value if</span>
+<span class="c">    * they both exists *)</span>
+  <span class="k">let</span> <span class="n">ap</span> <span class="n">f</span> <span class="n">x</span> <span class="o">=</span> <span class="k">match</span> <span class="n">f</span><span class="o">,</span> <span class="n">x</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Some</span> <span class="n">f</span><span class="o">,</span> <span class="nc">Some</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="nc">Some</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+    <span class="o">|</span> <span class="o">_</span>              <span class="o">-&gt;</span> <span class="nc">None</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>We can also define an applicative for the <code>result</code> type.</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ResultA</span><span class="o">:</span> <span class="o">(</span><span class="nc">APPLICATIVE</span> <span class="k">with</span> <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span><span class="o">,</span> <span class="kt">string</span><span class="o">)</span> <span class="n">result</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">ResultF</span>
+
+  <span class="c">(** Put a value in a Result *)</span>
+  <span class="k">let</span> <span class="n">pure</span> <span class="n">x</span> <span class="o">=</span> <span class="nc">Ok</span> <span class="n">x</span>
+
+  <span class="c">(** Take a result function and a result value,</span>
+<span class="c">    * and applies the function to the value if</span>
+<span class="c">    * they both exists *)</span>
+  <span class="k">let</span> <span class="n">ap</span> <span class="n">f</span> <span class="n">x</span> <span class="o">=</span> <span class="k">match</span> <span class="n">f</span><span class="o">,</span> <span class="n">x</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Ok</span> <span class="n">f</span><span class="o">,</span> <span class="nc">Ok</span> <span class="n">x</span>       <span class="o">-&gt;</span> <span class="nc">Ok</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+    <span class="o">|</span> <span class="nc">Error</span> <span class="n">e</span><span class="o">,</span> <span class="nc">Ok</span> <span class="o">_</span>    <span class="o">-&gt;</span> <span class="nc">Error</span> <span class="n">e</span>
+    <span class="o">|</span> <span class="nc">Ok</span> <span class="o">_,</span> <span class="nc">Error</span> <span class="n">e</span>    <span class="o">-&gt;</span> <span class="nc">Error</span> <span class="n">e</span>
+    <span class="o">|</span> <span class="nc">Error</span> <span class="n">e</span><span class="o">,</span> <span class="nc">Error</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="nc">Error</span> <span class="o">(</span><span class="nn">String</span><span class="p">.</span><span class="n">concat</span> <span class="s2">&quot; &quot;</span> <span class="o">[</span><span class="n">e</span><span class="o">;</span> <span class="n">f</span><span class="o">])</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Note here that we can replace the string with <em>any monoidal type</em>, and the last
+line of <code>ap</code> would just be changed into <code>| Error e, Error f -&gt; Error (e &lt;&gt; f)</code>.</p>
+<p>Note also that the applicatives are always "short circuiting", <code>ap</code> necessarily
+does the following: if everything can be extracted, proceed, otherwise always
+fall back to the "failure" case.</p>
+<p>In <a href="http://blog.shaynefletcher.org/2017/05/more-type-classes-in-ocaml.html" title="More type classes in OCaml">more-typeclasses</a> there is an interesting derivation using the identity
+applicative: it's worth having a look at that post. The identity applicative is
+simply:</p>
+<div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">id</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span>
+
+<span class="k">module</span> <span class="nc">IdApp</span><span class="o">:</span> <span class="o">(</span><span class="nc">APPLICATIVE</span> <span class="k">with</span> <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">id</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>  <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">id</span>
+  <span class="k">let</span> <span class="n">pure</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+  <span class="k">let</span> <span class="n">fmap</span> <span class="n">f</span> <span class="o">=</span> <span class="n">f</span>
+  <span class="k">let</span> <span class="n">ap</span>     <span class="o">=</span> <span class="n">fmap</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>What can we do with applicatives? Whay do we care? Let's see an example use to
+mock data to test some <a href="http://xapi-project.github.io" title="Xapi project">xapi</a> functionality. Given the following types and helpers</p>
+<div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">vm_type</span>          <span class="o">=</span> <span class="nc">PV</span> <span class="o">|</span> <span class="nc">HVM</span>
+<span class="k">type</span> <span class="n">storage_location</span> <span class="o">=</span> <span class="nc">Local</span> <span class="o">|</span> <span class="nc">NFS</span> <span class="o">|</span> <span class="nc">SCSI</span>
+<span class="k">type</span> <span class="n">vgpu_type</span>        <span class="o">=</span> <span class="nc">None</span> <span class="o">|</span> <span class="nc">AMD</span> <span class="o">|</span> <span class="nc">Nvidia</span>
+
+<span class="k">type</span> <span class="n">vm</span> <span class="o">=</span>
+  <span class="o">{</span> <span class="n">storage_size</span><span class="o">:</span> <span class="kt">int</span>
+  <span class="o">;</span> <span class="n">storage_location</span><span class="o">:</span> <span class="n">storage_location</span>
+  <span class="o">;</span> <span class="n">vgpu_type</span><span class="o">:</span> <span class="n">vgpu_type</span>
+  <span class="o">;</span> <span class="n">vm_type</span><span class="o">:</span> <span class="n">vm_type</span>
+  <span class="o">}</span>
+
+<span class="k">let</span> <span class="n">vm_of</span> <span class="n">storage_size</span> <span class="n">storage_location</span> <span class="n">vgpu_type</span> <span class="n">vm_type</span> <span class="o">=</span>
+  <span class="o">{</span> <span class="n">storage_size</span>
+  <span class="o">;</span> <span class="n">storage_location</span>
+  <span class="o">;</span> <span class="n">vgpu_type</span>
+  <span class="o">;</span> <span class="n">vm_type</span>
+  <span class="o">}</span>
+</pre></div>
+
+
+<p>We can generate all the possible configurations in one go by lifting the
+constructor and listing the parameter values.</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListApp</span> <span class="o">=</span> <span class="nc">Applicative_Utils</span><span class="o">(</span><span class="nc">ListA</span><span class="o">)</span>
+
+<span class="k">let</span> <span class="n">vm_templates</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="k">open</span> <span class="nc">ListApp</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="k">open</span> <span class="nc">FunU</span> <span class="k">in</span>    <span class="c">(* &lt;- unneeded if we use module signatures properly *)</span>
+  <span class="n">vm_of</span>
+  <span class="o">&lt;$&gt;</span> <span class="o">[</span><span class="mi">1000000</span><span class="o">;</span> <span class="mi">10000000</span><span class="o">;</span> <span class="mi">10000000</span><span class="o">;</span> <span class="mi">1234567890123456</span><span class="o">]</span>
+  <span class="o">&lt;*&gt;</span> <span class="o">[</span><span class="nc">Local</span><span class="o">;</span> <span class="nc">NFS</span><span class="o">;</span> <span class="nc">SCSI</span><span class="o">]</span>
+  <span class="o">&lt;*&gt;</span> <span class="o">[</span><span class="nc">None</span><span class="o">;</span> <span class="nc">AMD</span><span class="o">;</span> <span class="nc">Nvidia</span><span class="o">]</span>
+  <span class="o">&lt;*&gt;</span> <span class="o">[</span><span class="nc">PV</span><span class="o">;</span> <span class="nc">HVM</span><span class="o">]</span>
+
+<span class="c">(*</span>
+<span class="c"># List.length vm_templates</span>
+<span class="c">- : int = 72</span>
+<span class="c">*)</span>
+</pre></div>
+
+
+<p>We can use <code>OptionalA</code> to generate functions that accept <code>optional</code> arguments on
+demand. E.g. safe mathematical functions, or list head and tail. This could have
+prevented issues like the division by zero in the intel vgpu configuration in
+xapi.</p>
+<p>You can find plenty of examples of applicative instances at
+<a href="https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Applicative.html" title="Control.Applicative on Hackage">hackage-control.applicative</a>.</p>
+<h2>Small monadic intermission</h2>
+<p>We will not say much about monads in this brief notes, although they perfectly
+fit the final examples. But a digression here to plant a seed is in order.</p>
+<p>We saw that every <code>Applicative</code> is a <code>Functor</code>. Every <code>Monad</code> is an
+<code>Applicative</code>. The defition turns out to be the following (bear in mind that
+there are laws that should be satisfied by these functions. We will not discuss
+them here)</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">MONAD</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">include</span> <span class="nc">APPLICATIVE</span> <span class="k">with</span> <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">:=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** Lift a value *)</span>
+  <span class="c">(* this already resembles [pure] from APPLICATIVE *)</span>
+  <span class="k">val</span> <span class="n">return</span><span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="c">(** &#39;Kind of&#39; sequential application, called `bind` *)</span>
+  <span class="k">val</span> <span class="o">(&gt;&gt;=):</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Before going on, keep in mind that there is a standard function named <code>(=&lt;&lt;)</code>
+which is exactly <code>(&gt;&gt;=)</code>, but with its arguments flipped.</p>
+<div class="highlight"><pre><span></span><span class="k">val</span> <span class="o">(&gt;&gt;=):</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span><span class="o">)</span>         <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+<span class="k">val</span> <span class="o">(=&lt;&lt;):</span>         <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+</pre></div>
+
+
+<p>If we look at the structures that we have mentioned so far, we can see that they
+all give us a way to apply functions.</p>
+<div class="highlight"><pre><span></span><span class="k">val</span> <span class="o">(@@):</span>  <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">)</span>   <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>   <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span>     <span class="c">(* Function application *)</span>
+<span class="k">val</span> <span class="n">fmap</span><span class="o">:</span>  <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">)</span>   <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>   <span class="c">(* Key for Functors *)</span>
+<span class="k">val</span> <span class="n">ap</span><span class="o">:</span>    <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>   <span class="c">(* Key for Applicatives *)</span>
+<span class="k">val</span> <span class="o">(=&lt;&lt;):</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>   <span class="c">(* Key for Monads, you usually see &gt;&gt;= *)</span>
+</pre></div>
+
+
+<p>The major novelty in the bind, compared to the others, is that the function that
+it applies is aware of the context (the <code>'a</code> is out of its context and the <code>t</code>
+is part of the argument function type signature), and this gives it the power to
+modify it and avoid short circuiting!</p>
+<p>One last secret is that <code>Monad</code>s are simply a special kind of <code>Applicative</code> for
+which we can define a function (<code>join</code>) to collapse the context.</p>
+<div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">join</span><span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+</pre></div>
+
+
+<p>When that is defined, the following holds.</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">return</span> <span class="o">=</span> <span class="n">pure</span>
+
+<span class="c">(** Sequentially compose two actions, passing any value produced</span>
+<span class="c"> *  by the first as an argument to the second. *)</span>
+<span class="k">let</span> <span class="n">bind</span> <span class="n">v</span> <span class="n">f</span> <span class="o">=</span> <span class="n">join</span> <span class="o">(</span><span class="n">fmap</span> <span class="n">f</span> <span class="n">v</span><span class="o">)</span>
+<span class="k">let</span> <span class="o">(&gt;&gt;=)</span> <span class="o">=</span> <span class="n">bind</span>
+
+<span class="c">(* bind and join are interchangeable: if you have bind defined,</span>
+<span class="c"> * then you can define join as `let join x = x &gt;&gt;= id` *)</span>
+
+<span class="c">(* This is a common monad helper *)</span>
+<span class="c">(** Sequentially compose two actions, discarding any value produced</span>
+<span class="c"> *  by the first, like sequencing operators (such as the semicolon)</span>
+<span class="c"> *  in imperative languages. *)</span>
+<span class="k">let</span> <span class="o">(&gt;&gt;)</span>  <span class="o">=</span> <span class="o">(</span> <span class="o">*&gt;</span> <span class="o">)</span>
+</pre></div>
+
+
+<p>The difference in the type signatures shows that the Applicative, being context
+unaware, can run in parallel and do not rely on previous computations, while the
+Monad encodes sequential computations and can make a finer use of the state of
+the previous computations. As a friend recently told me, 'a monad is just a
+programmable semicolon'.</p>
+<p>You can see the incredible amount of helpers for imperative programming that
+come as part of monads here: <a href="https://hackage.haskell.org/package/base-4.9.1.0/docs/Control-Monad.html#t:Monad" title="Control.Monad on Hackage">hackage-control.monad</a>.</p>
+<h2>Mixing things up: the <code>Alternative</code>s</h2>
+<p>We have discussed functors and monoids as separate beasts, however there is no
+reason for them to be separate... indeed sometimes we can define a monoid over
+the applicative functors: welcome the <code>Alternative</code>s.</p>
+<p>For historical reasons, instead of having just a <code>mempty</code> and a <code>mappend</code>, the
+alternatives come with their own syntax:</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">ALTERNATIVE</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">include</span> <span class="nc">APPLICATIVE</span> <span class="k">with</span> <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">:=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** The identity of &lt;|&gt; *)</span>
+  <span class="k">val</span> <span class="n">empty</span><span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="c">(** An associative binary operation -- practically mappend *)</span>
+  <span class="k">val</span> <span class="o">(&lt;|&gt;):</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Being both a monoid and an applicative functor, alternatives come bundled with a
+huge set of generic helpers as well.</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Alternative_Utils</span> <span class="o">(</span><span class="nc">A</span><span class="o">:</span> <span class="nc">ALTERNATIVE</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** Generic Alternative helpers *)</span>
+  <span class="k">open</span> <span class="nc">A</span>
+  <span class="k">module</span> <span class="nc">AppU</span> <span class="o">=</span> <span class="nc">Applicative_Utils</span><span class="o">(</span><span class="nc">A</span><span class="o">)</span>
+  <span class="k">include</span> <span class="nc">AppU</span>
+
+  <span class="k">module</span> <span class="nc">AltMonoid</span><span class="o">(</span><span class="nc">T</span><span class="o">:</span> <span class="nc">GENERIC_TYPE_WORKAROUND</span><span class="o">):</span> <span class="o">(</span><span class="nc">MONOID</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nn">T</span><span class="p">.</span><span class="n">t</span> <span class="nn">A</span><span class="p">.</span><span class="n">t</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+    <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nn">T</span><span class="p">.</span><span class="n">t</span> <span class="nn">A</span><span class="p">.</span><span class="n">t</span>
+    <span class="k">let</span> <span class="n">mempty</span>  <span class="o">=</span> <span class="nn">A</span><span class="p">.</span><span class="n">empty</span>
+    <span class="k">let</span> <span class="n">mappend</span> <span class="o">=</span> <span class="nn">A</span><span class="p">.</span><span class="o">(&lt;|&gt;)</span>
+  <span class="k">end</span>
+
+  <span class="c">(*</span>
+<span class="c">  (* This should not be a comment, but for some reason ocaml 4.03 is optimising</span>
+<span class="c">   * the hell out of it and it ends up in a stack overflow due to infinite recursion.</span>
+<span class="c">   * I have also tried in vane to use lazy, with the same result. They do work, however,</span>
+<span class="c">   * when implemented separately case by case. *)</span>
+
+<span class="c">  (* note the need to break infinite recursion adding an intermediate evaluation *)</span>
+<span class="c">  let delay f = f ()</span>
+
+<span class="c">  (** Zero or more *)</span>
+<span class="c">  (* it could be defined as some v with `in some_ v` replaced by `in many_ v` *)</span>
+<span class="c">  let rec many p = List.cons &lt;$&gt; p &lt;*&gt; (delay @@ fun _ -&gt; many p)</span>
+<span class="c">    &lt;|&gt; pure []</span>
+
+<span class="c">  (** One or more *)</span>
+<span class="c">  let some v = let rec some_ v = List.cons &lt;$&gt; v &lt;*&gt; (delay @@ fun _ -&gt; many_ v)</span>
+<span class="c">    and many_ v = some_ v &lt;|&gt; pure []</span>
+<span class="c">    in some_ v</span>
+<span class="c">  *)</span>
+
+  <span class="c">(** Always return empty *)</span>
+  <span class="k">let</span> <span class="n">fail</span> <span class="o">=</span> <span class="n">empty</span>
+
+  <span class="c">(** Another name for concat *)</span>
+  <span class="k">let</span> <span class="n">choose</span> <span class="o">(</span><span class="k">type</span> <span class="n">a</span><span class="o">)</span> <span class="n">ps</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="k">module</span> <span class="nc">AM</span> <span class="o">=</span> <span class="nc">Monoid_Utils</span><span class="o">(</span><span class="nc">AltMonoid</span><span class="o">(</span><span class="k">struct</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">a</span> <span class="k">end</span><span class="o">))</span>
+    <span class="k">in</span> <span class="nn">AM</span><span class="p">.</span><span class="n">concat</span> <span class="n">ps</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>The laws that they need to fulfil are both the monoid ones and the functor ones.
+I will not enter too much in the detail of alternatives, yet, because an example
+will appear soon in the context of the implementation of the parser in the next
+session.</p>
+<h1>A practical example - monadic parsing library</h1>
+<p>We will try to use the patterns seen above to implement a simple parsing
+library, strongly inspired by <a href="http://www.cs.nott.ac.uk/~pszgmh/monparsing.pdf" title="Monadic Parser Combinators">hutton</a>.  You can see similar implementations
+both in <a href="https://github.com/pyrocat101/opal" title="Self-contained monadic parser combinators for OCaml">opal</a>, <a href="https://github.com/inhabitedtype/angstrom" title="Angstrom: Parser combinators built for speed and memory efficiency">angstrom</a> and <a href="http://blog.shaynefletcher.org/2017/05/more-type-classes-in-ocaml.html" title="More type classes in OCaml">more-typeclasses</a>.  Parser combinators libraries
+built from the same ideas are actually used in production, see <a href="https://hackage.haskell.org/package/parsec" title="Haskell's parsec">parsec</a>,
+<a href="https://github.com/inhabitedtype/angstrom" title="Angstrom: Parser combinators built for speed and memory efficiency">angstrom</a> and <a href="https://github.com/pcapriotti/optparse-applicative" title="Applicative option parser">optparseapp</a>.</p>
+<p>To be fair, some these combinators libraries are based on monadic patterns (see
+e.g. the implementation for
+<a href="https://github.com/pyrocat101/opal/blob/master/opal.ml">opal</a>) and some on
+applicative. Either of them has its pros and its cons, you can see an
+interesting comment in <a href="https://stackoverflow.com/questions/7861903/what-are-the-benefits-of-applicative-parsing-over-monadic-parsing#7863380" title="What are the benefits of applicative parsing over monadic parsing?">applicative-or-monadic</a>. The main difference can be
+summarised with</p>
+<blockquote>
+<p>If it helps, you can think of applicative parsers as atomic or parallel while
+monadic parsers would be incremental or serial. Yet another way to say it is
+that monadic parsers operate on the result of the previous parser and can only
+return something to the next; the overall result is then simply the result of
+the last parser in the chain. Applicative parsers, on the other hand, operate on
+the whole input and contribute directly to the whole output – when combined and
+executed, many applicative parsers can run “at once” to produce the final
+result.</p>
+</blockquote>
+<p>The zeroeth step, is to define a type for a parser.  A parser is a function that
+takes some test and returns a parsed value and the rest of the text, if any.  We
+have tree natural possible types:</p>
+<div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">text</span> <span class="o">=</span> <span class="kt">char</span> <span class="kt">list</span>
+<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">p_opt</span>  <span class="o">=</span> <span class="n">text</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="n">text</span><span class="o">)</span> <span class="n">option</span>
+<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">p_list</span> <span class="o">=</span> <span class="n">text</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="n">text</span><span class="o">)</span> <span class="kt">list</span>
+<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">p_res</span>  <span class="o">=</span> <span class="n">test</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="n">text</span><span class="o">)</span> <span class="kt">string</span> <span class="n">result</span>
+</pre></div>
+
+
+<p>We will keep things simple and use the <code>list</code>, to give an implementation
+alternative to <a href="http://blog.shaynefletcher.org/2017/05/more-type-classes-in-ocaml.html" title="More type classes in OCaml">more-typeclasses</a> and re-use some of the modules already defined
+above.</p>
+<div class="highlight"><pre><span></span><span class="c">(* this is our parser type *)</span>
+<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">p</span> <span class="o">=</span> <span class="n">text</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="n">text</span><span class="o">)</span> <span class="kt">list</span>
+<span class="o">````</span>
+
+<span class="nc">Note</span> <span class="n">that</span> <span class="o">`</span><span class="n">text</span><span class="o">`</span> <span class="n">is</span> <span class="n">more</span> <span class="n">general</span> <span class="n">a</span> <span class="n">priori</span> <span class="n">than</span> <span class="n">a</span> <span class="kt">list</span> <span class="k">of</span> <span class="n">character</span><span class="o">,</span> <span class="n">but</span> <span class="nc">I&#39;ve</span>
+<span class="n">chosen</span> <span class="n">this</span> <span class="n">implementation</span> <span class="k">for</span> <span class="n">ease</span> <span class="k">of</span> <span class="n">use</span><span class="o">.</span> <span class="nc">Using</span> <span class="n">some</span> <span class="k">lazy</span> <span class="kt">char</span> <span class="n">producer</span> <span class="n">would</span>
+<span class="n">have</span> <span class="n">been</span> <span class="n">much</span> <span class="n">more</span> <span class="n">efficient</span> <span class="k">in</span> <span class="n">this</span> <span class="n">case</span><span class="o">.</span>
+
+<span class="nc">We</span> <span class="n">can</span> <span class="n">always</span> <span class="n">convert</span> <span class="n">a</span> <span class="kt">string</span> <span class="k">to</span> <span class="n">a</span> <span class="kt">list</span> <span class="k">of</span> <span class="n">chars</span> <span class="n">using</span> <span class="n">the</span> <span class="n">following</span> <span class="o">`</span><span class="n">explode</span><span class="o">`</span>
+<span class="k">function</span><span class="o">.</span>
+
+<span class="o">```</span><span class="n">ocaml</span>
+<span class="k">let</span> <span class="n">explode</span> <span class="n">s</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">aux</span> <span class="n">i</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">aux</span> <span class="o">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span><span class="o">.[</span><span class="n">i</span><span class="o">]</span> <span class="o">::</span> <span class="n">acc</span><span class="o">)</span> <span class="k">in</span>
+  <span class="n">aux</span> <span class="o">(</span><span class="nn">String</span><span class="p">.</span><span class="n">length</span> <span class="n">s</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">[]</span>
+</pre></div>
+
+
+<p>The simpler parser I can think of matches an empty input and returns something
+only in that case.</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span>  <span class="o">-&gt;</span> <span class="o">[(</span><span class="bp">()</span><span class="o">,</span> <span class="bp">[]</span><span class="o">)]</span>
+  <span class="o">|</span> <span class="o">_</span>   <span class="o">-&gt;</span> <span class="bp">[]</span>
+</pre></div>
+
+
+<p>Another simple one consumes the first character in <code>text</code> and returns that
+character as a result. If it fails it returns the empty list.</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">item</span><span class="o">:</span> <span class="kt">char</span> <span class="n">p</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span>      <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="n">c</span> <span class="o">::</span> <span class="n">cs</span> <span class="o">-&gt;</span> <span class="o">[(</span><span class="n">c</span><span class="o">,</span> <span class="n">cs</span><span class="o">)]</span>
+</pre></div>
+
+
+<p>This can be easily generalised to a parser that given a function, can construct
+a new parser that, when successful, consumes a character of the input and
+produces a new value.</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">token</span> <span class="n">f</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span>      <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="n">c</span> <span class="o">::</span> <span class="n">cs</span> <span class="o">-&gt;</span> <span class="nn">ListF</span><span class="p">.</span><span class="n">fmap</span> <span class="o">(</span><span class="k">fun</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">cs</span><span class="o">))</span> <span class="o">(</span><span class="n">f</span> <span class="n">c</span><span class="o">)</span>
+</pre></div>
+
+
+<p>We can use this to implement a parser to match specific characters.</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">token</span> <span class="o">(</span><span class="k">fun</span> <span class="n">c&#39;</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="n">c</span> <span class="o">=</span> <span class="n">c&#39;</span> <span class="k">then</span> <span class="o">[</span><span class="n">c</span><span class="o">]</span> <span class="k">else</span> <span class="bp">[]</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Given that parsers are functions, the actual <code>parse</code> function does nothing but
+applying the parser and extracting the value.</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">parse</span> <span class="n">parser</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">input</span> <span class="o">-&gt;</span>
+  <span class="c">(* parser input &lt;$&gt; ListF.fmap fst *)</span>
+  <span class="k">match</span> <span class="n">parser</span> <span class="n">input</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="bp">[]</span>  <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="n">lst</span> <span class="o">-&gt;</span> <span class="nn">ListF</span><span class="p">.</span><span class="n">fmap</span> <span class="n">fst</span> <span class="n">lst</span>
+</pre></div>
+
+
+<p>Now, if we want to start composing the parsers, chaining many of them or
+allowing a choice between multiple ones, we need to find some appropriate
+combinators. We have a wrapped type and we know from the previous section that
+to apply a function inside wrapped types we can use applicative functors.</p>
+<p>We can use the types as a guide to define an applicative functor for parsers.</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ParserApplicative</span><span class="o">:</span> <span class="o">(</span><span class="nc">APPLICATIVE</span> <span class="k">with</span> <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">p</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">p</span>
+
+  <span class="c">(* functor *)</span>
+  <span class="k">let</span> <span class="n">fmap</span> <span class="n">f</span> <span class="n">parser</span> <span class="o">=</span>
+    <span class="n">parser</span> <span class="o">&gt;.&gt;</span> <span class="nn">ListF</span><span class="p">.</span><span class="n">fmap</span> <span class="o">(</span><span class="k">fun</span> <span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="n">cs</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">f</span> <span class="n">c</span><span class="o">,</span> <span class="n">cs</span><span class="o">))</span>
+
+  <span class="c">(* applicative *)</span>
+
+  <span class="c">(* pure takes a value and wraps it in a parser</span>
+<span class="c">   * -- a function from text to a list of tuples... *)</span>
+  <span class="k">let</span> <span class="n">pure</span> <span class="n">c</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">input</span> <span class="o">-&gt;</span> <span class="o">[(</span><span class="n">c</span><span class="o">,</span> <span class="n">input</span><span class="o">)]</span>   <span class="c">(* equiv. pure c input = [(c, input)] *)</span>
+
+  <span class="k">let</span> <span class="n">ap</span> <span class="n">parser_f</span> <span class="n">parser</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">input</span> <span class="o">-&gt;</span>
+    <span class="k">match</span> <span class="n">parser_f</span> <span class="n">input</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="bp">[]</span>            <span class="o">-&gt;</span> <span class="bp">[]</span>
+    <span class="o">|</span> <span class="o">(</span><span class="n">f</span><span class="o">,</span> <span class="n">cs</span><span class="o">)</span> <span class="o">::</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">fmap</span> <span class="n">f</span> <span class="n">parser</span> <span class="n">cs</span>
+    <span class="o">|</span> <span class="n">lst</span>           <span class="o">-&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="o">(</span><span class="n">f</span><span class="o">,</span> <span class="n">cs</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">fmap</span> <span class="n">f</span> <span class="n">parser</span> <span class="n">cs</span><span class="o">)</span> <span class="n">lst</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">concat</span> <span class="c">(* this should not really happen, we could use `-&gt; .` *)</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">ParserApp</span> <span class="o">=</span> <span class="nc">Applicative_Utils</span><span class="o">(</span><span class="nc">ParserApplicative</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Unfortunately parsers are functions, so we cannot really use our test modules
+and instead we need to do the math by hand to check the laws.</p>
+<p>We can now use <code>pure</code> and <code>ap</code> (or <code>&lt;*&gt;</code>) as building blocks to make the parser
+combinators.  For example a parser that parses the input <code>['x';'a';'p';'i']</code> and
+produces a unit result:</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">xapi</span> <span class="o">=</span> <span class="k">let</span> <span class="k">open</span> <span class="nc">ParserApp</span> <span class="k">in</span> <span class="k">let</span> <span class="k">open</span> <span class="nc">FunU</span> <span class="k">in</span>
+  <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s2">&quot;Gotcha!&quot;</span><span class="o">)</span> <span class="o">&lt;$&gt;</span> <span class="kt">char</span> <span class="sc">&#39;x&#39;</span> <span class="o">&lt;*</span> <span class="kt">char</span> <span class="sc">&#39;a&#39;</span> <span class="o">&lt;*</span> <span class="kt">char</span> <span class="sc">&#39;p&#39;</span> <span class="o">&lt;*</span> <span class="kt">char</span> <span class="sc">&#39;i&#39;</span>
+</pre></div>
+
+
+<p>Running this in <code>utop</code> will show something like the following.</p>
+<div class="highlight"><pre><span></span># xapi (explode &quot;xapi&quot;);;
+- : (string * text) list = [(&quot;Gotcha!&quot;, [])]
+
+# xapi (explode &quot;xapi11&quot;);;
+- : (string * text) list = [(&quot;Gotcha!&quot;, [&#39;1&#39;; &#39;1&#39;])]
+
+# xapi (explode &quot;test&quot;);;
+- : (string * text) list = []
+</pre></div>
+
+
+<p>We know more in fact. We can prescribe a parser that always fail and a function
+that given two parsers, tries the first and in case of failure tries the second
+(something like the <code>Any</code> monoid).</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ParserAlternative</span><span class="o">:</span> <span class="o">(</span><span class="nc">ALTERNATIVE</span> <span class="k">with</span> <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">p</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">ParserApplicative</span>
+
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">_</span> <span class="o">=</span> <span class="bp">[]</span>
+
+  <span class="k">let</span> <span class="o">(&lt;|&gt;)</span> <span class="n">p1</span> <span class="n">p2</span> <span class="n">txt</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">p1</span> <span class="n">txt</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="o">[</span> <span class="o">]</span>        <span class="o">-&gt;</span> <span class="n">p2</span> <span class="n">txt</span>
+    <span class="o">|</span> <span class="o">[_]</span> <span class="k">as</span> <span class="n">res</span> <span class="o">-&gt;</span> <span class="n">res</span>
+    <span class="o">|</span>  <span class="o">_</span>  <span class="k">as</span> <span class="n">res</span> <span class="o">-&gt;</span> <span class="n">res</span>  <span class="c">(* this will not happen ... we could use `-&gt; .` *)</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">ParserAlt</span> <span class="o">=</span> <span class="nc">Alternative_Utils</span><span class="o">(</span><span class="nc">ParserAlternative</span><span class="o">)</span>
+<span class="k">open</span> <span class="nc">ParserAlt</span>
+</pre></div>
+
+
+<p>The implementation for alternative gives us a <code>choose</code> function to try and apply
+multiple parsers, a function <code>some</code> that given a parser either parses one result
+of the given parser followed by many results, or in case it fails, consumes no
+input and returns an empty list, and a function <code>many</code> that is like <code>some</code> but
+does not fail if no result is found.</p>
+<p>Another handy combinator is <code>satisfy</code> that takes a predicate function for
+<em>filtering</em> a parser by only allowing it to succeed when its result satisfies
+the predicate:</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">satisfy</span> <span class="n">pred</span> <span class="n">p</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">input</span> <span class="o">-&gt;</span>
+  <span class="k">match</span> <span class="n">p</span> <span class="n">input</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="o">[(</span><span class="n">x</span><span class="o">,</span> <span class="o">_)]</span> <span class="k">as</span> <span class="n">res</span> <span class="k">when</span> <span class="n">pred</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">res</span>
+  <span class="o">|</span> <span class="o">_</span>                           <span class="o">-&gt;</span> <span class="bp">[]</span>
+</pre></div>
+
+
+<p>Interestingly, the <code>satisfy</code> combinator allows us to define a variation of
+<code>some</code>, <code>char</code> and <code>item</code> that is a bit more legible:</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">some&#39;</span> <span class="n">pred</span> <span class="o">=</span> <span class="n">satisfy</span> <span class="o">((&lt;&gt;)</span> <span class="bp">[]</span><span class="o">)</span> <span class="o">(</span><span class="n">many</span> <span class="n">pred</span><span class="o">)</span>
+<span class="k">let</span> <span class="n">item&#39;</span> <span class="o">=</span> <span class="n">satisfy</span> <span class="o">(</span><span class="n">const</span> <span class="bp">true</span><span class="o">)</span>
+<span class="k">let</span> <span class="kt">char</span><span class="k">&#39;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">satisfy</span> <span class="o">((=)</span> <span class="n">c</span><span class="o">)</span>
+</pre></div>
+
+
+<p>To make things cleaner we can wrap everything in a module with a signature that
+hides the implementation details. This also makes the parser type itself
+abstract and instead exposes a run function that takes a string as input rather
+than a list of characters (as in <a href="https://hackage.haskell.org/package/parsec" title="Haskell's parsec">parsec</a>).</p>
+<p>I like the approach used in <a href="http://blog.shaynefletcher.org/2017/05/more-type-classes-in-ocaml.html" title="More type classes in OCaml">more-typeclasses</a> for example. We can use a similar
+signature and provide an (almost) swappable implementation</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">PARSER</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="k">val</span> <span class="n">empty</span><span class="o">:</span>   <span class="kt">unit</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">run</span><span class="o">:</span>     <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">val</span> <span class="n">map</span><span class="o">:</span>     <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">pure</span><span class="o">:</span>    <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">ap</span><span class="o">:</span>      <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">&lt;$&gt;</span> <span class="o">):</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">&lt;*&gt;</span> <span class="o">):</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">&lt;*</span>  <span class="o">):</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">*&gt;</span>  <span class="o">):</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">token</span><span class="o">:</span>   <span class="o">(</span><span class="kt">char</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="kt">char</span><span class="o">:</span>    <span class="kt">char</span> <span class="o">-&gt;</span> <span class="kt">char</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">fail</span><span class="o">:</span>    <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">choose</span><span class="o">:</span>  <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">&lt;|&gt;</span> <span class="o">):</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">many</span><span class="o">:</span>    <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">some</span><span class="o">:</span>    <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">filter</span><span class="o">:</span>  <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">bool</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="k">type</span> <span class="nc">CHARPARSER</span> <span class="o">=</span> <span class="k">functor</span> <span class="o">(</span><span class="nc">P</span><span class="o">:</span> <span class="nc">PARSER</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">sig</span>
+
+  <span class="c">(* Some optional helpers *)</span>
+  <span class="k">val</span> <span class="n">exactly</span><span class="o">:</span> <span class="kt">char</span> <span class="o">-&gt;</span> <span class="kt">char</span> <span class="nn">P</span><span class="p">.</span><span class="n">t</span>
+  <span class="k">val</span> <span class="n">one_of</span><span class="o">:</span>  <span class="kt">char</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="kt">char</span> <span class="nn">P</span><span class="p">.</span><span class="n">t</span>
+  <span class="k">val</span> <span class="n">none_of</span><span class="o">:</span> <span class="kt">char</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="kt">char</span> <span class="nn">P</span><span class="p">.</span><span class="n">t</span>
+  <span class="k">val</span> <span class="n">range</span><span class="o">:</span>   <span class="kt">char</span> <span class="o">-&gt;</span> <span class="kt">char</span> <span class="o">-&gt;</span> <span class="kt">char</span> <span class="nn">P</span><span class="p">.</span><span class="n">t</span>
+  <span class="k">val</span> <span class="n">space</span><span class="o">:</span>   <span class="kt">char</span> <span class="nn">P</span><span class="p">.</span><span class="n">t</span>
+  <span class="k">val</span> <span class="n">newline</span><span class="o">:</span> <span class="kt">char</span> <span class="nn">P</span><span class="p">.</span><span class="n">t</span>
+  <span class="k">val</span> <span class="n">tab</span><span class="o">:</span>     <span class="kt">char</span> <span class="nn">P</span><span class="p">.</span><span class="n">t</span>
+  <span class="k">val</span> <span class="n">upper</span><span class="o">:</span>   <span class="kt">char</span> <span class="nn">P</span><span class="p">.</span><span class="n">t</span>
+  <span class="k">val</span> <span class="n">lower</span><span class="o">:</span>   <span class="kt">char</span> <span class="nn">P</span><span class="p">.</span><span class="n">t</span>
+  <span class="k">val</span> <span class="n">digit</span><span class="o">:</span>   <span class="kt">char</span> <span class="nn">P</span><span class="p">.</span><span class="n">t</span>
+  <span class="k">val</span> <span class="n">letter</span><span class="o">:</span>  <span class="kt">char</span> <span class="nn">P</span><span class="p">.</span><span class="n">t</span>
+  <span class="k">val</span> <span class="n">alpha_num</span><span class="o">:</span> <span class="kt">char</span> <span class="nn">P</span><span class="p">.</span><span class="n">t</span>
+  <span class="k">val</span> <span class="n">hex_digit</span><span class="o">:</span> <span class="kt">char</span> <span class="nn">P</span><span class="p">.</span><span class="n">t</span>
+  <span class="k">val</span> <span class="n">oct_digit</span><span class="o">:</span> <span class="kt">char</span> <span class="nn">P</span><span class="p">.</span><span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>You can see that introducing the alternatives, reduces even more the amount of
+special combinators needed to define the parser itself (compare this with the
+one obtained in <a href="http://blog.shaynefletcher.org/2017/05/more-type-classes-in-ocaml.html" title="More type classes in OCaml">more-typeclasses</a>)</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Parser</span><span class="o">:</span> <span class="nc">PARSER</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">ParserAlternative</span>
+  <span class="k">include</span> <span class="nc">ParserAlt</span>
+
+  <span class="k">let</span> <span class="n">map</span> <span class="o">=</span> <span class="n">fmap</span>
+
+  <span class="k">let</span> <span class="n">explode</span> <span class="n">s</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="k">rec</span> <span class="n">aux</span> <span class="n">i</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">aux</span> <span class="o">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span><span class="o">.[</span><span class="n">i</span><span class="o">]</span> <span class="o">::</span> <span class="n">acc</span><span class="o">)</span> <span class="k">in</span>
+    <span class="n">aux</span> <span class="o">(</span><span class="nn">String</span><span class="p">.</span><span class="n">length</span> <span class="n">s</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">[]</span>
+
+  <span class="k">let</span> <span class="n">run</span> <span class="n">p</span> <span class="n">s</span> <span class="o">=</span> <span class="n">explode</span> <span class="n">s</span>
+    <span class="o">|&gt;</span> <span class="n">p</span>
+    <span class="o">|&gt;</span> <span class="nn">ListF</span><span class="p">.</span><span class="n">fmap</span> <span class="n">fst</span>
+
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="bp">[]</span>  <span class="o">-&gt;</span> <span class="o">[(</span><span class="bp">()</span><span class="o">,</span> <span class="bp">[]</span><span class="o">)]</span>
+    <span class="o">|</span> <span class="o">_</span>   <span class="o">-&gt;</span> <span class="bp">[]</span>
+
+  <span class="k">let</span> <span class="n">token</span> <span class="n">f</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="bp">[]</span>      <span class="o">-&gt;</span> <span class="bp">[]</span>
+    <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span> <span class="o">-&gt;</span> <span class="nn">ListF</span><span class="p">.</span><span class="n">fmap</span> <span class="o">(</span><span class="k">fun</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">xs</span><span class="o">))</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+
+  <span class="k">let</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">token</span> <span class="o">(</span><span class="k">fun</span> <span class="n">c&#39;</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="n">c</span> <span class="o">=</span> <span class="n">c&#39;</span> <span class="k">then</span> <span class="o">[</span><span class="n">c</span><span class="o">]</span> <span class="k">else</span> <span class="bp">[]</span><span class="o">)</span>
+
+  <span class="k">let</span> <span class="n">satisfy</span> <span class="n">f</span> <span class="n">p</span> <span class="n">cs</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">p</span> <span class="n">cs</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="o">[(</span><span class="n">x</span><span class="o">,</span> <span class="n">cs</span><span class="o">)]</span> <span class="k">when</span> <span class="n">f</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="o">[(</span><span class="n">x</span><span class="o">,</span><span class="n">cs</span><span class="o">)]</span>
+    <span class="o">|</span> <span class="o">_</span>                  <span class="o">-&gt;</span> <span class="bp">[]</span>
+
+  <span class="k">let</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">satisfy</span>
+
+  <span class="k">let</span> <span class="n">delay</span> <span class="n">f</span> <span class="n">xs</span> <span class="o">=</span> <span class="n">f</span> <span class="bp">()</span> <span class="n">xs</span>
+
+  <span class="c">(* These are alternative&#39;s helpers, but we needed to move them</span>
+<span class="c">   * here to avoid infinite recursion... To be investigated... *)</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">many</span> <span class="n">p</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">cons</span> <span class="o">&lt;$&gt;</span> <span class="n">p</span> <span class="o">&lt;*&gt;</span> <span class="o">(</span><span class="n">delay</span> <span class="o">@@</span> <span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">many</span> <span class="n">p</span><span class="o">)</span>
+    <span class="o">&lt;|&gt;</span> <span class="n">pure</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">some</span> <span class="n">p</span> <span class="o">=</span> <span class="n">satisfy</span> <span class="o">((&lt;&gt;)</span> <span class="bp">[]</span><span class="o">)</span> <span class="o">(</span><span class="n">many</span> <span class="n">p</span><span class="o">)</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">MakeCharParser</span><span class="o">(</span><span class="nc">P</span><span class="o">:</span> <span class="nc">PARSER</span><span class="o">)</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">open</span> <span class="nc">P</span>
+
+  <span class="k">let</span> <span class="n">item</span> <span class="o">=</span> <span class="n">token</span> <span class="o">(</span><span class="k">fun</span> <span class="n">c</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="n">c</span><span class="o">])</span>
+
+  <span class="k">let</span> <span class="n">exactly</span> <span class="n">x</span> <span class="o">=</span> <span class="n">filter</span> <span class="o">((=)</span> <span class="n">x</span><span class="o">)</span> <span class="n">item</span>
+  <span class="k">let</span> <span class="n">one_of</span>  <span class="n">l</span> <span class="o">=</span> <span class="n">filter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">mem</span> <span class="n">x</span> <span class="n">l</span><span class="o">)</span> <span class="n">item</span>
+  <span class="k">let</span> <span class="n">none_of</span> <span class="n">l</span> <span class="o">=</span> <span class="n">filter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">not</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">mem</span> <span class="n">x</span> <span class="n">l</span><span class="o">))</span> <span class="n">item</span>
+  <span class="k">let</span> <span class="n">range</span> <span class="n">l</span> <span class="n">r</span> <span class="o">=</span> <span class="n">filter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&amp;&amp;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="o">)</span> <span class="n">item</span>
+
+  <span class="k">let</span> <span class="n">space</span>     <span class="o">=</span> <span class="n">one_of</span> <span class="o">[</span><span class="sc">&#39; &#39;</span><span class="o">;</span> <span class="sc">&#39;\t&#39;</span><span class="o">;</span> <span class="sc">&#39;\r&#39;</span><span class="o">;</span> <span class="sc">&#39;\n&#39;</span><span class="o">]</span>
+  <span class="k">let</span> <span class="n">newline</span>   <span class="o">=</span> <span class="n">exactly</span> <span class="sc">&#39;\n&#39;</span>
+  <span class="k">let</span> <span class="n">tab</span>       <span class="o">=</span> <span class="n">exactly</span> <span class="sc">&#39;\t&#39;</span>
+  <span class="k">let</span> <span class="n">upper</span>     <span class="o">=</span> <span class="n">range</span> <span class="sc">&#39;A&#39;</span> <span class="sc">&#39;Z&#39;</span>
+  <span class="k">let</span> <span class="n">lower</span>     <span class="o">=</span> <span class="n">range</span> <span class="sc">&#39;a&#39;</span> <span class="sc">&#39;z&#39;</span>
+  <span class="k">let</span> <span class="n">digit</span>     <span class="o">=</span> <span class="n">range</span> <span class="sc">&#39;0&#39;</span> <span class="sc">&#39;9&#39;</span>
+  <span class="k">let</span> <span class="n">letter</span>    <span class="o">=</span> <span class="n">lower</span>  <span class="o">&lt;|&gt;</span> <span class="n">upper</span>
+  <span class="k">let</span> <span class="n">alpha_num</span> <span class="o">=</span> <span class="n">letter</span> <span class="o">&lt;|&gt;</span> <span class="n">digit</span>
+  <span class="k">let</span> <span class="n">hex_digit</span> <span class="o">=</span> <span class="n">range</span> <span class="sc">&#39;a&#39;</span> <span class="sc">&#39;f&#39;</span> <span class="o">&lt;|&gt;</span> <span class="n">range</span> <span class="sc">&#39;A&#39;</span> <span class="sc">&#39;F&#39;</span> <span class="o">&lt;|&gt;</span> <span class="n">digit</span>
+  <span class="k">let</span> <span class="n">oct_digit</span> <span class="o">=</span> <span class="n">range</span> <span class="sc">&#39;0&#39;</span> <span class="sc">&#39;7&#39;</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>This is the same as the example in <a href="http://blog.shaynefletcher.org/2017/05/more-type-classes-in-ocaml.html" title="More type classes in OCaml">more-typeclasses</a>. Consider a parser for
+parsing dates of the format <code>YYYY-MM-DD</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">CP</span> <span class="o">=</span> <span class="nc">MakeCharParser</span><span class="o">(</span><span class="nc">Parser</span><span class="o">)</span>
+<span class="k">open</span> <span class="nc">Parser</span>
+<span class="k">open</span> <span class="nc">CP</span>
+
+<span class="k">let</span> <span class="kt">int</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">string_of_list</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="nn">String</span><span class="p">.</span><span class="n">make</span> <span class="mi">1</span><span class="o">)</span> <span class="o">&gt;.&gt;</span> <span class="nn">String</span><span class="p">.</span><span class="n">concat</span> <span class="s2">&quot;&quot;</span> <span class="k">in</span>
+  <span class="o">(</span><span class="n">string_of_list</span> <span class="o">&gt;.&gt;</span> <span class="n">int_of_string</span><span class="o">)</span> <span class="o">&lt;$&gt;</span> <span class="n">some</span> <span class="n">digit</span>
+
+<span class="k">let</span> <span class="n">int_range</span> <span class="n">mn</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">filter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">mn</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">mx</span><span class="o">)</span> <span class="kt">int</span>
+<span class="k">let</span> <span class="n">zero_digit</span> <span class="o">=</span> <span class="kt">char</span> <span class="sc">&#39;0&#39;</span> <span class="o">*&gt;</span> <span class="n">int_range</span> <span class="mi">1</span> <span class="mi">9</span>
+<span class="k">let</span> <span class="n">year</span>  <span class="o">=</span> <span class="n">int_range</span> <span class="mi">1700</span> <span class="mi">2400</span>
+<span class="k">let</span> <span class="n">month</span> <span class="o">=</span> <span class="n">zero_digit</span> <span class="o">&lt;|&gt;</span> <span class="n">int_range</span> <span class="mi">10</span> <span class="mi">12</span>
+<span class="k">let</span> <span class="n">day</span> <span class="o">=</span> <span class="n">zero_digit</span> <span class="o">&lt;|&gt;</span> <span class="n">int_range</span> <span class="mi">10</span> <span class="mi">31</span>
+
+<span class="k">let</span> <span class="n">date</span> <span class="o">=</span>
+  <span class="o">(</span><span class="k">fun</span> <span class="n">y</span> <span class="n">m</span> <span class="n">d</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">y</span><span class="o">,</span><span class="n">m</span><span class="o">,</span><span class="n">d</span><span class="o">))</span>
+  <span class="o">&lt;$&gt;</span> <span class="o">(</span><span class="n">year</span> <span class="o">&lt;*</span> <span class="kt">char</span> <span class="sc">&#39;-&#39;</span><span class="o">)</span>
+  <span class="o">&lt;*&gt;</span> <span class="o">(</span><span class="n">month</span> <span class="o">&lt;*</span> <span class="kt">char</span> <span class="sc">&#39;-&#39;</span><span class="o">)</span>
+  <span class="o">&lt;*&gt;</span> <span class="n">day</span>
+</pre></div>
+
+
+<p>Here are a few examples of running the <code>date</code> parser with different string
+inputs:</p>
+<div class="highlight"><pre><span></span># run date &quot;2019-01-23&quot;;;
+- : (int * int * int) list = [(2019, 1, 23)]
+
+# run date &quot;2019-10-23&quot;;;
+- : (int * int * int) list = [(2019, 10, 23)]
+
+# run date &quot;2019-1-23&quot;;;
+- : (int * int * int) list = []
+
+# run date &quot;999-1-23&quot;;;
+- : (int * int * int) list = []
+
+# run date &quot;a999-1-23&quot;;;
+- : (int * int * int) list = []
+</pre></div>
+
+
+<p>We did not mention it later... but to match exactly <code>xapi</code> we can use the
+<code>empty</code> parser:</p>
+<div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">xapi</span> <span class="o">=</span> <span class="k">let</span> <span class="k">open</span> <span class="nc">Parser</span> <span class="k">in</span>
+  <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s2">&quot;Gotcha!&quot;</span><span class="o">)</span> <span class="o">&lt;$&gt;</span> <span class="n">exactly</span> <span class="sc">&#39;x&#39;</span> <span class="o">&lt;*</span> <span class="n">exactly</span> <span class="sc">&#39;a&#39;</span> <span class="o">&lt;*</span> <span class="n">exactly</span> <span class="sc">&#39;p&#39;</span> <span class="o">&lt;*</span> <span class="n">exactly</span> <span class="sc">&#39;i&#39;</span> <span class="o">&lt;*</span> <span class="n">empty</span>
+</pre></div>
+
+
+<p>That in <code>utop</code> gives</p>
+<div class="highlight"><pre><span></span># run xapi &quot;xapi&quot;
+- : string list [&quot;Gotcha!&quot;]
+
+# run xapi &quot;xapi1&quot;
+- : string list []
+</pre></div>
+
+
+<p>Another interesting example could be a parser that counts the longest
+parenthesis nesting in a parenthesis only string:</p>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">PARENS</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">run</span><span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">val</span> <span class="n">parens</span><span class="o">:</span> <span class="kt">int</span> <span class="n">t</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">Parens</span><span class="o">:</span> <span class="nc">PARENS</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">ParserAlternative</span>
+  <span class="k">include</span> <span class="nc">ParserAlt</span>
+
+  <span class="k">let</span> <span class="n">map</span> <span class="o">=</span> <span class="n">fmap</span>
+
+  <span class="k">let</span> <span class="n">explode</span> <span class="n">s</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="k">rec</span> <span class="n">aux</span> <span class="n">i</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">aux</span> <span class="o">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span><span class="o">.[</span><span class="n">i</span><span class="o">]</span> <span class="o">::</span> <span class="n">acc</span><span class="o">)</span> <span class="k">in</span>
+    <span class="n">aux</span> <span class="o">(</span><span class="nn">String</span><span class="p">.</span><span class="n">length</span> <span class="n">s</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">[]</span>
+
+  <span class="k">let</span> <span class="n">run</span> <span class="n">p</span> <span class="n">s</span> <span class="o">=</span> <span class="n">explode</span> <span class="n">s</span>
+    <span class="o">|&gt;</span> <span class="n">p</span>
+    <span class="o">|&gt;</span> <span class="nn">ListF</span><span class="p">.</span><span class="n">fmap</span> <span class="n">fst</span>
+
+  <span class="k">let</span> <span class="n">token</span> <span class="n">f</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="bp">[]</span>      <span class="o">-&gt;</span> <span class="bp">[]</span>
+    <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span> <span class="o">-&gt;</span> <span class="nn">ListF</span><span class="p">.</span><span class="n">fmap</span> <span class="o">(</span><span class="k">fun</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">xs</span><span class="o">))</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+
+  <span class="k">let</span> <span class="n">satisfy</span> <span class="n">f</span> <span class="n">p</span> <span class="n">cs</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">p</span> <span class="n">cs</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="o">[(</span><span class="n">x</span><span class="o">,</span> <span class="n">cs</span><span class="o">)]</span> <span class="k">when</span> <span class="n">f</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="o">[(</span><span class="n">x</span><span class="o">,</span><span class="n">cs</span><span class="o">)]</span>
+    <span class="o">|</span> <span class="o">_</span>                  <span class="o">-&gt;</span> <span class="bp">[]</span>
+
+  <span class="k">let</span> <span class="n">item</span> <span class="o">=</span> <span class="n">token</span> <span class="o">(</span><span class="k">fun</span> <span class="n">c</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="n">c</span><span class="o">])</span>
+  <span class="k">let</span> <span class="n">exactly</span> <span class="n">x</span> <span class="o">=</span> <span class="n">satisfy</span> <span class="o">((=)</span> <span class="n">x</span><span class="o">)</span> <span class="n">item</span>
+
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">parens</span> <span class="n">txt</span> <span class="o">=</span> <span class="o">(</span>
+    <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="n">b</span> <span class="o">_</span> <span class="n">d</span> <span class="o">-&gt;</span> <span class="n">max</span> <span class="o">(</span><span class="mi">1</span><span class="o">+</span><span class="n">b</span><span class="o">)</span> <span class="n">d</span><span class="o">)</span> <span class="o">&lt;$&gt;</span> <span class="n">exactly</span> <span class="sc">&#39;(&#39;</span> <span class="o">&lt;*&gt;</span> <span class="n">parens</span> <span class="o">&lt;*&gt;</span> <span class="n">exactly</span> <span class="sc">&#39;)&#39;</span> <span class="o">&lt;*&gt;</span> <span class="n">parens</span>
+    <span class="o">&lt;|&gt;</span> <span class="n">pure</span> <span class="mi">0</span>
+  <span class="o">)</span> <span class="n">txt</span>
+<span class="k">end</span>
+
+<span class="k">open</span> <span class="nc">Parens</span>
+</pre></div>
+
+
+<p>That in <code>utop</code> gives</p>
+<div class="highlight"><pre><span></span># open Parens
+
+# run parens &quot;(())&quot;
+- : int list = [2]
+
+# run parens &quot;1(())&quot;)
+- : int list = [0]
+
+# run parens &quot;(()()()())&quot;
+- : int list = [2]
+
+# run parens &quot;((()())()()())&quot;
+- : int list = [3]
+
+# run parens &quot;((()(()))()()())&quot;
+- : int list = [4]
+
+# run parens &quot;((()(()))()()(()()((((((()))))))))&quot;
+- : int list = [9]
+</pre></div>
+        </div>
+        
+        </section>
+
+<section class="post-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE UNCOMMENTING THE THEME * * */
+    var disqus_shortname = 'talesofafractalspectrum'; // required: replace example with your forum shortname
+    // make sure to use the post.id as an identifier, 
+    //otherwise disqus will use the pages url per default, 
+    //which might be problematic...
+    var disqus_identifier = '43';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+    </article>
+    
+    <script type="text/javascript">
+        document.getElementById( 'top-post' ).scrollIntoView();
+    </script>
+
+</main>
+            
+        </div>
+    </div>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']]
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44365202-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

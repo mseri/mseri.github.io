@@ -18,7 +18,7 @@
 
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Convert djvu files to a decently small pdf" />
-    <meta property="og:description" content="Despite there are few decent djvu readers, they are not as comfortable as the pdf readers. Moreover, it is not really possible to open djvu files in eInk ebook readers. Additionally, if you have ever tried to convert djvu files to pdf (or ps), you should have noted that the ..." />
+    <meta property="og:description" content="Despite there are few decent djvu readers, they are not as comfortable as the pdf readers. Moreover, it is not really possible to open djvu files in eInk ebook readers. Additionally, if you have ever tried to convert djvu files to pdf (or ps), you should have noted that the …" />
 
         <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
 
@@ -88,20 +88,20 @@
             <p>Despite there are few decent <a href="http://en.wikipedia.org/wiki/DjVu">djvu</a> readers, they are not as comfortable as the pdf readers. Moreover, it is not really possible to open djvu files in eInk ebook readers.</p>
 <p>Additionally, if you have ever tried to convert djvu files to pdf (or ps), you should have noted that the output is either corrupted or unbelievably big.</p>
 <p>There is an hack that could come in help. Open your <code>.bashrc</code> (or <code>.zshrc</code> if you use Zsh) and define this new <a href="http://tldp.org/LDP/abs/html/aliases.html">alias</a> (i.e. add this line somewhere, say at the end of the file)</p>
-<div class="highlight"><pre><span class="nb">alias </span><span class="nv">djvu2pdf</span><span class="o">=</span><span class="s1">&#39;LC_ALL=C ddjvu -format=pdf -mode=black -quality=85&#39;</span>
+<div class="highlight"><pre><span></span><span class="nb">alias</span> <span class="nv">djvu2pdf</span><span class="o">=</span><span class="s1">&#39;LC_ALL=C ddjvu -format=pdf -mode=black -quality=85&#39;</span>
 </pre></div>
 
 
 <p>Save and reopen your terminal.</p>
 <p>Now, running</p>
-<div class="highlight"><pre>djvu2pdf file.djvu output.pdf
+<div class="highlight"><pre><span></span>djvu2pdf file.djvu output.pdf
 </pre></div>
 
 
 <p>will create a relatively small file with decent/good quality.</p>
 <p>Note that the <code>-mode=black</code> option improves sensibily the size of the file, but at the price of destroying some of the figures. </p>
 <p>If you really need the figures, you could drop the option or create a different alias, e.g.</p>
-<div class="highlight"><pre><span class="nb">alias </span><span class="nv">djvu2pdf4pics</span><span class="o">=</span><span class="s1">&#39;LC_ALL=C ddjvu -format=pdf -quality=85&#39;</span>
+<div class="highlight"><pre><span></span><span class="nb">alias</span> <span class="nv">djvu2pdf4pics</span><span class="o">=</span><span class="s1">&#39;LC_ALL=C ddjvu -format=pdf -quality=85&#39;</span>
 </pre></div>
         </div>
         
