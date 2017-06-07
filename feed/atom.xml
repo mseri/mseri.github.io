@@ -23,8 +23,10 @@ notes. If you have ideas on fixes and improvements, please let me know in the
 comments and I'll try to update and correct the text.&lt;/p&gt;
 &lt;p&gt;In what follows, I will focus on Monoids, Functors (not to be confused with
 OCaml's module functors), Applicatives, Alternatives and, only briefly, Monads
-(these will be the core of another talk, that will be followed by a final one on
-the Free Monad -- I will link the notes here if they are made public).&lt;/p&gt;
+(these will be the
+&lt;a href="https://medium.com/@huund/monadic-error-handling-1e2ce66e3810"&gt;core of another talk&lt;/a&gt;,
+that will be followed by a final one on the Free Monad -- I will link the
+notes here if they are made public).&lt;/p&gt;
 &lt;p&gt;There is plenty more to discuss: Semigroups, Categories, Semigroupoids,
 F-Algebras (scary, but these are really powerful and useful: &lt;a href="https://www.youtube.com/watch?v=PK4SOaAGVfg" title="F-algebras or: How I Learned to Stop Worrying and Love the Type System"&gt;f-algebras-video&lt;/a&gt;,
 &lt;a href="https://www.schoolofhaskell.com/user/bartosz/understanding-algebras" title="Understanding F-Algebras"&gt;f-algebras-understanding&lt;/a&gt;), Foldables, Traversables
