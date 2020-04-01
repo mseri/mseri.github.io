@@ -1,105 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Git workflow for lazy mathematicians // A fractal spectrum of tales</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Marcello Seri" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.mseri.me/css/main.min.ec3bf45ae8127a722e032b0b75094b81292bdb3ca7d7e659d340b2781233cbb9.css" />
 
-    <meta name="description" content="Tales of a Fractal Spectrum, ">
+    
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-44365202-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
 
-        <link rel="alternate" href="http://www.mseri.me/feed/atom.xml" type="application/atom+xml" title="Tales of a Fractal Spectrum Atom Feed"/>
-        <link rel="alternate" href="http://www.mseri.me/feed/rss.xml" type="application/rss+xml" title="Tales of a Fractal Spectrum RSS Feed"/>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git workflow for lazy mathematicians"/>
+<meta name="twitter:description" content="First of all, what is git? Citing its website
+ Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. [It] is easy to learn and has a tiny footprint with lightning fast performance.
+ In other words Git provides a source control repository that enables you to roll back code changes as needed, to merge the updates when collaborating with others and eventually to have an online backup of your work."/>
 
-        <title>Git workflow for lazy mathematicians - Tales of a Fractal Spectrum</title>
-
-
-
-    <meta property="og:type" content="article" />
     <meta property="og:title" content="Git workflow for lazy mathematicians" />
-    <meta property="og:description" content="First of all, what is git? Citing its website Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. [It] is easy to learn and has a tiny footprint with lightning fast performance. In other …" />
+<meta property="og:description" content="First of all, what is git? Citing its website
+ Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. [It] is easy to learn and has a tiny footprint with lightning fast performance.
+ In other words Git provides a source control repository that enables you to roll back code changes as needed, to merge the updates when collaborating with others and eventually to have an online backup of your work." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.mseri.me/git-workflow-for-lazy-mathematicians/" />
+<meta property="article:published_time" content="2013-10-21T16:40:27+00:00" />
+<meta property="article:modified_time" content="2013-10-29T15:58:55+00:00" />
 
-        <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
 
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400" />
-    <link rel="stylesheet" href="http://www.mseri.me/theme/css/style-min.css">
-    <!--<link rel="stylesheet" href="http://www.mseri.me/theme/css/pygments.css">-->
-
-</head>
-<body itemscope itemtype="http://schema.org/WebPage">
-    <div class="pure-g-r" id="layout">
-        <div class="sidebar pure-u">
-            <header class="header">
-                <hgroup>
-                        <a id="blog-logo" href="http://www.mseri.me"><img src="http://www.mseri.me/images/gauss_logo.png" alt="Blog Logo" /></a>
-                    <h1 itemprop="name" class="blog-title"><a href="http://www.mseri.me">Tales of a Fractal Spectrum</a></h1>
-                        <h2 itemprop="description" class="blog-description">Free thoughts of a geeky mathematician</h2>
-                </hgroup>
-<nav class="nav">
-  <ul class="social-list">
-<li class="social-item"><a class="subscribe icon-twitter" href="http://www.twitter.com/marcelloseri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-facebook" href="http://www.facebook.com/marcello.seri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-google-plus" href="http://plus.google.com/+MarcelloSeri" target="_blank" rel="publisher"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-github" href="http://www.github.com/mseri" target="_blank"></a></li>&nbsp;    <li class="social-item">&nbsp;</li>
-    <li class="social-item"><a class="subscribe icon-feed" href="http://www.mseri.me/feed/rss.xml" target="_blank"></a></li>
-</ul>
-</nav>
-            </header>
-            <footer class="footer">
-                <section class="copyright">&copy; 2013--2015 <a itemscope="copyrightHolder" href="http://www.mseri.me">Tales of a Fractal Spectrum</a></section>
-                <section class="poweredby">Proudly published with Pelican on GitHub Pages.</section> 
-                <section class="theme"><a href="https://github.com/mseri/pelican-purity" target="_blank">Purity</a> is built with <a href="http://purecss.io" target="_blank">PureCSS</a>.</section>
-            </footer>
-            
+    
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.mseri.me"><img class="app-header-avatar" src="/images/gauss_logo.png" alt="Marcello Seri" /></a>
+      <h1>A fractal spectrum of tales</h1>
+      <p>Free thoughts of a geeky mathematician</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/mseri" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/marcelloseri" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://academic.mseri.me" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-award">
+  <title>award</title>
+  <circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Git workflow for lazy mathematicians</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Oct 21, 2013
         </div>
-        <div class="pure-u-1 container">
-            
-<main class="content" role="main" id="top-post">
-        <div class="back">
-            <a href="http://www.mseri.me">&larr;  back to the home page</a>
-        </div>
-
-    <article itemscope itemtype="http://schema.org/Article" class="post purity_post">
-
-        <header class="post-header">
-            <h2 itemprop="name" class="post-title big">Git workflow for lazy mathematicians</h2>
-            <p class="post-meta">Written by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Marcello Seri</span></span> the <time itemprop="datePublished" datetime="21 Oct 2013">21 Oct 2013</time> - <span class="post-tagline"> under                                 <a class="post-category" href="http://www.mseri.me/tag/tutorial.html">tutorial</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/git.html">git</a>. </span></p>
-        </header>
-
-        <section class="post-content">
-
-        <div class="post-share-box">
-            <section class="share">
-                <h3>Share this post</h3>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.mseri.me/git-workflow-for-lazy-mathematicians/"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <span class="hidden">Facebook</span>
-                </a>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Git workflow for lazy mathematicians&url=http://www.mseri.me/git-workflow-for-lazy-mathematicians/"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <span class="hidden">Twitter</span>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://www.mseri.me/git-workflow-for-lazy-mathematicians/"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <span class="hidden">Google+</span>
-                </a>
-            </section>
-        </div>
-
-        <div itemprop="articleBody">
-            <p>First of all, what is <a href="http://git-scm.com">git</a>? Citing its website</p>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          11 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://www.mseri.me/tags/tutorial/">tutorial</a><a class="tag" href="https://www.mseri.me/tags/git/">git</a></div></div>
+    </header>
+    <div class="post-content">
+      <p>First of all, what is <a href="http://git-scm.com">git</a>? Citing its website</p>
 <blockquote>
 <p>Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
 [It] is easy to learn and has a tiny footprint with lightning fast performance.</p>
 </blockquote>
-<p>In other words Git provides a source control repository that enables you to roll back code changes as needed, to merge the updates when collaborating with others and eventually to have an online backup of your work. </p>
+<p>In other words Git provides a source control repository that enables you to roll back code changes as needed, to merge the updates when collaborating with others and eventually to have an online backup of your work.</p>
 <p>For remote backup and collaboration you can get a free account on <a href="http://www.github.com">github</a> or <a href="http://www.bitbucket.org">bitbucket</a>. Note that with this last one, if you have an academical email address, you can get unlimited private git repository with unlimited amount of collaborators. On the other hand, github seems the most common choice for open source projects.</p>
-<p>If you are coding numerical algorithms, mathematica notebooks, latex drafts, papers, or whateverelse, you may decide not to use Git, but sooner or later you will be there thinking "if only I had saved that version and could take back just those few lines"... and it's there that Git power enter into play.</p>
+<p>If you are coding numerical algorithms, mathematica notebooks, latex drafts, papers, or whateverelse, you may decide not to use Git, but sooner or later you will be there thinking &ldquo;if only I had saved that version and could take back just those few lines&rdquo;&hellip; and it&rsquo;s there that Git power enter into play.</p>
 <p>I have to admit that I disagree with the description given above: Git is not easy to understand or learn! But if you take the time to understand at least the basics, it will present as a worthwhile and essential tool.</p>
 <p>And if you briefly look online, you may discover that I am not the only one to think it (see e.g. <a href="http://stackoverflow.com/questions/6188780/git-latex-workflow">Git+LaTeX Workflow</a>, <a href="http://bensresearch.com/downloads/Git.pdf">Git Basics for LaTeX Users</a> or <a href="https://www.sharelatex.com/blog/2012/10/16/collaborating-with-latex-and-git.html">Collaborating with LaTeX and Git</a>).</p>
-<h2>Git in four paragraphs and a list</h2>
+<h2 id="git-in-four-paragraphs-and-a-list">Git in four paragraphs and a list</h2>
 <p>We use Git to record the changes (called <strong>commits</strong>) that we make to our projects over time.</p>
-<p>Each commit contains the change that a user has made to its code and some additional useful metadata: these include the time the change was made, the name of the user, and a message that is added to describe the change. </p>
-<p>These commits are stored in a specialized database provided by Git itself. </p>
-<p>Moreover Git provides a set of commands that allow more collaborators (or the single user): </p>
+<p>Each commit contains the change that a user has made to its code and some additional useful metadata: these include the time the change was made, the name of the user, and a message that is added to describe the change.</p>
+<p>These commits are stored in a specialized database provided by Git itself.</p>
+<p>Moreover Git provides a set of commands that allow more collaborators (or the single user):</p>
 <ul>
 <li>to make changes to the files and stay in sync;</li>
 <li>to maintain and access different versions of the project;</li>
@@ -107,66 +115,58 @@
 <li>to retrieve past versions of the project;</li>
 <li>to retrieve parts of the past versions of the project.</li>
 </ul>
-<h2>First of all install Git</h2>
+<h2 id="first-of-all-install-git">First of all install Git</h2>
 <p>But the zeroeth step is always to check if git is already installed on your computer (Mac OSX and many Linux distros have it pre-installed). Open a terminal and type</p>
-<div class="highlight"><pre><span></span>git version
-</pre></div>
-
-
+<pre><code>:::sh
+git version
+</code></pre>
 <p>If your output looks like</p>
-<div class="highlight"><pre><span></span>git version <span class="m">1</span>.8.3.4
-</pre></div>
-
-
-<p>you already have git installed, if it shows an error you probably don't.</p>
+<pre><code>:::sh
+git version 1.8.3.4
+</code></pre>
+<p>you already have git installed, if it shows an error you probably don&rsquo;t.</p>
 <p>How to install it is really a matter of what OS you are using. You could just go to the home page of <a href="http://git-scm.com">Git</a> and download an installer, use your favourite package manager or compile the sources.</p>
 <p>Alternatively you could use the github software for <a href="http://mac.github.com">mac</a> and <a href="http://windows.github.com">windows</a>. For windows I strongly suggest to use <a href="http://msysgit.github.io">msysGit</a>.</p>
-<p>On any Debian based linux (including Ubuntu) you can use the command line </p>
-<div class="highlight"><pre><span></span>sudo apt-get install git-core
-</pre></div>
-
-
+<p>On any Debian based linux (including Ubuntu) you can use the command line</p>
+<pre><code>:::sh
+sudo apt-get install git-core
+</code></pre>
 <p>Similarly, on red hat based (like Fedora), you can use</p>
-<div class="highlight"><pre><span></span>yum install git-core
-</pre></div>
-
-
+<pre><code>:::sh
+yum install git-core
+</code></pre>
 <p>Whatever you choose your option to be, I strongly suggest you make a free account either on BitBucket or GitHub (or both).</p>
 <p><em>When you register, you shuld use your real name. For a developer and for people involved with open source the BitBucket/GitHub account could be as important as a résumé or a business card. I really suggest you to use the name by which you are known professionally, even if you plan to use just private repositories.</em></p>
 <p>If you like nice graphical interfaces you could use the nice (and free) <a href="http://www.sourcetreeapp.com">Source Tree</a>. Personally Source Tree is the best, anyway on the official <a href="http://git-scm.com">Git website</a> you can find a good list of alternative graphical interfaces for Git.</p>
-<h3>Introduce yourself to git</h3>
+<h3 id="introduce-yourself-to-git">Introduce yourself to git</h3>
 <p>Now that Git is installed you shall check if it is properly configured, i.e. does it know who you are?
-Open a terminal (keep it open... we will use it a lot) and type</p>
-<div class="highlight"><pre><span></span>git config -l --global
-</pre></div>
-
-
+Open a terminal (keep it open&hellip; we will use it a lot) and type</p>
+<pre><code>:::sh
+git config -l --global
+</code></pre>
 <p>You should see <code>user.name=Your Name</code> and <code>user.email=your_email_address</code>. The email address will identify you to any services that use your Git repo, therefore it is important that these values are correct and are the one used to register your BitBucket/GitHub/OtherServiceUsingGit account.</p>
 <p>If the previous output was wrong, you can fix it easily with</p>
-<div class="highlight"><pre><span></span>git config --global user.name <span class="s1">&#39;Your Name&#39;</span>
+<pre><code>:::sh
+git config --global user.name 'Your Name'
 git config --global user.email youremail@somedomain.com
-</pre></div>
-
-
-<h2>Git Init</h2>
-<p>If you want to start using Git with your project you have to initialise it. <strong>Be sure to be in your project's root directory.</strong></p>
+</code></pre>
+<h2 id="git-init">Git Init</h2>
+<p>If you want to start using Git with your project you have to initialise it. <strong>Be sure to be in your project&rsquo;s root directory.</strong></p>
 <p>Initialise Git and make your first commit:</p>
-<div class="highlight"><pre><span></span>git init
+<pre><code>:::sh
+git init
 git add .
-git commit -m <span class="s1">&#39;first commit&#39;</span>
-</pre></div>
-
-
-<p>The <code>-m 'first commit'</code> simply attach a global message (with content 'first commit') to the commit. </p>
+git commit -m 'first commit'
+</code></pre>
+<p>The <code>-m 'first commit'</code> simply attach a global message (with content &lsquo;first commit&rsquo;) to the commit.</p>
 <blockquote>
 <p>You should include a short descriptive comment with every commit.</p>
 </blockquote>
 <p>At any time with you can check your repository status with</p>
-<div class="highlight"><pre><span></span>git status
-</pre></div>
-
-
-<h3>Add a remote repository</h3>
+<pre><code>:::sh
+git status
+</code></pre>
+<h3 id="add-a-remote-repository">Add a remote repository</h3>
 <p>If you want an offsite copy of your work or you plan to share your work with others you should get a Bitbucket/Github account.</p>
 <p>First create a new empty remote repository into which you can push your local one:</p>
 <ul>
@@ -177,52 +177,47 @@ git commit -m <span class="s1">&#39;first commit&#39;</span>
 <ul>
 <li>
 <p>for Bitbucket</p>
-<div class="highlight"><pre><span></span>git remote add origin https://user@bitbucket.org/path_to/repo.git
-git push origin master
-</pre></div>
-
-
+<pre><code>  :::sh
+  git remote add origin https://user@bitbucket.org/path_to/repo.git
+  git push origin master
+</code></pre>
 </li>
 <li>
 <p>for GitHub</p>
-<div class="highlight"><pre><span></span>git remote add origin https://user@github.com/path_to/repo.git
-git push origin master
-</pre></div>
-
-
+<pre><code>  :::sh
+  git remote add origin https://user@github.com/path_to/repo.git
+  git push origin master
+</code></pre>
 </li>
 </ul>
-<h3>Save changes</h3>
+<h3 id="save-changes">Save changes</h3>
 <p>At each stage of completion you should <a href="http://gitref.org/basic/#commit">commit your code</a> into your local repository with:</p>
-<div class="highlight"><pre><span></span>git commit -am <span class="s2">&quot;some readable comment&quot;</span>
-</pre></div>
-
-
+<pre><code>:::sh
+git commit -am &quot;some readable comment&quot;
+</code></pre>
 <p>Here we use the <code>-am</code> argument: <code>-m</code> adds a commit message, while <code>-a</code> automatically makes a snapshot of all the changes done to <em>tracked files</em>, adds new files and removes any files you may have marked for deletion (otherwise you have to use <code>git rm</code>, adding an additional step).</p>
 <p>Finally you can push your changes to the remote repository:</p>
-<div class="highlight"><pre><span></span>git push origin master
-</pre></div>
-
-
-<h4>Commit messages? C'mon...</h4>
+<pre><code>:::sh
+git push origin master
+</code></pre>
+<h4 id="commit-messages-cmon">Commit messages? C&rsquo;mon&hellip;</h4>
 <p>If you are not working alone your colleagues will surely appreciate if you follow some convention for your commit messages, and so would you when they are going to commit or when you are looking back to some change.</p>
-<p>I would suggest you to use imperative tense ("update" not "updated") and keep the first line very short. I think <a href="http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">A note about git commit messages</a> is a good reding in regard.</p>
-<h3>View the history of changes</h3>
+<p>I would suggest you to use imperative tense (&ldquo;update&rdquo; not &ldquo;updated&rdquo;) and keep the first line very short. I think <a href="http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">A note about git commit messages</a> is a good reding in regard.</p>
+<h3 id="view-the-history-of-changes">View the history of changes</h3>
 <p>To view your history is enough to type</p>
-<div class="highlight"><pre><span></span>git log
-</pre></div>
-
-
+<pre><code>:::sh
+git log
+</code></pre>
 <p>The output will be something like</p>
-<div class="highlight"><pre><span></span>commit 7dbba9ab8bb2031ed52abf6a2dc11cc335ece5a1
+<pre><code>commit 7dbba9ab8bb2031ed52abf6a2dc11cc335ece5a1
 Author: Marcello Seri 
-Date:   Fri Oct 4 13:11:51 2013 +0100
+date:   Fri Oct 4 13:11:51 2013 +0100
 
     add simulation for clusters
 
 commit 23e1443a59410eb91ef0af26c9f82fb0624dd42d
 Author: Marcello Seri 
-Date:   Wed Sep 18 12:18:05 2013 +0100
+date:   Wed Sep 18 12:18:05 2013 +0100
 
     minor fix in step 2 section
 
@@ -230,34 +225,31 @@ Date:   Wed Sep 18 12:18:05 2013 +0100
 
 commit 9cf461946076c7849726ff4a8a48e43d7e191f07
 Author: Marcello Seri
-Date:   Tue Jul 16 19:00:42 2013 +0100
+date:   Tue Jul 16 19:00:42 2013 +0100
 
     add and update estimates file
-
+    
 commit dafeaef258c850ce8ecb7d8f15c34e0dfc4930fa
 Author: Marcello Seri
-Date:   Fri May 17 14:40:04 2013 +0100
+date:   Fri May 17 14:40:04 2013 +0100
 
     first commit
-</pre></div>
-
-
+</code></pre>
 <p>You can user the weird code appearing next to the commit line to see what has changed in that particular commit:</p>
 <p>:::sh
-  git show 9cf461946076c7849726ff4a8a48e43d7e191f07 --word-diff=color</p>
+git show 9cf461946076c7849726ff4a8a48e43d7e191f07 &ndash;word-diff=color</p>
 <p>The first part of the output replicates the log. In the second part the changes are shown in detail. You can see the text that was added in highlighted green and the text that was removed in red. The affected files appear in higlighted white before the red/green text.</p>
 <p>Note that by default Git compares documents line by line, so that if anything has changed on a line then it shows the whole line as changed. With TeX documents lines can be quite long and it can be difficult to quickly see what has changed between similar lines: the option <code>--word-diff=color</code> tells Git to compare the changes word by word making the output more readable.</p>
 <p>These features are very useful if you want to see the changes made by one of your collaborators, or to remind yourself what you were working on last time.</p>
-<h3>Ignore Files</h3>
-<p>When you compile LaTeX documents, and in general when you compile any code, you will produce many different useless files that you don't want to be saved at each commit. To take care of them you have to create a <code>.gitignore</code> file in your project root directory.</p>
+<h3 id="ignore-files">Ignore Files</h3>
+<p>When you compile LaTeX documents, and in general when you compile any code, you will produce many different useless files that you don&rsquo;t want to be saved at each commit. To take care of them you have to create a <code>.gitignore</code> file in your project root directory.</p>
 <p>If you like terminal you could do as follows.</p>
-<div class="highlight"><pre><span></span>touch .gitignore
-<span class="nb">echo</span> <span class="s1">&#39;.DS_Store&#39;</span> &gt;&gt; .gitignore
-</pre></div>
-
-
+<pre><code>:::sh
+touch .gitignore
+echo '.DS_Store' &gt;&gt; .gitignore
+</code></pre>
 <p>Or open <code>.gitignore</code> with your favourite editor and add all the files and folder Git has to ignore. For LaTeX you <code>.gitignore</code> could look like</p>
-<div class="highlight"><pre><span></span># For Mac users
+<pre><code># For Mac users
 .DS_Store
 
 # For TexPad users
@@ -274,127 +266,93 @@ Date:   Fri May 17 14:40:04 2013 +0100
 *.out
 *.synctex.gz
 *.toc
-</pre></div>
-
-
-<h3>Undoing changes</h3>
+</code></pre>
+<h3 id="undoing-changes">Undoing changes</h3>
 <p>This section is borrowed from <a href="https://www.sharelatex.com/blog/2012/10/16/collaborating-with-latex-and-git.html#.UmU-DZGOays">Collaborating with LaTeX and Git</a>.</p>
-<p>Of course, you don't want to just be able to see changes, you want to be able to go back and use the history to undo changes. Perhaps you want to restore the document to a previous version because you don't like the changes you've made or you realise you made a mistake. Git doesn't just rewind the the history of your document because then you would lose the changes made between then and now. Instead, git lets you restore the files you are working with to an earlier version by creating a new version which comes after all of the intervening history. If you decide you didn't actually want to do this after all then nothing has been lost.</p>
+<p>Of course, you don&rsquo;t want to just be able to see changes, you want to be able to go back and use the history to undo changes. Perhaps you want to restore the document to a previous version because you don&rsquo;t like the changes you&rsquo;ve made or you realise you made a mistake. Git doesn&rsquo;t just rewind the the history of your document because then you would lose the changes made between then and now. Instead, git lets you restore the files you are working with to an earlier version by creating a new version which comes after all of the intervening history. If you decide you didn&rsquo;t actually want to do this after all then nothing has been lost.</p>
 <p>To restore your files to an earlier version, simply run:</p>
-<div class="highlight"><pre><span></span>git checkout f69606d7e24ad45b31bb6eb4b38192bd07f274fc *
-</pre></div>
-
-
+<pre><code>:::sh
+git checkout f69606d7e24ad45b31bb6eb4b38192bd07f274fc *
+</code></pre>
 <p>This tells git to <code>checkout</code> the files from the older version specified by the third argument (remember we refer to versions by their long identifier of numbers and letters). The files in your project now have their contents restored to the older version, but you still need to create a new version to mark this change in Git:</p>
-<div class="highlight"><pre><span></span>git commit -a -m <span class="s2">&quot;Restore files to previous version&quot;</span>
-</pre></div>
-
-
+<pre><code>:::sh
+git commit -a -m &quot;Restore files to previous version&quot;
+</code></pre>
 <p>You could of course edit your files at this previous version before creating a new version in git.</p>
-<p>Another common situation is you decide that you want to undo only one set of changes from a while ago. Perhaps you've edited the document in three steps: 
-1) Adding an abstract, 
-2) Updating your acknowledgements, 
-3) Adding in a figure. 
-At each step you've created a new version in git, but now you decide that you didn't really want to update you acknowledgements. Unfortunately this is sandwiched between other changes so a simple rollback like before won't do. Fear not, because git is clever enough to do what you want, with the revert command:</p>
-<div class="highlight"><pre><span></span>git revert f69606d7e24ad45b31bb6eb4b38192bd07f274fc
-</pre></div>
-
-
+<p>Another common situation is you decide that you want to undo only one set of changes from a while ago. Perhaps you&rsquo;ve edited the document in three steps:</p>
+<ol>
+<li>
+<p>Adding an abstract,</p>
+</li>
+<li>
+<p>Updating your acknowledgements,</p>
+</li>
+<li>
+<p>Adding in a figure.
+At each step you&rsquo;ve created a new version in git, but now you decide that you didn&rsquo;t really want to update you acknowledgements. Unfortunately this is sandwiched between other changes so a simple rollback like before won&rsquo;t do. Fear not, because git is clever enough to do what you want, with the revert command:</p>
+<p>:::sh
+git revert f69606d7e24ad45b31bb6eb4b38192bd07f274fc</p>
+</li>
+</ol>
 <p>The final parameter should be the identifier of the version that introduced the changes you want to undo.</p>
 <p>Note: <em>Git revert undoes the changes introduced by the version that you pass to it. It does not revert the project to that version. This is a commonly confused command so be careful! To put the whole project back to a previous version, use the first method described at the top of this section.</em></p>
-<h3>Pushes and Pulls</h3>
+<h3 id="pushes-and-pulls">Pushes and Pulls</h3>
 <p>Suppose that some collaborator made an important change and pushed it on the remote repository. Now that you need it, how can you retrieve it?</p>
 <p>Supposing that there is no conflict, you just have to commit your code and instead of pushin it, pull it from the remote:</p>
-<div class="highlight"><pre><span></span>git pull origin master
-</pre></div>
-
-
-<h3>A finer workflow</h3>
+<pre><code>:::sh
+git pull origin master
+</code></pre>
+<h3 id="a-finer-workflow">A finer workflow</h3>
 <p>This is the workflow I use when I work in teams. I learned it from <a href="http://railsapps.github.io/rails-git.html">Rails with Git and GitHub</a>. I like how it is explained in that page, this section is borrowed from their article.</p>
-<p>When you are using Git for version control, you can commit every time you save a file, even for the tiniest typo fixes. If only you will ever see your Git commits, no one will care. But if you are working on a team, either commercially or as part of an open source project, you will drive your fellow programmers crazy if they try to follow your work and see such "granular” commits. Instead, get in the habit of creating a Git branch each time you begin work to implement a feature. When your new feature is complete, merge the branch and "squash” the commits so your comrades see just one commit for the entire feature.</p>
-<p>Here's how you could create a new Git branch for a section named "Second Proof":</p>
-<div class="highlight"><pre><span></span>git checkout -b second_proof
-</pre></div>
-
-
-<p>The command creates a new branch named "second_proof" and switches to it, analogous to copying all your files to a new directory and moving to work in the new directory (though that is not really what happens with Git).</p>
-<p>When the new feature is complete, merge the working branch to "master" and squash the commits so you have just one commit for the entire feature:</p>
-<div class="highlight"><pre><span></span>git checkout master
+<p>When you are using Git for version control, you can commit every time you save a file, even for the tiniest typo fixes. If only you will ever see your Git commits, no one will care. But if you are working on a team, either commercially or as part of an open source project, you will drive your fellow programmers crazy if they try to follow your work and see such &ldquo;granular” commits. Instead, get in the habit of creating a Git branch each time you begin work to implement a feature. When your new feature is complete, merge the branch and &ldquo;squash” the commits so your comrades see just one commit for the entire feature.</p>
+<p>Here&rsquo;s how you could create a new Git branch for a section named &ldquo;Second Proof&rdquo;:</p>
+<pre><code>:::sh
+git checkout -b second_proof
+</code></pre>
+<p>The command creates a new branch named &ldquo;second_proof&rdquo; and switches to it, analogous to copying all your files to a new directory and moving to work in the new directory (though that is not really what happens with Git).</p>
+<p>When the new feature is complete, merge the working branch to &ldquo;master&rdquo; and squash the commits so you have just one commit for the entire feature:</p>
+<pre><code>:::sh
+git checkout master
 git merge --squash second_proof
-git commit -am <span class="s2">&quot;secion named &#39;Second Proof&#39; complete&quot;</span>
-</pre></div>
-
-
+git commit -am &quot;secion named 'Second Proof' complete&quot;
+</code></pre>
 <p>If everithing goes smoothly you can push your changes</p>
-<div class="highlight"><pre><span></span>git push origin master
-</pre></div>
-
-
-<p>Finally you can delete the working branch when you're done:</p>
-<div class="highlight"><pre><span></span>git branch -D second_proof
-</pre></div>
-
-
-<h2>A final remark</h2>
-<p>If you are new to git and want to become a master of the art, instead of my very simple workflow you can read for free the online version of <a href="http://git-scm.com/book">Pro Git by Scott Chacon</a>. </p>
+<pre><code>:::sh
+git push origin master
+</code></pre>
+<p>Finally you can delete the working branch when you&rsquo;re done:</p>
+<pre><code>:::sh
+git branch -D second_proof
+</code></pre>
+<h2 id="a-final-remark">A final remark</h2>
+<p>If you are new to git and want to become a master of the art, instead of my very simple workflow you can read for free the online version of <a href="http://git-scm.com/book">Pro Git by Scott Chacon</a>.</p>
 <p>You find a very nice free complete interactive crash course on git at <a href="http://gitimmersion.com">Git Immersion</a>. I realised it only after having written my post, it is very very good.</p>
-        </div>
-        
-        </section>
 
-<section class="post-comments">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE UNCOMMENTING THE THEME * * */
-    var disqus_shortname = 'talesofafractalspectrum'; // required: replace example with your forum shortname
-    // make sure to use the post.id as an identifier, 
-    //otherwise disqus will use the pages url per default, 
-    //which might be problematic...
-    var disqus_identifier = '11';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</section>
-
-
-
-    </article>
-    
-    <script type="text/javascript">
-        document.getElementById( 'top-post' ).scrollIntoView();
-    </script>
-
-</main>
-            
-        </div>
     </div>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$','$'], ['\\(','\\)']]
-    }
-  });
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    this.page.identifier = '11';
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "talesofafractalspectrum" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
 </script>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-44365202-1']);
-  _gaq.push(['_trackPageview']);
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-</body>
+    </main>
+  </body>
 </html>

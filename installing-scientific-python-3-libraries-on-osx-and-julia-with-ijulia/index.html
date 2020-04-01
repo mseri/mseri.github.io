@@ -1,212 +1,181 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Installing Scientific Python 3 libraries on OSX (and julia with IJulia) // A fractal spectrum of tales</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Marcello Seri" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.mseri.me/css/main.min.ec3bf45ae8127a722e032b0b75094b81292bdb3ca7d7e659d340b2781233cbb9.css" />
 
-    <meta name="description" content="Tales of a Fractal Spectrum, ">
+    
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-44365202-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
 
-        <link rel="alternate" href="http://www.mseri.me/feed/atom.xml" type="application/atom+xml" title="Tales of a Fractal Spectrum Atom Feed"/>
-        <link rel="alternate" href="http://www.mseri.me/feed/rss.xml" type="application/rss+xml" title="Tales of a Fractal Spectrum RSS Feed"/>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Installing Scientific Python 3 libraries on OSX (and julia with IJulia)"/>
+<meta name="twitter:description" content="In a recent post, I tried to explain how to install scientific python libraries on OSX and get rid of the most common errors. In that case everythong I did was for python 2.7.
+Yesterday I decided to fully move to python 3.4. I&rsquo;ve removed my python installation via homebrew and with it all the installed packages.
+Moving to python 3 is straightforward if you have done the procedure described in my previous post, it all really reduces to replace every occurrence of python in that post with python3 and every occurrence of pip with pip3."/>
 
-        <title>Installing Scientific Python 3 libraries on OSX (and julia with IJulia) - Tales of a Fractal Spectrum</title>
-
-
-
-    <meta property="og:type" content="article" />
     <meta property="og:title" content="Installing Scientific Python 3 libraries on OSX (and julia with IJulia)" />
-    <meta property="og:description" content="In a recent post, I tried to explain how to install scientific python libraries on OSX and get rid of the most common errors. In that case everythong I did was for python 2.7. Yesterday I decided to fully move to python 3.4. I've removed my python installation …" />
+<meta property="og:description" content="In a recent post, I tried to explain how to install scientific python libraries on OSX and get rid of the most common errors. In that case everythong I did was for python 2.7.
+Yesterday I decided to fully move to python 3.4. I&rsquo;ve removed my python installation via homebrew and with it all the installed packages.
+Moving to python 3 is straightforward if you have done the procedure described in my previous post, it all really reduces to replace every occurrence of python in that post with python3 and every occurrence of pip with pip3." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.mseri.me/installing-scientific-python-3-libraries-on-osx-and-julia-with-ijulia/" />
+<meta property="article:published_time" content="2014-04-15T13:35:03+00:00" />
+<meta property="article:modified_time" content="2014-04-15T15:00:24+00:00" />
 
-        <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
 
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400" />
-    <link rel="stylesheet" href="http://www.mseri.me/theme/css/style-min.css">
-    <!--<link rel="stylesheet" href="http://www.mseri.me/theme/css/pygments.css">-->
-
-</head>
-<body itemscope itemtype="http://schema.org/WebPage">
-    <div class="pure-g-r" id="layout">
-        <div class="sidebar pure-u">
-            <header class="header">
-                <hgroup>
-                        <a id="blog-logo" href="http://www.mseri.me"><img src="http://www.mseri.me/images/gauss_logo.png" alt="Blog Logo" /></a>
-                    <h1 itemprop="name" class="blog-title"><a href="http://www.mseri.me">Tales of a Fractal Spectrum</a></h1>
-                        <h2 itemprop="description" class="blog-description">Free thoughts of a geeky mathematician</h2>
-                </hgroup>
-<nav class="nav">
-  <ul class="social-list">
-<li class="social-item"><a class="subscribe icon-twitter" href="http://www.twitter.com/marcelloseri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-facebook" href="http://www.facebook.com/marcello.seri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-google-plus" href="http://plus.google.com/+MarcelloSeri" target="_blank" rel="publisher"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-github" href="http://www.github.com/mseri" target="_blank"></a></li>&nbsp;    <li class="social-item">&nbsp;</li>
-    <li class="social-item"><a class="subscribe icon-feed" href="http://www.mseri.me/feed/rss.xml" target="_blank"></a></li>
-</ul>
-</nav>
-            </header>
-            <footer class="footer">
-                <section class="copyright">&copy; 2013--2015 <a itemscope="copyrightHolder" href="http://www.mseri.me">Tales of a Fractal Spectrum</a></section>
-                <section class="poweredby">Proudly published with Pelican on GitHub Pages.</section> 
-                <section class="theme"><a href="https://github.com/mseri/pelican-purity" target="_blank">Purity</a> is built with <a href="http://purecss.io" target="_blank">PureCSS</a>.</section>
-            </footer>
-            
+    
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.mseri.me"><img class="app-header-avatar" src="/images/gauss_logo.png" alt="Marcello Seri" /></a>
+      <h1>A fractal spectrum of tales</h1>
+      <p>Free thoughts of a geeky mathematician</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/mseri" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/marcelloseri" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://academic.mseri.me" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-award">
+  <title>award</title>
+  <circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Installing Scientific Python 3 libraries on OSX (and julia with IJulia)</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Apr 15, 2014
         </div>
-        <div class="pure-u-1 container">
-            
-<main class="content" role="main" id="top-post">
-        <div class="back">
-            <a href="http://www.mseri.me">&larr;  back to the home page</a>
-        </div>
-
-    <article itemscope itemtype="http://schema.org/Article" class="post purity_post">
-
-        <header class="post-header">
-            <h2 itemprop="name" class="post-title big">Installing Scientific Python 3 libraries on OSX (and julia with IJulia)</h2>
-            <p class="post-meta">Written by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Marcello Seri</span></span> the <time itemprop="datePublished" datetime="15 Apr 2014">15 Apr 2014</time> - <span class="post-tagline"> under                                 <a class="post-category" href="http://www.mseri.me/tag/qutip.html">qutip</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/scipy.html">scipy</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/numpy.html">numpy</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/pip.html">pip</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/tutoria.html">tutoria</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/ipython.html">ipython</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/python3.html">python3</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/julia.html">julia</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/ijulia.html">ijulia</a>. </span></p>
-        </header>
-
-        <section class="post-content">
-
-        <div class="post-share-box">
-            <section class="share">
-                <h3>Share this post</h3>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.mseri.me/installing-scientific-python-3-libraries-on-osx-and-julia-with-ijulia/"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <span class="hidden">Facebook</span>
-                </a>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Installing Scientific Python 3 libraries on OSX (and julia with IJulia)&url=http://www.mseri.me/installing-scientific-python-3-libraries-on-osx-and-julia-with-ijulia/"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <span class="hidden">Twitter</span>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://www.mseri.me/installing-scientific-python-3-libraries-on-osx-and-julia-with-ijulia/"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <span class="hidden">Google+</span>
-                </a>
-            </section>
-        </div>
-
-        <div itemprop="articleBody">
-            <p>In a recent post, I tried to explain how to  <a href="https://www.mseri.me/installing-scientific-python-libraries-on-osx/">install scientific python libraries on OSX and get rid of the most common errors</a>. In that case everythong I did was for python 2.7.</p>
-<p>Yesterday I decided to fully move to python 3.4. I've removed my python installation via homebrew and with it all the installed packages.</p>
-<p>Moving to python 3 is straightforward if you have done the procedure described in <a href="https://www.mseri.me/installing-scientific-python-libraries-on-osx/">my previous post</a>, it all really reduces to replace every occurrence of <code>python</code> in that post with <code>python3</code> and every occurrence of <code>pip</code> with <code>pip3</code>. </p>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://www.mseri.me/tags/qutip/">qutip</a><a class="tag" href="https://www.mseri.me/tags/scipy/">scipy</a><a class="tag" href="https://www.mseri.me/tags/numpy/">numpy</a><a class="tag" href="https://www.mseri.me/tags/pip/">pip</a><a class="tag" href="https://www.mseri.me/tags/tutorial/">tutorial</a><a class="tag" href="https://www.mseri.me/tags/ipython/">ipython</a><a class="tag" href="https://www.mseri.me/tags/python3/">python3</a><a class="tag" href="https://www.mseri.me/tags/julia/">julia</a><a class="tag" href="https://www.mseri.me/tags/ijulia/">ijulia</a></div></div>
+    </header>
+    <div class="post-content">
+      <p>In a recent post, I tried to explain how to  <a href="https://www.mseri.me/installing-scientific-python-libraries-on-osx/">install scientific python libraries on OSX and get rid of the most common errors</a>. In that case everythong I did was for python 2.7.</p>
+<p>Yesterday I decided to fully move to python 3.4. I&rsquo;ve removed my python installation via homebrew and with it all the installed packages.</p>
+<p>Moving to python 3 is straightforward if you have done the procedure described in <a href="https://www.mseri.me/installing-scientific-python-libraries-on-osx/">my previous post</a>, it all really reduces to replace every occurrence of <code>python</code> in that post with <code>python3</code> and every occurrence of <code>pip</code> with <code>pip3</code>.</p>
 <p>Assuming that you had installed homebrew, fortran and pkg-config as explained there, what you have to do is just type and exectute the following:</p>
-<div class="highlight"><pre><span></span>brew install python3
+<pre><code>:::sh
+brew install python3
 pip3 install numpy
 pip3 install scipy
 pip3 install matplotlib
-</pre></div>
-
-
+</code></pre>
 <p>And for <code>qutip</code> you just do</p>
-<div class="highlight"><pre><span></span>pip3 install cython
+<pre><code>:::sh
+pip3 install cython
 pip3 install qutip
-</pre></div>
-
-
-<h3>A better IPython</h3>
+</code></pre>
+<h3 id="a-better-ipython">A better IPython</h3>
 <p>In the <a href="https://www.mseri.me/installing-scientific-python-libraries-on-osx/">last post</a> we installed ipython with a minimal working configuration. Recently I started enjoying writing my simulation with the notebooks of iJulia (we will discuss it soon) and <a href="http://ipython.org/notebook.html">iPython</a>: two very nice web based environment to write (and execute) your code.</p>
 <p>To run the iPython notebook one should type</p>
-<div class="highlight"><pre><span></span>ipython notebook
-</pre></div>
-
-
+<pre><code>:::sh
+ipython notebook
+</code></pre>
 <p>or, if using python 3,</p>
-<div class="highlight"><pre><span></span>ipython3 notebook
-</pre></div>
-
-
+<pre><code>:::sh
+ipython3 notebook
+</code></pre>
 <p>If you try to do it, your should get some errors. Luckily these are very easily solved installing the following packages (if you use python 2 replace <code>pip3</code> with <code>pip</code>):</p>
-<div class="highlight"><pre><span></span>brew install libzmq
+<pre><code>:::sh
+brew install libzmq
 pip3 install pyzmq jinja2
-</pre></div>
-
-
-<p>If you now run, let's say, <code>ipython3 notebook</code>, after a moment you should see a new browser window with your notebook.</p>
+</code></pre>
+<p>If you now run, let&rsquo;s say, <code>ipython3 notebook</code>, after a moment you should see a new browser window with your notebook.</p>
 <hr>
-<h2>Julia for fast computations</h2>
-<p><a href="http://julialang.org">Julia</a> is a recent "high-level, high-performance dynamic programming language for technical computing" developed as an open source project at MIT. It is extremely fast and powerful but as readable as python (if not more).</p>
+<h2 id="julia-for-fast-computations">Julia for fast computations</h2>
+<p><a href="http://julialang.org">Julia</a> is a recent &ldquo;high-level, high-performance dynamic programming language for technical computing&rdquo; developed as an open source project at MIT. It is extremely fast and powerful but as readable as python (if not more).</p>
 <p>It can nicely and simply interface with C, Fortran and Python and is <a href="http://julialang.org/benchmarks/">bloody fast</a>.</p>
-<p>I've been using it for the exercises of NLP in coursera and some simulations and I really enjoy it.</p>
+<p>I&rsquo;ve been using it for the exercises of NLP in coursera and some simulations and I really enjoy it.</p>
 <p>To install julia you have few alternatives. You can grab a <a href="http://julialang.org/downloads/">binary precompiled installer from the official website</a>, install the nice (open source and free) IDE <a href="http://forio.com/products/julia-studio/">Julia Studio</a> or use homebrew (my first choice):</p>
-<div class="highlight"><pre><span></span>brew tap staticfloat/julia
+<pre><code>:::sh
+brew tap staticfloat/julia
 brew install --64bit julia
-</pre></div>
-
-
+</code></pre>
 <p>If you get errors, or you want to install the support for gnuplot plots, I <a href="https://github.com/staticfloat/homebrew-julia">redirect you to the github page of hoembrew-julia</a>, where you can find all the additional information you may need.</p>
 <p>After having installed julia, open a terminal and run <code>julia</code> or open Julia Studio, and have fun!</p>
-<p>There are many resources to learn coding in julia. If you don't want to read the full docs (they are pretty short, is not a big deal) you can use the resources linked at the <a href="http://julialang.org/teaching/">Teaching Julia page</a>, in particular you may find easy to start with <a href="http://nbviewer.ipython.org/github/JuliaX/JuliaTutorial/blob/master/JuliaTutorial.ipynb">Julia Tutorial</a>, with <a href="http://learnxinyminutes.com/docs/julia/">Learn X in Y minutes</a> or with the <a href="http://forio.com/products/julia-studio/tutorials/">series of Julia Studio tutorials</a>.</p>
+<p>There are many resources to learn coding in julia. If you don&rsquo;t want to read the full docs (they are pretty short, is not a big deal) you can use the resources linked at the <a href="http://julialang.org/teaching/">Teaching Julia page</a>, in particular you may find easy to start with <a href="http://nbviewer.ipython.org/github/JuliaX/JuliaTutorial/blob/master/JuliaTutorial.ipynb">Julia Tutorial</a>, with <a href="http://learnxinyminutes.com/docs/julia/">Learn X in Y minutes</a> or with the <a href="http://forio.com/products/julia-studio/tutorials/">series of Julia Studio tutorials</a>.</p>
 <p>After you played a bit with it. The time to install some packages arrives. The most important, imho, is <a href="https://github.com/JuliaLang/IJulia.jl">IJulia</a>. A kernel for IPython that lets you write your julia code in a ipython notebook. Inside the julia environment (namely, after having opened a terminal and run <code>julia</code>) execute the following</p>
-<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;IJulia&quot;</span><span class="p">)</span>
-</pre></div>
-
-
+<pre><code>:::julia
+julia&gt; Pkg.add(&quot;IJulia&quot;)
+</code></pre>
 <p>This will download IJulia and a few other prerequisites, and will set up a Julia profile for IPython.</p>
-<p>Notice that <code>julia&gt;</code> is julia's shell prompt, you don't have to type it. It must be already there after you run julia.</p>
+<p>Notice that <code>julia&gt; </code> is julia&rsquo;s shell prompt, you don&rsquo;t have to type it. It must be already there after you run julia.</p>
 <p>To use IJulia you just need to run</p>
-<div class="highlight"><pre><span></span>ipython3 notebook --profile julia
-</pre></div>
-
-
+<pre><code>:::sh
+ipython3 notebook --profile julia
+</code></pre>
 <p>and eventually make an alias out of it if you plan to use it often. A simple IJulia tutorial from the MIT can be found <a href="http://nbviewer.ipython.org/url/jdj.mit.edu/~stevenj/IJulia%20Preview.ipynb">on IPython website</a>.</p>
-<p>Additionally you may want to install <code>PyPlot</code> and <code>Winston</code> for plots. You can find a <a href="http://docs.julialang.org/en/latest/packages/packagelist/&quot; target=_&quot;blank">list of available packages and their description on Julia website</a> or with a search on google or on <a href="http://www.github.com">GitHub</a>.</p>
-<p>To understand how to make complex plots with matplotlib using julia's pyplot interface I've found the following post extremely useful: <a href="http://iaindunning.com/2014/subs-battleships.html">Naval Warfare with JuMP + Julia</a>.</p>
-        </div>
-        
-        </section>
+<p>Additionally you may want to install <code>PyPlot</code> and <code>Winston</code> for plots. You can find a [list of available packages and their description on Julia website](<a href="http://docs.julialang.org/en/latest/packages/packagelist/%22">http://docs.julialang.org/en/latest/packages/packagelist/&quot;</a> target=_&ldquo;blank) or with a search on google or on <a href="http://www.github.com">GitHub</a>.</p>
+<p>To understand how to make complex plots with matplotlib using julia&rsquo;s pyplot interface I&rsquo;ve found the following post extremely useful: <a href="http://iaindunning.com/2014/subs-battleships.html">Naval Warfare with JuMP + Julia</a>.</p>
 
-<section class="post-comments">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE UNCOMMENTING THE THEME * * */
-    var disqus_shortname = 'talesofafractalspectrum'; // required: replace example with your forum shortname
-    // make sure to use the post.id as an identifier, 
-    //otherwise disqus will use the pages url per default, 
-    //which might be problematic...
-    var disqus_identifier = '29';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</section>
-
-
-
-    </article>
-    
-    <script type="text/javascript">
-        document.getElementById( 'top-post' ).scrollIntoView();
-    </script>
-
-</main>
-            
-        </div>
     </div>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$','$'], ['\\(','\\)']]
-    }
-  });
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    this.page.identifier = '29';
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "talesofafractalspectrum" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
 </script>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-44365202-1']);
-  _gaq.push(['_trackPageview']);
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-</body>
+    </main>
+  </body>
 </html>

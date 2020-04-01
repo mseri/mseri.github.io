@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on A fractal spectrum of tales</title>
+    <link>https://www.mseri.me/post/</link>
+    <description>Recent content in Posts on A fractal spectrum of tales</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 04 Jun 2017 22:00:54 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.mseri.me/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>First steps with Category Theory and OCaml</title>
+      <link>https://www.mseri.me/typeclass-ocaml/</link>
+      <pubDate>Sun, 04 Jun 2017 22:00:54 +0000</pubDate>
+      
+      <guid>https://www.mseri.me/typeclass-ocaml/</guid>
+      <description>Introduction Category theory is an abstrac mathematical framework that had a huge influence on pure functional programming design patterns. The abstractions and laws that come bundled with the mathematical concepts allow us to write safer and composable interfaces, very prone to equational reasoning, at the price of a steeper learning curve. If you attempt to write some relatively modern Haskell code, you will inevitably have to deal with Monoids, Functions, Monads, Lenses and whatnot typeclassopedia.</description>
+    </item>
+    
+    <item>
+      <title>On teaching mathematics - By V. I. Arnold</title>
+      <link>https://www.mseri.me/on-teaching-mathematics/</link>
+      <pubDate>Fri, 06 Feb 2015 01:11:05 +0000</pubDate>
+      
+      <guid>https://www.mseri.me/on-teaching-mathematics/</guid>
+      <description>This is an extended text of the address at the discussion on teaching of mathematics in Palais de Découverte in Paris on 7 March 1997.
+Mathematics is a part of physics. Physics is an experimental science, a part of natural science. Mathematics is the part of physics where experiments are cheap.
+The Jacobi identity (which forces the heights of a triangle to cross at one point) is an experimental fact in the same way as that the Earth is round (that is, homeomorphic to a ball).</description>
+    </item>
+    
+    <item>
+      <title>Left pipe in Haskell</title>
+      <link>https://www.mseri.me/left-pipe-in-haskell/</link>
+      <pubDate>Fri, 21 Nov 2014 15:24:54 +0000</pubDate>
+      
+      <guid>https://www.mseri.me/left-pipe-in-haskell/</guid>
+      <description>If you read this blog, you know that I am very biased by having worked with unix shells for almost two decades and that I am addicted to the use of pipes (see e.g. Piping with Swift). I really find much more natural to see data moving from left to right.
+Yesterday I was thinking that in Haskell everything is an expression and that you can easily define infix operators. Thus it must be possible to implement a shell-like pipe.</description>
+    </item>
+    
+    <item>
+      <title>What Problems to Solve - By Richard Feynman</title>
+      <link>https://www.mseri.me/what-problems-to-solve-by-richard-feynman/</link>
+      <pubDate>Fri, 21 Nov 2014 15:16:10 +0000</pubDate>
+      
+      <guid>https://www.mseri.me/what-problems-to-solve-by-richard-feynman/</guid>
+      <description>A former student, who was also once a student of Tomonaga’s, wrote to extend his congratulations. Feynman responded, asking Mr. Mano what he was now doing. The response: &amp;ldquo;studying the Coherence theory with some applications to the propagation of electromagnetic waves through turbulent atmosphere&amp;hellip; a humble and down-to-earth type of problem.&amp;quot;
+Dear Koichi,
+I was very happy to hear from you, and that you have such a position in the Research Laboratories.</description>
+    </item>
+    
+    <item>
+      <title>Socks proxy with ssh</title>
+      <link>https://www.mseri.me/socks-proxy-with-ssh/</link>
+      <pubDate>Fri, 31 Oct 2014 18:24:36 +0000</pubDate>
+      
+      <guid>https://www.mseri.me/socks-proxy-with-ssh/</guid>
+      <description>When you work in the University, it is very likely that during a trip or the weekend you urge to connect via the University to have access to Journals and other academic resources.
+Often enough this requires long and complicated procedures involving the setup of rarely updated proprietary VPN softwares that sometimes like to install their obscure helpers to monitor the traffic and prevent you to open malicious websites. Helpers that would keep working in background sending to unspecified servers all your business even when the VPN is off&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Why privacy matters by Glenn Greenwald</title>
+      <link>https://www.mseri.me/why-privacy-matters-by-glenn-greenwald/</link>
+      <pubDate>Sun, 19 Oct 2014 14:59:53 +0000</pubDate>
+      
+      <guid>https://www.mseri.me/why-privacy-matters-by-glenn-greenwald/</guid>
+      <description>I am so sorry that I needed so much time before watching this wonderfully inspiring TED video.
+ I really admire Snowden, Greenwald and all the people that are fighting to denounce the dangerous path that we are following.
+It&amp;rsquo;s time to take action, even the smallest one coubl make a difference. Maybe we don&amp;rsquo;t see the threat now, but we cannot now what will happen in the future.</description>
+    </item>
+    
+    <item>
+      <title>Fix WiFi on OS X by tweaking the MTU</title>
+      <link>https://www.mseri.me/fixing-wifi-on-os-x-by-tweaking-the-mtu/</link>
+      <pubDate>Wed, 15 Oct 2014 23:18:23 +0000</pubDate>
+      
+      <guid>https://www.mseri.me/fixing-wifi-on-os-x-by-tweaking-the-mtu/</guid>
+      <description>After I had installed the first developer beta of Yosemite I started experiencing serious WiFi issues at home, with the connection dropping after few seconds of activity. Only apparent solution was to disable and reenable periodically the wifi until it started working.
+The issue was not present whene I was in my office or using public wifi&amp;rsquo;s around. And removing the network setup to have them reset to default didn&amp;rsquo;t help.</description>
+    </item>
+    
+    <item>
+      <title>On Advanced Functional Programming</title>
+      <link>https://www.mseri.me/on-advanced-functional-programming/</link>
+      <pubDate>Wed, 15 Oct 2014 00:58:59 +0000</pubDate>
+      
+      <guid>https://www.mseri.me/on-advanced-functional-programming/</guid>
+      <description>In few days, tomorrow if I&amp;rsquo;m not mistaken, you will be able to attend the new Erik Meijer&amp;rsquo;s introduction to Functional Programming on edX. If you have any interest in mathematics or programming, I am sure that this is something that you have to watch.
+I am saying new because a similar course was held in 2010 by the same person, you can still watch it here: Erik Meijer&amp;rsquo;s MSDN Channel 9 lecture series on functional programming</description>
+    </item>
+    
+    <item>
+      <title>Piping with Swift</title>
+      <link>https://www.mseri.me/piping-with-swift/</link>
+      <pubDate>Mon, 16 Jun 2014 10:03:04 +0000</pubDate>
+      
+      <guid>https://www.mseri.me/piping-with-swift/</guid>
+      <description>Lately I&amp;rsquo;ve been playing with Apple&amp;rsquo;s newborn Swift quite a lot. I have to say that I am really impressed, and except for few things that I hope will be smoothed in the next months (years?), I find Swift really enjoyable and readable.
+However, there is one feature that I really miss. Something that I daily use with slightly different syntaxes in Sh, Haskell, Julia and Elixir: the pipe!
+Can we implement a kind of pipe in Swift?</description>
+    </item>
+    
+    <item>
+      <title>Implementing Either type in Swift</title>
+      <link>https://www.mseri.me/implementing-either-type-in-swift/</link>
+      <pubDate>Wed, 04 Jun 2014 14:11:25 +0000</pubDate>
+      
+      <guid>https://www.mseri.me/implementing-either-type-in-swift/</guid>
+      <description>It has been only a couple of days since Apple announced and released Swift. It has possibly been the most important and interesting announcement of Apple in the last few years and started an amount of discussions around the web.
+With the hours passing, we&amp;rsquo;ve found out that there was at least another Swift in the history of programming languages (with a similar icon) and that Swift is under development since 2010 and its father is Chris Lattner, creator of clang and LLVM.</description>
+    </item>
+    
+  </channel>
+</rss>

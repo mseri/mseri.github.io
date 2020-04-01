@@ -1,217 +1,190 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Piping with Swift // A fractal spectrum of tales</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.68.3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Marcello Seri" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.mseri.me/css/main.min.ec3bf45ae8127a722e032b0b75094b81292bdb3ca7d7e659d340b2781233cbb9.css" />
 
-    <meta name="description" content="Tales of a Fractal Spectrum, ">
+    
+<script type="application/javascript">
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-44365202-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
 
-        <link rel="alternate" href="http://www.mseri.me/feed/atom.xml" type="application/atom+xml" title="Tales of a Fractal Spectrum Atom Feed"/>
-        <link rel="alternate" href="http://www.mseri.me/feed/rss.xml" type="application/rss+xml" title="Tales of a Fractal Spectrum RSS Feed"/>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Piping with Swift"/>
+<meta name="twitter:description" content="Lately I&rsquo;ve been playing with Apple&rsquo;s newborn Swift quite a lot. I have to say that I am really impressed, and except for few things that I hope will be smoothed in the next months (years?), I find Swift really enjoyable and readable.
+However, there is one feature that I really miss. Something that I daily use with slightly different syntaxes in Sh, Haskell, Julia and Elixir: the pipe!
+Can we implement a kind of pipe in Swift?"/>
 
-        <title>Piping with Swift - Tales of a Fractal Spectrum</title>
-
-
-
-    <meta property="og:type" content="article" />
     <meta property="og:title" content="Piping with Swift" />
-    <meta property="og:description" content="Lately I've been playing with Apple's newborn Swift quite a lot. I have to say that I am really impressed, and except for few things that I hope will be smoothed in the next months (years?), I find Swift really enjoyable and readable. However, there is one feature that I …" />
+<meta property="og:description" content="Lately I&rsquo;ve been playing with Apple&rsquo;s newborn Swift quite a lot. I have to say that I am really impressed, and except for few things that I hope will be smoothed in the next months (years?), I find Swift really enjoyable and readable.
+However, there is one feature that I really miss. Something that I daily use with slightly different syntaxes in Sh, Haskell, Julia and Elixir: the pipe!
+Can we implement a kind of pipe in Swift?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.mseri.me/piping-with-swift/" />
+<meta property="article:published_time" content="2014-06-16T10:03:04+00:00" />
+<meta property="article:modified_time" content="2014-06-16T10:31:56+00:00" />
 
-        <link rel="shortcut icon" href="http://www.mseri.me/images/gauss_logo.png" />
 
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400" />
-    <link rel="stylesheet" href="http://www.mseri.me/theme/css/style-min.css">
-    <!--<link rel="stylesheet" href="http://www.mseri.me/theme/css/pygments.css">-->
-
-</head>
-<body itemscope itemtype="http://schema.org/WebPage">
-    <div class="pure-g-r" id="layout">
-        <div class="sidebar pure-u">
-            <header class="header">
-                <hgroup>
-                        <a id="blog-logo" href="http://www.mseri.me"><img src="http://www.mseri.me/images/gauss_logo.png" alt="Blog Logo" /></a>
-                    <h1 itemprop="name" class="blog-title"><a href="http://www.mseri.me">Tales of a Fractal Spectrum</a></h1>
-                        <h2 itemprop="description" class="blog-description">Free thoughts of a geeky mathematician</h2>
-                </hgroup>
-<nav class="nav">
-  <ul class="social-list">
-<li class="social-item"><a class="subscribe icon-twitter" href="http://www.twitter.com/marcelloseri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-facebook" href="http://www.facebook.com/marcello.seri" target="_blank"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-google-plus" href="http://plus.google.com/+MarcelloSeri" target="_blank" rel="publisher"></a></li>&nbsp;<li class="social-item"><a class="subscribe icon-github" href="http://www.github.com/mseri" target="_blank"></a></li>&nbsp;    <li class="social-item">&nbsp;</li>
-    <li class="social-item"><a class="subscribe icon-feed" href="http://www.mseri.me/feed/rss.xml" target="_blank"></a></li>
-</ul>
-</nav>
-            </header>
-            <footer class="footer">
-                <section class="copyright">&copy; 2013--2015 <a itemscope="copyrightHolder" href="http://www.mseri.me">Tales of a Fractal Spectrum</a></section>
-                <section class="poweredby">Proudly published with Pelican on GitHub Pages.</section> 
-                <section class="theme"><a href="https://github.com/mseri/pelican-purity" target="_blank">Purity</a> is built with <a href="http://purecss.io" target="_blank">PureCSS</a>.</section>
-            </footer>
-            
+    
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.mseri.me"><img class="app-header-avatar" src="/images/gauss_logo.png" alt="Marcello Seri" /></a>
+      <h1>A fractal spectrum of tales</h1>
+      <p>Free thoughts of a geeky mathematician</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/mseri" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/marcelloseri" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://academic.mseri.me" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-award">
+  <title>award</title>
+  <circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Piping with Swift</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jun 16, 2014
         </div>
-        <div class="pure-u-1 container">
-            
-<main class="content" role="main" id="top-post">
-        <div class="back">
-            <a href="http://www.mseri.me">&larr;  back to the home page</a>
-        </div>
-
-    <article itemscope itemtype="http://schema.org/Article" class="post purity_post">
-
-        <header class="post-header">
-            <h2 itemprop="name" class="post-title big">Piping with Swift</h2>
-            <p class="post-meta">Written by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Marcello Seri</span></span> the <time itemprop="datePublished" datetime="16 Jun 2014">16 Jun 2014</time> - <span class="post-tagline"> under                                 <a class="post-category" href="http://www.mseri.me/tag/swift.html">swift</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/pipe.html">pipe</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/operators.html">operators</a>,                                 <a class="post-category" href="http://www.mseri.me/tag/functional.html">functional</a>. </span></p>
-        </header>
-
-        <section class="post-content">
-
-        <div class="post-share-box">
-            <section class="share">
-                <h3>Share this post</h3>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.mseri.me/piping-with-swift/"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <span class="hidden">Facebook</span>
-                </a>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Piping with Swift&url=http://www.mseri.me/piping-with-swift/"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <span class="hidden">Twitter</span>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://www.mseri.me/piping-with-swift/"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <span class="hidden">Google+</span>
-                </a>
-            </section>
-        </div>
-
-        <div itemprop="articleBody">
-            <p>Lately I've been playing with Apple's newborn Swift quite a lot. I have to say that I am really impressed, and except for few things that I hope will be smoothed in the next months (years?), I find Swift really enjoyable and readable.</p>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://www.mseri.me/tags/swift/">swift</a><a class="tag" href="https://www.mseri.me/tags/pipe/">pipe</a><a class="tag" href="https://www.mseri.me/tags/operators/">operators</a><a class="tag" href="https://www.mseri.me/tags/functional/">functional</a></div></div>
+    </header>
+    <div class="post-content">
+      <p>Lately I&rsquo;ve been playing with Apple&rsquo;s newborn Swift quite a lot. I have to say that I am really impressed, and except for few things that I hope will be smoothed in the next months (years?), I find Swift really enjoyable and readable.</p>
 <p>However, there is one feature that I really miss. Something that I daily use with slightly different syntaxes in Sh, Haskell, Julia and Elixir: the <strong>pipe</strong>!</p>
-<h3>Can we implement a <em>kind of</em> pipe in Swift?</h3>
-<p>Given that in Swift <code>|</code>, <code>.</code> and <code>||</code> have already quite precise and distinct meanings, I am going to mimic Julia and Elixir's notation and use <code>|&gt;</code>. 
-Swift is unbelievably flexible from this point of view: one can easily define new generic <code>infix</code>, <code>prefix</code> or <code>suffix</code> operator, and state their associativity and precedence properties. You'll soon see that the syntax speaks by itself!</p>
-<p>Let's try to define a left associative generic pipe.</p>
-<div class="highlight"><pre><span></span><span class="kd">operator</span> <span class="kr">infix</span> <span class="o">|&gt;</span> <span class="p">{</span> 
-    <span class="kr">associativity</span> <span class="kr">left</span> 
-<span class="p">}</span>
-<span class="kd">func</span> <span class="o">|&gt;</span> <span class="p">&lt;</span><span class="n">L</span><span class="p">,</span><span class="n">R</span><span class="p">&gt;(</span><span class="kr">left</span><span class="p">:</span> <span class="n">L</span><span class="p">,</span> <span class="kr">right</span><span class="p">:</span> <span class="n">L</span> <span class="p">-&gt;</span> <span class="n">R</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">R</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="kr">right</span><span class="p">(</span><span class="kr">left</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-
-
+<h3 id="can-we-implement-a-_kind-of_-pipe-in-swift">Can we implement a <em>kind of</em> pipe in Swift?</h3>
+<p>Given that in Swift <code>|</code>, <code>.</code> and <code>||</code> have already quite precise and distinct meanings, I am going to mimic Julia and Elixir&rsquo;s notation and use <code>|&gt;</code>.
+Swift is unbelievably flexible from this point of view: one can easily define new generic <code>infix</code>, <code>prefix</code> or <code>suffix</code> operator, and state their associativity and precedence properties. You&rsquo;ll soon see that the syntax speaks by itself!</p>
+<p>Let&rsquo;s try to define a left associative generic pipe.</p>
+<pre><code>:::swift
+operator infix |&gt; { 
+    associativity left 
+}
+func |&gt; &lt;L,R&gt;(left: L, right: L -&gt; R) -&gt; R {
+    return right(left);
+}
+</code></pre>
 <p>Then we could use it to chain some function together in an elegant way. For example</p>
-<div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nf">unique</span><span class="p">&lt;</span><span class="n">T</span><span class="p">:</span><span class="nb">Hashable</span><span class="p">&gt;(</span><span class="n">array</span><span class="p">:</span> <span class="nb">Array</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;)</span> <span class="p">-&gt;</span> <span class="nb">Array</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;{</span>
-    <span class="kd">var</span> <span class="nv">filter</span> <span class="p">=</span> <span class="nb">Dictionary</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span><span class="nb">Bool</span><span class="p">&gt;()</span>
-    <span class="kd">var</span> <span class="nv">result</span> <span class="p">=</span> <span class="nb">Array</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;()</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.</span><span class="n">array</span><span class="p">.</span><span class="bp">count</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="kd">let</span> <span class="nv">elem</span> <span class="p">=</span> <span class="bp">filter</span><span class="p">[</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="p">{</span>
-            <span class="k">continue</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="bp">filter</span><span class="p">[</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="p">=</span> <span class="kc">true</span>
-            <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">result</span>
-<span class="p">}</span>
+<pre><code>:::swift
+func unique&lt;T:Hashable&gt;(array: Array&lt;T&gt;) -&gt; Array&lt;T&gt;{
+    var filter = Dictionary&lt;T,Bool&gt;()
+    var result = Array&lt;T&gt;()
+    for i in 0..array.count {
+        if let elem = filter[array[i]] {
+            continue
+        } else {
+            filter[array[i]] = true
+            result.append(array[i])
+        }
+    }
+    return result
+}
 
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span> <span class="o">|&gt;</span> <span class="bp">sort</span> <span class="o">|&gt;</span> <span class="n">unique</span> <span class="o">|&gt;</span> <span class="bp">toString</span> <span class="o">|&gt;</span> <span class="bp">println</span>
+[1, 2, 3, 3, 3, 4, 5, 5, 6, 7] |&gt; sort |&gt; unique |&gt; toString |&gt; println
 
-<span class="c1">// prints &#39;[1,2,3,4,5,6,7]&#39;</span>
-</pre></div>
-
-
-<p>I strongly believe that some (better) implementation of the pipe should become part of Swift standard library. For example it would be nice to be able to chain subscripts (e.g. <code>filter[array[i]]</code> replaced by <code>i |&gt; array[$0] |&gt; filter[$0]</code>) or more flexible maps (e.g. <code>[1, 2, 3, 3, 3, 4, 5, 5, 6, 7] |&gt; sort |&gt; unique |&gt; map($0, {x in x * x})</code>) . But maybe I am asking for too much...</p>
+// prints '[1,2,3,4,5,6,7]'
+</code></pre>
+<p>I strongly believe that some (better) implementation of the pipe should become part of Swift standard library. For example it would be nice to be able to chain subscripts (e.g. <code>filter[array[i]]</code> replaced by <code>i |&gt; array[$0] |&gt; filter[$0]</code>) or more flexible maps (e.g. <code>[1, 2, 3, 3, 3, 4, 5, 5, 6, 7] |&gt; sort |&gt; unique |&gt; map($0, {x in x * x})</code>) . But maybe I am asking for too much&hellip;</p>
 <p>While writing this example, I was wondering what is the best way to remove duplicates in a Swift array? The shortest code I could come up with is</p>
-<div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nf">unique</span><span class="p">&lt;</span><span class="n">T</span><span class="p">:</span><span class="nb">Hashable</span><span class="p">&gt;(</span><span class="n">array</span><span class="p">:</span> <span class="n">T</span><span class="p">[])</span> <span class="p">-&gt;</span> <span class="n">T</span><span class="p">[]</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nv">filter</span> <span class="p">=</span> <span class="nb">Dictionary</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span><span class="nb">Bool</span><span class="p">&gt;()</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.</span><span class="n">array</span><span class="p">.</span><span class="bp">count</span> <span class="p">{</span>
-            <span class="bp">filter</span><span class="p">[</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="p">=</span> <span class="kc">true</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="nb">Array</span><span class="p">(</span><span class="bp">filter</span><span class="p">.</span><span class="n">keys</span><span class="p">)</span>
-<span class="p">}</span>
-</pre></div>
-
-
+<pre><code>:::swift
+func unique&lt;T:Hashable&gt;(array: T[]) -&gt; T[] {
+    var filter = Dictionary&lt;T,Bool&gt;()
+    for i in 0..array.count {
+            filter[array[i]] = true
+    }
+    return Array(filter.keys)
+}
+</code></pre>
 <p>but it is probably not the fastest one. Nevertheless, I would probably use an underlying dictionary to implement a <code>Set</code> type and use the <code>Set</code> to remove duplicates. Note here that <code>T[]</code> is just syntactic sugar for <code>Array&lt;T&gt;</code>.</p>
 <p>Another version, using the builtin <code>contains</code> function could be</p>
-<div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nf">unique</span><span class="p">&lt;</span><span class="n">T</span> <span class="p">:</span> <span class="nb">Equatable</span><span class="p">&gt;(</span><span class="n">array</span><span class="p">:</span> <span class="n">T</span><span class="p">[])</span> <span class="p">-&gt;</span> <span class="n">T</span><span class="p">[]</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nv">result</span> <span class="p">=</span> <span class="n">T</span><span class="p">[]()</span>
-    <span class="k">for</span> <span class="n">x</span> <span class="k">in</span> <span class="n">array</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="o">!</span><span class="bp">contains</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">result</span> <span class="o">+=</span> <span class="n">x</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">result</span>
-<span class="p">}</span>
-</pre></div>
-
-
+<pre><code>:::swift
+func unique&lt;T : Equatable&gt;(array: T[]) -&gt; T[] {
+    var result = T[]()
+    for x in array {
+        if !contains(result, x) {
+            result += x
+        }
+    }
+    return result
+}
+</code></pre>
 <p>Again <code>+=</code> stands for <code>append</code> when used with arrays.</p>
 <p>I guess the fastest code would be to use a quicksort and remove the duplicates while sorting, but it (as my second implementation of <code>unique</code>) would not preserve the order of appearence.</p>
-<p>While wrtiting this post, on HN was linked a <a href="http://nomothetis.svbtle.com/smashing-swift">very initersting post</a> with implementation of some interesting construct, like the <a href="http://www.mseri.me/implementing-either-type-in-swift">either of the previous post</a> and more, and pointing out problems of the young swift compiler. I think it's a nice reading.</p>
-<p>Additionally I recently stumbled upon the <a href="http://stackoverflow.com/questions/24027116">following stackoverflow thread</a>. I find it quite interesting, especially because it shows a nice extension of Arrays introducing an <code>each</code> construct very similar to ruby's one.</p>
-<p>Another simple example I was working on is the <em>null coaleshing operator</em> that would come handy with Swift's optionals. An interesting discussion in regard can be found (again) in <a href="http://stackoverflow.com/questions/24082959">stackoverflow</a>.</p>
-<p>After some time we can start to understand the limitations of Swift, but the language is definitely still under construction and I would not be surprised if it will be different at the time of the final release. </p>
+<p>While wrtiting this post, on HN was linked a <a href="http://nomothetis.svbtle.com/smashing-swift">very initersting post</a> with implementation of some interesting construct, like the <a href="http://www.mseri.me/implementing-either-type-in-swift">either of the previous post</a> and more, and pointing out problems of the young swift compiler. I think it&rsquo;s a nice reading.</p>
+<p>Additionally I recently stumbled upon the <a href="http://stackoverflow.com/questions/24027116">following stackoverflow thread</a>. I find it quite interesting, especially because it shows a nice extension of Arrays introducing an <code>each</code> construct very similar to ruby&rsquo;s one.</p>
+<p>Another simple example I was working on is the <em>null coaleshing operator</em> that would come handy with Swift&rsquo;s optionals. An interesting discussion in regard can be found (again) in <a href="http://stackoverflow.com/questions/24082959">stackoverflow</a>.</p>
+<p>After some time we can start to understand the limitations of Swift, but the language is definitely still under construction and I would not be surprised if it will be different at the time of the final release.</p>
 <p>In the meanwhile, if you can, experiment with it and have fun!!</p>
 <p>UPDATE: despite the many limitations of Swift compiler in this direction, there is a quite active and promising library for functional programming in swift already under development: see <a href="https://github.com/maxpow4h/swiftz">swiftz on GitHub</a>.</p>
-        </div>
-        
-        </section>
 
-<section class="post-comments">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE UNCOMMENTING THE THEME * * */
-    var disqus_shortname = 'talesofafractalspectrum'; // required: replace example with your forum shortname
-    // make sure to use the post.id as an identifier, 
-    //otherwise disqus will use the pages url per default, 
-    //which might be problematic...
-    var disqus_identifier = '34';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</section>
-
-
-
-    </article>
-    
-    <script type="text/javascript">
-        document.getElementById( 'top-post' ).scrollIntoView();
-    </script>
-
-</main>
-            
-        </div>
     </div>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$','$'], ['\\(','\\)']]
-    }
-  });
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    this.page.identifier = '34';
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "talesofafractalspectrum" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
 </script>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-44365202-1']);
-  _gaq.push(['_trackPageview']);
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-</body>
+    </main>
+  </body>
 </html>
