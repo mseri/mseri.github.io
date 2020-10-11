@@ -3,7 +3,7 @@
   <head>
     <title>Update script explained // A fractal spectrum of tales</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.69.2" />
+    <meta name="generator" content="Hugo 0.75.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Marcello Seri" />
     <meta name="description" content="" />
@@ -150,7 +150,7 @@ cd $STARTLOCATION
 rm -rf $GHOSTUPDATELOCATION $GHOSTUPDATEFILE
 echo &quot;Folder cleaned&quot;
 </code></pre>
-<p>The next, last, step is the one that you will probably have to modify to adapt to your needs. Its purpose is restarting the ghost environment. In my case it runs with <a href="https://npmjs.org/package/forever">forever</a> and is started by a code that I saved in a script called <code>starter.sh</code> in my ghost folder. The following code does the restart as I would do it by hand and then tells me &ldquo;<em>Done!</em>&quot;.</p>
+<p>The next, last, step is the one that you will probably have to modify to adapt to your needs. Its purpose is restarting the ghost environment. In my case it runs with <a href="https://npmjs.org/package/forever">forever</a> and is started by a code that I saved in a script called <code>starter.sh</code> in my ghost folder. The following code does the restart as I would do it by hand and then tells me &ldquo;<em>Done!</em>&rdquo;.</p>
 <pre><code>:::sh
 echo &quot;Restarting ghost...&quot;
 forever stop 0

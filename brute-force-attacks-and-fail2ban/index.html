@@ -3,7 +3,7 @@
   <head>
     <title>Brute force attacks and fail2ban // A fractal spectrum of tales</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.69.2" />
+    <meta name="generator" content="Hugo 0.75.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Marcello Seri" />
     <meta name="description" content="" />
@@ -94,7 +94,7 @@ Reaching out the home page of the software you can read
   <title>tag</title>
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
 </svg>
-          <a class="tag" href="https://www.mseri.me/tags/fix/">fix</a></div></div>
+          </div></div>
     </header>
     <div class="post-content">
       <p>Even a nearly unkown server like mine receives every day a number of brute force attacks. Usually I have an instance of <code>fail2ban</code> monitoring the logs of all my services and readily banning the attackers after few attempts.</p>
@@ -104,7 +104,7 @@ Reaching out the home page of the software you can read
 <blockquote>
 <p>Fail2ban scans log files and bans IPs that show the malicious signs - too many password failures, seeking for exploits, etc. Generally Fail2Ban then used to update firewall rules to reject the IP addresses for a specified amount of time, although any arbitrary other action <em>(e.g. sending an email, or ejecting CD-ROM tray)</em> could also be configured. Out of the box Fail2Ban comes with filters for various services <em>(apache, curier, ssh, etc)</em>.</p>
 </blockquote>
-<p>Now that you know what we are talking about, I can tell you how fail2ban does it job. It starts a process in background (a [daemon](<a href="http://en.wikipedia.org/wiki/Daemon&amp;#95;(computing)%22">http://en.wikipedia.org/wiki/Daemon&amp;#95;(computing)&quot;</a> target=&rdquo;_blank)) that monitors the logs of your systems, each time something is logged it filters it using <a href="http://en.wikipedia.org/wiki/Regular_expression">regular expressions</a>, this filtering process identifies potential malicious hosts and, depending on your configuration, bans them for a limited/unlimited amount of time creating ad hoc firewall rules.</p>
+<p>Now that you know what we are talking about, I can tell you how fail2ban does it job. It starts a process in background (a [daemon](<a href="http://en.wikipedia.org/wiki/Daemon&amp;#95;(computing)%22">http://en.wikipedia.org/wiki/Daemon&amp;#95;(computing)&quot;</a> target=&quot;_blank)) that monitors the logs of your systems, each time something is logged it filters it using <a href="http://en.wikipedia.org/wiki/Regular_expression">regular expressions</a>, this filtering process identifies potential malicious hosts and, depending on your configuration, bans them for a limited/unlimited amount of time creating ad hoc firewall rules.</p>
 <p>On my ubuntu server 13.04 I had to touch very few settings and add very few rules, almost all the ones that come with the default installation are working and are setted up properly. You cannot believe how many attacks I receive daily (mainly to ssh or the webserver). I wonder how much bandwith big services can waste due to these assholes&hellip;</p>
 <p>Anyhow, the problem arised with the mail service. My mail server use <a href="http://www.dovecot.org">dovecot</a> to provide imap services, and <a href="http://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer">sasl</a> for authentication. Both of them requiring <a href="http://it.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>. <em>I will not go into the details of the configuration, if you want to do something close you could use <a href="http://sealedabstract.com/code/nsa-proof-your-e-mail-in-2-hours/">NSA-proof your e-mail in 2 hours</a> as a starting point.</em></p>
 <p>Apparently the filter that I was using for sasl had some problems: tonight I&rsquo;ve got a brute force attack (luckily with no consequences) and this morning my logwatch report was flooded by failed authentication attempts, all from the same ip. Fail2ban was definitely not doing its job properly.</p>
