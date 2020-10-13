@@ -6,7 +6,17 @@
     <description>Recent content in Posts on A fractal spectrum of tales</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Apr 2020 15:20:19 +0200</lastBuildDate><atom:link href="https://www.mseri.me/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Oct 2020 22:38:21 +0200</lastBuildDate><atom:link href="https://www.mseri.me/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>46 Micro Course in Spectra Sub Riemannian Geometry</title>
+      <link>https://www.mseri.me/micro-course-ddtandg/</link>
+      <pubDate>Tue, 13 Oct 2020 22:38:21 +0200</pubDate>
+      
+      <guid>https://www.mseri.me/micro-course-ddtandg/</guid>
+      <description>Recently, I have had the pleasure and honour to give a &amp;ldquo;micro&amp;rdquo; course on spectral sub-Riemannian geometry for the Dutch Differential Topology and Geometry seminar. Given the current global circumstances, the course was given via Zoom and the organizers and participants have been kind enough to have it recorded and published online.
+You can access the recordings of the first and second lecture on the [YouTube Channel of the DDT&amp;amp;G. The slides are also available (beware, they are 99Mb of handwritten pdf!</description>
+    </item>
+    
     <item>
       <title>Lecture notes on Hamiltonian mechanics</title>
       <link>https://www.mseri.me/lecture-notes-hamiltonian-mechanics/</link>
@@ -14,6 +24,15 @@
       
       <guid>https://www.mseri.me/lecture-notes-hamiltonian-mechanics/</guid>
       <description>In the last academic term, I had the great pleasure to teach Hamiltonian Mechanics, an optional master course for mathematics and physics students. Even though the course was based on Arnold&amp;rsquo;s beautiful book, my plan for the course was to give a panoramic on the modern theory of integrable systems and perturbation theory. Of course, my grand plan, was way to optimistic. And between the time available, a bad flu and then the pandemic landing, we were able to do much less than what I hoped for.</description>
+    </item>
+    
+    <item>
+      <title>Lecture notes on Hamiltonian mechanics (update)</title>
+      <link>https://www.mseri.me/hamiltonian-mechanics-ams/</link>
+      <pubDate>Mon, 20 Apr 2020 15:20:19 +0200</pubDate>
+      
+      <guid>https://www.mseri.me/hamiltonian-mechanics-ams/</guid>
+      <description>I have just released a small update to the Hamiltonian Mechanics lacture notes here. This contains some edits to improve the english and fix a few typos. The lecture notes have also been approved to appear in the AMS Open Math Notes, which seems to be a very nice initiative, full of very interesting and high quality content.</description>
     </item>
     
     <item>
@@ -86,27 +105,6 @@ It&amp;rsquo;s time to take action, even the smallest one coubl make a differenc
       <guid>https://www.mseri.me/fixing-wifi-on-os-x-by-tweaking-the-mtu/</guid>
       <description>After I had installed the first developer beta of Yosemite I started experiencing serious WiFi issues at home, with the connection dropping after few seconds of activity. Only apparent solution was to disable and reenable periodically the wifi until it started working.
 The issue was not present whene I was in my office or using public wifi&amp;rsquo;s around. And removing the network setup to have them reset to default didn&amp;rsquo;t help.</description>
-    </item>
-    
-    <item>
-      <title>On Advanced Functional Programming</title>
-      <link>https://www.mseri.me/on-advanced-functional-programming/</link>
-      <pubDate>Wed, 15 Oct 2014 00:58:59 +0000</pubDate>
-      
-      <guid>https://www.mseri.me/on-advanced-functional-programming/</guid>
-      <description>In few days, tomorrow if I&amp;rsquo;m not mistaken, you will be able to attend the new Erik Meijer&amp;rsquo;s introduction to Functional Programming on edX. If you have any interest in mathematics or programming, I am sure that this is something that you have to watch.
-I am saying new because a similar course was held in 2010 by the same person, you can still watch it here: Erik Meijer&amp;rsquo;s MSDN Channel 9 lecture series on functional programming</description>
-    </item>
-    
-    <item>
-      <title>Piping with Swift</title>
-      <link>https://www.mseri.me/piping-with-swift/</link>
-      <pubDate>Mon, 16 Jun 2014 10:03:04 +0000</pubDate>
-      
-      <guid>https://www.mseri.me/piping-with-swift/</guid>
-      <description>Lately I&amp;rsquo;ve been playing with Apple&amp;rsquo;s newborn Swift quite a lot. I have to say that I am really impressed, and except for few things that I hope will be smoothed in the next months (years?), I find Swift really enjoyable and readable.
-However, there is one feature that I really miss. Something that I daily use with slightly different syntaxes in Sh, Haskell, Julia and Elixir: the pipe!
-Can we implement a kind of pipe in Swift?</description>
     </item>
     
   </channel>
