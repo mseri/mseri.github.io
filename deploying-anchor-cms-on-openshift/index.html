@@ -3,10 +3,10 @@
   <head>
     <title>Deploying Anchor CMS on OpenShift // A fractal spectrum of tales</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.76.3" />
+    <meta name="generator" content="Hugo 0.76.5" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Marcello Seri" />
-    <meta name="description" content="" />
+    <meta name="description" content="Free thoughts of a geeky mathematician" />
     <link rel="stylesheet" href="https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css" />
 
     
@@ -27,11 +27,11 @@ if (!doNotTrack) {
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Deploying Anchor CMS on OpenShift"/>
 <meta name="twitter:description" content="Some of you may already know that installing ghost on OpenShift is extremely easy (and free). You can check this post if you don&rsquo;t believe me.
-I was wandering how is it with other small and less known CMS. Given that I was already making some local tests with [Anchor CMS](http://anchorcms.com&quot; _target=&ldquo;blank) for a friend, and given that there is almost nothing around about its deployment on Open Shift I decided to give it a try and write about it."/>
+I was wandering how is it with other small and less known CMS. Given that I was already making some local tests with [Anchor CMS](https://anchorcms.com&quot; _target=&ldquo;blank) for a friend, and given that there is almost nothing around about its deployment on Open Shift I decided to give it a try and write about it."/>
 
     <meta property="og:title" content="Deploying Anchor CMS on OpenShift" />
 <meta property="og:description" content="Some of you may already know that installing ghost on OpenShift is extremely easy (and free). You can check this post if you don&rsquo;t believe me.
-I was wandering how is it with other small and less known CMS. Given that I was already making some local tests with [Anchor CMS](http://anchorcms.com&quot; _target=&ldquo;blank) for a friend, and given that there is almost nothing around about its deployment on Open Shift I decided to give it a try and write about it." />
+I was wandering how is it with other small and less known CMS. Given that I was already making some local tests with [Anchor CMS](https://anchorcms.com&quot; _target=&ldquo;blank) for a friend, and given that there is almost nothing around about its deployment on Open Shift I decided to give it a try and write about it." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.mseri.me/deploying-anchor-cms-on-openshift/" />
 <meta property="article:published_time" content="2013-11-08T18:24:02+00:00" />
@@ -47,17 +47,17 @@ I was wandering how is it with other small and less known CMS. Given that I was 
       <p>Free thoughts of a geeky mathematician</p>
       <div class="app-header-social">
         
-          <a target="_blank" href="https://github.com/mseri" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+          <a target="_blank" href="https://github.com/mseri" rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
   <title>github</title>
   <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
 </svg></a>
         
-          <a target="_blank" href="https://twitter.com/marcelloseri" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+          <a target="_blank" href="https://twitter.com/marcelloseri" rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
   <title>twitter</title>
   <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
 </svg></a>
         
-          <a target="_blank" href="https://academic.mseri.me" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-award">
+          <a target="_blank" href="https://academic.mseri.me" rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-award">
   <title>award</title>
   <circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
 </svg></a>
@@ -71,32 +71,32 @@ I was wandering how is it with other small and less known CMS. Given that I was 
       <h1 class ="post-title">Deploying Anchor CMS on OpenShift</h1>
       <div class="post-meta">
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+          <svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
   <title>calendar</title>
   <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
 </svg>
           Nov 8, 2013
         </div>
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+          <svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
   <title>clock</title>
   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
 </svg>
           8 min read
         </div><div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+          <svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
   <title>tag</title>
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
 </svg>
           <a class="tag" href="https://www.mseri.me/tags/openshift/">OpenShift</a><a class="tag" href="https://www.mseri.me/tags/deploy/">deploy</a></div></div>
     </header>
     <div class="post-content">
-      <p>Some of you may already know that installing <a href="http://www.ghost.org">ghost</a> on <a href="http://www.openshift.org">OpenShift</a> is extremely easy (and free). You can <a href="http://ghost-laures.rhcloud.com">check this post</a> if you don&rsquo;t believe me.</p>
-<p>I was wandering how is it with other small and less known CMS. Given that I was already making some local tests with [Anchor CMS](<a href="http://anchorcms.com">http://anchorcms.com</a>&quot; _target=&ldquo;blank) for a friend, and given that there is almost nothing around about its deployment on Open Shift I decided to give it a try and write about it.</p>
-<p>I could find only three references online. Two were forum posts arguing that it is impossible to install it and one is the blog post titled [Ancor CMS on OpenShift](<a href="http://sruiz.co.uk/sruiz/blog/2013/09/07/anchor-cms-on-openshift/%22">http://sruiz.co.uk/sruiz/blog/2013/09/07/anchor-cms-on-openshift/&quot;</a> _target=&ldquo;blank), that explain how to install Anchor in a working but long and painful way.</p>
+      <p>Some of you may already know that installing <a href="https://www.ghost.org">ghost</a> on <a href="https://www.openshift.org">OpenShift</a> is extremely easy (and free). You can <a href="https://ghost-laures.rhcloud.com">check this post</a> if you don&rsquo;t believe me.</p>
+<p>I was wandering how is it with other small and less known CMS. Given that I was already making some local tests with [Anchor CMS](<a href="https://anchorcms.com">https://anchorcms.com</a>&quot; _target=&ldquo;blank) for a friend, and given that there is almost nothing around about its deployment on Open Shift I decided to give it a try and write about it.</p>
+<p>I could find only three references online. Two were forum posts arguing that it is impossible to install it and one is the blog post titled [Ancor CMS on OpenShift](<a href="https://sruiz.co.uk/sruiz/blog/2013/09/07/anchor-cms-on-openshift/%22">https://sruiz.co.uk/sruiz/blog/2013/09/07/anchor-cms-on-openshift/&quot;</a> _target=&ldquo;blank), that explain how to install Anchor in a working but long and painful way.</p>
 <p>In this post I explain you how to do it in 10 minutes (but you need a unix machine: *BSD, Linux or Mac are fine). You will need the following:</p>
 <ul>
-<li>A terminal that can execute wget, tar, <a href="http://www.mseri.me/git-workflow-for-lazy-mathematicians/">git</a> and ssh.</li>
+<li>A terminal that can execute wget, tar, <a href="https://www.mseri.me/git-workflow-for-lazy-mathematicians/">git</a> and ssh.</li>
 <li>A decent web browser.</li>
 </ul>
 <h2 id="step-0-the-necessary-tools">Step 0: the necessary tools</h2>
@@ -130,11 +130,11 @@ $ rhc create-app anchor zend-5.6
 </code></pre>
 <p>And wait some time. When you are prompted for cloning and accepting the security certificate just type <code>yes</code> and hit return.
 Remember to annotate somewhere the informations printed at the end of the procedure:</p>
-<pre><code>URL:        http://anchor-mseritutorial.rhcloud.com/
+<pre><code>URL:        https://anchor-mseritutorial.rhcloud.com/
 SSH to:     uuid@anchor-mseritutorial.rhcloud.com
 Git remote: ssh://uuid@anchor-mseritutorial.rhcloud.com/~/git/anchor.git/
 </code></pre>
-<p><em>Notice that the <code>URL</code> is simply <code>http://APP\_NAME-DOMAIN\_NAME.rhcloud.com/</code>. Notice moreover that we have a new subfolder called <strong>anchor</strong>: it is a clone of our online repository, the website content will go in <code>anchor/php</code>.</em></p>
+<p><em>Notice that the <code>URL</code> is simply <code>https://APP\_NAME-DOMAIN\_NAME.rhcloud.com/</code>. Notice moreover that we have a new subfolder called <strong>anchor</strong>: it is a clone of our online repository, the website content will go in <code>anchor/php</code>.</em></p>
 <p>Before doing anything, follow the instruction that says</p>
 <pre><code>You should set password for the Zend Server Console at:    
 https://anchor-mseritutorial.rhcloud.com/ZendServer
@@ -160,7 +160,7 @@ $ ssh uuid@anchor-mseritutorial.rhcloud.com 'env | grep MYSQL'
 <pre><code>:::sh
 $ cd anchor/php
 $ git rm health_check.php
-$ wget http://anchorcms.com/download -O anchorcms.tar.gz
+$ wget https://anchorcms.com/download -O anchorcms.tar.gz
 $ tar zxvf anchorcms.tar.gz --strip-components 1
 $ rm -f anchorcms.tar.gz
 $ git add .
@@ -168,7 +168,7 @@ $ git commit -m &quot;Our First Install&quot;
 $ git push
 </code></pre>
 <p>The first four lines are to replace the content of the <code>php</code> folder with the code of Anchor, the last three lines are to add the new files to the repository and push (and deploy) the changes online.</p>
-<p>The last command will take some time before finishing. When it is done, it is time to configure our Anchor installation: navigate to your website (in our case was <a href="http://anchor-mseritutorial.rhcloud.com">http://anchor-mseritutorial.rhcloud.com</a>), click on &ldquo;<em>Run the installer</em>&rdquo; and use the information that you annotated in the second step to complete the set-up.</p>
+<p>The last command will take some time before finishing. When it is done, it is time to configure our Anchor installation: navigate to your website (in our case was <a href="https://anchor-mseritutorial.rhcloud.com">https://anchor-mseritutorial.rhcloud.com</a>), click on &ldquo;<em>Run the installer</em>&rdquo; and use the information that you annotated in the second step to complete the set-up.</p>
 <p>You will end up on a green screen telling you to create a <code>.htaccess</code> file in the root folder and paste there some code. Don&rsquo;t click on any of the buttons yet. Just copy the code, and from your terminal: type <code>nano .htaccess</code>, paste the code, press <code>Ctrl x</code>, type <code>y</code> and finally press return.</p>
 <p><em>Do not yet push this change on the remote repository, otherwise you will loose the installation that you just made</em>.</p>
 <p>Each time you push some code online, the remote repository is overwritten with the content of your push. First we need to save in our repository the changes made by the installer. We can do it in the following way:</p>
@@ -232,7 +232,7 @@ $ git add .
 $ git commit -m &quot;Added Hot Deploy&quot;
 $ git push
 </code></pre>
-<p>You can find many themes online, a good source is <a href="http://anchorthemes.com">Anchor Themes</a>, or you can build your own one using the official documentation or <a href="http://webdesign.tutsplus.com/tutorials/creating-a-theme-for-anchor-cms">some tutorial</a>.</p>
+<p>You can find many themes online, a good source is <a href="https://anchorthemes.com">Anchor Themes</a>, or you can build your own one using the official documentation or <a href="https://webdesign.tutsplus.com/tutorials/creating-a-theme-for-anchor-cms">some tutorial</a>.</p>
 <p>To install a new theme is enough to download it and add its folder inside the folder <code>anchor/php/themes</code> (you can already see the <code>default</code> theme folder, don&rsquo;t replace it <em>default</em> is just the theme&rsquo;s name). Finally push it as usual:</p>
 <pre><code>:::sh
 $ git add .
@@ -254,7 +254,7 @@ $ rhc snapshot restore -a anchor -f {/path/to/anchor.tar.gz}
 <p>Remark: here the name that we are using is always <code>anchor</code> just because it is the name that we gave to the application at the beginning of Step 1.</p>
 <hr>
 <p>Now log in, post something and enjoy your newly installed CMS!</p>
-<p>The tutorial installation is going to be online and visible for the next few days at the url <a href="http://anchor-mseritutorial.rhcloud.com/">http://anchor-mseritutorial.rhcloud.com/</a>. I use that account for tests, I don&rsquo;t plan to keep this installation of anchor alive forever (and moreover I don&rsquo;t use it, it&rsquo;s just empty), so don&rsquo;t be upset if the link is not going anymore in the future.</p>
+<p>The tutorial installation is going to be online and visible for the next few days at the url <a href="https://anchor-mseritutorial.rhcloud.com/">https://anchor-mseritutorial.rhcloud.com/</a>. I use that account for tests, I don&rsquo;t plan to keep this installation of anchor alive forever (and moreover I don&rsquo;t use it, it&rsquo;s just empty), so don&rsquo;t be upset if the link is not going anymore in the future.</p>
 
     </div>
     <div class="post-footer">
