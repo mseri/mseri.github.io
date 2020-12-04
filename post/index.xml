@@ -6,7 +6,17 @@
     <description>Recent content in Posts on A fractal spectrum of tales</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 Oct 2020 22:38:21 +0200</lastBuildDate><atom:link href="https://www.mseri.me/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Dec 2020 10:45:35 +0100</lastBuildDate><atom:link href="https://www.mseri.me/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>On doing a PhD (in STEM)</title>
+      <link>https://www.mseri.me/on-doing-phd/</link>
+      <pubDate>Fri, 04 Dec 2020 10:45:35 +0100</pubDate>
+      
+      <guid>https://www.mseri.me/on-doing-phd/</guid>
+      <description>I was asked a few times in the recent past if doing a PhD is worth the effort. Since then, I have been thinking of writing what I think on my blog but, as usual, I could never find the time for it. Not long ago, Jacopo Bertolotti shared his thoughts on the same matter in a nice twitter thread.
+Since that really resonated with what I had to say, I&amp;rsquo;ll let him speak also for me and add a few more comments at the end.</description>
+    </item>
+    
     <item>
       <title>Micro Course in Spectral Sub Riemannian Geometry</title>
       <link>https://www.mseri.me/micro-course-ddtandg/</link>
@@ -95,16 +105,6 @@ Often enough this requires long and complicated procedures involving the setup o
       <description>I am so sorry that I needed so much time before watching this wonderfully inspiring TED video.
  I really admire Snowden, Greenwald and all the people that are fighting to denounce the dangerous path that we are following.
 It&amp;rsquo;s time to take action, even the smallest one coubl make a difference. Maybe we don&amp;rsquo;t see the threat now, but we cannot now what will happen in the future.</description>
-    </item>
-    
-    <item>
-      <title>Fix WiFi on OS X by tweaking the MTU</title>
-      <link>https://www.mseri.me/fixing-wifi-on-os-x-by-tweaking-the-mtu/</link>
-      <pubDate>Wed, 15 Oct 2014 23:18:23 +0000</pubDate>
-      
-      <guid>https://www.mseri.me/fixing-wifi-on-os-x-by-tweaking-the-mtu/</guid>
-      <description>After I had installed the first developer beta of Yosemite I started experiencing serious WiFi issues at home, with the connection dropping after few seconds of activity. Only apparent solution was to disable and reenable periodically the wifi until it started working.
-The issue was not present whene I was in my office or using public wifi&amp;rsquo;s around. And removing the network setup to have them reset to default didn&amp;rsquo;t help.</description>
     </item>
     
   </channel>
