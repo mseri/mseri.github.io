@@ -107,10 +107,8 @@ I was wandering how is it with other small and less known CMS. Given that I was 
 <p>it is very important that you use a simple and recallable string. For this tutorial I used <code>mseritutorial</code>.</p>
 <h2 id="step-1-create-the-application">Step 1: create the application</h2>
 <p>To install Anchor we need a recent version of php. Sadly the one contained in openshift&rsquo;s cartridge <code>php</code> is not recent enough, but the problem can be solved easily using instead the <code>zend server</code> cartridge. To create an app just type</p>
-<pre><code>:::sh
-$ rhc create-app anchor zend-5.6
-</code></pre>
-<p>And wait some time. When you are prompted for cloning and accepting the security certificate just type <code>yes</code> and hit return.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ rhc create-app anchor zend-5.6
+</code></pre></div><p>And wait some time. When you are prompted for cloning and accepting the security certificate just type <code>yes</code> and hit return.
 Remember to annotate somewhere the informations printed at the end of the procedure:</p>
 <pre><code>URL:        https://anchor-mseritutorial.rhcloud.com/
 SSH to:     uuid@anchor-mseritutorial.rhcloud.com

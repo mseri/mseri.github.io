@@ -196,9 +196,8 @@ date:   Fri May 17 14:40:04 2013 +0100
     first commit
 </code></pre>
 <p>You can user the weird code appearing next to the commit line to see what has changed in that particular commit:</p>
-<p>:::sh
-git show 9cf461946076c7849726ff4a8a48e43d7e191f07 &ndash;word-diff=color</p>
-<p>The first part of the output replicates the log. In the second part the changes are shown in detail. You can see the text that was added in highlighted green and the text that was removed in red. The affected files appear in higlighted white before the red/green text.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git show 9cf461946076c7849726ff4a8a48e43d7e191f07 --word-diff<span style="color:#f92672">=</span>color
+</code></pre></div><p>The first part of the output replicates the log. In the second part the changes are shown in detail. You can see the text that was added in highlighted green and the text that was removed in red. The affected files appear in higlighted white before the red/green text.</p>
 <p>Note that by default Git compares documents line by line, so that if anything has changed on a line then it shows the whole line as changed. With TeX documents lines can be quite long and it can be difficult to quickly see what has changed between similar lines: the option <code>--word-diff=color</code> tells Git to compare the changes word by word making the output more readable.</p>
 <p>These features are very useful if you want to see the changes made by one of your collaborators, or to remind yourself what you were working on last time.</p>
 <h3 id="ignore-files">Ignore Files</h3>
