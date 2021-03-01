@@ -10,20 +10,6 @@
     <link rel="stylesheet" href="https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css" />
 
     
-<script type="application/javascript">
-var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-var doNotTrack = (dnt == "1" || dnt == "yes");
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-44365202-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Move to ghc 7.8.2 on MacOSX"/>
 <meta name="twitter:description" content="Lately I&rsquo;ve been playing with some functional languages: haskell, lisp (in particular the scheme dialect, see e.g. chicken or racket) and elixir (I very much like it and I really appreciate that it runs on the erlang VM).
@@ -98,32 +84,22 @@ Each of those has something pretty unique and I believe is very worth learning. 
 <p>Recently, <code>ghc</code> reached version <code>7.8</code>, and that shipped a huge amount of improvements. With my huge disappointemnt, all the packages installed via Homebrew were supporting only ghc 7.6 and I had hard times with dependencies, multiple packages and so on&hellip;</p>
 <p>The solution was pretty simple and straightforward in the end, and I believe this could be handy for other people too strognly enough to write this post.</p>
 <p>First of all I uninstalled ghc 7.6, cabal-install or haskell platform (if you have it). Then I reinstalled the 7.8 branch of ghc, thanks to Homebrew that was pretty straightforward:</p>
-<pre><code>:::sh
-brew install ghc --devel
-</code></pre>
-<p>Additionally I had to remove the <code>.cabal</code> and <code>.ghc</code> folder in my home. There were pieces of configurations that were creating some conflicts, move them if you feel unsure and want to avoid the deletion.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    brew install ghc --devel
+</code></pre></div><p>Additionally I had to remove the <code>.cabal</code> and <code>.ghc</code> folder in my home. There were pieces of configurations that were creating some conflicts, move them if you feel unsure and want to avoid the deletion.</p>
 <p>Then I needed <code>cabal-install</code>. This requires slightly more work, especially it didn&rsquo;t quite work for me when I followed <a href="https://www.haskell.org/haskellwiki/Cabal-Install">the instructions</a>.</p>
 <p>First download the sources for <code>cabal-install</code> from <a href="https://www.haskell.org/cabal/download.html">here</a>. Just the <code>cabal-install tool</code> sources, it is going to update the <code>Cabal</code> library during its setup.</p>
 <p>Untar the file, e.g.</p>
-<pre><code>:::sh
-tar zxvf cabal-install-1.20.0.2.tar.gz
-</code></pre>
-<p>and enter the newly created folder, e.g</p>
-<pre><code>:::sh
-cd cabal-install-1.20.0.2
-</code></pre>
-<p>Now it all reduces to run</p>
-<pre><code>:::sh
-./bootstrap.sh --no-doc
-</code></pre>
-<p>(append <code>--global</code> if you prefer to install it in <code>/usr/local</code> instead of <code>$HOME/cabal</code>).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    tar zxvf cabal-install-1.20.0.2.tar.gz
+</code></pre></div><p>and enter the newly created folder, e.g</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    cd cabal-install-1.20.0.2
+</code></pre></div><p>Now it all reduces to run</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    ./bootstrap.sh --no-doc
+</code></pre></div><p>(append <code>--global</code> if you prefer to install it in <code>/usr/local</code> instead of <code>$HOME/cabal</code>).</p>
 <p>The <code>--no-docs</code> flag seemed necessary to avoid a number of errors appearing in the compilation process and forcing me to install a number of packages by hand. Sadly I could not figure out the problem in the script yet, but that flag seems a reasonable workaround and I will install the docs later anyhow.</p>
 <p>You may still get some error related to broken package, in such cas just <code>ghc-pkg unregister &lt;brokenpackagename&gt;</code> and rerun the script (in my case they were <code>text</code> and <code>mtl</code>).</p>
 <p>When cabal is installed it is a good idea to run</p>
-<pre><code>:::sh
-cabal update
-</code></pre>
-<p>and follow the instructions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    cabal update
+</code></pre></div><p>and follow the instructions.</p>
 <p>Remember that <code>.cabal/bin</code> must be in your <code>$PATH</code>.</p>
 <p>To learn coding in haskell there are few great sources. I think <a href="https://learnyouahaskell.com">Learn yourself a Haskell for Great Good!</a> is a good place to start, maybe not perfect and not complete but I really really enjoied it (and learnt a lot).</p>
 <h2 id="essential-packages-for-using-haskell">Essential Packages for Using Haskell</h2>
@@ -133,17 +109,13 @@ cabal update
 <p>I&rsquo;ve additionally got a strange error related to <code>happy</code> and <code>haskell-src-exts</code>, it can be solved just by <code>cabal install happy</code>. I am still wondering why it happened.</p>
 <p>When the setup is complete, you can run <code>hoogle data</code> to create a local database of entries, or <code>hoogle data all</code> if you want the complete hoogle dataset (this takes a loooong time).</p>
 <p>If you don&rsquo;t plan to use <code>goa</code> or <code>lambdabot</code> you can integrate <code>hoogle</code> in <code>ghci</code> by adding</p>
-<pre><code>:::haskell
-:def hoogle \str -&gt; return $ &quot;:! hoogle --count=15 \&quot;&quot; ++ str ++ &quot;\&quot;&quot;
-</code></pre>
-<p>to your <code>.ghci</code> file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">    <span style="color:#66d9ef">:</span>def hoogle <span style="color:#a6e22e">\</span>str <span style="color:#f92672">-&gt;</span> return <span style="color:#f92672">$</span> <span style="color:#e6db74">&#34;:! hoogle --count=15 </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">++</span> str <span style="color:#f92672">++</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><p>to your <code>.ghci</code> file.</p>
 <p>I believe that <code>ghci</code> is nothing without <a href="https://www.haskell.org/haskellwiki/Lambdabot">lambdabot</a>. Therefore <code>cabal install goa lambdabot</code> is the inevitable second step. Note that <code>goa</code> is not a mistake but a <a href="https://hackage.haskell.org/package/goa">useful addition</a>.</p>
 <p><code>lambdabot &lt;= 4.3.0.1</code> have some problems with <code>ghc-7.8.2</code> and you will get a compilation error. To fix it you first <code>cabal install goa</code> by itself, then <code>cabal get lambdabot; cd lambdabot-4.3.0.1</code> and then you need to replace the content of <code>src/Lambdabot/Monad.hs-boot</code> with</p>
-<pre><code>:::haskell
-{-# LANGUAGE RankNTypes #-}
-module Lambdabot.Monad where
-
-import Control.Monad.Reader
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">    <span style="color:#75715e">{-# LANGUAGE RankNTypes #-}</span>
+    <span style="color:#66d9ef">module</span> Lambdabot.Monad <span style="color:#66d9ef">where</span>
+</code></pre></div><pre><code>import Control.Monad.Reader
 import Data.IORef
 
 data IRCRWState
@@ -155,25 +127,23 @@ instance Monad LB
 <p>(the above code is due to <a href="https://github.com/mokus0/lambdabot/pull/79">artella-coding</a> and should be merged in the next release of lambdabot).
 Then save and run <code>cabal configure &amp;&amp; cabal install</code>.</p>
 <p>Then in my <code>.ghci</code> I have</p>
-<pre><code>:::haskell
-:m - Prelude
-:m + GOA
-setLambdabotHome &quot;/Users/marcelloseri/.cabal/bin&quot;
-:def bs        lambdabot &quot;botsnack&quot;
-:def pl        lambdabot &quot;pl&quot;
-:def unpl      lambdabot &quot;unpl&quot;
-:def redo      lambdabot &quot;redo&quot;
-:def undo      lambdabot &quot;undo&quot;
-:def index     lambdabot &quot;index&quot;
-:def docs      lambdabot &quot;docs&quot;
-:def instances lambdabot &quot;instances&quot;
-:def hoogle    lambdabot &quot;hoogle&quot;
-:def source    lambdabot &quot;fptools&quot;
-:def where     lambdabot &quot;where&quot;
-:def version   lambdabot &quot;version&quot;
-:def src       lambdabot &quot;src&quot;
-</code></pre>
-<p>I like to see what my code should look like. Often <a href="https://community.haskell.org/~ndm/hlint/">hlint</a> is of great help for this (especially when you run it directly in your favourite editor, e.g. <code>vim</code> and <code>Sublime Text</code>): thus <code>cabal install hlint</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">    <span style="color:#66d9ef">:</span>m <span style="color:#f92672">-</span> <span style="color:#66d9ef">Prelude</span>
+    <span style="color:#66d9ef">:</span>m <span style="color:#f92672">+</span> <span style="color:#66d9ef">GOA</span>
+    setLambdabotHome <span style="color:#e6db74">&#34;/Users/marcelloseri/.cabal/bin&#34;</span>
+    <span style="color:#66d9ef">:</span>def bs        lambdabot <span style="color:#e6db74">&#34;botsnack&#34;</span>
+    <span style="color:#66d9ef">:</span>def pl        lambdabot <span style="color:#e6db74">&#34;pl&#34;</span>
+    <span style="color:#66d9ef">:</span>def unpl      lambdabot <span style="color:#e6db74">&#34;unpl&#34;</span>
+    <span style="color:#66d9ef">:</span>def redo      lambdabot <span style="color:#e6db74">&#34;redo&#34;</span>
+    <span style="color:#66d9ef">:</span>def undo      lambdabot <span style="color:#e6db74">&#34;undo&#34;</span>
+    <span style="color:#66d9ef">:</span>def index     lambdabot <span style="color:#e6db74">&#34;index&#34;</span>
+    <span style="color:#66d9ef">:</span>def docs      lambdabot <span style="color:#e6db74">&#34;docs&#34;</span>
+    <span style="color:#66d9ef">:</span>def instances lambdabot <span style="color:#e6db74">&#34;instances&#34;</span>
+    <span style="color:#66d9ef">:</span>def hoogle    lambdabot <span style="color:#e6db74">&#34;hoogle&#34;</span>
+    <span style="color:#66d9ef">:</span>def source    lambdabot <span style="color:#e6db74">&#34;fptools&#34;</span>
+    <span style="color:#66d9ef">:</span>def <span style="color:#66d9ef">where</span>     lambdabot <span style="color:#e6db74">&#34;where&#34;</span>
+    <span style="color:#66d9ef">:</span>def version   lambdabot <span style="color:#e6db74">&#34;version&#34;</span>
+    <span style="color:#66d9ef">:</span>def src       lambdabot <span style="color:#e6db74">&#34;src&#34;</span>
+</code></pre></div><p>I like to see what my code should look like. Often <a href="https://community.haskell.org/~ndm/hlint/">hlint</a> is of great help for this (especially when you run it directly in your favourite editor, e.g. <code>vim</code> and <code>Sublime Text</code>): thus <code>cabal install hlint</code>.</p>
 <p>Ans speaking of editors we cannot forget <a href="https://www.mew.org/~kazu/proj/ghc-mod/en/ghc-mod.html">ghc-mod</a> to provide the integration: <code>cabal install ghc-mod</code>.</p>
 <p>Finally I massively use <code>pandoc</code>, look at <a href="https://johnmacfarlane.net/pandoc/">its webpage</a> if you don&rsquo;t know it. You can installe prebuild binaries but recently I restarted enjying compiling things by myself. The installation via <code>cabal</code> is trivial. Just type <code>cabal install pandoc</code> and wait. Maybe go to get some coffee&hellip; it&rsquo;s not going to be just a couple of minutes. It may fail complaining about <code>alex</code>, in such case just run <code>cabal install alex</code> and run <code>cabal install pandoc</code> again.</p>
 <p>Now that my <code>.cabal</code> folder is quite huge, I have everything I want to have fun with haskell.</p>
@@ -181,26 +151,14 @@ setLambdabotHome &quot;/Users/marcelloseri/.cabal/bin&quot;
 
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    this.page.identifier = '31';
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "talesofafractalspectrum" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
+      <script src="https://utteranc.es/client.js"
+        repo="mseri/mseri.github.io"
+        issue-term="pathname"
+        label="✨💬✨"
+        theme="photon-dark"
+        crossorigin="anonymous"
+        async>
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
   </article>
 

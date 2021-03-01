@@ -10,20 +10,6 @@
     <link rel="stylesheet" href="https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css" />
 
     
-<script type="application/javascript">
-var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-var doNotTrack = (dnt == "1" || dnt == "yes");
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-44365202-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Again on zsh"/>
 <meta name="twitter:description" content="I already wrote about the great pleasure of moving to zsh in a previous post, but I feel that I should update you on the progresses.
@@ -99,141 +85,121 @@ In fact, as far as I understood, prezto was born as a fork of oh-my-zsh and was 
 <p>I must say that it cover all the plugins that I need and it feels sensibly faster and nicer on OSX and on the Raspberry Pi.</p>
 <p>The setup requires three steps instead of just one but it&rsquo;s worth doing it.</p>
 <p>If you already use zsh I suggest you to make a backup copy of your configuration. It&rsquo;s enough to do the following from a terminal:</p>
-<pre><code>:::sh
-$ cd ~
-$ tar czf zshBackup.tar.gz .z* .oh-my-zsh
-</code></pre>
-<p>(remove <code>.oh-my-zsh</code> from the line if you have not installed it)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    $ cd ~
+    $ tar czf zshBackup.tar.gz .z* .oh-my-zsh
+</code></pre></div><p>(remove <code>.oh-my-zsh</code> from the line if you have not installed it)</p>
 <p>Then go to the <a href="https://github.com/sorin-ionescu/prezto">Prezto GitHub page</a> and follow the instructions there.</p>
 <p>To avoid too many jumps I am copying them here:</p>
 <ol start="0">
 <li>
 <p>Clean your previous Zsh configuration (<strong>create a Backup copy of the files before proceeding!!!</strong>)</p>
-<pre><code> :::sh
- rm -r .z* .oh-my-zsh
-</code></pre>
-</li>
-<li>
-<p>Launch Zsh:</p>
-<pre><code> :::sh
- zsh
-</code></pre>
-</li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    rm -r .z* .oh-my-zsh
+       
+</code></pre></div></li>
+</ol>
+<pre><code class="language-1." data-lang="1.">
+    ```sh
+        zsh
+</code></pre><ol start="2">
 <li>
 <p>Clone the repository:</p>
-<pre><code> :::sh
- git clone --recursive https://github.com/sorin-ionescu/prezto.git &quot;${ZDOTDIR:-$HOME}/.zprezto&quot;
-</code></pre>
-</li>
-<li>
-<p>Create a new Zsh configuration by copying the Zsh configuration files provided:</p>
-<pre><code> :::sh
- setopt EXTENDED_GLOB
- for rcfile in &quot;${ZDOTDIR:-$HOME}&quot;/.zprezto/runcoms/^README.md(.N)
- do
-     ln -s &quot;$rcfile&quot; &quot;${ZDOTDIR:-$HOME}/.${rcfile:t}&quot;
- done
-</code></pre>
-</li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    git clone --recursive https://github.com/sorin-ionescu/prezto.git <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>ZDOTDIR<span style="color:#66d9ef">:-</span>$HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/.zprezto&#34;</span>
+</code></pre></div></li>
+</ol>
+<pre><code>3. Create a new Zsh configuration by copying the Zsh configuration files provided:
+
+    ```sh
+        setopt EXTENDED_GLOB
+        for rcfile in &quot;${ZDOTDIR:-$HOME}&quot;/.zprezto/runcoms/^README.md(.N)
+        do
+            ln -s &quot;$rcfile&quot; &quot;${ZDOTDIR:-$HOME}/.${rcfile:t}&quot;
+        done
+</code></pre><ol start="4">
 <li>
 <p>Set Zsh as your default shell (if it is not):</p>
-<pre><code> :::sh
- chsh -s /bin/zsh
-</code></pre>
-</li>
-<li>
-<p>Open a new Zsh terminal window or tab.</p>
-</li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    chsh -s /bin/zsh
+</code></pre></div></li>
 </ol>
-<p>At this point you can happily see your new zsh theme.
-Prezto comes with many available plugins, I suggest you to look at the <a href="https://github.com/sorin-ionescu/prezto/tree/master/modules#modules">Modules page on Prezto&rsquo;s GitHub</a> or at the <code>README</code> file in <code>.zprezto/modules</code>.</p>
-<p>To enable the modules is enough to open <code>.zpreztorc</code> with your favourite editor and look for a block that looks like:</p>
-<pre><code># Set the Prezto modules to load (browse modules).
-# The order matters.
-zstyle ':prezto:load' pmodule \
-  'environment' \
-  'terminal' \
-  'editor' \
-  'history' \
-  'directory' \
-  'spectrum' \
-  'utility' \
-  'git' \
-  'archive' \
-  'homebrew' \
-  'osx' \
-  'ssh' \
-  'completion' \
-  'prompt'
+<pre><code>5. Open a new Zsh terminal window or tab.
+
+At this point you can happily see your new zsh theme.
+Prezto comes with many available plugins, I suggest you to look at the [Modules page on Prezto's GitHub](https://github.com/sorin-ionescu/prezto/tree/master/modules#modules) or at the `README` file in `.zprezto/modules`.
+
+To enable the modules is enough to open `.zpreztorc` with your favourite editor and look for a block that looks like:
+
+    # Set the Prezto modules to load (browse modules).
+    # The order matters.
+    zstyle ':prezto:load' pmodule \
+      'environment' \
+      'terminal' \
+      'editor' \
+      'history' \
+      'directory' \
+      'spectrum' \
+      'utility' \
+      'git' \
+      'archive' \
+      'homebrew' \
+      'osx' \
+      'ssh' \
+      'completion' \
+      'prompt'
+
+Walking through the file you may enable/disable/setup a lot of behaviours and functionalities, have a look at it.
+
+In particular I wanted back my custom theme... To enable and customise themes is a bit tricky (but not too much).
+
+I mimicked what they did in [YADR](https://github.com/skwp/dotfiles) (another very interesting dotfiles repository for zsh, vim, sublime text and iterm) and built mine.
+
+1. First of all you need to create a new folder
+      
+    ```sh
+        $ mkdir ~/.zsh.prompts
+</code></pre><pre><code>where you are going to save your theme.
 </code></pre>
-<p>Walking through the file you may enable/disable/setup a lot of behaviours and functionalities, have a look at it.</p>
-<p>In particular I wanted back my custom theme&hellip; To enable and customise themes is a bit tricky (but not too much).</p>
-<p>I mimicked what they did in <a href="https://github.com/skwp/dotfiles">YADR</a> (another very interesting dotfiles repository for zsh, vim, sublime text and iterm) and built mine.</p>
-<ol>
-<li>
-<p>First of all you need to create a new folder</p>
-<pre><code> :::sh
- $ mkdir ~/.zsh.prompts
-</code></pre>
-<p>where you are going to save your theme.</p>
-</li>
+<ol start="2">
 <li>
 <p>Modify the <code>Prompt</code> section of <code>.zpreztorc</code> to look like</p>
-<pre><code> :::sh
- # Set the prompt theme to load.
- # Setting it to 'random' loads a random theme.
- # Auto set to 'off' on dumb terminals.
- # zstyle ':prezto:module:prompt' theme 'sorin'
- autoload promptinit
- fpath=($HOME/.zsh.prompts $fpath)
- promptinit
-
- zstyle ':prezto:module:prompt' theme 'YOURTHEMENAME'
-</code></pre>
-<p>where <code>YOURTHEMENAME</code> is the name that you have chosen for your theme.</p>
-</li>
-<li>
-<p>Create your theme file in <code>.zsh.prompts</code>. Note that its name must be <code>prompt_YOURTHEMENAME_setup</code>, otherwise it will not be recognised.</p>
-</li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    <span style="color:#75715e"># Set the prompt theme to load.</span>
+    <span style="color:#75715e"># Setting it to &#39;random&#39; loads a random theme.</span>
+    <span style="color:#75715e"># Auto set to &#39;off&#39; on dumb terminals.</span>
+    <span style="color:#75715e"># zstyle &#39;:prezto:module:prompt&#39; theme &#39;sorin&#39;</span>
+    autoload promptinit
+    fpath<span style="color:#f92672">=(</span>$HOME/.zsh.prompts $fpath<span style="color:#f92672">)</span>
+    promptinit
+</code></pre></div></li>
 </ol>
-<p>I have no real advice on the creation of a theme. I posted <a href="https://gist.github.com/mseri/8026965">my theme on gist</a> if you want to try it or you want to use it as a starting point. It is a slightly modified version of YADR&rsquo;s steeef simplified theme.</p>
-<p>You may find the function provided in <a href="https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/spectrum.zsh">oh-my-zsh&rsquo;s spectrum file</a> helpful. For example it is enough to type the following in your Zsh terminal to see all the colours available</p>
-<pre><code>:::sh
-for code in {000..255}; do
-    print -P -- &quot;$code: %F{$code}Test%f&quot;
-done
-</code></pre>
-<p>Or, for something similar, have fun and try</p>
-<pre><code>:::sh
-for code in {000..255}; do
-    ((cc = code + 1))
-    print -P -- &quot;$BG[$code]$code: Test %{$reset_color%}&quot;
-done
-</code></pre>
-<p>Have fun. Thanks to zsh and <a href="https://www.iterm2.com/#/section/home">iTerm2</a> I am happily going back to use <a href="https://www.vim.org">vim</a> but that&rsquo;s another story&hellip;</p>
+<pre><code>        zstyle ':prezto:module:prompt' theme 'YOURTHEMENAME'
+
+    where `YOURTHEMENAME` is the name that you have chosen for your theme.
+ 
+3. Create your theme file in `.zsh.prompts`. Note that its name must be `prompt_YOURTHEMENAME_setup`, otherwise it will not be recognised.
+ 
+  I have no real advice on the creation of a theme. I posted [my theme on gist](https://gist.github.com/mseri/8026965) if you want to try it or you want to use it as a starting point. It is a slightly modified version of YADR's steeef simplified theme.
+
+You may find the function provided in [oh-my-zsh's spectrum file](https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/spectrum.zsh) helpful. For example it is enough to type the following in your Zsh terminal to see all the colours available
+
+```sh
+    for code in {000..255}; do
+        print -P -- &quot;$code: %F{$code}Test%f&quot;
+    done
+</code></pre><p>Or, for something similar, have fun and try</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    <span style="color:#66d9ef">for</span> code in <span style="color:#f92672">{</span>000..255<span style="color:#f92672">}</span>; <span style="color:#66d9ef">do</span>
+        <span style="color:#f92672">((</span>cc <span style="color:#f92672">=</span> code + 1<span style="color:#f92672">))</span>
+        print -P -- <span style="color:#e6db74">&#34;</span>$BG<span style="color:#e6db74">[</span>$code<span style="color:#e6db74">]</span>$code<span style="color:#e6db74">: Test %{</span>$reset_color<span style="color:#e6db74">%}&#34;</span>
+    <span style="color:#66d9ef">done</span>
+</code></pre></div><p>Have fun. Thanks to zsh and <a href="https://www.iterm2.com/#/section/home">iTerm2</a> I am happily going back to use <a href="https://www.vim.org">vim</a> but that&rsquo;s another story&hellip;</p>
 
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    this.page.identifier = '21';
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "talesofafractalspectrum" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
+      <script src="https://utteranc.es/client.js"
+        repo="mseri/mseri.github.io"
+        issue-term="pathname"
+        label="✨💬✨"
+        theme="photon-dark"
+        crossorigin="anonymous"
+        async>
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
   </article>
 

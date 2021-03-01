@@ -10,20 +10,6 @@
     <link rel="stylesheet" href="https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css" />
 
     
-<script type="application/javascript">
-var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-var doNotTrack = (dnt == "1" || dnt == "yes");
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-44365202-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Ghost on Amazon EC2 without using sudo"/>
 <meta name="twitter:description" content="I&rsquo;ve been thinking since yesterday&rsquo;s post how to run the ghost blog at the user level, wihout the need of using sudo.
@@ -108,71 +94,43 @@ Use Nginx In a production environment I would probably run ghos as a nginx subdo
 <p>If you set up ghost to listen on the port 8080, it&rsquo;s likely that you have nothing to do and port 80 and 8080 are already assigned to http. You can easily check it from the AWS Console (look for security groups) or simply <strong>giving it a try</strong>. Just modify your <code>config.js</code> and replace whatever is in <code>host: 2368</code> with <code>host: 8080</code>. Run ghost with <code>npm start</code> and try to access your blog, if it works there is nothing else to do than install <code>forever</code> and use it.</p>
 <p><img src="/images/03-screenshot.png" alt="The AWS console"></p>
 <p>If it doesn&rsquo;t work try to execute the following command (only for linux) in a terminal and it should start working</p>
-<pre><code>:::sh
-sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
-</code></pre>
-<p>If you are still using port 2360 replace 8080 with the appropriate value. You may need to enable the access to the proper ports, to do it is enough to execute the following.</p>
-<pre><code>:::sh
-sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-sudo iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
-</code></pre>
-<p>I reccomend to <strong>not play with iptables rules in a production environment if you don&rsquo;t know what you are doing</strong>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    sudo iptables -t nat -A PREROUTING -p tcp --dport <span style="color:#ae81ff">80</span> -j REDIRECT --to-port <span style="color:#ae81ff">8080</span>
+</code></pre></div><p>If you are still using port 2360 replace 8080 with the appropriate value. You may need to enable the access to the proper ports, to do it is enough to execute the following.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    sudo iptables -A INPUT -p tcp --dport <span style="color:#ae81ff">80</span> -j ACCEPT
+    sudo iptables -A INPUT -p tcp --dport <span style="color:#ae81ff">8080</span> -j ACCEPT
+</code></pre></div><p>I reccomend to <strong>not play with iptables rules in a production environment if you don&rsquo;t know what you are doing</strong>.</p>
 <p>To check if the rules have been accepted you can list the configuration with</p>
-<pre><code>:::sh
-sudo iptables -L
-</code></pre>
-<p>and to delete the previous rules in case they didn&rsquo;t work just type them again in the terminal with <code>-A</code> replaced by <code>-D</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    sudo iptables -L
+</code></pre></div><p>and to delete the previous rules in case they didn&rsquo;t work just type them again in the terminal with <code>-A</code> replaced by <code>-D</code>.</p>
 <p>This same procedure can be adapted to other unix systems just using the appropriate firewall rules (like packet filter on BSD).</p>
 <h2 id="install-and-use-forever">Install and use forever</h2>
 <p>Now that we can start ghost without any need of using sudo, we only have to install forever. Open a terminal and execute</p>
-<pre><code>:::sh
-sudo /usr/local/bin/npm install -g forever
-</code></pre>
-<p>then enter in the ghost folder with <code>cd path_to_your/ghost_folder</code> and run</p>
-<pre><code>:::sh
-NODE_ENV=production forever start index.js
-</code></pre>
-<p>Open your browser and enjoy your Ghost Blog!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    sudo /usr/local/bin/npm install -g forever
+</code></pre></div><p>then enter in the ghost folder with <code>cd path_to_your/ghost_folder</code> and run</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    NODE_ENV<span style="color:#f92672">=</span>production forever start index.js
+</code></pre></div><p>Open your browser and enjoy your Ghost Blog!</p>
 <p><em>If you are using the development configuration instead of the production one, just drop <code>NODE_ENV=production</code> from the previous command.</em></p>
 <p>To kill the server, just use</p>
-<pre><code>:::sh
-forever list
-forever stop 0
-</code></pre>
-<p>where 0 is the ghost process. Or eventually</p>
-<pre><code>:::sh
-forever stopall
-</code></pre>
-<h3 id="check-permissions">Check permissions</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    forever list
+    forever stop <span style="color:#ae81ff">0</span>
+</code></pre></div><p>where 0 is the ghost process. Or eventually</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    forever stopall
+</code></pre></div><h3 id="check-permissions">Check permissions</h3>
 <p>If you were running your ghost blog using sudo, you may not be able to access the database or some folders. In such case is enough to fix its permissions. Open a terminal, enter in the ghost folder with <code>cd path_to_your/ghost_folder</code> and execute</p>
-<pre><code>:::sh
-sudo chown yourusername -R *
-sudo chgrp yourusergroup -R *
-</code></pre>
-<p>where you have to replace <code>yourusername</code> and <code>yourusergroup</code> with the appropriate values. For Amazon EC2 the are in general both equal to <code>ec2-user</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    sudo chown yourusername -R *
+    sudo chgrp yourusergroup -R *
+</code></pre></div><p>where you have to replace <code>yourusername</code> and <code>yourusergroup</code> with the appropriate values. For Amazon EC2 the are in general both equal to <code>ec2-user</code>.</p>
 
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    this.page.identifier = '3';
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "talesofafractalspectrum" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
+      <script src="https://utteranc.es/client.js"
+        repo="mseri/mseri.github.io"
+        issue-term="pathname"
+        label="✨💬✨"
+        theme="photon-dark"
+        crossorigin="anonymous"
+        async>
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
   </article>
 

@@ -10,32 +10,18 @@
     <link rel="stylesheet" href="https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css" />
 
     
-<script type="application/javascript">
-var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-var doNotTrack = (dnt == "1" || dnt == "yes");
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-44365202-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Shasumming files in ruby"/>
 <meta name="twitter:description" content="Computing SHA-* hashes of files in ruby is in principle very easy.
 You can either use the OpenSSL module or the digest one and the sytax is almost interchangeable. I am using the digest module just because it seems to be slightly faster (I timed it and on my machine it takes few milliseconds less).
 My first code was
-:::ruby require &#39;digest&#39; filename = &#39;/path/to/the/file&#39; Digest::SHA1.hexdigest(File.read(filename))  Then I made the hashes for a folder containing files of different sizes."/>
+require &#39;digest&#39; filename = &#39;/path/to/the/file&#39; Digest::SHA1.hexdigest(File.read(filename))  Then I made the hashes for a folder containing files of different sizes."/>
 
     <meta property="og:title" content="Shasumming files in ruby" />
 <meta property="og:description" content="Computing SHA-* hashes of files in ruby is in principle very easy.
 You can either use the OpenSSL module or the digest one and the sytax is almost interchangeable. I am using the digest module just because it seems to be slightly faster (I timed it and on my machine it takes few milliseconds less).
 My first code was
-:::ruby require &#39;digest&#39; filename = &#39;/path/to/the/file&#39; Digest::SHA1.hexdigest(File.read(filename))  Then I made the hashes for a folder containing files of different sizes." />
+require &#39;digest&#39; filename = &#39;/path/to/the/file&#39; Digest::SHA1.hexdigest(File.read(filename))  Then I made the hashes for a folder containing files of different sizes." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.mseri.me/shasumming-files-in-ruby/" />
 <meta property="article:published_time" content="2013-12-13T22:33:31+00:00" />
@@ -98,18 +84,14 @@ My first code was
       <p>Computing <a href="https://en.wikipedia.org/wiki/Sha1sum">SHA-* hashes</a> of files in ruby is in principle very easy.</p>
 <p>You can either use the <code>OpenSSL</code> module or the <code>digest</code> one and the sytax is almost interchangeable. I am using the <code>digest</code> module just because it seems to be slightly faster (I timed it and on my machine it takes few milliseconds less).</p>
 <p>My first code was</p>
-<pre><code>:::ruby
-require 'digest'
-
-filename = '/path/to/the/file'
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">    require <span style="color:#e6db74">&#39;digest&#39;</span>
+</code></pre></div><pre><code>filename = '/path/to/the/file'
 Digest::SHA1.hexdigest(File.read(filename))
 </code></pre>
 <p>Then I made the hashes for a folder containing files of different sizes. For some reasones I checked them with <code>shasum</code> and with my great surprise I&rsquo;ve discovered that some hashes (namely the ones related to files bigger than few hundred megabytes) were wrong! Remarkably, the same happened with different SHA functions, and using <code>openssl</code>.</p>
 <p>I don&rsquo;t really know why the problem happened, but <a href="https://www.ruby-forum.com/topic/180458">apparently the solution is fairly easy</a>. I am now using a variation of the script proposed in the previous link that seems to run pretty smoothly and got rid of the error:</p>
-<pre><code>:::ruby
-require 'digest/sha1'
-
-filename = '/path/to/the/file'
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">    require <span style="color:#e6db74">&#39;digest/sha1&#39;</span>
+</code></pre></div><pre><code>filename = '/path/to/the/file'
 buf = ''
 d = Digest::SHA1.new
 f = File.open(filename)
@@ -127,26 +109,14 @@ d.hexdigest
 
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    this.page.identifier = '20';
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "talesofafractalspectrum" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
+      <script src="https://utteranc.es/client.js"
+        repo="mseri/mseri.github.io"
+        issue-term="pathname"
+        label="✨💬✨"
+        theme="photon-dark"
+        crossorigin="anonymous"
+        async>
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
   </article>
 

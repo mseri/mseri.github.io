@@ -11,20 +11,6 @@
 
     <link rel="alternate" type="application/rss+xml" href="https://www.mseri.me/post/index.xml" title="A fractal spectrum of tales" />
     
-<script type="application/javascript">
-var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-var doNotTrack = (dnt == "1" || dnt == "yes");
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-44365202-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Posts"/>
 <meta name="twitter:description" content="Free thoughts of a geeky mathematician"/>
@@ -165,7 +151,7 @@ In fact, as far as I understood, prezto was born as a fork of oh-my-zsh and was 
             <span>Computing SHA-* hashes of files in ruby is in principle very easy.
 You can either use the OpenSSL module or the digest one and the sytax is almost interchangeable. I am using the digest module just because it seems to be slightly faster (I timed it and on my machine it takes few milliseconds less).
 My first code was
-:::ruby require 'digest' filename = '/path/to/the/file' Digest::SHA1.hexdigest(File.read(filename))  Then I made the hashes for a folder containing files of different sizes.</span><br/>
+require &#39;digest&#39; filename = '/path/to/the/file' Digest::SHA1.hexdigest(File.read(filename))  Then I made the hashes for a folder containing files of different sizes.</span><br/>
             
             <span>
             <svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">

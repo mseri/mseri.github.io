@@ -10,20 +10,6 @@
     <link rel="stylesheet" href="https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css" />
 
     
-<script type="application/javascript">
-var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-var doNotTrack = (dnt == "1" || dnt == "yes");
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-44365202-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Ghost up and running on Amazon EC2"/>
 <meta name="twitter:description" content="I had my free Amazon EC2 instance waiting for this moment since my last use of it.
@@ -100,10 +86,8 @@ I spent my few free hours setting up a decent (I hope) theme for Ghost, and read
 <p>If your local computer crashes, or you are connected via a modem and lose the connection, the processes or login sessions you establish through screen don&rsquo;t go away. You can resume your screen sessions with the following command: <code>screen -r</code></p>
 </blockquote>
 <p>Awesome! In fact what I did was just run</p>
-<pre><code>:::sh
-screen sudo /usr/local/bin/npm start --production
-</code></pre>
-<p>close the terminal and log into my ghost blog to write this post.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    screen sudo /usr/local/bin/npm start --production
+</code></pre></div><p>close the terminal and log into my ghost blog to write this post.</p>
 <p><strong>As you can see things kept working properly!</strong></p>
 <p><em>Note that I am running the production configuration of ghost. You have to remove the <code>--production</code> argument to run the development server and use the configuration that you did following the tutorial linked above.</em></p>
 <p>###UPDATE
@@ -111,26 +95,14 @@ The theme is no more called <code>pureBuster</code>. It has been renamed <code>p
 
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    this.page.identifier = '2';
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "talesofafractalspectrum" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
+      <script src="https://utteranc.es/client.js"
+        repo="mseri/mseri.github.io"
+        issue-term="pathname"
+        label="✨💬✨"
+        theme="photon-dark"
+        crossorigin="anonymous"
+        async>
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
   </article>
 

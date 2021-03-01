@@ -10,20 +10,6 @@
     <link rel="stylesheet" href="https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css" />
 
     
-<script type="application/javascript">
-var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-var doNotTrack = (dnt == "1" || dnt == "yes");
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-44365202-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Left pipe in Haskell"/>
 <meta name="twitter:description" content="If you read this blog, you know that I am very biased by having worked with unix shells for almost two decades and that I am addicted to the use of pipes (see e.g. Piping with Swift). I really find much more natural to see data moving from left to right.
@@ -94,49 +80,29 @@ Yesterday I was thinking that in Haskell everything is an expression and that yo
       <p>If you read this blog, you know that I am very biased by having worked with unix shells for almost two decades and that I am addicted to the use of pipes (see e.g. <a href="https://www.mseri.me/piping-with-swift/">Piping with Swift</a>). I really find much more natural to see data moving from left to right.</p>
 <p>Yesterday I was thinking that in Haskell everything is an expression and that you can easily define infix operators. Thus it must be possible to implement a shell-like pipe.</p>
 <p>First of all, composition <code>(.)</code> is too strong, the pipe I have in mind is like <code>($)</code> but reversed. In fact, my second attempt (I feel embarassed by the first, I am not going to post it ;-P) was</p>
-<pre><code>:::haskell
-($&gt;) = flip ($)
-</code></pre>
-<p>One can immediately check that it is typed correctly as</p>
-<pre><code>:::haskell
-($&gt;) :: a -&gt; (a -&gt; b) -&gt; b
-</code></pre>
-<p>Now I can do e.g.</p>
-<pre><code>:::haskell
-import Data.List
-
-[3,1,4,2,2,6] $&gt; sort $&gt; filter (\x -&gt; x &lt; 4) $&gt; map even $&gt; and
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">    (<span style="color:#f92672">$&gt;</span>) <span style="color:#f92672">=</span> flip (<span style="color:#f92672">$</span>)
+</code></pre></div><p>One can immediately check that it is typed correctly as</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">    (<span style="color:#f92672">$&gt;</span>) <span style="color:#f92672">::</span> a <span style="color:#f92672">-&gt;</span> (a <span style="color:#f92672">-&gt;</span> b) <span style="color:#f92672">-&gt;</span> b
+</code></pre></div><p>Now I can do e.g.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">    <span style="color:#66d9ef">import</span> Data.List
+</code></pre></div><pre><code>[3,1,4,2,2,6] $&gt; sort $&gt; filter (\x -&gt; x &lt; 4) $&gt; map even $&gt; and
 </code></pre>
 <p>and get the result without complaints.</p>
 <p>This is just a stupid example but I find it more expressive (again probably because I use too much the shell) than</p>
-<pre><code>:::haskell
-and . map even . filter (\x -&gt; x &lt; 4) . sort $ [3,1,4,2,2,6]
-</code></pre>
-<p>at least for certain kind of progressive filtering of data.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">    and <span style="color:#f92672">.</span> map even <span style="color:#f92672">.</span> filter (<span style="color:#a6e22e">\</span>x <span style="color:#f92672">-&gt;</span> x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>) <span style="color:#f92672">.</span> sort <span style="color:#f92672">$</span> [<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">6</span>]
+</code></pre></div><p>at least for certain kind of progressive filtering of data.</p>
 <p>I am now following <strong>fp101x</strong> on <strong>edX</strong>. It is quite good! I will soon(?) post a brief cheatsheet that I made to recall how to use Functors, Monads and other interesting constructs.</p>
 
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    this.page.identifier = '41';
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "talesofafractalspectrum" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
+      <script src="https://utteranc.es/client.js"
+        repo="mseri/mseri.github.io"
+        issue-term="pathname"
+        label="✨💬✨"
+        theme="photon-dark"
+        crossorigin="anonymous"
+        async>
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
   </article>
 

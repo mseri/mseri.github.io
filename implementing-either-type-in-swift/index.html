@@ -10,20 +10,6 @@
     <link rel="stylesheet" href="https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css" />
 
     
-<script type="application/javascript">
-var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-var doNotTrack = (dnt == "1" || dnt == "yes");
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-44365202-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Implementing Either type in Swift"/>
 <meta name="twitter:description" content="It has been only a couple of days since Apple announced and released Swift. It has possibly been the most important and interesting announcement of Apple in the last few years and started an amount of discussions around the web.
@@ -96,42 +82,34 @@ With the hours passing, we&rsquo;ve found out that there was at least another Sw
 <p>As we can read from his page, it&rsquo;s no surprise that people have found similarities with Rust, Haskell, Ruby, Python, Julia, and many other language. And the more I play with Swift, the happier I am of what they did. I really hope that the language will be released with an open source license as LLVM, clang and in some sense Objective-C.</p>
 <p>But let&rsquo;s come to the hearth of this post. I find abstract types and monadic construct very powerful and fun to code. And the type system in Swift, desite not being as flexible and powerful as Haskell&rsquo;s, gives a lot of freedom in this directon. Optionals fall exactly in this context and correspond very closely to <a href="https://www.haskell.org/haskellwiki/Maybe">Haskell&rsquo;s Maybe class</a>.</p>
 <p>As you can read in <a href="https://itun.es/gb/jEUH0.l">Apple Inc. “The Swift Programming Language.” ebook</a>, the <em>optional</em> type in Swift is nothing but synctactic sugar for the following enum</p>
-<pre><code>:::swift
-/* Reimplement the Swift standard library's optional type */
-enum OptionalValue&lt;T&gt; {
-    case None
-    case Some(T)
-}
-
-var possibleInteger: OptionalValue&lt;Int&gt; = .None
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">    <span style="color:#75715e">/* Reimplement the Swift standard library&#39;s optional type */</span>
+    <span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">OptionalValue</span>&lt;T&gt; {
+        <span style="color:#66d9ef">case</span> None
+        <span style="color:#66d9ef">case</span> Some(T)
+    }
+</code></pre></div><pre><code>var possibleInteger: OptionalValue&lt;Int&gt; = .None
 possibleInteger = .Some(100)
 </code></pre>
 <p>Where<code>T</code> represents a generic type, <code>nil</code> is indeed syntactic sugar for <code>OptionalValue&lt;T&gt;.None</code> and <code>?</code> the same for <code>OptionalValue&lt;T&gt;.Some(T)</code>.</p>
 <p>You can then use a <code>switch</code> and swift pattern matching capabilities to manage the error</p>
-<pre><code>:::swift
-switch possibleInteger {
-case .Some(let value) :
-    /* just type 'value' here to see '100' appearing in playground REPL */
-    println(&quot;Value is: \(value)&quot;)
-case .None :
-    println(&quot;Error: no value.&quot;)
-}
-</code></pre>
-<p>I am not going in the realm of Monads (yet) and <a href="https://www.haskell.org/haskellwiki/Monad_tutorials_timeline">try to explain them</a>, but I think that the <a href="https://www.haskell.org/ghc/docs/latest/html/libraries/base/Data-Either.html"><em>either</em></a> type could be very useful in Swift. As for the <em>optional</em>, we can easily define it as</p>
-<pre><code>:::swift
-enum Either&lt;T1, T2&gt; {
-    case Left(T1)
-    case Right(T2)
-}
-</code></pre>
-<p>As in Haskell, Either is parameterized by two types, not one. A value of the Either type <em>either</em> contains a value of type <code>T1</code> or of type <code>T2</code>. With it, we can discriminate between two possibilities and using Swift pattern matching we can write a nice, clean code.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">    <span style="color:#66d9ef">switch</span> possibleInteger {
+    <span style="color:#66d9ef">case</span> .Some(<span style="color:#66d9ef">let</span> value) :
+        <span style="color:#75715e">/* just type &#39;value&#39; here to see &#39;100&#39; appearing in playground REPL */</span>
+        println(<span style="color:#e6db74">&#34;Value is: </span><span style="color:#e6db74">\(</span>value<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
+    <span style="color:#66d9ef">case</span> .None :
+        println(<span style="color:#e6db74">&#34;Error: no value.&#34;</span>)
+    }
+</code></pre></div><p>I am not going in the realm of Monads (yet) and <a href="https://www.haskell.org/haskellwiki/Monad_tutorials_timeline">try to explain them</a>, but I think that the <a href="https://www.haskell.org/ghc/docs/latest/html/libraries/base/Data-Either.html"><em>either</em></a> type could be very useful in Swift. As for the <em>optional</em>, we can easily define it as</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">    <span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">Either</span>&lt;T1, T2&gt; {
+        <span style="color:#66d9ef">case</span> Left(T1)
+        <span style="color:#66d9ef">case</span> Right(T2)
+    }
+</code></pre></div><p>As in Haskell, Either is parameterized by two types, not one. A value of the Either type <em>either</em> contains a value of type <code>T1</code> or of type <code>T2</code>. With it, we can discriminate between two possibilities and using Swift pattern matching we can write a nice, clean code.</p>
 <p>Either can be used as a <a href="https://www.fpcomplete.com/school/starting-with-haskell/basics-of-haskell/10_Error_Handling">generalization of optional types</a> in which Left not only encodes failure but is accompanied by an error message (so often <code>T1</code> will be just <code>String</code>). Then Right encodes success and the accompanying value.</p>
 <p>For example</p>
-<pre><code>:::swift
-var possibleInteger: Either&lt;String,Int&gt; = .Left(&quot;Not a number&quot;)
-var possibleInteger2: Either&lt;String,Int&gt; = .Right(3)
-
-switch possibleInteger1 {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">    <span style="color:#66d9ef">var</span> possibleInteger: Either&lt;String,Int&gt; = .Left(<span style="color:#e6db74">&#34;Not a number&#34;</span>)
+    <span style="color:#66d9ef">var</span> possibleInteger2: Either&lt;String,Int&gt; = .Right(<span style="color:#ae81ff">3</span>)
+</code></pre></div><pre><code>switch possibleInteger1 {
 case .Left(let errorText) :
     println(&quot;Error: \(errorText)&quot;)
 case .Right(let value) :
@@ -155,26 +133,14 @@ var badDivision = safeDiv(2,0)
 
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    this.page.identifier = '33';
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "talesofafractalspectrum" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
+      <script src="https://utteranc.es/client.js"
+        repo="mseri/mseri.github.io"
+        issue-term="pathname"
+        label="✨💬✨"
+        theme="photon-dark"
+        crossorigin="anonymous"
+        async>
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
   </article>
 

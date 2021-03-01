@@ -10,20 +10,6 @@
     <link rel="stylesheet" href="https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css" />
 
     
-<script type="application/javascript">
-var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-var doNotTrack = (dnt == "1" || dnt == "yes");
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-44365202-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Convert djvu files to a decently small pdf"/>
 <meta name="twitter:description" content="Despite there are few decent djvu readers, they are not as comfortable as the pdf readers. Moreover, it is not really possible to open djvu files in eInk ebook readers.
@@ -96,15 +82,11 @@ There is an hack that could come in help. Open your .bashrc (or ." />
       <p>Despite there are few decent <a href="https://en.wikipedia.org/wiki/DjVu">djvu</a> readers, they are not as comfortable as the pdf readers. Moreover, it is not really possible to open djvu files in eInk ebook readers.</p>
 <p>Additionally, if you have ever tried to convert djvu files to pdf (or ps), you should have noted that the output is either corrupted or unbelievably big.</p>
 <p>There is an hack that could come in help. Open your <code>.bashrc</code> (or <code>.zshrc</code> if you use Zsh) and define this new <a href="https://tldp.org/LDP/abs/html/aliases.html">alias</a> (i.e. add this line somewhere, say at the end of the file)</p>
-<pre><code>:::sh
-alias djvu2pdf='LC_ALL=C ddjvu -format=pdf -mode=black -quality=85'
-</code></pre>
-<p>Save and reopen your terminal.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    alias djvu2pdf<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;LC_ALL=C ddjvu -format=pdf -mode=black -quality=85&#39;</span>
+</code></pre></div><p>Save and reopen your terminal.</p>
 <p>Now, running</p>
-<pre><code>:::sh
-djvu2pdf file.djvu output.pdf
-</code></pre>
-<p>will create a relatively small file with decent/good quality.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">    djvu2pdf file.djvu output.pdf
+</code></pre></div><p>will create a relatively small file with decent/good quality.</p>
 <p>Note that the <code>-mode=black</code> option improves sensibily the size of the file, but at the price of destroying some of the figures.</p>
 <p>If you really need the figures, you could drop the option or create a different alias, e.g.</p>
 <pre><code>:::sh
@@ -112,26 +94,14 @@ alias djvu2pdf4pics='LC_ALL=C ddjvu -format=pdf -quality=85'</code></pre>
 
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    this.page.identifier = '22';
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "talesofafractalspectrum" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
+      <script src="https://utteranc.es/client.js"
+        repo="mseri/mseri.github.io"
+        issue-term="pathname"
+        label="✨💬✨"
+        theme="photon-dark"
+        crossorigin="anonymous"
+        async>
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
   </article>
 
