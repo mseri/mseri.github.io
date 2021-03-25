@@ -6,7 +6,28 @@
     <description>Recent content on A fractal spectrum of tales</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 04 Dec 2020 10:45:35 +0100</lastBuildDate><atom:link href="https://www.mseri.me/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Mar 2021 13:17:25 +0100</lastBuildDate><atom:link href="https://www.mseri.me/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lecture notes on Analysis on Manifolds</title>
+      <link>https://www.mseri.me/analysis-on-manifolds/</link>
+      <pubDate>Thu, 25 Mar 2021 13:17:25 +0100</pubDate>
+      
+      <guid>https://www.mseri.me/analysis-on-manifolds/</guid>
+      <description>In the previous academic term I had the pleasure to teach Analysis on Manifolds, essentially an introduction to differential geometry for third year students.
+In the course I tried to address the topic with the perspective that some of the students would be joining also my master course in Hamiltonian Mechanics later on next year. So many of the topics go in the direction of introducing the prerequisites for studying flows, symplectic geometry and sub-Riemannian geometry.</description>
+    </item>
+    
+    <item>
+      <title>Steven Strogatz ask me anything video</title>
+      <link>https://www.mseri.me/steven-strogatz-ama/</link>
+      <pubDate>Thu, 25 Mar 2021 13:10:51 +0100</pubDate>
+      
+      <guid>https://www.mseri.me/steven-strogatz-ama/</guid>
+      <description>This is a follow up from the previous post. I have stumbled upon a wonderful recent video by Steven Strogatz on Twitter which I believe could be extremely helpful for current and prospective PhD students in STEM, and for their advisors!
+I think it is worth every minute of it:
+  Consider also listening to Strogatz&#39; The Joy of x podcast, it gives a beautiful, humane and informative snapshot into what research and researchers are like.</description>
+    </item>
+    
     <item>
       <title>On doing a PhD (in STEM)</title>
       <link>https://www.mseri.me/on-doing-phd/</link>
@@ -84,27 +105,6 @@ Yesterday I was thinking that in Haskell everything is an expression and that yo
       <description>A former student, who was also once a student of Tomonaga’s, wrote to extend his congratulations. Feynman responded, asking Mr. Mano what he was now doing. The response: &amp;ldquo;studying the Coherence theory with some applications to the propagation of electromagnetic waves through turbulent atmosphere&amp;hellip; a humble and down-to-earth type of problem.&amp;quot;
 Dear Koichi,
 I was very happy to hear from you, and that you have such a position in the Research Laboratories.</description>
-    </item>
-    
-    <item>
-      <title>Socks proxy with ssh</title>
-      <link>https://www.mseri.me/socks-proxy-with-ssh/</link>
-      <pubDate>Fri, 31 Oct 2014 18:24:36 +0000</pubDate>
-      
-      <guid>https://www.mseri.me/socks-proxy-with-ssh/</guid>
-      <description>When you work in the University, it is very likely that during a trip or the weekend you urge to connect via the University to have access to Journals and other academic resources.
-Often enough this requires long and complicated procedures involving the setup of rarely updated proprietary VPN softwares that sometimes like to install their obscure helpers to monitor the traffic and prevent you to open malicious websites. Helpers that would keep working in background sending to unspecified servers all your business even when the VPN is off&amp;hellip;</description>
-    </item>
-    
-    <item>
-      <title>Why privacy matters by Glenn Greenwald</title>
-      <link>https://www.mseri.me/why-privacy-matters-by-glenn-greenwald/</link>
-      <pubDate>Sun, 19 Oct 2014 14:59:53 +0000</pubDate>
-      
-      <guid>https://www.mseri.me/why-privacy-matters-by-glenn-greenwald/</guid>
-      <description>I am so sorry that I needed so much time before watching this wonderfully inspiring TED video.
- I really admire Snowden, Greenwald and all the people that are fighting to denounce the dangerous path that we are following.
-It&amp;rsquo;s time to take action, even the smallest one coubl make a difference. Maybe we don&amp;rsquo;t see the threat now, but we cannot now what will happen in the future.</description>
     </item>
     
   </channel>
