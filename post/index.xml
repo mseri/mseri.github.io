@@ -6,7 +6,17 @@
     <description>Recent content in Posts on A fractal spectrum of tales</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Mar 2021 13:17:25 +0100</lastBuildDate><atom:link href="https://www.mseri.me/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Mar 2021 00:15:46 +0100</lastBuildDate><atom:link href="https://www.mseri.me/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Material from Hamiltonian Mechanics 2021</title>
+      <link>https://www.mseri.me/links-from-hm/</link>
+      <pubDate>Fri, 26 Mar 2021 00:15:46 +0100</pubDate>
+      
+      <guid>https://www.mseri.me/links-from-hm/</guid>
+      <description>During the current incarnation of the course in Hamiltonian Mechanics I have collected some amount of material to share with the students. To avoid losing it in the guts of our teaching CMS, I leave it here for posterity, practically copy-pasting it without edits because I am really tired :D
+The books on SpringerLinks linked below are accessible from our students for free via the university proxy but in general (unfortunately) not open access.</description>
+    </item>
+    
     <item>
       <title>Lecture notes on Analysis on Manifolds</title>
       <link>https://www.mseri.me/analysis-on-manifolds/</link>
@@ -94,17 +104,6 @@ The Jacobi identity (which forces the heights of a triangle to cross at one poin
       <guid>https://www.mseri.me/left-pipe-in-haskell/</guid>
       <description>If you read this blog, you know that I am very biased by having worked with unix shells for almost two decades and that I am addicted to the use of pipes (see e.g. Piping with Swift). I really find much more natural to see data moving from left to right.
 Yesterday I was thinking that in Haskell everything is an expression and that you can easily define infix operators. Thus it must be possible to implement a shell-like pipe.</description>
-    </item>
-    
-    <item>
-      <title>What Problems to Solve - By Richard Feynman</title>
-      <link>https://www.mseri.me/what-problems-to-solve-by-richard-feynman/</link>
-      <pubDate>Fri, 21 Nov 2014 15:16:10 +0000</pubDate>
-      
-      <guid>https://www.mseri.me/what-problems-to-solve-by-richard-feynman/</guid>
-      <description>A former student, who was also once a student of Tomonaga’s, wrote to extend his congratulations. Feynman responded, asking Mr. Mano what he was now doing. The response: &amp;ldquo;studying the Coherence theory with some applications to the propagation of electromagnetic waves through turbulent atmosphere&amp;hellip; a humble and down-to-earth type of problem.&amp;quot;
-Dear Koichi,
-I was very happy to hear from you, and that you have such a position in the Research Laboratories.</description>
     </item>
     
   </channel>
