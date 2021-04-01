@@ -3,7 +3,7 @@
   <head>
     <title>Piping with Swift // A fractal spectrum of tales</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.82.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Marcello Seri" />
     <meta name="description" content="Free thoughts of a geeky mathematician" />
@@ -21,9 +21,10 @@ Can we implement a kind of pipe in Swift?"/>
 However, there is one feature that I really miss. Something that I daily use with slightly different syntaxes in Sh, Haskell, Julia and Elixir: the pipe!
 Can we implement a kind of pipe in Swift?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.mseri.me/piping-with-swift/" />
-<meta property="article:published_time" content="2014-06-16T10:03:04+00:00" />
-<meta property="article:modified_time" content="2014-06-16T10:31:56+00:00" />
+<meta property="og:url" content="https://www.mseri.me/piping-with-swift/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2014-06-16T10:03:04&#43;00:00" />
+<meta property="article:modified_time" content="2014-06-16T10:31:56&#43;00:00" />
+
 
 
     
@@ -131,7 +132,7 @@ Swift is unbelievably flexible from this point of view: one can easily define ne
     }
 </code></pre></div><p>Again <code>+=</code> stands for <code>append</code> when used with arrays.</p>
 <p>I guess the fastest code would be to use a quicksort and remove the duplicates while sorting, but it (as my second implementation of <code>unique</code>) would not preserve the order of appearence.</p>
-<p>While wrtiting this post, on HN was linked a <a href="https://nomothetis.svbtle.com/smashing-swift">very initersting post</a> with implementation of some interesting construct, like the <a href="https://www.mseri.me/implementing-either-type-in-swift">either of the previous post</a> and more, and pointing out problems of the young swift compiler. I think it&rsquo;s a nice reading.</p>
+<p>While wrtiting this post, on HN was linked a <a href="https://nomothetis.svbtle.com/smashing-swift">very initersting post</a> with implementation of some interesting construct, like the <a href="/implementing-either-type-in-swift/">either of the previous post</a> and more, and pointing out problems of the young swift compiler. I think it&rsquo;s a nice reading.</p>
 <p>Additionally I recently stumbled upon the <a href="https://stackoverflow.com/questions/24027116">following stackoverflow thread</a>. I find it quite interesting, especially because it shows a nice extension of Arrays introducing an <code>each</code> construct very similar to ruby&rsquo;s one.</p>
 <p>Another simple example I was working on is the <em>null coaleshing operator</em> that would come handy with Swift&rsquo;s optionals. An interesting discussion in regard can be found (again) in <a href="https://stackoverflow.com/questions/24082959">stackoverflow</a>.</p>
 <p>After some time we can start to understand the limitations of Swift, but the language is definitely still under construction and I would not be surprised if it will be different at the time of the final release.</p>
