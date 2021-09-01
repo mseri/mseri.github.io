@@ -73,7 +73,7 @@ possibleInteger = .Some(100)
         <span style=color:#66d9ef>case</span> Right(T2)
     }
 </code></pre></div><p>As in Haskell, Either is parameterized by two types, not one. A value of the Either type <em>either</em> contains a value of type <code>T1</code> or of type <code>T2</code>. With it, we can discriminate between two possibilities and using Swift pattern matching we can write a nice, clean code.</p>
-<p>Either can be used as a <a href=https://www.fpcomplete.com/school/starting-with-haskell/basics-of-haskell/10_Error_Handling>generalization of optional types</a> in which Left not only encodes failure but is accompanied by an error message (so often <code>T1</code> will be just <code>String</code>). Then Right encodes success and the accompanying value.</p>
+<p>Either can be used as a <a href=https://web.archive.org/web/20180620003318/https://www.schoolofhaskell.com/school/starting-with-haskell/basics-of-haskell/10_Error_Handling>generalization of optional types</a> in which Left not only encodes failure but is accompanied by an error message (so often <code>T1</code> will be just <code>String</code>). Then Right encodes success and the accompanying value.</p>
 <p>For example</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-swift data-lang=swift>    <span style=color:#66d9ef>var</span> possibleInteger: Either&lt;String,Int&gt; = .Left(<span style=color:#e6db74>&#34;Not a number&#34;</span>)
     <span style=color:#66d9ef>var</span> possibleInteger2: Either&lt;String,Int&gt; = .Right(<span style=color:#ae81ff>3</span>)
