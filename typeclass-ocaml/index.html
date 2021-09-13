@@ -2,7 +2,7 @@
 <head>
 <title>First steps with Category Theory and OCaml // A fractal spectrum of tales</title>
 <meta charset=utf-8>
-<meta name=generator content="Hugo 0.87.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=author content="Marcello Seri">
 <meta name=description content="Free thoughts of a geeky mathematician">
@@ -165,7 +165,7 @@ monoid modules for integer numbers with sum and product as</p>
 allows multiple coexisting definitions of <code>mempty</code> and <code>mappend</code> that
 do not need to be encapsulated in a module namespace.</p>
 <p>These are true monoids if we make sure that</p>
-<pre><code>(* closed: however you choose x, y, z with type t below ... *)
+<pre tabindex=0><code>(* closed: however you choose x, y, z with type t below ... *)
 (* neutral element *)
 mappend mempty x        = x
 mappend x mempty        = x
@@ -236,7 +236,7 @@ string:</p>
   <span style=color:#66d9ef>let</span> mappend s1 s2 <span style=color:#f92672>=</span> s1<span style=color:#f92672>^</span>s2
 <span style=color:#66d9ef>end</span>
 </code></pre></div><p>Let&rsquo;s try one more!</p>
-<pre><code>(* Broken example... *)
+<pre tabindex=0><code>(* Broken example... *)
 module ListM: (MONOID with type t = 'a list) = struct
   type t = 'a list
   let mempty  = []
@@ -316,7 +316,7 @@ altering the context).</p>
 </code></pre></div><p>As for monoids, functors need to satisfy some laws. We can translate the
 structure-preserving property from the mathematical defitinion into the
 following (if you know what a <em>morphism</em> is, this should look familiar)</p>
-<pre><code>  (* we map the identity into itself *)
+<pre tabindex=0><code>  (* we map the identity into itself *)
   fmap id = id
 
   (* mapping a composition of functions is
@@ -506,7 +506,7 @@ order in which we evaluate the function and its argument doesn&rsquo;t matter)</
 its limitations soon&mldr;</p>
 <p>Note that as a consequence of these laws, the functor instance for <code>f</code> will
 satisfy</p>
-<pre><code>fmap f x = pure f &lt;*&gt; x
+<pre tabindex=0><code>fmap f x = pure f &lt;*&gt; x
 </code></pre><p>Let&rsquo;s see how this much stuff can be rewritten in OCaml.</p>
 <p>We can take the <code>ListF</code> module defined above and extend it into an applicative.
 In fact, it&rsquo;s kind of the other way around: <code>ListA</code> re-exports the
@@ -831,7 +831,7 @@ produces a unit result:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ocaml data-lang=ocaml><span style=color:#66d9ef>let</span> xapi <span style=color:#f92672>=</span> <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>open</span> <span style=color:#a6e22e>ParserApp</span> <span style=color:#66d9ef>in</span> <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>open</span> <span style=color:#a6e22e>FunU</span> <span style=color:#66d9ef>in</span>
   <span style=color:#f92672>(</span><span style=color:#66d9ef>fun</span> <span style=color:#f92672>_</span> <span style=color:#f92672>-&gt;</span> <span style=color:#e6db74>&#34;Gotcha!&#34;</span><span style=color:#f92672>)</span> <span style=color:#f92672>&lt;$&gt;</span> <span style=color:#66d9ef>char</span> <span style=color:#e6db74>&#39;x&#39;</span> <span style=color:#f92672>&lt;*</span> <span style=color:#66d9ef>char</span> <span style=color:#e6db74>&#39;a&#39;</span> <span style=color:#f92672>&lt;*</span> <span style=color:#66d9ef>char</span> <span style=color:#e6db74>&#39;p&#39;</span> <span style=color:#f92672>&lt;*</span> <span style=color:#66d9ef>char</span> <span style=color:#e6db74>&#39;i&#39;</span>
 </code></pre></div><p>Running this in <code>utop</code> will show something like the following.</p>
-<pre><code># xapi (explode &quot;xapi&quot;);;
+<pre tabindex=0><code># xapi (explode &quot;xapi&quot;);;
 - : (string * text) list = [(&quot;Gotcha!&quot;, [])]
 
 # xapi (explode &quot;xapi11&quot;);;
@@ -1006,7 +1006,7 @@ parsing dates of the format <code>YYYY-MM-DD</code>:</p>
   <span style=color:#f92672>&lt;*&gt;</span> day
 </code></pre></div><p>Here are a few examples of running the <code>date</code> parser with different string
 inputs:</p>
-<pre><code># run date &quot;2019-01-23&quot;;;
+<pre tabindex=0><code># run date &quot;2019-01-23&quot;;;
 - : (int * int * int) list = [(2019, 1, 23)]
 
 # run date &quot;2019-10-23&quot;;;
@@ -1025,7 +1025,7 @@ inputs:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ocaml data-lang=ocaml><span style=color:#66d9ef>let</span> xapi <span style=color:#f92672>=</span> <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>open</span> <span style=color:#a6e22e>Parser</span> <span style=color:#66d9ef>in</span>
   <span style=color:#f92672>(</span><span style=color:#66d9ef>fun</span> <span style=color:#f92672>_</span> <span style=color:#f92672>-&gt;</span> <span style=color:#e6db74>&#34;Gotcha!&#34;</span><span style=color:#f92672>)</span> <span style=color:#f92672>&lt;$&gt;</span> exactly <span style=color:#e6db74>&#39;x&#39;</span> <span style=color:#f92672>&lt;*</span> exactly <span style=color:#e6db74>&#39;a&#39;</span> <span style=color:#f92672>&lt;*</span> exactly <span style=color:#e6db74>&#39;p&#39;</span> <span style=color:#f92672>&lt;*</span> exactly <span style=color:#e6db74>&#39;i&#39;</span> <span style=color:#f92672>&lt;*</span> empty
 </code></pre></div><p>That in <code>utop</code> gives</p>
-<pre><code># run xapi &quot;xapi&quot;
+<pre tabindex=0><code># run xapi &quot;xapi&quot;
 - : string list [&quot;Gotcha!&quot;]
 
 # run xapi &quot;xapi1&quot;
@@ -1072,7 +1072,7 @@ parenthesis nesting in a parenthesis only string:</p>
 
 <span style=color:#66d9ef>open</span> <span style=color:#a6e22e>Parens</span>
 </code></pre></div><p>That in <code>utop</code> gives</p>
-<pre><code># open Parens
+<pre tabindex=0><code># open Parens
 
 # run parens &quot;(())&quot;
 - : int list = [2]
