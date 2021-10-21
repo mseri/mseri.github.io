@@ -33,6 +33,18 @@
 <h1>A fractal spectrum of tales</h1>
 <ul class=posts-list>
 <li class=posts-list-item>
+<a class=posts-list-item-title href=https://www.mseri.me/shasumming-files-in-ruby/>Shasumming files in ruby</a>
+<span class=posts-list-item-description>
+<span>Computing SHA-* hashes of files in ruby is in principle very easy.
+You can either use the OpenSSL module or the digest one and the sytax is almost interchangeable. I am using the digest module just because it seems to be slightly faster (I timed it and on my machine it takes few milliseconds less).
+My first code was
+require 'digest' filename = '/path/to/the/file' Digest::SHA1.hexdigest(File.read(filename)) Then I made the hashes for a folder containing files of different sizes.</span><br>
+<span><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2 min read -
+Dec 13, 2013
+</span>
+</span>
+</li>
+<li class=posts-list-item>
 <a class=posts-list-item-title href=https://www.mseri.me/brute-force-attacks-and-fail2ban/>Brute force attacks and fail2ban</a>
 <span class=posts-list-item-description>
 <span>Even a nearly unkown server like mine receives every day a number of brute force attacks. Usually I have an instance of fail2ban monitoring the logs of all my services and readily banning the attackers after few attempts.
@@ -128,16 +140,6 @@ I am personally using a very basic bash script. If you need a semiauthomatic way
 I think it is simple enough to require no explanation.</span><br>
 <span><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 1 min read -
 Oct 19, 2013
-</span>
-</span>
-</li>
-<li class=posts-list-item>
-<a class=posts-list-item-title href=https://www.mseri.me/nginx-ghost-0-3-3-and-modsecurity/>nginx, ghost 0.3.3 and modsecurity</a>
-<span class=posts-list-item-description>
-<span>In my previous post, Ghost on Amazon EC2 without using sudo, I was proposing some way of running ghost without having to use sudo and with at least a minimal eye on security.
-If you have followed one of the guides that I suggested, namely Dude Looks Like a Ghost, or you have installed your own modsecurity configuration you should have received a big page announcing an Error 403 right after the update of your ghost to version 0.</span><br>
-<span><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2 min read -
-Oct 18, 2013
 </span>
 </span>
 </li>
