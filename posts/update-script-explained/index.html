@@ -1,0 +1,127 @@
+<!doctype html><html lang=en-us>
+<head>
+<title>Update script explained // A fractal spectrum of tales</title>
+<meta charset=utf-8>
+<meta name=generator content="Hugo 0.89.4">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=author content="Marcello Seri">
+<meta name=description content="Free thoughts of a geeky mathematician">
+<meta http-equiv=permissions-policy content="interest-cohort=()">
+<link rel=stylesheet href=https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Update script explained">
+<meta name=twitter:description content="I am going to proceed step by step through the code of the script that I have posted few days ago.
+I purposedly updated the script to be a bit more general and flexible (but not too much). At the end of the file I explain how to run it. You should make a backup before doing the update (the simplest way is probably running tar czf backup.tar.gz YOUR_GHOST_FOLDER). Be careful that there is no warranty with this script and I will not take any responsibility for claims or damages consequent to the use of it.">
+<meta property="og:title" content="Update script explained">
+<meta property="og:description" content="I am going to proceed step by step through the code of the script that I have posted few days ago.
+I purposedly updated the script to be a bit more general and flexible (but not too much). At the end of the file I explain how to run it. You should make a backup before doing the update (the simplest way is probably running tar czf backup.tar.gz YOUR_GHOST_FOLDER). Be careful that there is no warranty with this script and I will not take any responsibility for claims or damages consequent to the use of it.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.mseri.me/posts/update-script-explained/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2013-10-21T14:02:38+00:00">
+<meta property="article:modified_time" content="2013-10-29T16:00:05+00:00">
+</head>
+<body>
+<header class=app-header>
+<a href=https://www.mseri.me><img class=app-header-avatar src=/images/gauss_logo.png alt="Marcello Seri"></a>
+<h1>A fractal spectrum of tales</h1>
+<p>Free thoughts of a geeky mathematician</p>
+<div class=app-header-social>
+<a target=_blank href=https://github.com/mseri rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github"><title>github</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a>
+<a target=_blank href=https://twitter.com/marcelloseri rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter"><title>twitter</title><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a>
+<a target=_blank href=https://academic.mseri.me rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-award"><title>award</title><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></a>
+</div>
+</header>
+<main class=app-container>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Update script explained</h1>
+<div class=post-meta>
+<div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+Oct 21, 2013
+</div>
+<div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+4 min read
+</div><div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag"><title>tag</title><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg>
+<a class=tag href=https://www.mseri.me/tags/ghost/>ghost</a><a class=tag href=https://www.mseri.me/tags/update/>update</a><a class=tag href=https://www.mseri.me/tags/bash/>bash</a></div></div>
+</header>
+<div class=post-content>
+<p>I am going to proceed step by step through the code of the script that I have <a href=https://www.mseri.me/a-simple-script-to-update-ghost/>posted few days ago</a>.</p>
+<p>I purposedly updated the script to be a bit more general and flexible (but not too much). At the end of the file I explain how to run it. You should <a href=https://docs.ghost.org/installation/upgrading/>make a backup</a> before doing the update (the simplest way is probably running <code>tar czf backup.tar.gz YOUR_GHOST_FOLDER</code>). Be careful that there is no warranty with this script and I will not take any responsibility for claims or damages consequent to the use of it.</p>
+<p>The following line is called <em>sha bang</em> and simply tells your system that the file contains a set of instructions that has to be executed by the <a href=https://en.wikipedia.org/wiki/Bash_(Unix_shell)><em>bash</em></a> interpreter.</p>
+<pre><code>::sh
+#!/bin/bash
+</code></pre>
+<p>You should have bash installed in <code>/bin/bash</code> to be sure that the script will be of any use.</p>
+<p>The next bit of code is just checking if you have defined the three most important variables: <code>GHOSTUPDATEFILE</code>, <code>GHOSTUPDATELOCATION</code>, <code>GHOSTINSTALLDIR</code>; and define them if they are not. They respectively represent the name of the last ghost update, at the present day it is just <code>ghost-0.3.3.zip</code>, the temporary folder that will be used to unzip the new ghost, by default <code>update-ghost-tmp</code> and the folder where ghost is installed (in this last version in absolute path), the default is the subfolder <code>ghost</code> of the folder containing the script.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    <span style=color:#66d9ef>if</span> <span style=color:#f92672>[[</span> -z $GHOSTUPDATEFILE <span style=color:#f92672>]]</span>;
+    <span style=color:#66d9ef>then</span>
+      export GHOSTUPDATEFILE<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ghost-0.3.3.zip&#39;</span>
+    <span style=color:#66d9ef>fi</span>
+     
+    <span style=color:#66d9ef>if</span> <span style=color:#f92672>[[</span> -z $GHOSTUPDATELOCATION <span style=color:#f92672>]]</span>;
+    <span style=color:#66d9ef>then</span>
+      export GHOSTUPDATELOCATION<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;update-ghost-tmp&#39;</span>
+    <span style=color:#66d9ef>fi</span>
+     
+    <span style=color:#66d9ef>if</span> <span style=color:#f92672>[[</span> -z $GHOSTINSTALLDIR <span style=color:#f92672>]]</span>;
+    <span style=color:#66d9ef>then</span>
+      export GHOSTINSTALLDIR<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>pwd<span style=color:#e6db74>`</span><span style=color:#e6db74>&#39;/ghost&#39;</span>
+    <span style=color:#66d9ef>fi</span>
+</code></pre></div><p>You can either change them in the file or simply type something like the following before running the script in your terminal: <code>export NAME_OF_THE_VARIABLE='YOUR_CUSTOM_VALUE'</code></p>
+<p>I suggest you to check that the variables are correct typing in your terminal <code>echo $NAME_OF_THE_VARIABLE</code> and checking that in output you get the correct <code>YOUR_CUSTOM_VALUE</code>.</p>
+<p>The code proceed saving the current location in a variable, we will need it later, with</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    export STARTLOCATION<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>pwd<span style=color:#e6db74>`</span>
+</code></pre></div><p>The following three lines simply take care to download <code>GHOSTUPDATEFILE</code> and unzip it in <code>GHOSTUPDATELOCATION</code>.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    wget https://ghost.org/zip/<span style=color:#66d9ef>$(</span>echo $GHOSTUPDATEFILE<span style=color:#66d9ef>)</span>
+    unzip $GHOSTUPDATEFILE -d $GHOSTUPDATELOCATION
+    echo <span style=color:#e6db74>&#34;Ghost downloaded and unzipped&#34;</span>
+</code></pre></div><p>For this step to be effective you need to have installed <code>wget</code>. If this is not the case you should install it or replace the wget line with</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    curl -O https://ghost.org/zip/<span style=color:#66d9ef>$(</span>echo $GHOSTUPDATEFILE<span style=color:#66d9ef>)</span>
+</code></pre></div><p>Note that you will anyhow read the message <em>Ghost downloaded and unzipped</em>, even if there have been errors during the execution. If I have time, I may change this behavior in a future version but I don&rsquo;t plan to do it for the moment.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    cd $GHOSTUPDATELOCATION
+    cp *.md *.js *.txt *.json $GHOSTINSTALLDIR
+    cp -R core $GHOSTINSTALLDIR
+    cp -R content/themes/casper $GHOSTINSTALLDIR/content/themes
+    echo <span style=color:#e6db74>&#34;Ghost has been updated with&#34;</span> $GHOST
+    
+    cd $GHOSTINSTALLDIR
+    npm install --production
+    echo <span style=color:#e6db74>&#34;NPM updated&#34;</span>
+</code></pre></div><p>These few lines of code simply do what is mechanically suggested to do in the <a href=https://docs.ghost.org/installation/upgrading/>ghost upgrade instruction page</a>: go into the new ghost folder and copy all the files in your active ghost environment, then move back to your ghost environment and run npm update.</p>
+<p>After this update process is finished, hopefully without errors, we go back to our first location and remove the temporary update file and update folder.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    cd $STARTLOCATION
+    rm -rf $GHOSTUPDATELOCATION $GHOSTUPDATEFILE
+    echo <span style=color:#e6db74>&#34;Folder cleaned&#34;</span>
+</code></pre></div><p>The next, last, step is the one that you will probably have to modify to adapt to your needs. Its purpose is restarting the ghost environment. In my case it runs with <a href=https://npmjs.org/package/forever>forever</a> and is started by a code that I saved in a script called <code>starter.sh</code> in my ghost folder. The following code does the restart as I would do it by hand and then tells me &ldquo;<em>Done!</em>&rdquo;.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    echo <span style=color:#e6db74>&#34;Restarting ghost...&#34;</span>
+    forever stop <span style=color:#ae81ff>0</span>
+    sh $GHOSTINSTALLDIR/starter.sh
+    
+    echo <span style=color:#e6db74>&#34;Done!&#34;</span>
+</code></pre></div><p>You have to replace those lines with the appropriate code. It really depends on how you start/stop your server, you can even delete them and do it by hand after the update is complete.</p>
+<p>Suppose that your folder structure is something like</p>
+<pre><code>~\
+  folder1\
+          ...
+  folder2\
+          ...
+  folder3\
+          myghost\
+                ...
+          folder5\
+          update-ghost.sh
+  folder4\
+  ...
+</code></pre>
+<p>then to run the script you should log in to your server and do something like</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    cd folder1/
+    export GHOSTINSTALLDIR<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>pwd<span style=color:#e6db74>`</span><span style=color:#e6db74>&#39;/myghost&#39;</span>
+    sh update-ghost.sh
+</code></pre></div><p>I hope this is clear enough to give to everybody the chance to adapt the script and use a semiautomated way to update their ghost installation while we wait for some other official system.</p>
+</div>
+<div class=post-footer>
+</div>
+</article>
+</main>
+</body>
+</html>

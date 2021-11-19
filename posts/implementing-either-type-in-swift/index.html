@@ -1,0 +1,107 @@
+<!doctype html><html lang=en-us>
+<head>
+<title>Implementing Either type in Swift // A fractal spectrum of tales</title>
+<meta charset=utf-8>
+<meta name=generator content="Hugo 0.89.4">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=author content="Marcello Seri">
+<meta name=description content="Free thoughts of a geeky mathematician">
+<meta http-equiv=permissions-policy content="interest-cohort=()">
+<link rel=stylesheet href=https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Implementing Either type in Swift">
+<meta name=twitter:description content="It has been only a couple of days since Apple announced and released Swift. It has possibly been the most important and interesting announcement of Apple in the last few years and started an amount of discussions around the web.
+With the hours passing, we&rsquo;ve found out that there was at least another Swift in the history of programming languages (with a similar icon) and that Swift is under development since 2010 and its father is Chris Lattner, creator of clang and LLVM.">
+<meta property="og:title" content="Implementing Either type in Swift">
+<meta property="og:description" content="It has been only a couple of days since Apple announced and released Swift. It has possibly been the most important and interesting announcement of Apple in the last few years and started an amount of discussions around the web.
+With the hours passing, we&rsquo;ve found out that there was at least another Swift in the history of programming languages (with a similar icon) and that Swift is under development since 2010 and its father is Chris Lattner, creator of clang and LLVM.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.mseri.me/posts/implementing-either-type-in-swift/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2014-06-04T14:11:25+00:00">
+<meta property="article:modified_time" content="2014-06-04T16:11:02+00:00">
+</head>
+<body>
+<header class=app-header>
+<a href=https://www.mseri.me><img class=app-header-avatar src=/images/gauss_logo.png alt="Marcello Seri"></a>
+<h1>A fractal spectrum of tales</h1>
+<p>Free thoughts of a geeky mathematician</p>
+<div class=app-header-social>
+<a target=_blank href=https://github.com/mseri rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github"><title>github</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a>
+<a target=_blank href=https://twitter.com/marcelloseri rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter"><title>twitter</title><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a>
+<a target=_blank href=https://academic.mseri.me rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-award"><title>award</title><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></a>
+</div>
+</header>
+<main class=app-container>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Implementing Either type in Swift</h1>
+<div class=post-meta>
+<div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+Jun 4, 2014
+</div>
+<div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+3 min read
+</div><div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag"><title>tag</title><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg>
+<a class=tag href=https://www.mseri.me/tags/haskell/>haskell</a><a class=tag href=https://www.mseri.me/tags/either/>either</a><a class=tag href=https://www.mseri.me/tags/types/>types</a><a class=tag href=https://www.mseri.me/tags/swift/>swift</a></div></div>
+</header>
+<div class=post-content>
+<p>It has been only a couple of days since Apple <a href=https://developer.apple.com/swift/>announced and released Swift</a>. It has possibly been the most important and interesting announcement of Apple in the last few years and <a href="https://news.ycombinator.com/item?id=7835099">started an amount of discussions around the web</a>.</p>
+<p>With the hours passing, we&rsquo;ve found out that there was <a href=https://swift-lang.org>at least another Swift</a> in the history of programming languages (with a similar icon) and that <a href=https://nondot.org/sabre/>Swift is under development since 2010 and its father is Chris Lattner</a>, creator of <code>clang</code> and <code>LLVM</code>.</p>
+<p>As we can read from his page, it&rsquo;s no surprise that people have found similarities with Rust, Haskell, Ruby, Python, Julia, and many other language. And the more I play with Swift, the happier I am of what they did. I really hope that the language will be released with an open source license as LLVM, clang and in some sense Objective-C.</p>
+<p>But let&rsquo;s come to the hearth of this post. I find abstract types and monadic construct very powerful and fun to code. And the type system in Swift, desite not being as flexible and powerful as Haskell&rsquo;s, gives a lot of freedom in this directon. Optionals fall exactly in this context and correspond very closely to <a href=https://www.haskell.org/haskellwiki/Maybe>Haskell&rsquo;s Maybe class</a>.</p>
+<p>As you can read in <a href=https://itun.es/gb/jEUH0.l>Apple Inc. “The Swift Programming Language.” ebook</a>, the <em>optional</em> type in Swift is nothing but synctactic sugar for the following enum</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-swift data-lang=swift>    <span style=color:#75715e>/* Reimplement the Swift standard library&#39;s optional type */</span>
+    <span style=color:#66d9ef>enum</span> <span style=color:#a6e22e>OptionalValue</span>&lt;T&gt; {
+        <span style=color:#66d9ef>case</span> None
+        <span style=color:#66d9ef>case</span> Some(T)
+    }
+</code></pre></div><pre><code>var possibleInteger: OptionalValue&lt;Int&gt; = .None
+possibleInteger = .Some(100)
+</code></pre>
+<p>Where<code>T</code> represents a generic type, <code>nil</code> is indeed syntactic sugar for <code>OptionalValue&lt;T>.None</code> and <code>?</code> the same for <code>OptionalValue&lt;T>.Some(T)</code>.</p>
+<p>You can then use a <code>switch</code> and swift pattern matching capabilities to manage the error</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-swift data-lang=swift>    <span style=color:#66d9ef>switch</span> possibleInteger {
+    <span style=color:#66d9ef>case</span> .Some(<span style=color:#66d9ef>let</span> value) :
+        <span style=color:#75715e>/* just type &#39;value&#39; here to see &#39;100&#39; appearing in playground REPL */</span>
+        println(<span style=color:#e6db74>&#34;Value is: </span><span style=color:#e6db74>\(</span>value<span style=color:#e6db74>)</span><span style=color:#e6db74>&#34;</span>)
+    <span style=color:#66d9ef>case</span> .None :
+        println(<span style=color:#e6db74>&#34;Error: no value.&#34;</span>)
+    }
+</code></pre></div><p>I am not going in the realm of Monads (yet) and <a href=https://www.haskell.org/haskellwiki/Monad_tutorials_timeline>try to explain them</a>, but I think that the <a href=https://www.haskell.org/ghc/docs/latest/html/libraries/base/Data-Either.html><em>either</em></a> type could be very useful in Swift. As for the <em>optional</em>, we can easily define it as</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-swift data-lang=swift>    <span style=color:#66d9ef>enum</span> <span style=color:#a6e22e>Either</span>&lt;T1, T2&gt; {
+        <span style=color:#66d9ef>case</span> Left(T1)
+        <span style=color:#66d9ef>case</span> Right(T2)
+    }
+</code></pre></div><p>As in Haskell, Either is parameterized by two types, not one. A value of the Either type <em>either</em> contains a value of type <code>T1</code> or of type <code>T2</code>. With it, we can discriminate between two possibilities and using Swift pattern matching we can write a nice, clean code.</p>
+<p>Either can be used as a <a href=https://web.archive.org/web/20180620003318/https://www.schoolofhaskell.com/school/starting-with-haskell/basics-of-haskell/10_Error_Handling>generalization of optional types</a> in which Left not only encodes failure but is accompanied by an error message (so often <code>T1</code> will be just <code>String</code>). Then Right encodes success and the accompanying value.</p>
+<p>For example</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-swift data-lang=swift>    <span style=color:#66d9ef>var</span> possibleInteger: Either&lt;String,Int&gt; = .Left(<span style=color:#e6db74>&#34;Not a number&#34;</span>)
+    <span style=color:#66d9ef>var</span> possibleInteger2: Either&lt;String,Int&gt; = .Right(<span style=color:#ae81ff>3</span>)
+</code></pre></div><pre><code>switch possibleInteger1 {
+case .Left(let errorText) :
+    println(&quot;Error: \(errorText)&quot;)
+case .Right(let value) :
+    println(&quot;The value is: \(value)&quot;)
+}
+
+func safeDiv(x:Float, y:Float) -&gt; Either&lt;String,Float&gt; {
+  if y == 0 {
+    return Either&lt;String, Float&gt;.Left(&quot;Error: division by zero&quot;)
+  } else {
+    return Either&lt;String, Float&gt;.Right(x/y)
+  }
+}
+
+var badDivision = safeDiv(2,0)
+</code></pre>
+<p>In some sense you still have a kind of <code>assert</code> without having to stop the execution and raise and exception. This let&rsquo;s you control certain kind of errors or expected behaviors with much ease.</p>
+<p>Additionally, it would be pretty easy to use <code>generics</code> and <code>typealias</code>es to shorten sensibly the notation and clean the code above.</p>
+<hr>
+<p><strong>Update</strong>: as a more comprehensive guide on how one can use these and deeper functional concepts in swift I can point you to the nice post <a href=https://www.mokacoding.com/blog/functor-applicative-monads-in-pictures/>Swift Functors, Applicatives, and Monads in Pictures</a>.</p>
+</div>
+<div class=post-footer>
+</div>
+</article>
+</main>
+</body>
+</html>

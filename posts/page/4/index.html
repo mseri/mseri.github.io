@@ -1,0 +1,185 @@
+<!doctype html><html lang=en-us>
+<head>
+<title>Posts // A fractal spectrum of tales</title>
+<meta charset=utf-8>
+<meta name=generator content="Hugo 0.89.4">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=author content="Marcello Seri">
+<meta name=description content="Free thoughts of a geeky mathematician">
+<meta http-equiv=permissions-policy content="interest-cohort=()">
+<link rel=stylesheet href=https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css>
+<link rel=alternate type=application/rss+xml href=https://www.mseri.me/posts/index.xml title="A fractal spectrum of tales">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Posts">
+<meta name=twitter:description content="Free thoughts of a geeky mathematician">
+<meta property="og:title" content="Posts">
+<meta property="og:description" content="Free thoughts of a geeky mathematician">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.mseri.me/posts/">
+</head>
+<body>
+<header class=app-header>
+<a href=https://www.mseri.me><img class=app-header-avatar src=/images/gauss_logo.png alt="Marcello Seri"></a>
+<h1>A fractal spectrum of tales</h1>
+<p>Free thoughts of a geeky mathematician</p>
+<div class=app-header-social>
+<a target=_blank href=https://github.com/mseri rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github"><title>github</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a>
+<a target=_blank href=https://twitter.com/marcelloseri rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter"><title>twitter</title><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a>
+<a target=_blank href=https://academic.mseri.me rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-award"><title>award</title><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></a>
+</div>
+</header>
+<main class=app-container>
+<article>
+<h1>Posts</h1>
+<ul class=posts-list>
+<li class=posts-list-item>
+<a class=posts-list-item-title href=https://www.mseri.me/posts/again-on-zsh/>Again on zsh</a>
+<span class=posts-list-item-description>
+<span>I already wrote about the great pleasure of moving to zsh in a previous post, but I feel that I should update you on the progresses.
+From the last time I moved from Oh-My-Zsh to Prezto, a different dotfiles framework. I&rsquo;ve found it much lighter and faster than oh-my-zsh, despite not having the same amount of plugins and themes.
+In fact, as far as I understood, prezto was born as a fork of oh-my-zsh and was later completely rewritten to be more zshish and better optimised.</span><br>
+<span><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 4 min read -
+Dec 18, 2013
+</span>
+</span>
+</li>
+<li class=posts-list-item>
+<a class=posts-list-item-title href=https://www.mseri.me/posts/shasumming-files-in-ruby/>Shasumming files in ruby</a>
+<span class=posts-list-item-description>
+<span>Computing SHA-* hashes of files in ruby is in principle very easy.
+You can either use the OpenSSL module or the digest one and the sytax is almost interchangeable. I am using the digest module just because it seems to be slightly faster (I timed it and on my machine it takes few milliseconds less).
+My first code was
+require 'digest' filename = '/path/to/the/file' Digest::SHA1.hexdigest(File.read(filename)) Then I made the hashes for a folder containing files of different sizes.</span><br>
+<span><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2 min read -
+Dec 13, 2013
+</span>
+</span>
+</li>
+<li class=posts-list-item>
+<a class=posts-list-item-title href=https://www.mseri.me/posts/brute-force-attacks-and-fail2ban/>Brute force attacks and fail2ban</a>
+<span class=posts-list-item-description>
+<span>Even a nearly unkown server like mine receives every day a number of brute force attacks. Usually I have an instance of fail2ban monitoring the logs of all my services and readily banning the attackers after few attempts.
+Not tonight&mldr;
+Let&rsquo;s move a step backwards. What is fail2ban and how does it work?
+Reaching out the home page of the software you can read
+Fail2ban scans log files and bans IPs that show the malicious signs - too many password failures, seeking for exploits, etc.</span><br>
+<span><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 3 min read -
+Dec 12, 2013
+</span>
+</span>
+</li>
+<li class=posts-list-item>
+<a class=posts-list-item-title href=https://www.mseri.me/posts/on-iterm2-and-solarized-dark/>On iTerm2 and solarized dark</a>
+<span class=posts-list-item-description>
+<span>This weekend I&rsquo;ve spent some time to understand Z Shell. I admit that I&rsquo;ve should have done it ages ago. I actually regret not having done it ages ago, I would have saved a lot of time.
+Moving your .bashrc to your new .zshrc is almost just copy and paste. And you suddently find yourself with a shell that makes you feel in the future!
+If you additionally install oh my zsh, the only thing that your shell will be missing is the capability of making coffee.</span><br>
+<span><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2 min read -
+Dec 7, 2013
+</span>
+</span>
+</li>
+<li class=posts-list-item>
+<a class=posts-list-item-title href=https://www.mseri.me/posts/thought-on-the-differential-logistic-equation/>On the differential logistic equation</a>
+<span class=posts-list-item-description>
+<span>This fall I am teaching Mathematical Methods for Scientist. This week we started to talk about differential equations and for the lecture I was looking for an example of a broadely used first order ODE: my final choice has been the logistic equation.
+It is a fairly simple differential equation that is used to describe the growth (and saturation) of populations in environments with competition for limited resources. Before entering into more details I think it&rsquo;s time to digress slightly and talk about something simpler.</span><br>
+<span><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 4 min read -
+Dec 6, 2013
+</span>
+</span>
+</li>
+<li class=posts-list-item>
+<a class=posts-list-item-title href=https://www.mseri.me/posts/deploying-anchor-cms-on-openshift/>Deploying Anchor CMS on OpenShift</a>
+<span class=posts-list-item-description>
+<span>Some of you may already know that installing ghost on OpenShift is extremely easy (and free). You can check this post if you don&rsquo;t believe me.
+I was wandering how is it with other small and less known CMS. Given that I was already making some local tests with [Anchor CMS](https://anchorcms.com" _target=&ldquo;blank) for a friend, and given that there is almost nothing around about its deployment on Open Shift I decided to give it a try and write about it.</span><br>
+<span><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 8 min read -
+Nov 8, 2013
+</span>
+</span>
+</li>
+<li class=posts-list-item>
+<a class=posts-list-item-title href=https://www.mseri.me/posts/the-beauty-of-mathematics/>The beauty of mathematics</a>
+<span class=posts-list-item-description>
+<span>After having watched this video I hope you will agree with Bertrand Russell:
+"Mathematics, rightly viewed, possesses not only truth, but supreme beauty — a beauty cold and austere, without the gorgeous trappings of painting or music."
+— Bertrand Russell
+And this is just a scratch of the surface of the mysterious wonderful world that is hiding behind those fascinating symbols.
+A video by Yann Pineill & Nicolas Lefaucheux.</span><br>
+<span><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 1 min read -
+Nov 5, 2013
+</span>
+</span>
+</li>
+<li class=posts-list-item>
+<a class=posts-list-item-title href=https://www.mseri.me/posts/a-great-workaround-for-targeting-links-in-ghost/>A great workaround for targeting links in Ghost</a>
+<span class=posts-list-item-description>
+<span>When I am reading something, I hate to click on some link (that I will supposedly read later) and be redirected to the new page. I&rsquo;d rather prefer the links to open in background in a new tab.
+You may say that it is enough to click while pressing Command or Control and the page will be opened in a background tab, but it&rsquo;s not the same. What if I accidentally click for example?</span><br>
+<span><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 2 min read -
+Oct 29, 2013
+</span>
+</span>
+</li>
+<li class=posts-list-item>
+<a class=posts-list-item-title href=https://www.mseri.me/posts/git-workflow-for-lazy-mathematicians/>Git workflow for lazy mathematicians</a>
+<span class=posts-list-item-description>
+<span>First of all, what is git? Citing its website
+Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. [It] is easy to learn and has a tiny footprint with lightning fast performance.
+In other words Git provides a source control repository that enables you to roll back code changes as needed, to merge the updates when collaborating with others and eventually to have an online backup of your work.</span><br>
+<span><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 11 min read -
+Oct 21, 2013
+</span>
+</span>
+</li>
+<li class=posts-list-item>
+<a class=posts-list-item-title href=https://www.mseri.me/posts/update-script-explained/>Update script explained</a>
+<span class=posts-list-item-description>
+<span>I am going to proceed step by step through the code of the script that I have posted few days ago.
+I purposedly updated the script to be a bit more general and flexible (but not too much). At the end of the file I explain how to run it. You should make a backup before doing the update (the simplest way is probably running tar czf backup.tar.gz YOUR_GHOST_FOLDER). Be careful that there is no warranty with this script and I will not take any responsibility for claims or damages consequent to the use of it.</span><br>
+<span><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 4 min read -
+Oct 21, 2013
+</span>
+</span>
+</li>
+</ul>
+<ul class=pagination>
+<li class=page-item>
+<a class=page-link href=/posts/page/3/><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-arrow-left"><title>arrow-left</title><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+</a>
+</li>
+<li class=page-item>
+<a class=page-link href=/posts/>
+1
+</a>
+</li>
+<li class=page-item>
+<a class=page-link href=/posts/page/2/>
+2
+</a>
+</li>
+<li class=page-item>
+<a class=page-link href=/posts/page/3/>
+3
+</a>
+</li>
+<li class="page-item active">
+<a class=page-link href=/posts/page/4/>
+4
+</a>
+</li>
+<li class=page-item>
+<a class=page-link href=/posts/page/5/>
+5
+</a>
+</li>
+<li class=page-item>
+<a class=page-link href=/posts/page/5/><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-arrow-right"><title>arrow-right</title><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+</a>
+</li>
+</ul>
+</article>
+</main>
+</body>
+</html>
