@@ -1,0 +1,64 @@
+<!doctype html><html lang=en-us>
+<head>
+<title>Lecture notes on Hamiltonian mechanics // A fractal spectrum of tales</title>
+<meta charset=utf-8>
+<meta name=generator content="Hugo 0.89.4">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=author content="Marcello Seri">
+<meta name=description content="Free thoughts of a geeky mathematician">
+<meta http-equiv=permissions-policy content="interest-cohort=()">
+<link rel=stylesheet href=https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Lecture notes on Hamiltonian mechanics">
+<meta name=twitter:description content="In the last academic term, I had the great pleasure to teach Hamiltonian Mechanics, an optional master course for mathematics and physics students. Even though the course was based on Arnold&rsquo;s beautiful book, my plan for the course was to give a panoramic on the modern theory of integrable systems and perturbation theory. Of course, my grand plan, was way to optimistic. And between the time available, a bad flu and then the pandemic landing, we were able to do much less than what I hoped for.">
+<meta property="og:title" content="Lecture notes on Hamiltonian mechanics">
+<meta property="og:description" content="In the last academic term, I had the great pleasure to teach Hamiltonian Mechanics, an optional master course for mathematics and physics students. Even though the course was based on Arnold&rsquo;s beautiful book, my plan for the course was to give a panoramic on the modern theory of integrable systems and perturbation theory. Of course, my grand plan, was way to optimistic. And between the time available, a bad flu and then the pandemic landing, we were able to do much less than what I hoped for.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.mseri.me/lecture-notes-hamiltonian-mechanics/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2020-04-20T15:20:19+02:00">
+<meta property="article:modified_time" content="2020-04-20T15:20:19+02:00">
+</head>
+<body>
+<header class=app-header>
+<a href=https://www.mseri.me><img class=app-header-avatar src=/images/gauss_logo.png alt="Marcello Seri"></a>
+<h1>A fractal spectrum of tales</h1>
+<p>Free thoughts of a geeky mathematician</p>
+<div class=app-header-social>
+<a target=_blank href=https://github.com/mseri rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github"><title>github</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a>
+<a target=_blank href=https://twitter.com/marcelloseri rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter"><title>twitter</title><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a>
+<a target=_blank href=https://academic.mseri.me rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-award"><title>award</title><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></a>
+</div>
+</header>
+<main class=app-container>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Lecture notes on Hamiltonian mechanics</h1>
+<div class=post-meta>
+<div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+Apr 20, 2020
+</div>
+<div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+2 min read
+</div><div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag"><title>tag</title><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg>
+<a class=tag href=https://www.mseri.me/tags/mathematics/>mathematics</a><a class=tag href=https://www.mseri.me/tags/blog/>blog</a><a class=tag href=https://www.mseri.me/tags/mechanics/>mechanics</a><a class=tag href=https://www.mseri.me/tags/teaching/>teaching</a></div></div>
+</header>
+<div class=post-content>
+<p>In the last academic term, I had the great pleasure to teach Hamiltonian Mechanics, an optional master course for mathematics and physics students.
+Even though the course was based on Arnold&rsquo;s beautiful book, my plan for the course was to give a panoramic on the modern theory of integrable systems and perturbation theory. Of course, my grand plan, was way to optimistic. And between the time available, a bad flu and then the pandemic landing, we were able to do much less than what I hoped for.</p>
+<p>Nevertheless, from the feedback I got, it seems that the course turned out nice and I decided to hide the unfinished parts from the lecture notes and publish them <a href=https://github.com/mseri/hammech20/releases title="Lecture Notes PDF">here</a> for wider availability under a <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
+<p>My original plan for this post was to give a very brief introduction to the topic, using a pendulum and a spring as motivating examples, but I&rsquo;ve been dragging this post for a month and I could never find time to sit down and concentrate long enough to prepare something decent.
+So, let&rsquo;s cut things short, before it&rsquo;s too late and I need to postpone again: <a href=https://github.com/mseri/hammech20/releases/download/v1.0/HamMech2020.pdf title="Lecture Notes PDF">Lecture Notes of Hamiltonian Mechanics in A5 format &ndash; tablet and booklet-print friendly</a>.
+The source latex code is also available on <a href=https://github.com/mseri/hammech20>GitHub</a>.</p>
+<p>If I get some time I will update this post mentioning what was plan and what did not end up in the notes.
+They are a <strong>preliminary version</strong> and surely stull filled with typos, please let me know about the mistakes or if you have interesting exercises or remarks to add.</p>
+<p>I already plan to change many things for next year, reducing the focus on the introductory part and on Lagrangian mechanics, and increasing the focus on integrable systems and perturbation theory. In particular, if you know what I am talking about, I would like to cover also Lax pairs, something about phase-space reduction done rigorously, a better account of resonant cases and a brief discussion of monodromy.
+I want to also add lots of pictures and interactive simulations for next year, let&rsquo;s see if the time will allow for it.</p>
+<p>The final lecture describing how the hamiltonian formalism translate into quantum mechanics and what classical hamiltonian mechanics tells us in the semiclassical limit is not in the notes.</p>
+<p>One day I will find the time to write a followup with the introduction mentioned above, in the meantime stay safe and have a nice day.</p>
+</div>
+<div class=post-footer>
+</div>
+</article>
+</main>
+</body>
+</html>
