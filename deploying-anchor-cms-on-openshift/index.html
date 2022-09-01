@@ -1,198 +1,96 @@
-<!doctype html><html lang=en-us>
-<head>
-<title>Deploying Anchor CMS on OpenShift // A fractal spectrum of tales</title>
-<meta charset=utf-8>
-<meta name=generator content="Hugo 0.92.1">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=author content="Marcello Seri">
-<meta name=description content="Free thoughts of a geeky mathematician">
-<meta http-equiv=permissions-policy content="interest-cohort=()">
-<link rel=stylesheet href=https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css>
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Deploying Anchor CMS on OpenShift">
-<meta name=twitter:description content="Some of you may already know that installing ghost on OpenShift is extremely easy (and free). You can check this post if you don&rsquo;t believe me.
-I was wandering how is it with other small and less known CMS. Given that I was already making some local tests with [Anchor CMS](https://anchorcms.com&#34; _target=&ldquo;blank) for a friend, and given that there is almost nothing around about its deployment on Open Shift I decided to give it a try and write about it.">
-<meta property="og:title" content="Deploying Anchor CMS on OpenShift">
-<meta property="og:description" content="Some of you may already know that installing ghost on OpenShift is extremely easy (and free). You can check this post if you don&rsquo;t believe me.
-I was wandering how is it with other small and less known CMS. Given that I was already making some local tests with [Anchor CMS](https://anchorcms.com&#34; _target=&ldquo;blank) for a friend, and given that there is almost nothing around about its deployment on Open Shift I decided to give it a try and write about it.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://www.mseri.me/deploying-anchor-cms-on-openshift/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2013-11-08T18:24:02+00:00">
-<meta property="article:modified_time" content="2013-11-22T12:01:13+00:00">
-</head>
-<body>
-<header class=app-header>
-<a href=https://www.mseri.me><img class=app-header-avatar src=/images/gauss_logo.png alt="Marcello Seri"></a>
-<h1>A fractal spectrum of tales</h1>
-<p>Free thoughts of a geeky mathematician</p>
-<div class=app-header-social>
-<a target=_blank href=https://github.com/mseri rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github"><title>github</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a>
-<a target=_blank href=https://twitter.com/marcelloseri rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter"><title>twitter</title><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a>
-<a target=_blank href=https://academic.mseri.me rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-award"><title>award</title><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></a>
-</div>
-</header>
-<main class=app-container>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>Deploying Anchor CMS on OpenShift</h1>
-<div class=post-meta>
-<div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-Nov 8, 2013
-</div>
-<div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-8 min read
-</div><div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag"><title>tag</title><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg>
-<a class=tag href=https://www.mseri.me/tags/openshift/>OpenShift</a><a class=tag href=https://www.mseri.me/tags/deploy/>deploy</a></div></div>
-</header>
-<div class=post-content>
-<p>Some of you may already know that installing <a href=https://www.ghost.org>ghost</a> on <a href=https://www.openshift.org>OpenShift</a> is extremely easy (and free). You can <a href=https://ghost-laures.rhcloud.com>check this post</a> if you don&rsquo;t believe me.</p>
-<p>I was wandering how is it with other small and less known CMS. Given that I was already making some local tests with [Anchor CMS](<a href=https://anchorcms.com>https://anchorcms.com</a>" _target=&ldquo;blank) for a friend, and given that there is almost nothing around about its deployment on Open Shift I decided to give it a try and write about it.</p>
-<p>I could find only three references online. Two were forum posts arguing that it is impossible to install it and one is the blog post titled [Ancor CMS on OpenShift](<a href=https://sruiz.co.uk/sruiz/blog/2013/09/07/anchor-cms-on-openshift/%22>https://sruiz.co.uk/sruiz/blog/2013/09/07/anchor-cms-on-openshift/"</a> _target=&ldquo;blank), that explain how to install Anchor in a working but long and painful way.</p>
-<p>In this post I explain you how to do it in 10 minutes (but you need a unix machine: *BSD, Linux or Mac are fine). You will need the following:</p>
-<ul>
-<li>A terminal that can execute wget, tar, <a href=https://www.mseri.me/git-workflow-for-lazy-mathematicians/>git</a> and ssh.</li>
-<li>A decent web browser.</li>
-</ul>
-<h2 id=step-0-the-necessary-tools>Step 0: the necessary tools</h2>
-<p>Head to <a href=https://openshift.redhat.com/app/account/new>https://openshift.redhat.com/app/account/new</a> and fill in the form. The captcha can be pretty nasty, just be strong and read it carefully. We will just need the free account: no need for credit cards.</p>
-<p>Wait for the confirmation email, click on the link, and accept the term of license. We are ready to start!</p>
-<p>To use your account I strongly encourage you to install and set up the OpenShift client tools (better known as rhc) on your computer. You may think to go for the &ldquo;Wimp Way&rdquo; and use the web-UI, but real men use the CLI for higher productivity and besides you would not be able to reach the end of this tutorial.</p>
-<p>To install the <a href=https://www.openshift.com/developers/rhc-client-tools-install>rhc Client Tools</a> go <a href=https://www.openshift.com/developers/rhc-client-tools-install>straight to this website</a> and follow the instructions.</p>
-<p>On a Mac OSX + brew configuration you may get an error related to SSL certificates when you run <code>gem install rhc</code> step. I have solved the problem with the following procedure</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    $ brew update
-    $ brew install openssl
-    $ brew link openssl --force
-    $ brew install curl-ca-bundle
-</code></pre></div><p>If you use <code>rvm</code> you may even try with <code>rvm osx-ssl-certs update all</code>.</p>
-<p>Now that <code>rhc</code> is installed, you have to link it with your OpenShift account.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    $ mkdir anchor_tutorial
-    $ cd anchor_tutorial
-    $ rhc setup
-</code></pre></div><p>Now follow the instructions on screen and wait for it to finish. If you are not sure what to answer, have a look to my terminal output <a href=https://gist.github.com/mseri/29d4989d86dfd1ccdbc8>on a private gist</a>.</p>
-<p>When you read</p>
-<pre><code>Please enter a namespace (letters and numbers only) |&lt;none&gt;|: 
-</code></pre>
-<p>it is very important that you use a simple and recallable string. For this tutorial I used <code>mseritutorial</code>.</p>
-<h2 id=step-1-create-the-application>Step 1: create the application</h2>
-<p>To install Anchor we need a recent version of php. Sadly the one contained in openshift&rsquo;s cartridge <code>php</code> is not recent enough, but the problem can be solved easily using instead the <code>zend server</code> cartridge. To create an app just type</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ rhc create-app anchor zend-5.6
-</code></pre></div><p>And wait some time. When you are prompted for cloning and accepting the security certificate just type <code>yes</code> and hit return.
-Remember to annotate somewhere the informations printed at the end of the procedure:</p>
-<pre><code>URL:        https://anchor-mseritutorial.rhcloud.com/
+<!doctype html><html lang=en-us><head><title>Deploying Anchor CMS on OpenShift // A fractal spectrum of tales</title><meta charset=utf-8><meta name=generator content="Hugo 0.102.2"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="Marcello Seri"><meta name=description content="Free thoughts of a geeky mathematician"><meta http-equiv=permissions-policy content="interest-cohort=()"><link rel=stylesheet href=https://www.mseri.me/css/main.min.4e2016cf62779480fbe7ba44c261abc7b3a9744838af7268702179daa31e0716.css><meta name=twitter:card content="summary"><meta name=twitter:title content="Deploying Anchor CMS on OpenShift"><meta name=twitter:description content="Some of you may already know that installing ghost on OpenShift is extremely easy (and free). You can check this post if you don&rsquo;t believe me.
+I was wandering how is it with other small and less known CMS. Given that I was already making some local tests with [Anchor CMS](https://anchorcms.com&#34; _target=&ldquo;blank) for a friend, and given that there is almost nothing around about its deployment on Open Shift I decided to give it a try and write about it."><meta property="og:title" content="Deploying Anchor CMS on OpenShift"><meta property="og:description" content="Some of you may already know that installing ghost on OpenShift is extremely easy (and free). You can check this post if you don&rsquo;t believe me.
+I was wandering how is it with other small and less known CMS. Given that I was already making some local tests with [Anchor CMS](https://anchorcms.com&#34; _target=&ldquo;blank) for a friend, and given that there is almost nothing around about its deployment on Open Shift I decided to give it a try and write about it."><meta property="og:type" content="article"><meta property="og:url" content="https://www.mseri.me/deploying-anchor-cms-on-openshift/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2013-11-08T18:24:02+00:00"><meta property="article:modified_time" content="2013-11-22T12:01:13+00:00"></head><body><header class=app-header><a href=https://www.mseri.me><img class=app-header-avatar src=/images/gauss_logo.png alt="Marcello Seri"></a><h1>A fractal spectrum of tales</h1><p>Free thoughts of a geeky mathematician</p><div class=app-header-social><a target=_blank href=https://github.com/mseri rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github"><title>github</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a><a target=_blank href=https://twitter.com/marcelloseri rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter"><title>twitter</title><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a><a target=_blank href=https://academic.mseri.me rel="noreferrer noopener"><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-award"><title>award</title><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></a></div></header><main class=app-container><article class=post><header class=post-header><h1 class=post-title>Deploying Anchor CMS on OpenShift</h1><div class=post-meta><div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Nov 8, 2013</div><div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>8 min read</div><div><svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag"><title>tag</title><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg><a class=tag href=https://www.mseri.me/tags/openshift/>OpenShift</a><a class=tag href=https://www.mseri.me/tags/deploy/>deploy</a></div></div></header><div class=post-content><p>Some of you may already know that installing <a href=https://www.ghost.org>ghost</a> on <a href=https://www.openshift.org>OpenShift</a> is extremely easy (and free). You can <a href=https://ghost-laures.rhcloud.com>check this post</a> if you don&rsquo;t believe me.</p><p>I was wandering how is it with other small and less known CMS. Given that I was already making some local tests with [Anchor CMS](<a href=https://anchorcms.com>https://anchorcms.com</a>" _target=&ldquo;blank) for a friend, and given that there is almost nothing around about its deployment on Open Shift I decided to give it a try and write about it.</p><p>I could find only three references online. Two were forum posts arguing that it is impossible to install it and one is the blog post titled [Ancor CMS on OpenShift](<a href=https://sruiz.co.uk/sruiz/blog/2013/09/07/anchor-cms-on-openshift/%22>https://sruiz.co.uk/sruiz/blog/2013/09/07/anchor-cms-on-openshift/"</a> _target=&ldquo;blank), that explain how to install Anchor in a working but long and painful way.</p><p>In this post I explain you how to do it in 10 minutes (but you need a unix machine: *BSD, Linux or Mac are fine). You will need the following:</p><ul><li>A terminal that can execute wget, tar, <a href=https://www.mseri.me/git-workflow-for-lazy-mathematicians/>git</a> and ssh.</li><li>A decent web browser.</li></ul><h2 id=step-0-the-necessary-tools>Step 0: the necessary tools</h2><p>Head to <a href=https://openshift.redhat.com/app/account/new>https://openshift.redhat.com/app/account/new</a> and fill in the form. The captcha can be pretty nasty, just be strong and read it carefully. We will just need the free account: no need for credit cards.</p><p>Wait for the confirmation email, click on the link, and accept the term of license. We are ready to start!</p><p>To use your account I strongly encourage you to install and set up the OpenShift client tools (better known as rhc) on your computer. You may think to go for the &ldquo;Wimp Way&rdquo; and use the web-UI, but real men use the CLI for higher productivity and besides you would not be able to reach the end of this tutorial.</p><p>To install the <a href=https://www.openshift.com/developers/rhc-client-tools-install>rhc Client Tools</a> go <a href=https://www.openshift.com/developers/rhc-client-tools-install>straight to this website</a> and follow the instructions.</p><p>On a Mac OSX + brew configuration you may get an error related to SSL certificates when you run <code>gem install rhc</code> step. I have solved the problem with the following procedure</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>    $ brew update
+</span></span><span style=display:flex><span>    $ brew install openssl
+</span></span><span style=display:flex><span>    $ brew link openssl --force
+</span></span><span style=display:flex><span>    $ brew install curl-ca-bundle
+</span></span></code></pre></div><p>If you use <code>rvm</code> you may even try with <code>rvm osx-ssl-certs update all</code>.</p><p>Now that <code>rhc</code> is installed, you have to link it with your OpenShift account.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>    $ mkdir anchor_tutorial
+</span></span><span style=display:flex><span>    $ cd anchor_tutorial
+</span></span><span style=display:flex><span>    $ rhc setup
+</span></span></code></pre></div><p>Now follow the instructions on screen and wait for it to finish. If you are not sure what to answer, have a look to my terminal output <a href=https://gist.github.com/mseri/29d4989d86dfd1ccdbc8>on a private gist</a>.</p><p>When you read</p><pre><code>Please enter a namespace (letters and numbers only) |&lt;none&gt;|: 
+</code></pre><p>it is very important that you use a simple and recallable string. For this tutorial I used <code>mseritutorial</code>.</p><h2 id=step-1-create-the-application>Step 1: create the application</h2><p>To install Anchor we need a recent version of php. Sadly the one contained in openshift&rsquo;s cartridge <code>php</code> is not recent enough, but the problem can be solved easily using instead the <code>zend server</code> cartridge. To create an app just type</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ rhc create-app anchor zend-5.6
+</span></span></code></pre></div><p>And wait some time. When you are prompted for cloning and accepting the security certificate just type <code>yes</code> and hit return.
+Remember to annotate somewhere the informations printed at the end of the procedure:</p><pre><code>URL:        https://anchor-mseritutorial.rhcloud.com/
 SSH to:     uuid@anchor-mseritutorial.rhcloud.com
 Git remote: ssh://uuid@anchor-mseritutorial.rhcloud.com/~/git/anchor.git/
-</code></pre>
-<p><em>Notice that the <code>URL</code> is simply <code>https://APP\_NAME-DOMAIN\_NAME.rhcloud.com/</code>. Notice moreover that we have a new subfolder called <strong>anchor</strong>: it is a clone of our online repository, the website content will go in <code>anchor/php</code>.</em></p>
-<p>Before doing anything, follow the instruction that says</p>
-<pre><code>You should set password for the Zend Server Console at:    
+</code></pre><p><em>Notice that the <code>URL</code> is simply <code>https://APP\_NAME-DOMAIN\_NAME.rhcloud.com/</code>. Notice moreover that we have a new subfolder called <strong>anchor</strong>: it is a clone of our online repository, the website content will go in <code>anchor/php</code>.</em></p><p>Before doing anything, follow the instruction that says</p><pre><code>You should set password for the Zend Server Console at:    
 https://anchor-mseritutorial.rhcloud.com/ZendServer
-</code></pre>
-<p>You have to accept a licence, save a password and just click <code>Next</code> at the License Information page.</p>
-<p>Having secured our zend app, is time to add mysql to the application. Do it with</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    $ rhc add-cartridge mysql-5.1 --app anchor
-</code></pre></div><p>Again annotate the following informations:</p>
-<pre><code>Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
+</code></pre><p>You have to accept a licence, save a password and just click <code>Next</code> at the License Information page.</p><p>Having secured our zend app, is time to add mysql to the application. Do it with</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>    $ rhc add-cartridge mysql-5.1 --app anchor
+</span></span></code></pre></div><p>Again annotate the following informations:</p><pre><code>Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
 Database Name:  anchor
 Password:       YOUR_PASSWORD
 Username:       YOUR_USERNAME
-</code></pre>
-<p><em>A good idea to increase security now would be to install phpmyadmin or login to the remote mysql to create a new database and a new user with restricted permissions to use for the website. It is a good idea and should be done, I am skipping this step for the tutorial and go on using the username and password obtained at this step.</em></p>
-<p>For the setup of Anchor we need to annotate something more. Use the address for <code>SSH To:</code> that you obtained previously and save the output of the following command</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    $ ssh uuid@anchor-mseritutorial.rhcloud.com <span style=color:#e6db74>&#39;env | grep MYSQL&#39;</span>
-</code></pre></div><h2 id=step-3-install-anchor>Step 3: Install Anchor</h2>
-<p>We can do it from the terminal in the following way</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    $ cd anchor/php
-    $ git rm health_check.php
-    $ wget https://anchorcms.com/download -O anchorcms.tar.gz
-    $ tar zxvf anchorcms.tar.gz --strip-components <span style=color:#ae81ff>1</span>
-    $ rm -f anchorcms.tar.gz
-    $ git add .
-    $ git commit -m <span style=color:#e6db74>&#34;Our First Install&#34;</span>
-    $ git push
-</code></pre></div><p>The first four lines are to replace the content of the <code>php</code> folder with the code of Anchor, the last three lines are to add the new files to the repository and push (and deploy) the changes online.</p>
-<p>The last command will take some time before finishing. When it is done, it is time to configure our Anchor installation: navigate to your website (in our case was <a href=https://anchor-mseritutorial.rhcloud.com>https://anchor-mseritutorial.rhcloud.com</a>), click on &ldquo;<em>Run the installer</em>&rdquo; and use the information that you annotated in the second step to complete the set-up.</p>
-<p>You will end up on a green screen telling you to create a <code>.htaccess</code> file in the root folder and paste there some code. Don&rsquo;t click on any of the buttons yet. Just copy the code, and from your terminal: type <code>nano .htaccess</code>, paste the code, press <code>Ctrl x</code>, type <code>y</code> and finally press return.</p>
-<p><em>Do not yet push this change on the remote repository, otherwise you will loose the installation that you just made</em>.</p>
-<p>Each time you push some code online, the remote repository is overwritten with the content of your push. First we need to save in our repository the changes made by the installer. We can do it in the following way:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    $ ssh uuid@anchor-mseritutorial.rhcloud.com <span style=color:#e6db74>&#39;tar c app-root/runtime/repo/php/install&#39;</span> &gt; install.tar
-    $ ssh uuid@anchor-mseritutorial.rhcloud.com <span style=color:#e6db74>&#39;tar c app-root/runtime/repo/php/anchor/config&#39;</span> &gt; config.tar
-    $ rm -rf anchor/config install
-    $ tar xvf install.tar --strip-components <span style=color:#ae81ff>4</span>
-    $ tar xvf config.tar --strip-components <span style=color:#ae81ff>4</span>
-    $ rm *.tar
-</code></pre></div><p>Then we need to move the content folder in a space that the remote keeps safe and separated from the repository deployment. This can be done creating the file <code>.openshift/action_hooks/build</code> (as before you just need <code>$ nano ../.openshift/action_hooks/build</code>) with the following content</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>    <span style=color:#75715e>#!/bin/bash </span>
-    
-    <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> ! -d $OPENSHIFT_DATA_DIR/content <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
-       echo <span style=color:#e6db74>&#34;Creating and populating the safe content folder&#34;</span>
-       mkdir $OPENSHIFT_DATA_DIR/content
-       cp -a $OPENSHIFT_REPO_DIR/php/content/*  $OPENSHIFT_DATA_DIR/content
-    <span style=color:#66d9ef>fi</span>
-    
-    <span style=color:#75715e># it would be much cleaner to remove</span>
-    <span style=color:#75715e># the content folder before pushing it</span>
-    <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> -d $OPENSHIFT_REPO_DIR/php/content <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
-       echo <span style=color:#e6db74>&#34;Cleaning the repository content folder&#34;</span>
-       rm -rf $OPENSHIFT_REPO_DIR/php/content
-    <span style=color:#66d9ef>fi</span>
-</code></pre></div><pre><code>echo &quot;Symlinking the safe content folder&quot;
+</code></pre><p><em>A good idea to increase security now would be to install phpmyadmin or login to the remote mysql to create a new database and a new user with restricted permissions to use for the website. It is a good idea and should be done, I am skipping this step for the tutorial and go on using the username and password obtained at this step.</em></p><p>For the setup of Anchor we need to annotate something more. Use the address for <code>SSH To:</code> that you obtained previously and save the output of the following command</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>    $ ssh uuid@anchor-mseritutorial.rhcloud.com <span style=color:#e6db74>&#39;env | grep MYSQL&#39;</span>
+</span></span></code></pre></div><h2 id=step-3-install-anchor>Step 3: Install Anchor</h2><p>We can do it from the terminal in the following way</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>    $ cd anchor/php
+</span></span><span style=display:flex><span>    $ git rm health_check.php
+</span></span><span style=display:flex><span>    $ wget https://anchorcms.com/download -O anchorcms.tar.gz
+</span></span><span style=display:flex><span>    $ tar zxvf anchorcms.tar.gz --strip-components <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    $ rm -f anchorcms.tar.gz
+</span></span><span style=display:flex><span>    $ git add .
+</span></span><span style=display:flex><span>    $ git commit -m <span style=color:#e6db74>&#34;Our First Install&#34;</span>
+</span></span><span style=display:flex><span>    $ git push
+</span></span></code></pre></div><p>The first four lines are to replace the content of the <code>php</code> folder with the code of Anchor, the last three lines are to add the new files to the repository and push (and deploy) the changes online.</p><p>The last command will take some time before finishing. When it is done, it is time to configure our Anchor installation: navigate to your website (in our case was <a href=https://anchor-mseritutorial.rhcloud.com>https://anchor-mseritutorial.rhcloud.com</a>), click on &ldquo;<em>Run the installer</em>&rdquo; and use the information that you annotated in the second step to complete the set-up.</p><p>You will end up on a green screen telling you to create a <code>.htaccess</code> file in the root folder and paste there some code. Don&rsquo;t click on any of the buttons yet. Just copy the code, and from your terminal: type <code>nano .htaccess</code>, paste the code, press <code>Ctrl x</code>, type <code>y</code> and finally press return.</p><p><em>Do not yet push this change on the remote repository, otherwise you will loose the installation that you just made</em>.</p><p>Each time you push some code online, the remote repository is overwritten with the content of your push. First we need to save in our repository the changes made by the installer. We can do it in the following way:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>    $ ssh uuid@anchor-mseritutorial.rhcloud.com <span style=color:#e6db74>&#39;tar c app-root/runtime/repo/php/install&#39;</span> &gt; install.tar
+</span></span><span style=display:flex><span>    $ ssh uuid@anchor-mseritutorial.rhcloud.com <span style=color:#e6db74>&#39;tar c app-root/runtime/repo/php/anchor/config&#39;</span> &gt; config.tar
+</span></span><span style=display:flex><span>    $ rm -rf anchor/config install
+</span></span><span style=display:flex><span>    $ tar xvf install.tar --strip-components <span style=color:#ae81ff>4</span>
+</span></span><span style=display:flex><span>    $ tar xvf config.tar --strip-components <span style=color:#ae81ff>4</span>
+</span></span><span style=display:flex><span>    $ rm *.tar
+</span></span></code></pre></div><p>Then we need to move the content folder in a space that the remote keeps safe and separated from the repository deployment. This can be done creating the file <code>.openshift/action_hooks/build</code> (as before you just need <code>$ nano ../.openshift/action_hooks/build</code>) with the following content</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>    <span style=color:#75715e>#!/bin/bash </span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> ! -d $OPENSHIFT_DATA_DIR/content <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>       echo <span style=color:#e6db74>&#34;Creating and populating the safe content folder&#34;</span>
+</span></span><span style=display:flex><span>       mkdir $OPENSHIFT_DATA_DIR/content
+</span></span><span style=display:flex><span>       cp -a $OPENSHIFT_REPO_DIR/php/content/*  $OPENSHIFT_DATA_DIR/content
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># it would be much cleaner to remove</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># the content folder before pushing it</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> -d $OPENSHIFT_REPO_DIR/php/content <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>       echo <span style=color:#e6db74>&#34;Cleaning the repository content folder&#34;</span>
+</span></span><span style=display:flex><span>       rm -rf $OPENSHIFT_REPO_DIR/php/content
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fi</span>
+</span></span></code></pre></div><pre><code>echo &quot;Symlinking the safe content folder&quot;
 ln -sf $OPENSHIFT_DATA_DIR/content $OPENSHIFT_REPO_DIR/php/content 
-</code></pre>
-<p>We are almost ready. Before pushing the changes we need to modify the file <code>.gitignore</code> contained in the <code>php</code> folder. Open it with <code>$ nano .gitignore</code> and delete the lines</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    <span style=color:#75715e># generated config</span>
-    /anchor/config/app.php
-    /anchor/config/db.php
-    /anchor/config/session.php
-    
-    <span style=color:#75715e># user mod_rewrite</span>
-    /.htaccess
-    
-    <span style=color:#75715e># debug and custom themes</span>
-    /themes/*
-    !/themes/default
-</code></pre></div><p>Save the changes and finally deploy a working Anchor copy with</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    $ cd ..
-    $ git add .
-    $ git commit -m <span style=color:#e6db74>&#34;Configured Anchor&#34;</span>
-    $ git push
-</code></pre></div><h2 id=step-5-install-a-nice-theme>Step 5: Install a nice theme</h2>
-<p>You may try many themes before being happy with what you have, but each time you push changes the server is restarted. To speed things up and avoid the restart is enough to add a special empty file:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    $ touch .openshift/markers/hot_deploy
-</code></pre></div><p>Of course you have to deploy it:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    $ git add .
-    $ git commit -m <span style=color:#e6db74>&#34;Added Hot Deploy&#34;</span>
-    $ git push
-</code></pre></div><p>You can find many themes online, a good source is <a href=https://anchorthemes.com>Anchor Themes</a>, or you can build your own one using the official documentation or <a href=https://webdesign.tutsplus.com/tutorials/creating-a-theme-for-anchor-cms>some tutorial</a>.</p>
-<p>To install a new theme is enough to download it and add its folder inside the folder <code>anchor/php/themes</code> (you can already see the <code>default</code> theme folder, don&rsquo;t replace it <em>default</em> is just the theme&rsquo;s name). Finally push it as usual:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    $ git add .
-    $ git commit -m <span style=color:#e6db74>&#34;Added Theme&#34;</span>
-    $ git push
-    
-<span style=color:#e6db74>```</span>Refresh or open the website metadata panel in the admin section of Anchor and you will find it appearing next to the other installed themes.
-
-As a final note I particularly like <span style=color:#f92672>[</span>Balzac<span style=color:#f92672>](</span>https://github.com/ColeTownsend/Balzac<span style=color:#f92672>)</span>.
-
-<span style=color:#75715e>## Step 6: backup and restore</span>
-
-To create a backup simply run
-
-<span style=color:#e6db74>```</span>sh
-    $ rhc snapshot save -a anchor
-</code></pre></div><p>It will save a <code>anchor.tar.gz</code> file containing the full content of the online <code>anchor</code> folder.</p>
-<p>To restore from a backup run:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>    $ rhc snapshot restore -a anchor -f <span style=color:#f92672>{</span>/path/to/anchor.tar.gz<span style=color:#f92672>}</span>
-    
-<span style=color:#e6db74>```</span>Remark: here the name that we are using is always <span style=color:#e6db74>`</span>anchor<span style=color:#e6db74>`</span> just because it is the name that we gave to the application at the beginning of Step 1.
-
-- - - - - 
-
-Now log in, post something and enjoy your newly installed CMS!
-
-The tutorial installation is going to be online and visible <span style=color:#66d9ef>for</span> the next few days at the url <span style=color:#f92672>[</span>https://anchor-mseritutorial.rhcloud.com/<span style=color:#f92672>](</span>https://anchor-mseritutorial.rhcloud.com/<span style=color:#f92672>)</span>. I use that account <span style=color:#66d9ef>for</span> tests, I don<span style=color:#e6db74>&#39;t plan to keep this installation of anchor alive forever (and moreover I don&#39;</span>t use it, it<span style=color:#e6db74>&#39;s just empty), so don&#39;</span>t be upset <span style=color:#66d9ef>if</span> the link is not going anymore in the future.</code></pre></div>
-</div>
-<div class=post-footer>
-</div>
-</article>
-</main>
-</body>
-</html>
+</code></pre><p>We are almost ready. Before pushing the changes we need to modify the file <code>.gitignore</code> contained in the <code>php</code> folder. Open it with <code>$ nano .gitignore</code> and delete the lines</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>    <span style=color:#75715e># generated config</span>
+</span></span><span style=display:flex><span>    /anchor/config/app.php
+</span></span><span style=display:flex><span>    /anchor/config/db.php
+</span></span><span style=display:flex><span>    /anchor/config/session.php
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># user mod_rewrite</span>
+</span></span><span style=display:flex><span>    /.htaccess
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># debug and custom themes</span>
+</span></span><span style=display:flex><span>    /themes/*
+</span></span><span style=display:flex><span>    !/themes/default
+</span></span></code></pre></div><p>Save the changes and finally deploy a working Anchor copy with</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>    $ cd ..
+</span></span><span style=display:flex><span>    $ git add .
+</span></span><span style=display:flex><span>    $ git commit -m <span style=color:#e6db74>&#34;Configured Anchor&#34;</span>
+</span></span><span style=display:flex><span>    $ git push
+</span></span></code></pre></div><h2 id=step-5-install-a-nice-theme>Step 5: Install a nice theme</h2><p>You may try many themes before being happy with what you have, but each time you push changes the server is restarted. To speed things up and avoid the restart is enough to add a special empty file:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>    $ touch .openshift/markers/hot_deploy
+</span></span></code></pre></div><p>Of course you have to deploy it:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>    $ git add .
+</span></span><span style=display:flex><span>    $ git commit -m <span style=color:#e6db74>&#34;Added Hot Deploy&#34;</span>
+</span></span><span style=display:flex><span>    $ git push
+</span></span></code></pre></div><p>You can find many themes online, a good source is <a href=https://anchorthemes.com>Anchor Themes</a>, or you can build your own one using the official documentation or <a href=https://webdesign.tutsplus.com/tutorials/creating-a-theme-for-anchor-cms>some tutorial</a>.</p><p>To install a new theme is enough to download it and add its folder inside the folder <code>anchor/php/themes</code> (you can already see the <code>default</code> theme folder, don&rsquo;t replace it <em>default</em> is just the theme&rsquo;s name). Finally push it as usual:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>    $ git add .
+</span></span><span style=display:flex><span>    $ git commit -m <span style=color:#e6db74>&#34;Added Theme&#34;</span>
+</span></span><span style=display:flex><span>    $ git push
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>Refresh or open the website metadata panel in the admin section of Anchor and you will find it appearing next to the other installed themes.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>As a final note I particularly like <span style=color:#f92672>[</span>Balzac<span style=color:#f92672>](</span>https://github.com/ColeTownsend/Balzac<span style=color:#f92672>)</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Step 6: backup and restore</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>To create a backup simply run
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>sh
+</span></span><span style=display:flex><span>    $ rhc snapshot save -a anchor
+</span></span></code></pre></div><p>It will save a <code>anchor.tar.gz</code> file containing the full content of the online <code>anchor</code> folder.</p><p>To restore from a backup run:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>    $ rhc snapshot restore -a anchor -f <span style=color:#f92672>{</span>/path/to/anchor.tar.gz<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>Remark: here the name that we are using is always <span style=color:#e6db74>`</span>anchor<span style=color:#e6db74>`</span> just because it is the name that we gave to the application at the beginning of Step 1.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>- - - - - 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Now log in, post something and enjoy your newly installed CMS!
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>The tutorial installation is going to be online and visible <span style=color:#66d9ef>for</span> the next few days at the url <span style=color:#f92672>[</span>https://anchor-mseritutorial.rhcloud.com/<span style=color:#f92672>](</span>https://anchor-mseritutorial.rhcloud.com/<span style=color:#f92672>)</span>. I use that account <span style=color:#66d9ef>for</span> tests, I don<span style=color:#e6db74>&#39;t plan to keep this installation of anchor alive forever (and moreover I don&#39;</span>t use it, it<span style=color:#e6db74>&#39;s just empty), so don&#39;</span>t be upset <span style=color:#66d9ef>if</span> the link is not going anymore in the future.
+</span></span></code></pre></div></div><div class=post-footer></div></article></main></body></html>
