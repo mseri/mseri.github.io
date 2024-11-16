@@ -1,4 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Script on A fractal spectrum of tales</title><link>https://www.mseri.me/tags/script/</link><description>Recent content in Script on A fractal spectrum of tales</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 13 Jan 2014 13:20:46 +0000</lastBuildDate><atom:link href="https://www.mseri.me/tags/script/index.xml" rel="self" type="application/rss+xml"/><item><title>Ghost 0.4.0 is out</title><link>https://www.mseri.me/ghost-0-4-0-is-out/</link><pubDate>Mon, 13 Jan 2014 13:20:46 +0000</pubDate><guid>https://www.mseri.me/ghost-0-4-0-is-out/</guid><description>and the ghost update script has been updated to mirror the changes in the update procedure. You can find it here: https://gist.github.com/mseri/7059958
-Updates for purity to support all the new features are going to be released very soon.
-As you can read from the official announcement, the new release of Ghost comes with a huge amount of features and updates:
-Static pages. You can now toggle any post to be a &amp;ldquo;page&amp;rdquo; from within your post settings menu.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Script on A fractal spectrum of tales</title><link>https://www.mseri.me/tags/script/</link><description>Recent content in Script on A fractal spectrum of tales</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 13 Jan 2014 13:20:46 +0000</lastBuildDate><atom:link href="https://www.mseri.me/tags/script/index.xml" rel="self" type="application/rss+xml"/><item><title>Ghost 0.4.0 is out</title><link>https://www.mseri.me/ghost-0-4-0-is-out/</link><pubDate>Mon, 13 Jan 2014 13:20:46 +0000</pubDate><guid>https://www.mseri.me/ghost-0-4-0-is-out/</guid><description>&lt;p>and the ghost update script has been updated to mirror the changes in the update procedure. You can find it here: &lt;a href="https://gist.github.com/mseri/7059958">https://gist.github.com/mseri/7059958&lt;/a>&lt;/p>
+&lt;p>Updates for &lt;code>purity&lt;/code> to support all the new features are going to be released very soon.&lt;/p>
+&lt;p>As you can read from &lt;a href="https://blog.ghost.org/ghost-0-4/">the official announcement&lt;/a>, the new release of Ghost comes with a huge amount of features and updates:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Static pages&lt;/strong>. You can now toggle any post to be a &amp;ldquo;page&amp;rdquo; from within your post settings menu. This will remove it from your post feed. About / Contact / Terms galore!&lt;/li>
+&lt;li>&lt;strong>Unsaved changes notifications&lt;/strong>. We&amp;rsquo;ll now give you a heads up when you&amp;rsquo;re about to lose unsaved changes. So you can, you know, save.&lt;/li>
+&lt;li>&lt;strong>Featured posts&lt;/strong>. You can now mark posts as featured, and style them accordingly from within your theme.&lt;/li>
+&lt;li>&lt;strong>Sexy new loading bar&lt;/strong>. Always know when Ghost is doing something, a little blue bar crawls across the screen to let you know!&lt;/li>
+&lt;li>&lt;strong>Quick edit post urls&lt;/strong>. You can now slap /edit/ on the end of any post URL and, boom, you&amp;rsquo;re editing it.&lt;/li>
+&lt;li>&lt;strong>Date based permalink support&lt;/strong>. If you like that kind of thing.&lt;/li>
+&lt;li>&lt;strong>SSL support and a more secure password reset process&lt;/strong>.&lt;/li>
+&lt;li>Over 100 bugfixes and minor improvements!&lt;/li>
+&lt;li>&lt;a href="https://github.com/TryGhost/Ghost/wiki/Release-Notes:-0.4.0">Much, much more&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>Don&amp;rsquo;t waste time. Update your ghost!!&lt;/p></description></item></channel></rss>
